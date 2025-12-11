@@ -2,10 +2,16 @@ import { useEffect, useState } from "react";
 import { fetchGames } from "../../api/fetchGames";
 import GameSection from "../../components/GameSection/GameSection";
 import "./Home.css";
+import { useLanguage } from "../../context/LanguageContext";
+import { translate } from "../../data/translations";
+import FAQ from "../../components/FAQ/FAQ";
+
 
 export default function Home({ search }) {
   const [games, setGames] = useState([]);
   const [loading, setLoading] = useState(true);
+  const { lang } = useLanguage();
+
 
   useEffect(() => {
     fetchGames().then(data => {
@@ -59,32 +65,85 @@ export default function Home({ search }) {
     <div className="home-wrapper">
 
       {search && (
-        <GameSection id="searchResults" title="Search Results" games={filteredGames} />
+        <GameSection 
+        id="searchResults" 
+        title="Search Results" 
+        games={filteredGames} />
       )}
 
-      <GameSection id="featuredSection" title="⭐ Featured Games" games={categories.featured} />
+      <GameSection
+        id="featuredSection"
+        title={`⭐ ${translate("featuredGames", lang)}`}
+        games={categories.featured}
+      />
 
-      <GameSection id="recentSection" title="⏱ Recent Games" games={categories.recent} />
+      <GameSection
+        id="recentSection"
+        title={`⏱ ${translate("recentGames", lang)}`}
+        games={categories.recent}
+      />
 
-      <GameSection id="popularSection" title="💥 Popular Games" games={categories.popular} />
+      <GameSection
+        id="popularSection"
+        title={`💥 ${translate("popularGames", lang)}`}
+        games={categories.popular}
+      />
 
-      <GameSection id="hotSection" title="🔥 Hot Games" games={categories.hot} />
+      <GameSection
+        id="hotSection"
+        title={`🔥 ${translate("hotGames", lang)}`}
+        games={categories.hot}
+      />
 
-      <GameSection id="top100" title="⭐ Top 100" games={categories.top100} />
+      <GameSection
+        id="top100"
+        title={`⭐ ${translate("top100Games", lang)}`}
+        games={categories.top100}
+      />
 
-      <GameSection id="gamesAll" title="🎮 All Games" games={categories.all} />
+      <GameSection
+        id="gamesAll"
+        title={`🎮 ${translate("allGames", lang)}`}
+        games={categories.all}
+      />
 
-      <GameSection id="number_games" title="🏏 Cricket Games" games={categories.cricket} />
+      <GameSection
+        id="number_games"
+        title={`🏏 ${translate("cricket", lang)} ${translate("games", lang)}`}
+        games={categories.cricket}
+      />
 
-      <GameSection id="football_games" title="⚽ Football Games" games={categories.football} />
+      <GameSection
+        id="football_games"
+        title={`⚽ ${translate("football", lang)} ${translate("games", lang)}`}
+        games={categories.football}
+      />
 
-      <GameSection id="basketball_games" title="🏀 Basketball Games" games={categories.basketball} />
+      <GameSection
+        id="basketball_games"
+        title={`🏀 ${translate("basketball", lang)} ${translate("games", lang)}`}
+        games={categories.basketball}
+      />
 
-      <GameSection id="halloween_games" title="🎃 Halloween Games" games={categories.halloween} />
+      <GameSection
+        id="halloween_games"
+        title={`🎃 ${translate("halloween", lang)} ${translate("games", lang)}`}
+        games={categories.halloween}
+      />
 
-      <GameSection id="horror_games" title="💀 Horror Games" games={categories.horror} />
+      <GameSection
+        id="horror_games"
+        title={`💀 ${translate("horror", lang)} ${translate("games", lang)}`}
+        games={categories.horror}
+      />
 
-      <GameSection id="shooting_games" title="🔫 Shooting Games" games={categories.shooting} />
+      <GameSection
+        id="shooting_games"
+        title={`🔫 ${translate("shooting", lang)} ${translate("games", lang)}`}
+        games={categories.shooting}
+      />
+
+      <FAQ />
 
 
     </div>

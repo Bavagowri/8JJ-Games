@@ -1,49 +1,29 @@
 import "./FAQ.css";
+import { useLanguage } from "../../context/LanguageContext";
+import { translate } from "../../data/translations";
 
 const faqList = [
-  {
-    question: "Are all games really free to play?",
-    answer: "Yes! All games on 8JJ Games are free to play.",
-  },
-  {
-    question: "Are games safe for kids?",
-    answer: "All games are reviewed, but parental guidance is recommended.",
-  },
-  {
-    question: "How often are new games added?",
-    answer: "New games are added almost every week.",
-  },
-  {
-    question: "Do I need to create an account?",
-    answer: "No account is required. Just click and play instantly.",
-  },
-  {
-    question: "What devices are supported?",
-    answer: "You can play on mobile, tablet, or desktop browsers.",
-  },
-  {
-    question: "Can I play with friends online?",
-    answer: "Many games support multiplayer modes.",
-  },
-  {
-    question: "Why do some games need Flash?",
-    answer: "Some older games still use Flash, but most are HTML5 now.",
-  },
-  {
-    question: "How do I report a broken game?",
-    answer: "Contact support with the game name and issue details.",
-  },
+  { q: "faq_q1", a: "faq_a1" },
+  { q: "faq_q2", a: "faq_a2" },
+  { q: "faq_q3", a: "faq_a3" },
+  { q: "faq_q4", a: "faq_a4" },
+  { q: "faq_q5", a: "faq_a5" },
+  { q: "faq_q6", a: "faq_a6" },
+  { q: "faq_q7", a: "faq_a7" },
+  { q: "faq_q8", a: "faq_a8" },
 ];
 
 export default function FAQ() {
-  const openFAQ = (answer) => {
-    alert(answer);
+  const { lang } = useLanguage();
+
+  const openFAQ = (answerKey) => {
+    alert(translate(answerKey, lang));
   };
 
   return (
     <section id="faqSection" className="faq-container">
       <h2 className="faq-title">
-        <span className="faq-icon">❓</span> Frequently Asked Questions
+        <span className="faq-icon">❓</span> {translate("faqTitle", lang)}
       </h2>
 
       <div className="faq-grid">
@@ -51,9 +31,9 @@ export default function FAQ() {
           <button
             key={index}
             className="faq-item"
-            onClick={() => openFAQ(faq.answer)}
+            onClick={() => openFAQ(faq.a)}
           >
-            <span className="faq-q">Q:</span> {faq.question}
+            <span className="faq-q">Q:</span> {translate(faq.q, lang)}
           </button>
         ))}
       </div>

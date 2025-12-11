@@ -1,6 +1,16 @@
 import "./Footer.css";
 
 export default function Footer() {
+  const scrollTo = (id) => {
+    const el = document.getElementById(id);
+    if (!el) return;
+
+    window.scrollTo({
+      top: el.offsetTop - 80, // adjust for header height
+      behavior: "smooth",
+    });
+  };
+
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
@@ -13,8 +23,6 @@ export default function Footer() {
 
         {/* LEFT SECTION */}
         <div className="footer-left">
-
-          {/* LOGO + TITLE INLINE */}
           <div className="footer-brand-row">
             <img src="/images/8JJ_games.png" alt="8JJ Games" className="footer-logo" />
             <div className="footer-tile-row">
@@ -39,29 +47,29 @@ export default function Footer() {
           <div className="footer-column">
             <h3>Browse</h3>
             <ul>
-              <li>Popular Games</li>
-              <li>Hot Games</li>
-              <li>Featured</li>
-              <li>All Games</li>
-              <li>Recently Played</li>
+              <li onClick={() => scrollTo("popularSection")}>Popular Games</li>
+              <li onClick={() => scrollTo("hotSection")}>Hot Games</li>
+              <li onClick={() => scrollTo("featuredSection")}>Featured</li>
+              <li onClick={() => scrollTo("gamesAll")}>All Games</li>
+              <li onClick={() => scrollTo("recentSection")}>Recently Played</li>
             </ul>
           </div>
 
           <div className="footer-column">
             <h3>Categories</h3>
             <ul>
-              <li>Cricket Games</li>
-              <li>Football Games</li>
-              <li>Basketball Games</li>
-              <li>Racing Games</li>
-              <li>Card & Puzzle</li>
+              <li onClick={() => scrollTo("number_games")}>Cricket Games</li>
+              <li onClick={() => scrollTo("football_games")}>Football Games</li>
+              <li onClick={() => scrollTo("basketball_games")}>Basketball Games</li>
+              <li onClick={() => scrollTo("hotSection")}>Racing Games</li>
+              <li onClick={() => scrollTo("gamesAll")}>Card & Puzzle</li>
             </ul>
           </div>
 
           <div className="footer-column">
             <h3>Support</h3>
             <ul>
-              <li>FAQ</li>
+              <li onClick={() => scrollTo("faqSection")}>FAQ</li>
             </ul>
           </div>
 

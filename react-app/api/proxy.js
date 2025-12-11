@@ -7,20 +7,16 @@ export default async function handler(req, res) {
 
   try {
     const response = await fetch(target);
-    let html = await response.text();
 
-    const base = target.split("/").slice(0, -1).join("/");
+    const contentType = response.headers.get("content-type") || "";
 
-    // Rewrite relative URLs → absolute URLs
-    html = html
-      .replace(/src="\//g, `src="https://www.onlinegames.io/`)
-      .replace(/href="\//g, `href="https://www.onlinegames.io/`)
-      .replace(/src="(?!http)([^"]+)"/g, `src="${base}/$1"`)
-      .replace(/href="(?!http)([^"]+)"/g, `href="${base}/$1"`);
+    res.setHeader("Access-Control-Allow-Origin", "*");
+    res.setHeader("Content-Type", contentType);
 
-    res.setHeader("Content-Type", "text/html");
-    res.status(200).send(html);
+    // Stream response directly (best method)
+    const body = await response.arrayBuffer();
+    res.send(Buffer.from(body));
   } catch (e) {
-    res.status(500).json({ error: "Proxy failed", details: e.message });
+    res.status(500).json({ error: "Proxy failed", details: e.toString() });
   }
 }

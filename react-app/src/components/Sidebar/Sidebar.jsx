@@ -1,6 +1,4 @@
 import { useEffect, useState } from "react";
-import { useLanguage } from "../../context/LanguageContext";
-import { translate } from "../../data/translations";
 import "./Sidebar.css";
 
 const sidebarItems = [
@@ -22,6 +20,7 @@ const sidebarItems = [
 
 export default function Sidebar() {
   const [open, setOpen] = useState(false);
+  const [activeId, setActiveId] = useState("top");
 
   useEffect(() => {
     const handler = () => setOpen(true);
@@ -33,12 +32,14 @@ export default function Sidebar() {
     setOpen(false); // close drawer after clicking
     if (id === "top") {
       window.scrollTo({ top: 0, behavior: "smooth" });
+      setActiveId("top");
       return;
     }
     document.getElementById(id)?.scrollIntoView({
       behavior: "smooth",
       block: "start",
     });
+    setActiveId(id);
   };
 
   useEffect(() => {
@@ -54,9 +55,7 @@ export default function Sidebar() {
         const visible = entries
           .filter((e) => e.isIntersecting)
           .sort((a, b) => b.intersectionRatio - a.intersectionRatio);
-        if (visible[0]) {
-          setActiveId(visible[0].target.id);
-        }
+        if (visible[0]) setActiveId(visible[0].target.id);
       },
       { root: null, rootMargin: "-90px 0px -60% 0px", threshold: [0.25, 0.5, 0.75] }
     );
@@ -74,10 +73,10 @@ export default function Sidebar() {
             <li
               key={item.id}
               onClick={() => scrollTo(item.id)}
-              className={`sidebar-item drawer-item`}
+              className={`sidebar-item drawer-item ${activeId === item.id ? "active" : ""}`}
             >
               <span className="icon">{item.icon}</span>
-              <span className="label">{translate(item.label)}</span>
+              <span className="label">{item.label}</span>
             </li>
           ))}
         </ul>

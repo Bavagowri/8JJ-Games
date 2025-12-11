@@ -1,5 +1,4 @@
 import "./GameCard.css";
-import { useNavigate } from "react-router-dom";
 
 export default function GameCard({ game, onClick }) {
   return (

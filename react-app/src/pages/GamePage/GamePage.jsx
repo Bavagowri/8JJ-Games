@@ -1,22 +1,21 @@
 import { useParams } from "react-router-dom";
-import { useEffect, useState } from "react";
+import { useState, useMemo } from "react";
 import "./GamePage.css";
 
 export default function GamePage() {
   const { index } = useParams();
-  const [games, setGames] = useState([]);
-  const [game, setGame] = useState(null);
-  const [playing, setPlaying] = useState(false);
-
-  useEffect(() => {
-    const saved = localStorage.getItem("games");
-
-    if (saved) {
-      const list = JSON.parse(saved);
-      setGames(list);
-      setGame(list[index]);
+  const idx = useMemo(() => Number(index) || 0, [index]);
+  const [games] = useState(() => {
+    try {
+      const saved = localStorage.getItem("games");
+      return saved ? JSON.parse(saved) : [];
+    } catch {
+      return [];
     }
-  }, [index]);
+  });
+  const game = games[idx] || null;
+  const [playing, setPlaying] = useState(false);
+  const [plays] = useState(() => Math.floor(Math.random() * 8000 + 2000));
 
   if (!game) return <p style={{ color: "white", marginTop: 80, textAlign: "center" }}>Loading game…</p>;
 
@@ -64,7 +63,7 @@ export default function GamePage() {
         </div>
         <div className="info-block">
           <span className="label">PLAYS</span>
-          <span className="value">{Math.floor(Math.random() * 8000 + 2000)}</span>
+          <span className="value">{plays}</span>
         </div>
         <div className="info-block">
           <span className="label">RATING</span>

@@ -11,7 +11,7 @@ export function loadRecent() {
 export function saveRecent(list) {
   try {
     localStorage.setItem(RECENT_KEY, JSON.stringify(list));
-  } catch {}
+  } catch { void 0; }
 }
 
 export function pushRecent(game) {

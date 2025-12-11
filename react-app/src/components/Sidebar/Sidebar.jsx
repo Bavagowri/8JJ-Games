@@ -74,10 +74,10 @@ export default function Sidebar() {
             <li
               key={item.id}
               onClick={() => scrollTo(item.id)}
-              className={`sidebar-item drawer-item ${activeId === item.id ? "active" : ""}`}
+              className={`sidebar-item drawer-item`}
             >
               <span className="icon">{item.icon}</span>
-              <span className="label">{translate(item.label, lang)}</span>
+              <span className="label">{translate(item.label)}</span>
             </li>
           ))}
         </ul>

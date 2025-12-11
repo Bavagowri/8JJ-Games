@@ -1,8 +1,10 @@
 .game-card {
-  width: 160px;
+  width: 180px;
   background: #0f131a;
   border-radius: 14px;
-  padding-bottom: 10px;
+  padding-bottom: 5px;
+  padding-left: 2px;
+  padding-right: 2px;
   overflow: hidden;
   cursor: pointer;
   transition: transform 0.2s;
@@ -20,9 +22,10 @@
 }
 
 .game-card-title {
-  padding: 8px;
-  margin-left: 0.1rem;
   font-size: 14px;
   color: #fff;
   text-align: center;
+}
+.game-card-info h4 {
+ text-align: center;
 }

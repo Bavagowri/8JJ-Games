@@ -56,6 +56,62 @@
   gap: 20px;
   padding: 0 10px;
 }
+
+/* FEATURED SLIDER */
+.slider-wrapper {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+  margin-top: 10px;
+}
+
+.slider-container {
+  display: flex;
+  gap: 14px;
+  overflow-x: auto;
+  scroll-behavior: smooth;
+  padding: 10px 0;
+}
+
+.slider-container::-webkit-scrollbar {
+  display: none;
+}
+
+.slide-btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 5;
+  background: rgba(0,0,0,0.6);
+  border: none;
+  color: white;
+  font-size: 26px;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+.slide-btn.left {
+  left: 5px;
+}
+
+.slide-btn.right {
+  right: 5px;
+}
+
+/* Game card inside slider */
+.slider-container .game-card {
+  min-width: 220px;
+  flex-shrink: 0;
+}
+
+@media (max-width: 600px) {
+  .slider-container .game-card {
+    min-width: 160px;
+  }
+}
+
 @media (max-width: 768px) {
   .game-grid {
     grid-template-columns: repeat(2, 1fr); /* 2 cards per row */
@@ -83,4 +139,23 @@
   .game-card img {
     height: 160px;
   }
+}
+
+.slider-wrapper {
+  position: relative;
+  overflow: hidden;
+  width: 100%;
+  margin-top: 10px;
+}
+
+.slider-container {
+  display: flex;
+  gap: 14px;
+  overflow-x: auto;
+  scroll-behavior: smooth;
+  padding-bottom: 10px;
+}
+
+.slider-container::-webkit-scrollbar {
+  display: none;
 }

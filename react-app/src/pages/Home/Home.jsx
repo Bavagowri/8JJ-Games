@@ -77,7 +77,9 @@ export default function Home({ search }) {
         id="featuredSection"
         title={`⭐ ${translate("featuredGames", lang)}`}
         games={categories.featured}
+        slider={true}
       />
+
 
       <GameSection
         id="recentSection"

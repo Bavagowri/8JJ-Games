@@ -44,6 +44,14 @@
   color: white;
 }
 
+.sidebar-item.active,
+.drawer-item.active {
+  background: #1f2937;
+  color: #ffffff;
+  border-color: #3b82f6;
+  box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.25) inset;
+}
+
 .label {
   opacity: 0;
   visibility: hidden;
@@ -94,3 +102,23 @@
   background: rgba(0, 0, 0, 0.6);
   z-index: 15;
 }
+
+.icon {
+  margin-left: 10px;
+}
+.sidebar-item {
+       
+        font-size: 18px;
+        filter: grayscale(.4) opacity(.8) !important;
+        transition: filter .18s ease, transform .18s ease;
+             
+}
+
+.sidebar-item:hover,.sidebar-item.drawer-item.active {
+       
+        
+        filter: none !important;
+        
+             
+}
+

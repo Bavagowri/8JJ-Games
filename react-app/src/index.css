@@ -14,3 +14,8 @@ body {
 button {
   font-family: inherit;
 }
+html {
+  scroll-padding-top: 65px;
+  scroll-behavior: smooth;
+}
+

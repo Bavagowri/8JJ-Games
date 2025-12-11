@@ -6,9 +6,7 @@ const sidebarItems = [
   { id: "recentSection", icon: "⏱️", label: "Recent" },
   { id: "popularSection", icon: "💥", label: "Popular" },
   { id: "hotSection", icon: "🔥", label: "Hot" },
-  { id: "top100", icon: "⭐", label: "Top 100" },
-  { id: "faqSection", icon: "❓", label: "FAQ" },
-  { id: "gamesAll", icon: "🎮", label: "All Games" },
+  { id: "top100", icon: "⭐", label: "Top" },
   { id: "number_games", icon: "🏏", label: "Cricket" },
   { id: "football_games", icon: "⚽", label: "Football" },
   { id: "basketball_games", icon: "🏀", label: "Basketball" },
@@ -16,10 +14,13 @@ const sidebarItems = [
   { id: "shooting_games", icon: "🔫", label: "Shooting" },
   { id: "halloween_games", icon: "🎃", label: "Halloween" },
   { id: "horror_games", icon: "💀", label: "Horror" },
+  { id: "gamesAll", icon: "🎮", label: "Games" },
+  { id: "faqSection", icon: "❓", label: "FAQ" }
 ];
 
 export default function Sidebar() {
   const [open, setOpen] = useState(false);
+  const [activeId, setActiveId] = useState("top");
 
   // Listen for hamburger click event
   useEffect(() => {
@@ -33,13 +34,39 @@ export default function Sidebar() {
     setOpen(false); // close drawer after clicking
     if (id === "top") {
       window.scrollTo({ top: 0, behavior: "smooth" });
+      setActiveId("top");
       return;
     }
     document.getElementById(id)?.scrollIntoView({
       behavior: "smooth",
       block: "start",
     });
+    setActiveId(id);
   };
+
+  useEffect(() => {
+    const ids = sidebarItems.map((s) => s.id).filter((i) => i !== "top");
+    const targets = ids
+      .map((id) => document.getElementById(id))
+      .filter(Boolean);
+
+    if (targets.length === 0) return;
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        const visible = entries
+          .filter((e) => e.isIntersecting)
+          .sort((a, b) => b.intersectionRatio - a.intersectionRatio);
+        if (visible[0]) {
+          setActiveId(visible[0].target.id);
+        }
+      },
+      { root: null, rootMargin: "-90px 0px -60% 0px", threshold: [0.25, 0.5, 0.75] }
+    );
+
+    targets.forEach((el) => observer.observe(el));
+    return () => observer.disconnect();
+  }, []);
 
   return (
     <>
@@ -51,7 +78,7 @@ export default function Sidebar() {
             <li
               key={item.id}
               onClick={() => scrollTo(item.id)}
-              className="sidebar-item"
+              className={`sidebar-item drawer-item ${activeId === item.id ? "active" : ""}`}
             >
               <span className="icon">{item.icon}</span>
               <span className="label">{item.label}</span>

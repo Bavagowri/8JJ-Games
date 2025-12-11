@@ -5,12 +5,9 @@ export default function GameCard({ game, index }) {
   const navigate = useNavigate();
 
   const openGame = () => {
-    const saved = localStorage.getItem("games");
-
-    if (!saved) {
-      console.warn("Saving full list temporarily");
-      localStorage.setItem("games", JSON.stringify([game]));
-    }
+    // Save ENTIRE game list
+    const list = JSON.parse(localStorage.getItem("games"));
+    if (!list) return;
 
     navigate(`/game/${index}`);
   };

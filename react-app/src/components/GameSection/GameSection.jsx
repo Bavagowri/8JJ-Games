@@ -21,7 +21,7 @@ export default function GameSection({ title, games, id, slider = false }) {
       }
     };
 
-    const interval = setInterval(autoplay, 2); // autoplay speed
+    const interval = setInterval(autoplay, 20); // autoplay speed
     return () => clearInterval(interval);
   }, [slider, games]);
 

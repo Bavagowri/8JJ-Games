@@ -10,6 +10,7 @@ export default function GamePage() {
   const [playing, setPlaying] = useState(false);
 
   const isLocal = window.location.hostname === "localhost";
+  
 
 
   useEffect(() => {

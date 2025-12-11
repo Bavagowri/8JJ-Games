@@ -45,7 +45,13 @@ export default function GamePage() {
 
       <div className="side-column left-column">
         {games.slice(0, 12).map((g, i) => (
-          <img key={i} src={g.image} alt={g.title} className="side-thumb" />
+        <img
+        key={i}
+        src={g.image}
+        alt={g.title}
+        className="side-thumb"
+        onClick={() => window.location.href = `/game/${i}`}
+        />
         ))}
       </div>
 
@@ -91,14 +97,26 @@ export default function GamePage() {
         <h3 className="more-title">More Games</h3>
         <div className="more-games-grid">
           {games.slice(0, 12).map((g, i) => (
-            <img key={i} src={g.image} alt={g.title} className="more-game-thumb" />
+            <img
+            key={i}
+            src={g.image}
+            alt={g.title}
+            className="more-game-thumb"
+            onClick={() => window.location.href = `/game/${i}`}
+            />
           ))}
         </div>
       </div>
 
       <div className="side-column right-column">
         {games.slice(12, 24).map((g, i) => (
-          <img key={i} src={g.image} alt={g.title} className="side-thumb" />
+        <img
+        key={i}
+        src={g.image}
+        alt={g.title}
+        className="side-thumb"
+        onClick={() => window.location.href = `/game/${12 + i}`}
+        />
         ))}
       </div>
 

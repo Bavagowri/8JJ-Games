@@ -1,9 +1,10 @@
-import { useRef, useEffect } from "react";
+import { useRef, useEffect, useState } from "react";
 import GameCard from "../GameCard/GameCard";
 import "./GameSection.css";
 
 export default function GameSection({ title, games, id, slider = false }) {
   const sliderRef = useRef(null);
+  const [showAll, setShowAll] = useState(false);
 
   // AUTOPLAY slider
   useEffect(() => {
@@ -13,7 +14,6 @@ export default function GameSection({ title, games, id, slider = false }) {
     if (!sliderEl) return;
 
     const autoplay = () => {
-      // End reached? → loop to start
       if (sliderEl.scrollLeft + sliderEl.clientWidth >= sliderEl.scrollWidth - 5) {
         sliderEl.scrollTo({ left: 0, behavior: "smooth" });
       } else {
@@ -21,30 +21,40 @@ export default function GameSection({ title, games, id, slider = false }) {
       }
     };
 
-    const interval = setInterval(autoplay, 1); // autoplay speed
-
+    const interval = setInterval(autoplay, 2); // autoplay speed
     return () => clearInterval(interval);
   }, [slider, games]);
 
-  // UI RENDER
+  // Visible games for NON-SLIDER sections
+  const visibleGames = slider ? games : showAll ? games : games.slice(0, 12);
+
   return (
     <section className="game-section" id={id}>
       <h2 className="section-title">{title}</h2>
 
       {slider ? (
+        // SLIDER MODE (Featured)
         <div className="slider-wrapper">
           <div className="slider-container" ref={sliderRef}>
-            {games.map((g, i) => (
+            {visibleGames.map((g, i) => (
               <GameCard key={i} game={g} index={i} />
             ))}
           </div>
         </div>
       ) : (
+        // NORMAL GRID MODE
         <div className="games-grid">
-          {games.map((g, i) => (
+          {visibleGames.map((g, i) => (
             <GameCard key={i} game={g} index={i} />
           ))}
         </div>
+      )}
+
+      {/* VIEW MORE BUTTON for NON-SLIDER */}
+      {!slider && games.length > 12 && (
+        <button className="view-more-btn" onClick={() => setShowAll(!showAll)}>
+          {showAll ? "View Less" : "View More"}
+        </button>
       )}
     </section>
   );

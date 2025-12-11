@@ -1,0 +1,227 @@
+.header {
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  backdrop-filter: blur(14px);
+  background: linear-gradient(to bottom, rgba(5, 7, 11, 0.95), transparent);
+}
+
+.header-container {
+  max-width: 1200px;
+  padding: 10px 16px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-top: 10px;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.brand-logo {
+  height: 80px;
+}
+
+/* Hide hamburger on desktop */
+.menu-toggle {
+  display: none !important;
+}
+
+.icon-btn {
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  padding: 6px;
+  border-radius: 999px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.hamburger-line {
+  width: 22px;
+  height: 2px;
+  background: #ffffff;
+  margin: 4px 0;
+  border-radius: 999px;
+  display: block;
+}
+
+.header-actions {
+  margin-left: 80%;
+  display: flex;
+  align-items: right;
+  gap: 12px;
+}
+
+/* Fix header actions */
+/* .header-actions {
+  margin-left: auto !important;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+} */
+
+
+.search {
+  position: relative;
+}
+
+.search input {
+  background: #0b0e15;
+  border-radius: 999px;
+  border: 1px solid #1f2933;
+  padding: 8px 30px 8px 12px;
+  color: #e5e7eb;
+  font-size: 13px;
+  min-width: 200px;
+}
+
+.search-icon {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 14px;
+  opacity: 0.6;
+}
+
+.lang-switch {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.language-select {
+  background: #0b0e15;
+  border-radius: 999px;
+  border: 1px solid #1f2933;
+  padding: 6px 10px;
+  color: #e5e7eb;
+  font-size: 13px;
+}
+
+.share-header-icon {
+  width: 20px;
+  height: 20px;
+  object-fit: contain;
+}
+/* HAMBURGER LINES */
+.hamburger-line {
+  width: 20px;
+  height: 2px;
+  border-radius: 999px;
+  background: #e5e7eb;
+  margin: 3px 0;
+  display: block;
+}
+
+
+/* ===========================
+   MOBILE RESPONSIVE HEADER
+=========================== */
+@media (max-width: 768px) {
+
+  /* Reduce padding */
+  .header-container {
+    padding: 8px 12px;
+    gap: 10px;
+    justify-content: space-between;
+  }
+
+  /* Smaller logo */
+  .brand-logo {
+    height: 45px;
+  }
+
+  /* Hide search on very small screens OR make it shrink */
+  .search input {
+    min-width: 120px;   /* reduce width */
+    padding: 6px 28px 6px 10px;
+    font-size: 12px;
+  }
+
+  .search-icon {
+    right: 8px;
+    font-size: 12px;
+  }
+
+  /* Fix header-actions alignment */
+  .header-actions {
+    margin-left: 0;       /* IMPORTANT FIX */
+    gap: 8px;
+  }
+
+  /* Language selector smaller */
+  .language-select {
+    padding: 4px 8px;
+    font-size: 12px;
+  }
+
+  /* Share icon smaller */
+  .share-header-icon {
+    width: 18px;
+    height: 18px;
+  }
+
+}
+
+/* Extra small devices (<430px) like iPhone SE */
+@media (max-width: 430px) {
+
+  /* Smaller logo */
+  .brand-logo {
+    height: 38px;
+  }
+
+  /* Search bar shrink more */
+  .search input {
+    min-width: 100px;
+  }
+
+  /* Reduce spacing */
+  .header-container {
+    gap: 6px;
+  }
+
+  /* Hide text labels inside dropdown if needed */
+  .language-select {
+    font-size: 11px;
+    padding: 4px 6px;
+  }
+
+}
+
+
+/* Show hamburger on all mobile devices */
+@media (max-width: 768px) {
+
+  .brand-logo {
+    height: 45px;
+  }
+
+  .search input {
+    min-width: 120px;
+  }
+}
+
+/* Extra small screens */
+@media (max-width: 430px) {
+  .brand-logo {
+    height: 38px;
+  }
+
+  .search input {
+    min-width: 100px;
+  }
+}
+/* Show hamburger ONLY on mobile */
+@media (max-width: 900px) {
+  .menu-toggle {
+    display: flex !important;
+  }
+}

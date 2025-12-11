@@ -1,0 +1,86 @@
+.game-section {
+  padding: 32px 0;
+}
+
+.section-title {
+  font-size: 20px;
+  font-weight: 600;
+  color: #f1f5f9;
+  margin-bottom: 16px;
+}
+
+.games-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  gap: 16px;
+}
+
+/* View More */
+.view-more-btn {
+  margin: 20px auto 0;
+  display: block;
+  padding: 10px 22px;
+  border-radius: 20px;
+  font-size: 14px;
+  border: 1px solid #334155;
+  background: #1e293b;
+  color: #e2e8f0;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.view-more-btn:hover {
+  background: #334155;
+}
+
+@media (max-width: 480px) {
+  .games-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+.game-section {
+  margin-bottom: 40px;
+}
+
+.game-section-title {
+  font-size: 18px;
+  font-weight: 600;
+  margin-bottom: 16px;
+  color: #fff;
+  padding-left: 10px;
+}
+
+.game-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+  gap: 20px;
+  padding: 0 10px;
+}
+@media (max-width: 768px) {
+  .game-grid {
+    grid-template-columns: repeat(2, 1fr); /* 2 cards per row */
+    gap: 16px;
+  }
+
+  .game-card {
+    width: 100%;
+  }
+
+  .game-card img {
+    height: 140px;
+  }
+
+  .game-card-title {
+    font-size: 13px;
+  }
+}
+
+@media (max-width: 480px) {
+  .game-grid {
+    grid-template-columns: repeat(1, 1fr); /* 1 card per row */
+  }
+
+  .game-card img {
+    height: 160px;
+  }
+}

@@ -1,0 +1,43 @@
+.featured-strip {
+  overflow: hidden;
+  border-radius: 18px;
+  background: radial-gradient(circle at top left, #1e293b, #020617);
+  padding: 12px 0;
+}
+
+.featured-track {
+  display: flex;
+  gap: 14px;
+  padding: 4px 16px;
+  animation: marquee 30s linear infinite;
+}
+
+.f-card {
+  min-width: 220px;
+  max-width: 220px;
+  border-radius: 16px;
+  overflow: hidden;
+  border: none;
+  background: #020617;
+  cursor: pointer;
+}
+
+.f-thumb {
+  height: 120px;
+  background-size: cover;
+  background-position: center;
+}
+
+.f-title {
+  padding: 8px 10px;
+  font-size: 13px;
+}
+
+@keyframes marquee {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}

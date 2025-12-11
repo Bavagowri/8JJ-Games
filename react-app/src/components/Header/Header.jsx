@@ -28,7 +28,7 @@ export default function Header({ onSearch }) {
           </button>
 
 
-          <a href="#top" aria-label="8JJ Home">
+          <a href="/" aria-label="8JJ Home">
             <img
               className="brand-logo"
               src="/images/8JJ_games.png"

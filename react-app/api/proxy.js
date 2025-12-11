@@ -1,17 +1,26 @@
 export default async function handler(req, res) {
-  const targetUrl = req.query.url;
+  const target = req.query.url;
 
-  if (!targetUrl) {
+  if (!target) {
     return res.status(400).json({ error: "Missing URL" });
   }
 
-  const response = await fetch(targetUrl);
-  let html = await response.text();
+  try {
+    const response = await fetch(target);
+    let html = await response.text();
 
-  // Remove iframe blocking headers
-  res.setHeader("Content-Security-Policy", "");
-  res.setHeader("X-Frame-Options", "");
-  res.setHeader("Access-Control-Allow-Origin", "*");
+    const base = target.split("/").slice(0, -1).join("/");
 
-  res.status(200).send(html);
+    // Rewrite relative URLs → absolute URLs
+    html = html
+      .replace(/src="\//g, `src="https://www.onlinegames.io/`)
+      .replace(/href="\//g, `href="https://www.onlinegames.io/`)
+      .replace(/src="(?!http)([^"]+)"/g, `src="${base}/$1"`)
+      .replace(/href="(?!http)([^"]+)"/g, `href="${base}/$1"`);
+
+    res.setHeader("Content-Type", "text/html");
+    res.status(200).send(html);
+  } catch (e) {
+    res.status(500).json({ error: "Proxy failed", details: e.message });
+  }
 }

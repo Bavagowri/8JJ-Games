@@ -9,14 +9,30 @@ export default function GamePage() {
   const [playing, setPlaying] = useState(false);
 
   useEffect(() => {
-    const saved = localStorage.getItem("games");
+  const saved = localStorage.getItem("games");
 
-    if (saved) {
-      const list = JSON.parse(saved);
-      setGames(list);
-      setGame(list[index]);
-    }
-  }, [index]);
+  if (saved) {
+    const list = JSON.parse(saved);
+    setGames(list);
+    setGame(list[index]);
+  } else {
+    // fallback fetch
+    fetch("https://corsproxy.io/?https://www.onlinegames.io/media/plugins/genGames/embed.json")
+      .then(res => res.json())
+      .then(data => {
+        const list = data.map(g => ({
+          ...g,
+          tagList: g.tags.split(",")
+        }));
+
+        localStorage.setItem("games", JSON.stringify(list));
+
+        setGames(list);
+        setGame(list[index]);
+      });
+  }
+}, [index]);
+
 
   if (!game) return <p style={{ color: "white", marginTop: 80, textAlign: "center" }}>Loading game…</p>;
 
@@ -72,7 +88,7 @@ export default function GamePage() {
         </div>
         <div className="info-block">
           <span className="label">ADDED</span>
-          <span className="value">20251</span>
+          <span className="value">2025</span>
         </div>
       </div>
 

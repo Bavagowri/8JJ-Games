@@ -23,6 +23,7 @@ const sidebarItems = [
 
 export default function Sidebar() {
   const [open, setOpen] = useState(false);
+  const [activeItem, setActiveItem] = useState("top"); // Add active state
   const { lang } = useLanguage();
   const navigate = useNavigate();
   const location = useLocation();
@@ -35,6 +36,7 @@ export default function Sidebar() {
 
   const scrollTo = (id) => {
     setOpen(false);
+    setActiveItem(id); // Set active item when clicked
 
     // If user is NOT on home page → redirect first
     if (location.pathname !== "/") {
@@ -65,7 +67,7 @@ export default function Sidebar() {
             <li
               key={item.id}
               onClick={() => scrollTo(item.id)}
-              className="sidebar-item"
+              className={`sidebar-item ${activeItem === item.id ? "active" : ""}`} // Add active class conditionally
             >
               <span className="icon">{item.icon}</span>
               <span className="label">{translate(item.label, lang)}</span>

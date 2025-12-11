@@ -45,7 +45,7 @@ export default function Header({ onSearch }) {
           <div className="search">
             <input
               type="text"
-              placeholder={translate("searchPlaceholder", lang)}
+              placeholder={translate("Search", lang)}
               aria-label="Search games"
               onChange={handleSearch}
             />

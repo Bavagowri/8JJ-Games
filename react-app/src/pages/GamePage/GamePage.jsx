@@ -97,7 +97,7 @@ export default function GamePage() {
 
         <h3 className="more-title">More Games</h3>
         <div className="more-games-grid">
-          {games.slice(0, 12).map((g, i) => (
+          {games.slice(0, 10).map((g, i) => (
             <img
             key={i}
             src={g.image}

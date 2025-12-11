@@ -3,20 +3,24 @@ import { useEffect, useState } from "react";
 import "./GamePage.css";
 
 export default function GamePage() {
-  const { index } = useParams();
-  const [games, setGames] = useState([]);
-  const [game, setGame] = useState(null);
-  const [playing, setPlaying] = useState(false);
+    const { index } = useParams();
+    const gameIndex = Number(index);
+    const [games, setGames] = useState([]);
+    const [game, setGame] = useState(null);
+    const [playing, setPlaying] = useState(false);
+
+    // Debug log here 👇 (Runs every render)
+  console.log("index:", index, "gameIndex:", Number(index), "game:", game);
 
   useEffect(() => {
   const saved = localStorage.getItem("games");
+  const gameIndex = Number(index);
 
   if (saved) {
     const list = JSON.parse(saved);
     setGames(list);
-    setGame(list[index]);
+    setGame(list[gameIndex]);
   } else {
-    // fallback fetch
     fetch("https://corsproxy.io/?https://www.onlinegames.io/media/plugins/genGames/embed.json")
       .then(res => res.json())
       .then(data => {
@@ -26,9 +30,8 @@ export default function GamePage() {
         }));
 
         localStorage.setItem("games", JSON.stringify(list));
-
         setGames(list);
-        setGame(list[index]);
+        setGame(list[gameIndex]);
       });
   }
 }, [index]);

@@ -1,9 +1,9 @@
 /* 3-COLUMN GRID LAYOUT */
 .gamepage-layout {
   display: grid;
-  grid-template-columns: 180px auto 180px;
+  grid-template-columns: 220px auto 220px;
   gap: 20px;
-  padding-top: 110px;
+  padding-top: 20px;
   padding-bottom: 40px;
   max-width: 1200px;
   margin: 0 auto;
@@ -20,7 +20,7 @@
 
 .side-thumb {
   width: 100%;
-  height: 80px;
+  height: 104px;
   border-radius: 10px;
   object-fit: cover;
   cursor: pointer;
@@ -127,10 +127,48 @@
   transform: scale(1.05);
 }
 
+<<<<<<< Updated upstream
 /* RESPONSIVE */
 @media (max-width: 900px) {
   .game-frame-container {
     height: 420px;
+=======
+/* ====================================
+   MOBILE LAYOUT — GAME FIRST
+==================================== */
+@media (max-width: 650px) {
+
+  /* Convert 3 columns → 1 column */
+  .gamepage-layout {
+    grid-template-columns: 1fr;
+    padding: 20px 16px;
+  }
+
+  /* CENTER COLUMN SHOULD COME FIRST */
+  .center-column {
+    order: 1;                /* FIRST on mobile */
+  }
+
+  /* SIDE THUMB COLUMNS COME AFTER GAMEPLAY */
+  .left-column,
+  .right-column {
+    order: 2;                /* AFTER gameplay */
+    grid-template-columns: repeat(4, 1fr);
+    margin: 20px 0;
+  }
+
+  /* INFO BAR BELOW SIDE THUMBS */
+  .game-info-bar {
+   text-align: center;
+   display: grid;
+   grid-template-columns: 1fr 1fr;
+   gap: 12px;
+  }
+
+  /* MORE GAMES GRID AFTER EVERYTHING */
+  .more-games-grid {
+    order: 4;
+>>>>>>> Stashed changes
   }
 }
 
@@ -157,4 +195,11 @@
   .play-title {
     font-size: 22px;
   }
+}
+
+
+.info-block .label{
+    opacity: 1;
+    visibility: unset;
+    margin-bottom: 15px;
 }

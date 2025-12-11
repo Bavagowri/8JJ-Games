@@ -20,7 +20,14 @@ const sidebarItems = [
 
 export default function Sidebar() {
   const [open, setOpen] = useState(false);
+<<<<<<< Updated upstream
   const [activeId, setActiveId] = useState("top");
+=======
+  const [activeItem, setActiveItem] = useState("top");
+  const { lang } = useLanguage();
+  const navigate = useNavigate();
+  const location = useLocation();
+>>>>>>> Stashed changes
 
   useEffect(() => {
     const handler = () => setOpen(true);
@@ -29,7 +36,20 @@ export default function Sidebar() {
   }, []);
 
   const scrollTo = (id) => {
+<<<<<<< Updated upstream
     setOpen(false); // close drawer after clicking
+=======
+    setOpen(false);
+    setActiveItem(id);
+
+    // If user is NOT on home page → redirect first
+    if (location.pathname !== "/") {
+      navigate("/", { state: { scrollTo: id } });
+      return;
+    }
+
+    // Home → scroll immediately
+>>>>>>> Stashed changes
     if (id === "top") {
       window.scrollTo({ top: 0, behavior: "smooth" });
       setActiveId("top");
@@ -73,7 +93,11 @@ export default function Sidebar() {
             <li
               key={item.id}
               onClick={() => scrollTo(item.id)}
+<<<<<<< Updated upstream
               className={`sidebar-item drawer-item ${activeId === item.id ? "active" : ""}`}
+=======
+              className={`sidebar-item ${activeItem === item.id ? "active" : ""}`}
+>>>>>>> Stashed changes
             >
               <span className="icon">{item.icon}</span>
               <span className="label">{item.label}</span>

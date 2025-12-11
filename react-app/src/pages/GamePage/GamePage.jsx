@@ -65,6 +65,7 @@ export default function GamePage() {
           <span className="label">PLAYS</span>
           <span className="value">{plays}</span>
         </div>
+<<<<<<< Updated upstream
         <div className="info-block">
           <span className="label">RATING</span>
           <span className="value">4.5 ★</span>
@@ -72,6 +73,20 @@ export default function GamePage() {
         <div className="info-block">
           <span className="label">ADDED</span>
           <span className="value">2025</span>
+=======
+
+        <h3 className="more-title">More Games</h3>
+        <div className="more-games-grid">
+          {games.slice(0, 10).map((g, i) => (
+            <img
+            key={i}
+            src={g.image}
+            alt={g.title}
+            className="more-game-thumb"
+            onClick={() => window.location.href = `/game/${i}`}
+            />
+          ))}
+>>>>>>> Stashed changes
         </div>
       </div>
 

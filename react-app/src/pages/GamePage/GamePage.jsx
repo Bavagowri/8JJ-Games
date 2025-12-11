@@ -72,7 +72,7 @@ export default function GamePage() {
         </div>
         <div className="info-block">
           <span className="label">ADDED</span>
-          <span className="value">2025</span>
+          <span className="value">20251</span>
         </div>
       </div>
 

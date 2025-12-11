@@ -1,12 +1,16 @@
 import "./Footer.css";
+import { useLanguage } from "../../context/LanguageContext";
+import { translate } from "../../data/translations";
 
 export default function Footer() {
+  const { lang } = useLanguage();
+
   const scrollTo = (id) => {
     const el = document.getElementById(id);
     if (!el) return;
 
     window.scrollTo({
-      top: el.offsetTop - 80, // adjust for header height
+      top: el.offsetTop - 80,
       behavior: "smooth",
     });
   };
@@ -28,48 +32,50 @@ export default function Footer() {
             <div className="footer-tile-row">
                 <h2 className="footer-heading">8JJ GAMES</h2>
                 <p className="footer-description">
-                    Fast, free browser games — no downloads, no sign-ups.
-                    Just tap Play Now and start.
+                  {translate("footerTagline", lang)}
                 </p>
             </div>
           </div>
 
           <div className="footer-badges">
-            <span className="badge">🎮 100% Free</span>
-            <span className="badge">⚡ One-Click Start</span>
-            <span className="badge">📱 Works on Any Device</span>
+            <span className="badge">🎮 {translate("freeBadge", lang)}</span>
+            <span className="badge">⚡ {translate("oneClick", lang)}</span>
+            <span className="badge">📱 {translate("worksOnDevice", lang)}</span>
           </div>
         </div>
 
         {/* RIGHT SECTION (COLUMNS) */}
         <div className="footer-right">
 
+          {/* BROWSE */}
           <div className="footer-column">
-            <h3>Browse</h3>
+            <h3>{translate("browse", lang)}</h3>
             <ul>
-              <li onClick={() => scrollTo("popularSection")}>Popular Games</li>
-              <li onClick={() => scrollTo("hotSection")}>Hot Games</li>
-              <li onClick={() => scrollTo("featuredSection")}>Featured</li>
-              <li onClick={() => scrollTo("gamesAll")}>All Games</li>
-              <li onClick={() => scrollTo("recentSection")}>Recently Played</li>
+              <li onClick={() => scrollTo("popularSection")}>{translate("popularGames", lang)}</li>
+              <li onClick={() => scrollTo("hotSection")}>{translate("hotGames", lang)}</li>
+              <li onClick={() => scrollTo("featuredSection")}>{translate("featuredGames", lang)}</li>
+              <li onClick={() => scrollTo("gamesAll")}>{translate("allGames", lang)}</li>
+              <li onClick={() => scrollTo("recentSection")}>{translate("recentlyPlayed", lang)}</li>
             </ul>
           </div>
 
+          {/* CATEGORIES */}
           <div className="footer-column">
-            <h3>Categories</h3>
+            <h3>{translate("categories", lang)}</h3>
             <ul>
-              <li onClick={() => scrollTo("number_games")}>Cricket Games</li>
-              <li onClick={() => scrollTo("football_games")}>Football Games</li>
-              <li onClick={() => scrollTo("basketball_games")}>Basketball Games</li>
-              <li onClick={() => scrollTo("hotSection")}>Racing Games</li>
-              <li onClick={() => scrollTo("gamesAll")}>Card & Puzzle</li>
+              <li onClick={() => scrollTo("number_games")}>{translate("cricket", lang)} {translate("games", lang)}</li>
+              <li onClick={() => scrollTo("football_games")}>{translate("football", lang)} {translate("games", lang)}</li>
+              <li onClick={() => scrollTo("basketball_games")}>{translate("basketball", lang)} {translate("games", lang)}</li>
+              <li onClick={() => scrollTo("hotSection")}>{translate("racing", lang)}</li>
+              <li onClick={() => scrollTo("gamesAll")}>{translate("cardPuzzle", lang)}</li>
             </ul>
           </div>
 
+          {/* SUPPORT */}
           <div className="footer-column">
-            <h3>Support</h3>
+            <h3>{translate("support", lang)}</h3>
             <ul>
-              <li onClick={() => scrollTo("faqSection")}>FAQ</li>
+              <li onClick={() => scrollTo("faqSection")}>{translate("faq", lang)}</li>
             </ul>
           </div>
 
@@ -81,8 +87,10 @@ export default function Footer() {
 
       {/* BOTTOM COPYRIGHT ROW */}
       <div className="footer-bottom">
-        <p>© 2025 8JJ Games — Free Online Games.</p>
-        <button onClick={scrollToTop} className="back-to-top">Back to top ↑</button>
+        <p>© 2025 8JJ Games — {translate("allGames", lang)}.</p>
+        <button onClick={scrollToTop} className="back-to-top">
+          {translate("backToTop", lang)}
+        </button>
       </div>
 
     </footer>

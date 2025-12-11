@@ -14,9 +14,12 @@ export default function GameSection({ title, games, id }) {
       <h2 className="section-title">{title}</h2>
 
       <div className="games-grid">
-        {visibleGames.map((game, i) => (
-          <GameCard key={i} game={game} index={i} games={games} />
-
+        {visibleGames.map((game) => (
+          <GameCard 
+          key={game.globalIndex}
+          game={game} 
+          index={game.globalIndex} 
+          />
         ))}
       </div>
 

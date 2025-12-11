@@ -9,10 +9,12 @@ export async function fetchGames() {
     const data = await res.json();
 
     // Add tagList array
-    return data.map(game => ({
+    return data.map((game, index) => ({
       ...game,
       tagList: game.tags.split(","),
+      globalIndex: index
     }));
+
   } catch (err) {
     console.error("Game fetch failed:", err);
     return [];

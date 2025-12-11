@@ -14,11 +14,13 @@ export default function Home({ search }) {
 
 
   useEffect(() => {
-    fetchGames().then(data => {
-      setGames(data);
-      setLoading(false);
-    });
-  }, []);
+  fetchGames().then(data => {
+    setGames(data);
+    localStorage.setItem("games", JSON.stringify(data)); // ADD THIS
+    setLoading(false);
+  });
+}, []);
+
 
   if (loading) {
     return (

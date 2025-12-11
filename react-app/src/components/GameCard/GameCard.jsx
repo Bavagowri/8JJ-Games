@@ -1,12 +1,17 @@
 import "./GameCard.css";
 import { useNavigate } from "react-router-dom";
 
-export default function GameCard({ game, index, games }) {
+export default function GameCard({ game, index }) {
   const navigate = useNavigate();
 
   const openGame = () => {
-    // ALWAYS store full list so GamePage works on Vercel
-    localStorage.setItem("games", JSON.stringify(games));
+    const saved = localStorage.getItem("games");
+
+    if (!saved) {
+      console.warn("Saving full list temporarily");
+      localStorage.setItem("games", JSON.stringify([game]));
+    }
+
     navigate(`/game/${index}`);
   };
 

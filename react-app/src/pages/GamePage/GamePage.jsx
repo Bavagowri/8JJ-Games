@@ -55,14 +55,12 @@ export default function GamePage() {
         <div className="game-frame-container">
           {playing ? (
             <iframe
-            src={
-                isLocal
-                ? `http://localhost:5174/api/proxy?url=${encodeURIComponent(game.embed)}`
-                : `/api/proxy?url=${encodeURIComponent(game.embed)}`
-            }
+            src={game.embed}
             className="game-iframe"
             allowFullScreen
-            />
+            sandbox="allow-same-origin allow-scripts allow-pointer-lock allow-forms allow-modals"
+            ></iframe>
+
 
           ) : (
             <button className="big-play-btn" onClick={() => setPlaying(true)}>

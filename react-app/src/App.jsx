@@ -1,22 +1,35 @@
 import { useState } from "react";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+
 import { LanguageProvider } from "./context/LanguageContext";
+
 import Header from "./components/Header/Header";
 import Sidebar from "./components/Sidebar/Sidebar";
 import Home from "./pages/Home/Home";
+import GamePage from "./pages/GamePage/GamePage";
 import Footer from "./components/Footer/Footer";
-// import ShareModal from "./components/ShareModal/ShareModal";
 
 export default function App() {
   const [search, setSearch] = useState("");
 
   return (
     <LanguageProvider>
-      <div className="app-root">
-        <Header onSearch={setSearch} />
-        <Sidebar />
-        <Home search={search} />
-        <Footer />
-      </div>
+      <BrowserRouter>
+        <div className="app-root">
+
+          {/* Always visible */}
+          <Header onSearch={setSearch} />
+          <Sidebar />
+
+          {/* Page content changes here */}
+          <Routes>
+            <Route path="/" element={<Home search={search} />} />
+            <Route path="/game/:index" element={<GamePage />} />
+          </Routes>
+
+          <Footer />
+        </div>
+      </BrowserRouter>
     </LanguageProvider>
   );
 }

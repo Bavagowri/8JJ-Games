@@ -4,24 +4,25 @@ import { translate } from "../../data/translations";
 import "./Sidebar.css";
 
 const sidebarItems = [
-  { id: "top", icon: "🏠", label: "Home" },
-  { id: "recentSection", icon: "⏱️", label: "Recent" },
-  { id: "popularSection", icon: "💥", label: "Popular" },
-  { id: "hotSection", icon: "🔥", label: "Hot" },
-  { id: "top100", icon: "⭐", label: "Top 100" },
-  { id: "faqSection", icon: "❓", label: "FAQ" },
-  { id: "gamesAll", icon: "🎮", label: "All Games" },
-  { id: "number_games", icon: "🏏", label: "Cricket" },
-  { id: "football_games", icon: "⚽", label: "Football" },
-  { id: "basketball_games", icon: "🏀", label: "Basketball" },
-  { id: "baseball_games", icon: "⚾", label: "Baseball" },
-  { id: "shooting_games", icon: "🔫", label: "Shooting" },
-  { id: "halloween_games", icon: "🎃", label: "Halloween" },
-  { id: "horror_games", icon: "💀", label: "Horror" },
+  { id: "top", icon: "🏠", label: "home" },
+  { id: "recentSection", icon: "⏱️", label: "recent" },
+  { id: "popularSection", icon: "💥", label: "popular" },
+  { id: "hotSection", icon: "🔥", label: "hot" },
+  { id: "top100", icon: "⭐", label: "top100" },
+  { id: "faqSection", icon: "❓", label: "faq" },
+  { id: "gamesAll", icon: "🎮", label: "allGames" },
+  { id: "number_games", icon: "🏏", label: "cricket" },
+  { id: "football_games", icon: "⚽", label: "football" },
+  { id: "basketball_games", icon: "🏀", label: "basketball" },
+  { id: "baseball_games", icon: "⚾", label: "baseball" },
+  { id: "shooting_games", icon: "🔫", label: "shooting" },
+  { id: "halloween_games", icon: "🎃", label: "halloween" },
+  { id: "horror_games", icon: "💀", label: "horror" },
 ];
 
 export default function Sidebar() {
   const [open, setOpen] = useState(false);
+  const { lang } = useLanguage();
 
   useEffect(() => {
     const handler = () => setOpen(true);
@@ -30,40 +31,10 @@ export default function Sidebar() {
   }, []);
 
   const scrollTo = (id) => {
-    setOpen(false); // close drawer after clicking
-    if (id === "top") {
-      window.scrollTo({ top: 0, behavior: "smooth" });
-      return;
-    }
-    document.getElementById(id)?.scrollIntoView({
-      behavior: "smooth",
-      block: "start",
-    });
+    setOpen(false);
+    if (id === "top") return window.scrollTo({ top: 0, behavior: "smooth" });
+    document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
   };
-
-  useEffect(() => {
-    const ids = sidebarItems.map((s) => s.id).filter((i) => i !== "top");
-    const targets = ids
-      .map((id) => document.getElementById(id))
-      .filter(Boolean);
-
-    if (targets.length === 0) return;
-
-    const observer = new IntersectionObserver(
-      (entries) => {
-        const visible = entries
-          .filter((e) => e.isIntersecting)
-          .sort((a, b) => b.intersectionRatio - a.intersectionRatio);
-        if (visible[0]) {
-          setActiveId(visible[0].target.id);
-        }
-      },
-      { root: null, rootMargin: "-90px 0px -60% 0px", threshold: [0.25, 0.5, 0.75] }
-    );
-
-    targets.forEach((el) => observer.observe(el));
-    return () => observer.disconnect();
-  }, []);
 
   return (
     <>
@@ -74,10 +45,10 @@ export default function Sidebar() {
             <li
               key={item.id}
               onClick={() => scrollTo(item.id)}
-              className={`sidebar-item drawer-item`}
+              className="sidebar-item"
             >
               <span className="icon">{item.icon}</span>
-              <span className="label">{translate(item.label)}</span>
+              <span className="label">{translate(item.label, lang)}</span>
             </li>
           ))}
         </ul>

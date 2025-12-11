@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { useNavigate, useLocation } from "react-router-dom";
 import { useLanguage } from "../../context/LanguageContext";
 import { translate } from "../../data/translations";
 import "./Sidebar.css";
@@ -23,6 +24,8 @@ const sidebarItems = [
 export default function Sidebar() {
   const [open, setOpen] = useState(false);
   const { lang } = useLanguage();
+  const navigate = useNavigate();
+  const location = useLocation();
 
   useEffect(() => {
     const handler = () => setOpen(true);
@@ -32,13 +35,30 @@ export default function Sidebar() {
 
   const scrollTo = (id) => {
     setOpen(false);
-    if (id === "top") return window.scrollTo({ top: 0, behavior: "smooth" });
-    document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
+
+    // If user is NOT on home page → redirect first
+    if (location.pathname !== "/") {
+      navigate("/", { state: { scrollTo: id } });
+      return;
+    }
+
+    // Home → scroll immediately
+    if (id === "top") {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    } else {
+      document.getElementById(id)?.scrollIntoView({
+        behavior: "smooth",
+        block: "start",
+      });
+    }
   };
 
   return (
     <>
-      {open && <div className="sidebar-overlay" onClick={() => setOpen(false)} />}
+      {open && (
+        <div className="sidebar-overlay" onClick={() => setOpen(false)} />
+      )}
+
       <aside className={`sidebar ${open ? "open" : ""}`}>
         <ul className="sidebar-list">
           {sidebarItems.map((item) => (

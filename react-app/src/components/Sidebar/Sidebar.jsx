@@ -1,4 +1,6 @@
 import { useEffect, useState } from "react";
+import { useLanguage } from "../../context/LanguageContext";
+import { translate } from "../../data/translations";
 import "./Sidebar.css";
 
 const sidebarItems = [
@@ -6,7 +8,9 @@ const sidebarItems = [
   { id: "recentSection", icon: "⏱️", label: "Recent" },
   { id: "popularSection", icon: "💥", label: "Popular" },
   { id: "hotSection", icon: "🔥", label: "Hot" },
-  { id: "top100", icon: "⭐", label: "Top" },
+  { id: "top100", icon: "⭐", label: "Top 100" },
+  { id: "faqSection", icon: "❓", label: "FAQ" },
+  { id: "gamesAll", icon: "🎮", label: "All Games" },
   { id: "number_games", icon: "🏏", label: "Cricket" },
   { id: "football_games", icon: "⚽", label: "Football" },
   { id: "basketball_games", icon: "🏀", label: "Basketball" },
@@ -14,19 +18,14 @@ const sidebarItems = [
   { id: "shooting_games", icon: "🔫", label: "Shooting" },
   { id: "halloween_games", icon: "🎃", label: "Halloween" },
   { id: "horror_games", icon: "💀", label: "Horror" },
-  { id: "gamesAll", icon: "🎮", label: "Games" },
-  { id: "faqSection", icon: "❓", label: "FAQ" }
 ];
 
 export default function Sidebar() {
   const [open, setOpen] = useState(false);
-  const [activeId, setActiveId] = useState("top");
 
-  // Listen for hamburger click event
   useEffect(() => {
     const handler = () => setOpen(true);
     document.addEventListener("openDrawer", handler);
-
     return () => document.removeEventListener("openDrawer", handler);
   }, []);
 
@@ -34,14 +33,12 @@ export default function Sidebar() {
     setOpen(false); // close drawer after clicking
     if (id === "top") {
       window.scrollTo({ top: 0, behavior: "smooth" });
-      setActiveId("top");
       return;
     }
     document.getElementById(id)?.scrollIntoView({
       behavior: "smooth",
       block: "start",
     });
-    setActiveId(id);
   };
 
   useEffect(() => {
@@ -71,7 +68,6 @@ export default function Sidebar() {
   return (
     <>
       {open && <div className="sidebar-overlay" onClick={() => setOpen(false)} />}
-
       <aside className={`sidebar ${open ? "open" : ""}`}>
         <ul className="sidebar-list">
           {sidebarItems.map((item) => (
@@ -81,7 +77,7 @@ export default function Sidebar() {
               className={`sidebar-item drawer-item ${activeId === item.id ? "active" : ""}`}
             >
               <span className="icon">{item.icon}</span>
-              <span className="label">{item.label}</span>
+              <span className="label">{translate(item.label, lang)}</span>
             </li>
           ))}
         </ul>

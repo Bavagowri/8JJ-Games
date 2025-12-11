@@ -1,13 +1,14 @@
 import { useState } from "react";
 import GameCard from "../GameCard/GameCard";
+import GameModal from "../GameModal/GameModal";
 import "./GameSection.css";
 
 export default function GameSection({ title, games, id }) {
   const [showAll, setShowAll] = useState(false);
+  const [selectedGame, setSelectedGame] = useState(null);
 
   if (!games || games.length === 0) return null;
 
-  // Show only first 12 unless expanded
   const visibleGames = showAll ? games : games.slice(0, 12);
 
   return (
@@ -16,7 +17,7 @@ export default function GameSection({ title, games, id }) {
 
       <div className="games-grid">
         {visibleGames.map((game, i) => (
-          <GameCard key={i} game={game} />
+          <GameCard key={i} game={game} onClick={() => setSelectedGame(game)} />
         ))}
       </div>
 
@@ -25,6 +26,9 @@ export default function GameSection({ title, games, id }) {
           {showAll ? "View Less" : "View More"}
         </button>
       )}
+
+      {/* Modal */}
+      <GameModal game={selectedGame} onClose={() => setSelectedGame(null)} />
     </section>
   );
 }

@@ -9,6 +9,9 @@ export default function GamePage() {
   const [game, setGame] = useState(null);
   const [playing, setPlaying] = useState(false);
 
+  const isLocal = window.location.hostname === "localhost";
+
+
   useEffect(() => {
     const load = async () => {
       let saved = localStorage.getItem("games");
@@ -52,11 +55,13 @@ export default function GamePage() {
         <div className="game-frame-container">
           {playing ? (
             <iframe
-            src={`/api/proxy?url=${encodeURIComponent(game.embed)}`}
-            title={game.title}
-            allowFullScreen
-            frameBorder="0"
+            src={
+                isLocal
+                ? `http://localhost:5174/api/proxy?url=${encodeURIComponent(game.embed)}`
+                : `/api/proxy?url=${encodeURIComponent(game.embed)}`
+            }
             className="game-iframe"
+            allowFullScreen
             />
 
           ) : (

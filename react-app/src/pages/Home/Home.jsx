@@ -37,33 +37,6 @@ export default function Home({ search }) {
   );
 
   // CATEGORY ENGINE — matches your sidebar
-  // const categories = {
-  //   featured: games.slice(0, 12),
-  //   recent: games.slice(12, 24),
-
-  //   popular: games.filter(g =>
-  //     g.tagList.includes("free") || g.tagList.includes("1-player")
-  //   ),
-
-  //   hot: games.filter(g =>
-  //     g.tagList.includes("crazy") ||
-  //     g.tagList.includes("drift") ||
-  //     g.tagList.includes("speed")
-  //   ),
-
-  //   top100: games.slice(0, 100),
-
-  //   all: games,
-
-  //   cricket: games.filter(g => g.tagList.includes("cricket")),
-  //   football: games.filter(g => g.tagList.includes("soccer")),
-  //   basketball: games.filter(g => g.tagList.includes("basketball")),
-  //   halloween: games.filter(g => g.tagList.includes("halloween")),
-  //   horror: games.filter(g => g.tagList.includes("horror")),
-  //   shooting: games.filter(g => g.tagList.includes("shooting")),
-
-  // };
-
   const categories = {
   // ⭐ FEATURED → H5 only
   featured: games.slice(0, 12),
@@ -90,6 +63,12 @@ export default function Home({ search }) {
 
   simulation: games.filter(g => g.tagList.includes("simulation")),
 
+  endlessrunner: games.filter(g => g.tagList.includes("endless runner")),
+
+  platformers: games.filter(g => g.tagList.includes("platformers")),
+
+  card: games.filter(g => g.tagList.includes("card")),
+
   all: games,
 };
 
@@ -103,80 +82,6 @@ export default function Home({ search }) {
         games={filteredGames} />
       )}
 
-      {/* <GameSection
-        id="featuredSection"
-        title={`⭐ ${translate("featuredGames", lang)}`}
-        games={categories.featured}
-        slider={true}
-      />
-
-
-      <GameSection
-        id="recentSection"
-        title={`🎅🏻 ${translate("recentGames", lang)}`}
-        games={categories.recent}
-      />
-
-      <GameSection
-        id="popularSection"
-        title={`💥 ${translate("popularGames", lang)}`}
-        games={categories.popular}
-      />
-
-      <GameSection
-        id="hotSection"
-        title={`🔥 ${translate("hotGames", lang)}`}
-        games={categories.hot}
-      />
-
-      <GameSection
-        id="top100"
-        title={`⭐ ${translate("top100Games", lang)}`}
-        games={categories.top100}
-      />
-
-      <GameSection
-        id="gamesAll"
-        title={`🎮 ${translate("allGames", lang)}`}
-        games={categories.all}
-      />
-
-      <GameSection
-        id="number_games"
-        title={`🏏 ${translate("cricket", lang)} ${translate("games", lang)}`}
-        games={categories.cricket}
-      />
-
-      <GameSection
-        id="football_games"
-        title={`⚽ ${translate("football", lang)} ${translate("games", lang)}`}
-        games={categories.football}
-      />
-
-      <GameSection
-        id="basketball_games"
-        title={`🏀 ${translate("basketball", lang)} ${translate("games", lang)}`}
-        games={categories.basketball}
-      />
-
-      <GameSection
-        id="halloween_games"
-        title={`🎃 ${translate("halloween", lang)} ${translate("games", lang)}`}
-        games={categories.halloween}
-      />
-
-      <GameSection
-        id="horror_games"
-        title={`💀 ${translate("horror", lang)} ${translate("games", lang)}`}
-        games={categories.horror}
-      />
-
-      <GameSection
-        id="shooting_games"
-        title={`🔫 ${translate("shooting", lang)} ${translate("games", lang)}`}
-        games={categories.shooting}
-      /> */}
-
       <GameSection
         id="featuredSection"
         title={`⭐ ${translate("featuredGames", lang)}`}
@@ -186,19 +91,19 @@ export default function Home({ search }) {
 
       <GameSection
         id="christmas"
-        title={`🎅🏻 ${translate("christmas", lang)}`}
+        title={`🎅🏻 ${translate("christmas", lang)} ${translate("games", lang)}`}
         games={categories.christmas}
       />
 
       <GameSection
         id="action"
-        title="🔥 Action Games"
+        title={`🔥 ${translate("action", lang)}`}
         games={categories.action}
       />
 
       <GameSection
         id="driving"
-        title="🚗 Driving Games"
+        title={`🚗 ${translate("driving", lang)}`}
         games={categories.driving}
       />
 
@@ -209,6 +114,12 @@ export default function Home({ search }) {
       />
 
       <GameSection
+        id="card_games"
+        title={`🃏 ${translate("card", lang)} ${translate("games", lang)}`}
+        games={categories.card}
+      />
+
+      <GameSection
         id="football_games"
         title={`⚽ ${translate("football", lang)} ${translate("games", lang)}`}
         games={categories.football}
@@ -221,14 +132,20 @@ export default function Home({ search }) {
       />
 
       <GameSection
+        id="basketball_games"
+        title={`🏀 ${translate("basketball", lang)} ${translate("games", lang)}`}
+        games={categories.basketball}
+      />
+
+      <GameSection
         id="simulation_games"
-        title={`🎮 ${translate("shooting", lang)} ${translate("games", lang)}`}
+        title={`🎮 ${translate("simulation", lang)}`}
         games={categories.simulation}
       />
 
       <GameSection
         id="skill_games"
-        title="🎯 Skill Games"
+        title={`🎯 ${translate("skill", lang)}`}
         games={categories.skill}
       />
       
@@ -238,9 +155,15 @@ export default function Home({ search }) {
         games={categories.horror}
       />
 
+      <GameSection
+        id="endless_runner"
+        title={`💀 ${translate("endlessRunner", lang)}`}
+        games={categories.endlessrunner}
+      />
+
        <GameSection
         id="puzzles"
-        title="🧩 Puzzle Games"
+        title={`🧩 ${translate("puzzles", lang)}`}
         games={categories.puzzles}
       />
 
@@ -250,8 +173,6 @@ export default function Home({ search }) {
         title={`🎮 ${translate("allGames", lang)}`}
         games={categories.all}
       />
-
-
 
       <FAQ />
 

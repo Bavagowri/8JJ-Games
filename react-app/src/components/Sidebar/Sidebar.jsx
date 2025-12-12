@@ -7,20 +7,22 @@ import "./Sidebar.css";
 const sidebarItems = [
   { id: "top", icon: "🏠", label: "home" },
   { id: "christmas", icon: "🎅🏻", label: "christmas" },
-  { id: "popularSection", icon: "💥", label: "popular" },
-  { id: "hotSection", icon: "🔥", label: "hot" },
-  { id: "top100", icon: "⭐", label: "top100" },
+  { id: "endless_runner", icon:"🏃‍♂️", label:"endlessRunner"},
+  // { id: "popularSection", icon: "💥", label: "popular" },
+  // { id: "hotSection", icon: "🔥", label: "hot" },
+  // { id: "top100", icon: "⭐", label: "top100" },
   { id: "faqSection", icon: "❓", label: "faq" },
-  { id: "gamesAll", icon: "🎮", label: "allGames" },
-  { id: "number_games", icon: "🏏", label: "cricket" },
+  { id: "card_games", icon: "🃏", label: "card" },
   { id: "football_games", icon: "⚽", label: "football" },
   { id: "basketball_games", icon: "🏀", label: "basketball" },
-  { id: "baseball_games", icon: "⚾", label: "baseball" },
-  { id: "shooting_games", icon: "🔫", label: "shooting" },
+  // { id: "baseball_games", icon: "⚾", label: "baseball" },
+  { id: "platformer", icon:"🧗‍♂️", label: "platformer"},
+  // { id: "shooting_games", icon: "🔫", label: "shooting" },
   { id: "halloween_games", icon: "🎃", label: "halloween" },
   { id: "horror_games", icon: "💀", label: "horror" },
-  { id: "skill_games", icon:"🎯", label:"skillGames"},
-  { id: "simulation_games", icon:"🎮", label:"simulationGames"}
+  { id: "skill_games", icon:"🎯", label:"skill"},
+  { id: "simulation_games", icon:"🎮", label:"simulation"},
+  { id: "gamesAll", icon: "👾", label: "allGames" },
 ];
 
 export default function Sidebar() {

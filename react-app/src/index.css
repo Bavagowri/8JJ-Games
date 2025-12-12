@@ -40,3 +40,21 @@ html {
     filter: brightness(2) contrast(1.2) drop-shadow(0 0 10px rgba(255, 215, 100, 0.6));
     transform: scale(1.03);
 }
+
+html {
+  scroll-snap-type: y mandatory;
+  timeline-scope: --section;
+}
+
+.game-section {
+  scroll-snap-align: start;
+  view-timeline: --section;
+}
+
+.game-section .content-anim {
+  animation: backwards-scroll ease-in-out both;
+  animation-timeline: --section;
+  position: relative;
+}
+
+

@@ -5,8 +5,11 @@ export default async function handler(req, res) {
     return res.status(400).json({ error: "Missing URL" });
   }
 
-  // Optional safety
-  if (!target.startsWith("https://h5games.online")) {
+  // allow both JSON + images
+  if (
+    !target.startsWith("https://h5games.online") &&
+    !target.startsWith("https://s.h5games.online")
+  ) {
     return res.status(403).json({ error: "Forbidden" });
   }
 
@@ -28,8 +31,8 @@ export default async function handler(req, res) {
     res.setHeader("Cache-Control", "public, max-age=86400");
 
     res.status(200).send(Buffer.from(buffer));
-  } catch (err) {
-    console.error("Proxy error:", err);
+  } catch (e) {
+    console.error(e);
     res.status(500).json({ error: "Proxy failed" });
   }
 }

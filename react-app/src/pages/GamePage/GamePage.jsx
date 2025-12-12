@@ -1,7 +1,9 @@
 import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
-import { fetchGames } from "../../api/fetchGames";  // USE YOUR WORKING FETCH!
+// import { fetchGames } from "../../api/fetchGames";  // USE YOUR WORKING FETCH!
 import "./GamePage.css";
+import { fetchH5Games } from "../../api/fetchH5Games";
+
 
 export default function GamePage() {
   const { index } = useParams();
@@ -21,7 +23,7 @@ export default function GamePage() {
       if (saved) {
         list = JSON.parse(saved);
       } else {
-        list = await fetchGames();   // <-- REAL FIX (works on Vercel)
+        list = await fetchH5Games();   // <-- REAL FIX (works on Vercel)
         localStorage.setItem("games", JSON.stringify(list));
       }
 

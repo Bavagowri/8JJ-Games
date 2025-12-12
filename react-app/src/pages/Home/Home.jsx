@@ -70,6 +70,8 @@ export default function Home({ search }) {
 
   recent: games.slice(12, 24),
 
+  christmas: games.filter(g => g.tagList.includes("christmas")),
+
   puzzles: games.filter(g => g.category === "puzzles"),
 
   action: games.filter(g => g.tagList.includes("action")),
@@ -85,6 +87,8 @@ export default function Home({ search }) {
   halloween: games.filter(g => g.tagList.includes("halloween")),
 
   football: games.filter(g => g.tagList.includes("football")),
+
+  simulation: games.filter(g => g.tagList.includes("simulation")),
 
   all: games,
 };
@@ -109,7 +113,7 @@ export default function Home({ search }) {
 
       <GameSection
         id="recentSection"
-        title={`⏱ ${translate("recentGames", lang)}`}
+        title={`🎅🏻 ${translate("recentGames", lang)}`}
         games={categories.recent}
       />
 
@@ -181,21 +185,15 @@ export default function Home({ search }) {
       />
 
       <GameSection
-        id="puzzles"
-        title="🧩 Puzzle Games"
-        games={categories.puzzles}
+        id="christmas"
+        title={`🎅🏻 ${translate("christmas", lang)}`}
+        games={categories.christmas}
       />
 
       <GameSection
         id="action"
         title="🔥 Action Games"
         games={categories.action}
-      />
-
-      <GameSection
-        id="skill"
-        title="🎯 Skill Games"
-        games={categories.skill}
       />
 
       <GameSection
@@ -222,6 +220,17 @@ export default function Home({ search }) {
         games={categories.basketball}
       />
 
+      <GameSection
+        id="simulation_games"
+        title={`🎮 ${translate("shooting", lang)} ${translate("games", lang)}`}
+        games={categories.simulation}
+      />
+
+      <GameSection
+        id="skill_games"
+        title="🎯 Skill Games"
+        games={categories.skill}
+      />
       
       <GameSection
         id="horror_games"
@@ -229,11 +238,20 @@ export default function Home({ search }) {
         games={categories.horror}
       />
 
+       <GameSection
+        id="puzzles"
+        title="🧩 Puzzle Games"
+        games={categories.puzzles}
+      />
+
+
       <GameSection
         id="gamesAll"
         title={`🎮 ${translate("allGames", lang)}`}
         games={categories.all}
       />
+
+
 
       <FAQ />
 

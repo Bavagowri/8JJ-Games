@@ -6,7 +6,7 @@ import "./Sidebar.css";
 
 const sidebarItems = [
   { id: "top", icon: "🏠", label: "home" },
-  { id: "recentSection", icon: "⏱️", label: "recent" },
+  { id: "christmas", icon: "🎅🏻", label: "christmas" },
   { id: "popularSection", icon: "💥", label: "popular" },
   { id: "hotSection", icon: "🔥", label: "hot" },
   { id: "top100", icon: "⭐", label: "top100" },
@@ -19,6 +19,8 @@ const sidebarItems = [
   { id: "shooting_games", icon: "🔫", label: "shooting" },
   { id: "halloween_games", icon: "🎃", label: "halloween" },
   { id: "horror_games", icon: "💀", label: "horror" },
+  { id: "skill_games", icon:"🎯", label:"skillGames"},
+  { id: "simulation_games", icon:"🎮", label:"simulationGames"}
 ];
 
 export default function Sidebar() {

@@ -27,6 +27,7 @@
 }
 
 .sidebar-item {
+  height: 47px;
   display: flex;
   align-items: center;
   gap: 14px;
@@ -68,16 +69,7 @@ ease;
   border-color: #60a5fa;
 }
 
-.label {
-  opacity: 0;
-  visibility: hidden;
-  transition: 0.2s;
-}
 
-.sidebar:hover .label {
-  opacity: 1;
-  visibility: visible;
-}
 
 /* ===========================
    MOBILE DRAWER SIDEBAR
@@ -109,6 +101,16 @@ ease;
     opacity: 1;
     visibility: visible;
   }
+
+  .sidebar .label {
+    transition: 0.4s;
+    display: none ;
+  }
+  .sidebar.open .label {
+    transition: 0.4s;
+    display: block !important ;
+    
+}
 }
 
 /* Overlay (dark background behind drawer) */
@@ -116,11 +118,32 @@ ease;
   position: fixed;
   inset: 0;
   background: rgba(0, 0, 0, 0.6);
-  z-index: 15;
+  z-index: 10;
 }
 
 
 .sidebar-item .icon{
   margin-left: 10px;
 }
+
+
+
+.sidebar:hover .label {
+  
+  transition: 0.4s;
+  display: block !important;
+}
+
+
+@media (min-width: 900px) {
+.sidebar .label {
+    transition: 0.4s;
+    display: none !important;
+    height: 15px;
+    overflow: hidden;
+}
+
+}
+
+
 

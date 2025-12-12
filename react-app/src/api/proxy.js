@@ -5,8 +5,18 @@ export default async function handler(req, res) {
     return res.status(400).json({ error: "Missing URL" });
   }
 
+  // Optional safety
+  if (!target.startsWith("https://h5games.online")) {
+    return res.status(403).json({ error: "Forbidden" });
+  }
+
   try {
-    const response = await fetch(target);
+    const response = await fetch(target, {
+      headers: {
+        "User-Agent": "Mozilla/5.0",
+        "Referer": "https://h5games.online/"
+      }
+    });
 
     const buffer = await response.arrayBuffer();
 
@@ -15,6 +25,7 @@ export default async function handler(req, res) {
       "Content-Type",
       response.headers.get("content-type") || "application/octet-stream"
     );
+    res.setHeader("Cache-Control", "public, max-age=86400");
 
     res.status(200).send(Buffer.from(buffer));
   } catch (err) {

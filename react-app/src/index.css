@@ -46,15 +46,18 @@ html {
   timeline-scope: --section;
 }
 
-.game-section {
+.game-section,.faq-container {
   scroll-snap-align: start;
   view-timeline: --section;
 }
 
-.game-section .content-anim {
+.game-section .content-anim,.faq-container {
   animation: backwards-scroll ease-in-out both;
   animation-timeline: --section;
   position: relative;
+}
+html, body {
+  scroll-padding-top: 130px; 
 }
 
 

@@ -7,23 +7,32 @@ export default function GameSection({ title, games, id, slider = false }) {
   const [showAll, setShowAll] = useState(false);
 
   // AUTOPLAY slider
-  useEffect(() => {
-    if (!slider) return;
+ useEffect(() => {
+  if (!slider) return;
 
-    const sliderEl = sliderRef.current;
-    if (!sliderEl) return;
+  const sliderEl = sliderRef.current;
+  if (!sliderEl) return;
 
-    const autoplay = () => {
-      if (sliderEl.scrollLeft + sliderEl.clientWidth >= sliderEl.scrollWidth - 5) {
-        sliderEl.scrollTo({ left: 0, behavior: "smooth" });
-      } else {
-        sliderEl.scrollBy({ left: 260, behavior: "smooth" });
-      }
-    };
+  let rafId;
+  let speed = 0.4; // px per frame
 
-    const interval = setInterval(autoplay, 20); // autoplay speed
-    return () => clearInterval(interval);
-  }, [slider, games]);
+  const animate = () => {
+    if (
+      sliderEl.scrollLeft + sliderEl.clientWidth >=
+      sliderEl.scrollWidth
+    ) {
+      sliderEl.scrollLeft = 0;
+    } else {
+      sliderEl.scrollLeft += speed;
+    }
+    rafId = requestAnimationFrame(animate);
+  };
+
+  rafId = requestAnimationFrame(animate);
+
+  return () => cancelAnimationFrame(rafId);
+}, [slider]);
+
 
   // Visible games for NON-SLIDER sections
   const visibleGames = slider ? games : showAll ? games : games.slice(0, 12);

@@ -5,7 +5,7 @@ import "./Home.css";
 import { useLanguage } from "../../context/LanguageContext";
 import { translate } from "../../data/translations";
 import FAQ from "../../components/FAQ/FAQ";
-import { fetchH5Games } from "../../api/fetchH5Games";
+import { fetchH5Games } from "../../../api/fetchH5Games";
 
 
 

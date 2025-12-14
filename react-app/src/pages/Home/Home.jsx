@@ -5,6 +5,13 @@ import "./Home.css";
 import { useLanguage } from "../../context/LanguageContext";
 import { translate } from "../../data/translations";
 import FAQ from "../../components/FAQ/FAQ";
+<<<<<<< Updated upstream
+=======
+import { fetchH5Games } from "../../api/fetchH5Games";
+import { selfHostedGames } from "../../data/selfHostedGames";
+import { useLocation } from "react-router-dom";
+
+>>>>>>> Stashed changes
 
 
 export default function Home({ search }) {
@@ -12,6 +19,50 @@ export default function Home({ search }) {
   const [loading, setLoading] = useState(true);
   const { lang } = useLanguage();
 
+<<<<<<< Updated upstream
+=======
+  const location = useLocation();
+
+useEffect(() => {
+  if (location.state?.scrollTo) {
+    const id = location.state.scrollTo;
+
+    // Wait for DOM to render
+    setTimeout(() => {
+      const el = document.getElementById(id);
+      if (el) {
+        window.scrollTo({
+          top: el.offsetTop - 80,
+          behavior: "smooth",
+        });
+      }
+    }, 100);
+  }
+}, [location]);
+
+
+//   useEffect(() => {
+//   fetchH5Games().then(data => {
+//     setGames(data);
+//     localStorage.setItem("games", JSON.stringify(data)); // ADD THIS
+//     setLoading(false);
+//   });
+// }, []);
+
+useEffect(() => {
+  const load = async () => {
+    const h5 = await fetchH5Games();
+    const all = [...selfHostedGames, ...h5];
+
+    setGames(all);
+    localStorage.setItem("games", JSON.stringify(all));
+    setLoading(false);
+  };
+
+  load();
+}, []);
+
+>>>>>>> Stashed changes
 
   useEffect(() => {
     fetchGames().then(data => {

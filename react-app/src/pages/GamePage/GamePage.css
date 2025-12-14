@@ -13,7 +13,7 @@
 /* SIDE COLUMNS */
 .side-column {
   display: grid;
-  grid-template-columns: 1fr 1fr; /* TWO COLUMNS */
+  grid-template-columns: 1fr 1fr; 
   gap: 12px;
   height: fit-content;
 }
@@ -52,6 +52,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
+
 }
 
 /* IFRAME */

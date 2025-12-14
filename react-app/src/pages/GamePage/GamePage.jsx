@@ -8,6 +8,14 @@ export default function GamePage() {
   const [game, setGame] = useState(null);
   const [playing, setPlaying] = useState(false);
 
+<<<<<<< Updated upstream
+=======
+  const isLocal = window.location.hostname === "localhost";
+
+  const [pageLoading, setPageLoading] = useState(false);
+  const navigate = useNavigate();
+  
+>>>>>>> Stashed changes
   useEffect(() => {
     const saved = localStorage.getItem("games");
 
@@ -23,9 +31,21 @@ export default function GamePage() {
   return (
   <div className="gamepage-layout">
 
+<<<<<<< Updated upstream
     {/* LEFT SIDE GAMES */}
     <div className="side-column left-column">
       {games.slice(0, 12).map((g, i) => (
+=======
+      {pageLoading && (
+        <div className="page-loader">
+          <div className="spinner"></div>
+          <p>Loading game…</p>
+        </div>
+      )}
+
+      <div className="side-column left-column">
+        {games.slice(0, 12).map((g, i) => (
+>>>>>>> Stashed changes
         <img
           key={i}
           src={g.image}
@@ -35,8 +55,13 @@ export default function GamePage() {
       ))}
     </div>
 
+<<<<<<< Updated upstream
     {/* CENTER GAME CONTENT */}
     <div className="center-column">
+=======
+      <div className="center-column">
+        <h2 className="play-title">Click Play to Start {game.title}</h2>
+>>>>>>> Stashed changes
 
       <h2 className="play-title">Click Play to Start</h2>
 
@@ -66,6 +91,7 @@ export default function GamePage() {
           <span className="label">PLAYS</span>
           <span className="value">{Math.floor(Math.random() * 8000 + 2000)}</span>
         </div>
+<<<<<<< Updated upstream
         <div className="info-block">
           <span className="label">RATING</span>
           <span className="value">4.5 ★</span>
@@ -81,6 +107,34 @@ export default function GamePage() {
       <div className="more-games-grid">
         {games.slice(0, 12).map((g, i) => (
           <img key={i} src={g.image} alt={g.title} className="more-game-thumb" />
+=======
+
+        <h3 className="more-title">More Games</h3>
+        <div className="more-games-grid">
+          {games.slice(0, 10).map((g, i) => (
+            <img
+            key={i}
+            src={g.image}
+            alt={g.title}
+            className="more-game-thumb"
+            // onClick={() => window.location.href = `/game/${i}`}
+            onClick={() => changeGame(i)}
+            />
+          ))}
+        </div>
+      </div>
+
+      <div className="side-column right-column">
+        {games.slice(12, 24).map((g, i) => (
+        <img
+        key={i}
+        src={g.image}
+        alt={g.title}
+        className="side-thumb"
+        // onClick={() => window.location.href = `/game/${12 + i}`}
+        onClick={() => changeGame(12 + i)}
+        />
+>>>>>>> Stashed changes
         ))}
       </div>
 

@@ -1,11 +1,26 @@
 import "./Footer.css";
 import { useLanguage } from "../../context/LanguageContext";
 import { translate } from "../../data/translations";
+import { useNavigate, useLocation } from "react-router-dom";
+
 
 export default function Footer() {
   const { lang } = useLanguage();
 
-  const scrollTo = (id) => {
+  const navigate = useNavigate();
+  const location = useLocation();
+
+  const goToSection = (id) => {
+    if (location.pathname !== "/") {
+      // Go to home first with section info
+      navigate("/", { state: { scrollTo: id } });
+    } else {
+      // Already on home → scroll directly
+      scrollToId(id);
+    }
+  };
+
+  const scrollToId = (id) => {
     const el = document.getElementById(id);
     if (!el) return;
 
@@ -13,10 +28,6 @@ export default function Footer() {
       top: el.offsetTop - 80,
       behavior: "smooth",
     });
-  };
-
-  const scrollToTop = () => {
-    window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
   return (
@@ -51,11 +62,11 @@ export default function Footer() {
           <div className="footer-column">
             <h3>{translate("browse", lang)}</h3>
             <ul>
-              <li onClick={() => scrollTo("popularSection")}>{translate("popularGames", lang)}</li>
-              <li onClick={() => scrollTo("hotSection")}>{translate("hotGames", lang)}</li>
-              <li onClick={() => scrollTo("featuredSection")}>{translate("featuredGames", lang)}</li>
-              <li onClick={() => scrollTo("gamesAll")}>{translate("allGames", lang)}</li>
-              <li onClick={() => scrollTo("recentSection")}>{translate("recentlyPlayed", lang)}</li>
+              <li onClick={() => goToSection("popularSection")}>{translate("popularGames", lang)}</li>
+              <li onClick={() => goToSection("hotSection")}>{translate("hotGames", lang)}</li>
+              <li onClick={() => goToSection("featuredSection")}>{translate("featuredGames", lang)}</li>
+              <li onClick={() => goToSection("gamesAll")}>{translate("allGames", lang)}</li>
+              <li onClick={() => goToSection("recentSection")}>{translate("recentlyPlayed", lang)}</li>
             </ul>
           </div>
 
@@ -63,11 +74,11 @@ export default function Footer() {
           <div className="footer-column">
             <h3>{translate("categories", lang)}</h3>
             <ul>
-              <li onClick={() => scrollTo("number_games")}>{translate("cricket", lang)} {translate("games", lang)}</li>
-              <li onClick={() => scrollTo("football_games")}>{translate("football", lang)} {translate("games", lang)}</li>
-              <li onClick={() => scrollTo("basketball_games")}>{translate("basketball", lang)} {translate("games", lang)}</li>
-              <li onClick={() => scrollTo("hotSection")}>{translate("racing", lang)}</li>
-              <li onClick={() => scrollTo("gamesAll")}>{translate("cardPuzzle", lang)}</li>
+              <li onClick={() => goToSection("number_games")}>{translate("cricket", lang)} {translate("games", lang)}</li>
+              <li onClick={() => goToSection("football_games")}>{translate("football", lang)} {translate("games", lang)}</li>
+              <li onClick={() => goToSection("basketball_games")}>{translate("basketball", lang)} {translate("games", lang)}</li>
+              <li onClick={() => goToSection("hotSection")}>{translate("racing", lang)}</li>
+              <li onClick={() => goToSection("gamesAll")}>{translate("cardPuzzle", lang)}</li>
             </ul>
           </div>
 
@@ -75,7 +86,7 @@ export default function Footer() {
           <div className="footer-column">
             <h3>{translate("support", lang)}</h3>
             <ul>
-              <li onClick={() => scrollTo("faqSection")}>{translate("faq", lang)}</li>
+              <li onClick={() => goToSection("faqSection")}>{translate("faq", lang)}</li>
             </ul>
           </div>
 
@@ -88,7 +99,7 @@ export default function Footer() {
       {/* BOTTOM COPYRIGHT ROW */}
       <div className="footer-bottom">
         <p>© 2025 8JJ Games — {translate("allGames", lang)}.</p>
-        <button onClick={scrollToTop} className="back-to-top">
+        <button onClick={scrollToId} className="back-to-top">
           {translate("backToTop", lang)}
         </button>
       </div>

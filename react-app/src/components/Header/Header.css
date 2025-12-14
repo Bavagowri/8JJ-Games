@@ -1,7 +1,7 @@
 .header {
   position: sticky;
-  top: 0;
   z-index: 20;
+  top: 44px;
   backdrop-filter: blur(14px);
   background: linear-gradient(to bottom, rgba(5, 7, 11, 0.95), transparent);
 }

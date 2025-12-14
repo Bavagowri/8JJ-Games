@@ -3,6 +3,8 @@ import { useEffect, useState } from "react";
 // import { fetchGames } from "../../api/fetchGames";  // USE YOUR WORKING FETCH!
 import "./GamePage.css";
 import { fetchH5Games } from "../../api/fetchH5Games";
+import { useNavigate } from "react-router-dom";
+
 
 
 export default function GamePage() {
@@ -12,28 +14,77 @@ export default function GamePage() {
   const [playing, setPlaying] = useState(false);
 
   const isLocal = window.location.hostname === "localhost";
-  
 
+  const [pageLoading, setPageLoading] = useState(false);
+  const navigate = useNavigate();
 
   useEffect(() => {
-    const load = async () => {
-      let saved = localStorage.getItem("games");
-      let list;
+  let mounted = true;
 
-      if (saved) {
-        list = JSON.parse(saved);
-      } else {
-        list = await fetchH5Games();   // <-- REAL FIX (works on Vercel)
-        localStorage.setItem("games", JSON.stringify(list));
-      }
+  const load = async () => {
+    const start = Date.now();
+    setPageLoading(true);
+
+    let saved = localStorage.getItem("games");
+    let list;
+
+    if (saved) {
+      list = JSON.parse(saved);
+    } else {
+      list = await fetchH5Games();
+      localStorage.setItem("games", JSON.stringify(list));
+    }
+
+    const selectedGame = list[Number(index)];
+
+    // Ensure loader stays at least 200ms
+    const elapsed = Date.now() - start;
+    const remaining = Math.max(200, 200 - elapsed);
+
+    setTimeout(() => {
+      if (!mounted) return;
 
       setGames(list);
-      setGame(list[Number(index)]);
-      console.log("Loaded game:", list[Number(index)]);
-    };
+      setGame(selectedGame);
+      setPlaying(false);
+      setPageLoading(false);
+    }, remaining);
+  };
 
-    load();
-  }, [index]);
+  load();
+
+  return () => {
+    mounted = false;
+  };
+}, [index]);
+
+
+
+  // useEffect(() => {
+  //   const load = async () => {
+  //     let saved = localStorage.getItem("games");
+  //     let list;
+
+  //     if (saved) {
+  //       list = JSON.parse(saved);
+  //     } else {
+  //       list = await fetchH5Games();   // <-- REAL FIX (works on Vercel)
+  //       localStorage.setItem("games", JSON.stringify(list));
+  //     }
+
+  //     setGames(list);
+  //     setGame(list[Number(index)]);
+  //     console.log("Loaded game:", list[Number(index)]);
+  //   };
+
+  //   load();
+  // }, [index]);
+
+
+  const changeGame = (newIndex) => {
+  if (newIndex === Number(index)) return;
+  navigate(`/game/${newIndex}`);
+};
 
   if (!game) {
     return (
@@ -44,7 +95,15 @@ export default function GamePage() {
   }
 
   return (
+    
     <div className="gamepage-layout">
+
+      {pageLoading && (
+  <div className="page-loader">
+    <div className="spinner"></div>
+    <p>Loading game…</p>
+  </div>
+)}
 
       <div className="side-column left-column">
         {games.slice(0, 12).map((g, i) => (
@@ -53,7 +112,8 @@ export default function GamePage() {
         src={g.image}
         alt={g.title}
         className="side-thumb"
-        onClick={() => window.location.href = `/game/${i}`}
+        // onClick={() => window.location.href = `/game/${i}`}
+        onClick={() => changeGame(i)}
         />
         ))}
       </div>
@@ -105,7 +165,8 @@ export default function GamePage() {
             src={g.image}
             alt={g.title}
             className="more-game-thumb"
-            onClick={() => window.location.href = `/game/${i}`}
+            // onClick={() => window.location.href = `/game/${i}`}
+            onClick={() => changeGame(12 + i)}
             />
           ))}
         </div>
@@ -118,7 +179,8 @@ export default function GamePage() {
         src={g.image}
         alt={g.title}
         className="side-thumb"
-        onClick={() => window.location.href = `/game/${12 + i}`}
+        // onClick={() => window.location.href = `/game/${12 + i}`}
+        onClick={() => changeGame(i)}
         />
         ))}
       </div>

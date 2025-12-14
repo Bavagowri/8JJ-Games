@@ -6,7 +6,7 @@ import { useLanguage } from "../../context/LanguageContext";
 import { translate } from "../../data/translations";
 import FAQ from "../../components/FAQ/FAQ";
 import { fetchH5Games } from "../../api/fetchH5Games";
-
+import { selfHostedGames } from "../../data/selfHostedGames";
 
 
 export default function Home({ search }) {
@@ -14,13 +14,27 @@ export default function Home({ search }) {
   const [loading, setLoading] = useState(true);
   const { lang } = useLanguage();
 
-  useEffect(() => {
-  fetchH5Games().then(data => {
-    setGames(data);
-    localStorage.setItem("games", JSON.stringify(data)); // ADD THIS
+//   useEffect(() => {
+//   fetchH5Games().then(data => {
+//     setGames(data);
+//     localStorage.setItem("games", JSON.stringify(data)); // ADD THIS
+//     setLoading(false);
+//   });
+// }, []);
+
+useEffect(() => {
+  const load = async () => {
+    const h5 = await fetchH5Games();
+    const all = [...selfHostedGames, ...h5];
+
+    setGames(all);
+    localStorage.setItem("games", JSON.stringify(all));
     setLoading(false);
-  });
+  };
+
+  load();
 }, []);
+
 
 
   if (loading) {
@@ -123,12 +137,6 @@ export default function Home({ search }) {
         id="football_games"
         title={`⚽ ${translate("football", lang)} ${translate("games", lang)}`}
         games={categories.football}
-      />
-
-      <GameSection
-        id="basketball_games"
-        title={`🏀 ${translate("basketball", lang)} ${translate("games", lang)}`}
-        games={categories.basketball}
       />
 
       <GameSection

@@ -6,17 +6,28 @@
   width: 80px;
   background: #0d1117;
   position: fixed;
-  top: 90px;
+  top: 110px;
   left: 0;
   height: calc(100vh - 90px);
   padding-top: 20px;
   border-right: 1px solid #1f2937;
-  transition: width 0.25s ease;
+  transition: width 0.25s ease, left 0.25s ease; /* Added left transition */
   z-index: 10;
   overflow-y: auto;
 }
 
+/* Hidden state for desktop */
+.sidebar.hidden {
+  left: -80px;
+}
+
 .sidebar:hover {
+  width: 220px;
+}
+
+/* When hidden and hovering, expand to the right */
+.sidebar.hidden:hover {
+  left: 0;
   width: 220px;
 }
 
@@ -39,20 +50,14 @@
   border-radius: 12px;
   cursor: pointer;
   transition: 0.2s;
-  filter: grayscale(.4) opacity(.8);
-        transition: filter .18s 
-ease, transform .18s 
-ease;
 }
 
 .sidebar-item:hover {
-  background: #1f2937;
+  background: #555555;
   color: white;
-  filter: none;
-        transition: filter .18s 
-ease, transform .18s 
-ease;
+  border: 1px solid #1e40b0;
 }
+
 .sidebar-item.active:hover .label{
   color: white;
 }
@@ -69,8 +74,6 @@ ease;
   border-color: #60a5fa;
 }
 
-
-
 /* ===========================
    MOBILE DRAWER SIDEBAR
 =========================== */
@@ -84,12 +87,18 @@ ease;
     transition: transform 0.3s ease;
   }
 
+  /* Mobile doesn't use the hidden class, only open class */
+  .sidebar.hidden {
+    left: 0;
+    transform: translateX(-100%);
+  }
+
   .sidebar.open {
     transform: translateX(0);
   }
 
   .sidebar:hover {
-    width: 240px; /* disable hover logic */
+    width: 240px;
   }
 
   .sidebar-item {
@@ -104,13 +113,13 @@ ease;
 
   .sidebar .label {
     transition: 0.4s;
-    display: none ;
+    display: none;
   }
+  
   .sidebar.open .label {
     transition: 0.4s;
-    display: block !important ;
-    
-}
+    display: block !important;
+  }
 }
 
 /* Overlay (dark background behind drawer) */
@@ -121,29 +130,40 @@ ease;
   z-index: 10;
 }
 
-
 .sidebar-item .icon{
   margin-left: 10px;
 }
 
-
-
 .sidebar:hover .label {
-  
   transition: 0.4s;
   display: block !important;
 }
 
-
 @media (min-width: 900px) {
-.sidebar .label {
+  .sidebar .label {
     transition: 0.4s;
     display: none !important;
     height: 15px;
     overflow: hidden;
+  }
 }
 
+.sidebar .label{
+  color:#fff;
 }
 
+.sidebar-item:hover .label{
+  color: #7694ff;
+}
 
+.sidebar-item .icon{
+  font-size: 23px;
+  transition: 0.2s;
+  filter: brightness(1) contrast(1) drop-shadow(0 0 15px rgb(63, 99, 172));
+}
 
+.sidebar-item:hover .icon{
+  font-size: 25px;
+  transition: 0.2s;
+  filter: brightness(1.1) contrast(0.9) drop-shadow(0 0 15px rgb(63, 99, 172));
+}

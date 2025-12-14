@@ -345,7 +345,7 @@ box-shadow: 0 23px 32px rgb(9 40 101) !important;
 }
 .btn:hover .btnInner {
   background: rgba(88, 221, 147, 0.1);
-  color: #0b0b0b;
+  color: #ffffff;
 }
 .btn:active {
   transform: scale(0.95);

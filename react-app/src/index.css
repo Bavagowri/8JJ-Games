@@ -20,7 +20,7 @@ html {
 }
 
 html {
-  scroll-padding-top: 70px; 
+  scroll-padding-top: 100px; 
   scroll-behavior: smooth;
 }
 
@@ -42,16 +42,16 @@ html {
 }
 
 html {
-  scroll-snap-type: y mandatory;
+  scroll-snap-type: y proximity; /* Changed from mandatory */
   timeline-scope: --section;
 }
 
-.game-section,.faq-container {
+.game-section,.faq-container,.footer-container,.gamepage-layout {
   scroll-snap-align: start;
   view-timeline: --section;
 }
 
-.game-section .content-anim,.faq-container {
+.game-section .content-anim,.faq-container,.footer-container,.gamepage-layout {
   animation: backwards-scroll ease-in-out both;
   animation-timeline: --section;
   position: relative;

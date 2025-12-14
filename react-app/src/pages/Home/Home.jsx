@@ -1,33 +1,43 @@
 import { useEffect, useState } from "react";
-import { fetchGames } from "../../api/fetchGames";
+import { fetchH5Games } from "../../api/fetchH5Games";
+import { selfHostedGames } from "../../data/selfHostedGames";
 import GameSection from "../../components/GameSection/GameSection";
+import FAQ from "../../components/FAQ/FAQ";
 import "./Home.css";
 import { useLanguage } from "../../context/LanguageContext";
 import { translate } from "../../data/translations";
-import FAQ from "../../components/FAQ/FAQ";
-<<<<<<< Updated upstream
-=======
-import { fetchH5Games } from "../../api/fetchH5Games";
-import { selfHostedGames } from "../../data/selfHostedGames";
 import { useLocation } from "react-router-dom";
-
->>>>>>> Stashed changes
-
 
 export default function Home({ search }) {
   const [games, setGames] = useState([]);
   const [loading, setLoading] = useState(true);
   const { lang } = useLanguage();
-
-<<<<<<< Updated upstream
-=======
   const location = useLocation();
 
-useEffect(() => {
-  if (location.state?.scrollTo) {
-    const id = location.state.scrollTo;
+  // 🔹 Load games ONCE
+  useEffect(() => {
+    const load = async () => {
+      try {
+        const h5 = await fetchH5Games();
+        const allGames = [...selfHostedGames, ...h5];
 
-    // Wait for DOM to render
+        setGames(allGames);
+        localStorage.setItem("games", JSON.stringify(allGames));
+      } catch (err) {
+        console.error("Failed to load games", err);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    load();
+  }, []);
+
+  // 🔹 Scroll from sidebar navigation
+  useEffect(() => {
+    if (!location.state?.scrollTo) return;
+
+    const id = location.state.scrollTo;
     setTimeout(() => {
       const el = document.getElementById(id);
       if (el) {
@@ -37,39 +47,7 @@ useEffect(() => {
         });
       }
     }, 100);
-  }
-}, [location]);
-
-
-//   useEffect(() => {
-//   fetchH5Games().then(data => {
-//     setGames(data);
-//     localStorage.setItem("games", JSON.stringify(data)); // ADD THIS
-//     setLoading(false);
-//   });
-// }, []);
-
-useEffect(() => {
-  const load = async () => {
-    const h5 = await fetchH5Games();
-    const all = [...selfHostedGames, ...h5];
-
-    setGames(all);
-    localStorage.setItem("games", JSON.stringify(all));
-    setLoading(false);
-  };
-
-  load();
-}, []);
-
->>>>>>> Stashed changes
-
-  useEffect(() => {
-    fetchGames().then(data => {
-      setGames(data);
-      setLoading(false);
-    });
-  }, []);
+  }, [location]);
 
   if (loading) {
     return (
@@ -79,53 +57,55 @@ useEffect(() => {
     );
   }
 
-  // Search filter
-  const filteredGames = games.filter(g =>
-    g.title.toLowerCase().includes(search.toLowerCase())
-  );
+  // 🔹 Search
+  const filteredGames = search
+    ? games.filter(g =>
+        g.title.toLowerCase().includes(search.toLowerCase())
+      )
+    : [];
 
-  // CATEGORY ENGINE — matches your sidebar
+  // 🔹 Categories
   const categories = {
     featured: games.slice(0, 12),
     recent: games.slice(12, 24),
 
     popular: games.filter(g =>
-      g.tagList.includes("free") || g.tagList.includes("1-player")
+      g.tagList?.includes("free") || g.tagList?.includes("1-player")
     ),
 
     hot: games.filter(g =>
-      g.tagList.includes("crazy") ||
-      g.tagList.includes("drift") ||
-      g.tagList.includes("speed")
+      g.tagList?.includes("crazy") ||
+      g.tagList?.includes("drift") ||
+      g.tagList?.includes("speed")
     ),
 
     top100: games.slice(0, 100),
-
     all: games,
 
-    cricket: games.filter(g => g.tagList.includes("cricket")),
-    football: games.filter(g => g.tagList.includes("soccer")),
-    basketball: games.filter(g => g.tagList.includes("basketball")),
-    halloween: games.filter(g => g.tagList.includes("halloween")),
-    horror: games.filter(g => g.tagList.includes("horror")),
-    shooting: games.filter(g => g.tagList.includes("shooting")),
-
+    cricket: games.filter(g => g.tagList?.includes("cricket")),
+    football: games.filter(g => g.tagList?.includes("football")),
+    basketball: games.filter(g => g.tagList?.includes("basketball")),
+    halloween: games.filter(g => g.tagList?.includes("halloween")),
+    horror: games.filter(g => g.tagList?.includes("horror")),
+    shooting: games.filter(g => g.tagList?.includes("shooting")),
   };
 
   return (
     <div className="home-wrapper">
 
       {search && (
-        <GameSection 
-        id="searchResults" 
-        title="Search Results" 
-        games={filteredGames} />
+        <GameSection
+          id="searchResults"
+          title="Search Results"
+          games={filteredGames}
+        />
       )}
 
       <GameSection
         id="featuredSection"
         title={`⭐ ${translate("featuredGames", lang)}`}
         games={categories.featured}
+        slider
       />
 
       <GameSection
@@ -195,8 +175,6 @@ useEffect(() => {
       />
 
       <FAQ />
-
-
     </div>
   );
 }

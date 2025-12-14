@@ -5,9 +5,15 @@ import { LanguageProvider } from "./context/LanguageContext";
 
 import Header from "./components/Header/Header";
 import Sidebar from "./components/Sidebar/Sidebar";
+// import TopPromoBar from "./components/TopPromoBar/TopPromoBar";
+
 import Home from "./pages/Home/Home";
 import GamePage from "./pages/GamePage/GamePage";
 import Footer from "./components/Footer/Footer";
+import GamePageV2 from "./pages/GamePageV2/GamePageV2";
+
+import Snow from "./components/Snow/Snow";
+
 
 export default function App() {
   const [search, setSearch] = useState("");
@@ -16,7 +22,8 @@ export default function App() {
     <LanguageProvider>
       <BrowserRouter>
         <div className="app-root">
-
+          <Snow />
+          {/* <TopPromoBar /> */}
           {/* Always visible */}
           <Header onSearch={setSearch} />
           <Sidebar />
@@ -24,7 +31,7 @@ export default function App() {
           {/* Page content changes here */}
           <Routes>
             <Route path="/" element={<Home search={search} />} />
-            <Route path="/game/:index" element={<GamePage />} />
+            <Route path="/game/:index" element={<GamePageV2 />} />
           </Routes>
 
           <Footer />

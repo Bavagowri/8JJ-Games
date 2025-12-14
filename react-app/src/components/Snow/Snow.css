@@ -1,0 +1,27 @@
+#snow-container {
+  pointer-events: none;
+  position: fixed;
+  inset: 0;
+  overflow: hidden;
+  z-index: 9999;
+}
+
+.snowflake {
+  position: absolute;
+  top: -20px;
+  color: white;
+  user-select: none;
+  animation-name: fall;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+}
+
+.snowflake::before {
+  content: "❄";
+}
+
+@keyframes fall {
+  to {
+    transform: translateY(110vh);
+  }
+}

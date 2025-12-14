@@ -39,7 +39,7 @@ export default function GamePage() {
 
     // Ensure loader stays at least 200ms
     const elapsed = Date.now() - start;
-    const remaining = Math.max(200, 200 - elapsed);
+    const remaining = Math.max(600, 600 - elapsed);
 
     setTimeout(() => {
       if (!mounted) return;

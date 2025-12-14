@@ -1,0 +1,222 @@
+/* TrendingSection.css */
+
+.trending-section {
+  background: linear-gradient(180deg, #0a0e1a 0%, #1a1f35 100%);
+
+
+}
+
+.trending-content {
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+.trending-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 0px;
+  padding-bottom: 15px !important;
+  padding: 0 2rem;
+}
+
+.trending-title {
+  font-size: 2.5rem;
+  font-weight: bold;
+  color: white;
+  margin: 0;
+}
+
+.trending-nav {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.nav-btn {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.1);
+  border: none;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  backdrop-filter: blur(10px);
+}
+
+.nav-btn:hover {
+  background: rgba(255, 255, 255, 0.2);
+  transform: scale(1.05);
+}
+
+.nav-btn:active {
+  transform: scale(0.95);
+}
+
+/* Trending Wrapper */
+.trending-wrapper {
+  position: relative;
+  padding: 0px;
+}
+
+.trending-container {
+  overflow-y: hidden;
+  padding: 5px 0px !important;
+  display: flex;
+  gap: 2rem;
+  overflow-x: auto;
+  scroll-behavior: smooth;
+  padding-bottom: 0px !important;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.trending-container::-webkit-scrollbar {
+  display: none;
+}
+
+/* Trending Item */
+.trending-item {
+  position: relative;
+  flex-shrink: 0;
+  min-width: 250px;
+  display: flex;
+  padding-left: 70px !important;
+  padding-bottom: 55px;
+}
+
+/* Background Number */
+.trending-number {
+  color: #000 !important;
+  text-shadow: 1px 1px 0 #e6e6e6, -1px 1px 0 #e6e6e6, -1px -1px 0 #e6e6e6, 1px -1px 0 #e6e6e6;
+  font-size: 190px !important;
+  left: 70px !important;
+  line-height: 80% !important;
+  position: absolute;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  font-weight: 900;
+  color: rgb(255 255 255 / 16%);
+  font-family: 'Arial Black', sans-serif;
+  -webkit-text-stroke: 2px rgba(255, 255, 255, 0.08);
+  pointer-events: none;
+  user-select: none;
+  z-index: 1;
+}
+
+/* Game Card Wrapper */
+.trending-card-wrapper {
+  position: relative;
+  z-index: 10;
+  margin-left: 2rem;
+  transition: transform 0.3s ease;
+}
+
+.trending-card-wrapper:hover {
+  transform: scale(1.05);
+}
+
+
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .trending-section {
+    padding: 5px 0;
+  }
+
+
+
+  .trending-number {
+    font-size: 180px;
+  }
+
+  .trending-item {
+    min-width: 200px;
+  }
+
+
+
+  .nav-btn {
+    width: 40px;
+    height: 40px;
+  }
+}
+
+@media (max-width: 480px) {
+  .trending-section {
+    padding: 2rem 0;
+  }
+
+  .trending-title {
+    font-size: 1.5rem;
+  }
+
+  .trending-number {
+    font-size: 140px;
+  }
+
+  .trending-item {
+    min-width: 160px;
+  }
+
+  .rank-badge {
+    width: 32px;
+    height: 32px;
+    font-size: 0.9rem;
+  }
+}
+
+
+.trending-section {
+  /* box-shadow: inset 0 0 25px rgba(0, 150, 255, 0.25), inset 0 0 50px rgba(0, 150, 255, 0.15), 0 4px 20px rgba(0, 0, 0, 0.4); */
+  border-radius: 40px;
+  /* background: linear-gradient(45deg, #161616 13%, #061c58 66%, rgba(111, 38, 41, 0)); */
+  margin-bottom: 40px; 
+  padding-top: 30px;
+  padding-bottom: 10px;
+  box-shadow: inset 0 0 40px rgba(255, 255, 255, 0.03), inset 0 0 80px rgba(0, 150, 255, 0.12), 0 0 50px rgba(0, 0, 0, 0.7);
+
+}
+
+
+.trending-section:hover{
+   transition: box-shadow 0.6s ease, transform 0.6s ease;
+    background: linear-gradient(180deg, #14243d 0%, #0b1624 100%);
+  
+   box-shadow:inset 0 0 25px rgba(0, 150, 255, 0.25),inset 0 0 50px rgba(0, 150, 255, 0.15),0 4px 20px rgba(0, 0, 0, 0.4);
+}
+
+.trending-section:hover {
+    transform: translateY(-4px);
+    background: linear-gradient(45deg, #161616 13%, #061c58 66%, rgba(111, 38, 41, 0));
+    animation: gameGlow 1.5s ease-in-out forwards;
+}
+
+
+@keyframes gameGlow {
+    0% {
+    box-shadow: inset 0 0 20px rgba(0, 160, 255, 0.15);
+  }
+  100% {
+    box-shadow:
+      inset 0 0 40px rgba(0, 160, 255, 0.35),
+      inset 0 0 80px rgba(0, 160, 255, 0.15);
+  }
+}
+
+
+#trending .game-card:hover{
+      transform: translateY(0px) !important;
+}
+
+#trending .game-card{
+      max-height: 158px !important;
+}
+
+
+#trending  .game-card{
+  box-shadow: 24px 20px 20px rgb(9 40 101) !important;
+}

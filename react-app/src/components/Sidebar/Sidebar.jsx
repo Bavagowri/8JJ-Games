@@ -8,7 +8,6 @@ const sidebarItems = [
   { id: "top", icon: "🏠", label: "home" },
   { id: "christmas", icon: "🎅🏻", label: "christmas" },
   { id: "endless_runner", icon:"🏃‍♂️", label:"endlessRunner"},
-  { id: "faqSection", icon: "❓", label: "faq" },
   { id: "card_games", icon: "🃏", label: "card" },
   { id: "football_games", icon: "⚽", label: "football" },
   { id: "basketball_games", icon: "🏀", label: "basketball" },
@@ -18,6 +17,7 @@ const sidebarItems = [
   { id: "skill_games", icon:"🎯", label:"skill"},
   { id: "simulation_games", icon:"🎮", label:"simulation"},
   { id: "gamesAll", icon: "👾", label: "allGames" },
+  { id: "faqSection", icon: "❓", label: "faq" }
 ];
 
 export default function Sidebar() {

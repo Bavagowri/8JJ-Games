@@ -1,3 +1,4 @@
+import { useState } from "react";
 import "./FAQ.css";
 import { useLanguage } from "../../context/LanguageContext";
 import { translate } from "../../data/translations";
@@ -15,26 +16,55 @@ const faqList = [
 
 export default function FAQ() {
   const { lang } = useLanguage();
+  const [openIndex, setOpenIndex] = useState(null);
 
-  const openFAQ = (answerKey) => {
-    alert(translate(answerKey, lang));
+  const toggleFAQ = (index) => {
+    setOpenIndex(openIndex === index ? null : index);
   };
 
   return (
     <section id="faqSection" className="faq-container">
-      <h2 className="faq-title">
+      <h2 className="section-title">
         <span className="faq-icon">❓</span> {translate("faqTitle", lang)}
       </h2>
 
-      <div className="faq-grid">
+      <div className="faq-list">
         {faqList.map((faq, index) => (
-          <button
+          <div
             key={index}
-            className="faq-item"
-            onClick={() => openFAQ(faq.a)}
+            className={`faq-item ${openIndex === index ? "active" : ""}`}
           >
-            <span className="faq-q">Q:</span> {translate(faq.q, lang)}
-          </button>
+            <button
+              className="faq-question"
+              onClick={() => toggleFAQ(index)}
+              aria-expanded={openIndex === index}
+            >
+              <span className="faq-q-text">
+                <span className="faq-q-label">Q:</span> {translate(faq.q, lang)}
+              </span>
+              <svg
+                className="faq-icon-chevron"
+                width="20"
+                height="20"
+                viewBox="0 0 20 20"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M5 7.5L10 12.5L15 7.5"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                />
+              </svg>
+            </button>
+            <div className="faq-answer-wrapper">
+              <div className="faq-answer">
+                <span className="faq-a-label">A:</span> {translate(faq.a, lang)}
+              </div>
+            </div>
+          </div>
         ))}
       </div>
     </section>

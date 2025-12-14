@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
-// import { fetchGames } from "../../../api/fetchGames";
 import GameSection from "../../components/GameSection/GameSection";
+import TrendingSection from "../../components/TrendingSection/TrendingSection";
+import TopPicksSection from "../../components/TopPicksSection/TopPicksSection";
 import "./Home.css";
 import { useLanguage } from "../../context/LanguageContext";
 import { translate } from "../../data/translations";
@@ -14,34 +15,94 @@ export default function Home({ search }) {
   const [loading, setLoading] = useState(true);
   const { lang } = useLanguage();
 
-//   useEffect(() => {
-//   fetchH5Games().then(data => {
-//     setGames(data);
-//     localStorage.setItem("games", JSON.stringify(data)); // ADD THIS
-//     setLoading(false);
-//   });
-// }, []);
+  useEffect(() => {
+    const load = async () => {
+      const h5 = await fetchH5Games();
+      const all = [...selfHostedGames, ...h5];
 
-useEffect(() => {
-  const load = async () => {
-    const h5 = await fetchH5Games();
-    const all = [...selfHostedGames, ...h5];
+      setGames(all);
+      localStorage.setItem("games", JSON.stringify(all));
+      setLoading(false);
+    };
 
-    setGames(all);
-    localStorage.setItem("games", JSON.stringify(all));
-    setLoading(false);
-  };
-
-  load();
-}, []);
-
-
+    load();
+  }, []);
 
   if (loading) {
+    // Check if mobile
+    const isMobile = window.innerWidth <= 750;
+
     return (
-      <p style={{ textAlign: "center", color: "white", marginTop: 40 }}>
-        Loading games…
-      </p>
+      <div className="home-wrapper">
+        {/* Featured Section */}
+        <div className="loading-section">
+          <div className="skeleton-title"></div>
+          <div className="grid">
+            {Array.from({ length: 10 }).map((_, index) => (
+              <div key={index} className="card loading">
+                <div className="image"></div>
+                <div className="content">
+                  <h1></h1>
+                  <h2></h2>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* Only show these sections on desktop */}
+        {!isMobile && (
+          <>
+            {/* Christmas Section */}
+            <div className="loading-section">
+              <div className="skeleton-title"></div>
+              <div className="grid">
+                {Array.from({ length: 5 }).map((_, index) => (
+                  <div key={`christmas-${index}`} className="card loading">
+                    <div className="image"></div>
+                    <div className="content">
+                      <h1></h1>
+                      <h2></h2>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            {/* Action Section */}
+            <div className="loading-section">
+              <div className="skeleton-title"></div>
+              <div className="grid">
+                {Array.from({ length: 5 }).map((_, index) => (
+                  <div key={`action-${index}`} className="card loading">
+                    <div className="image"></div>
+                    <div className="content">
+                      <h1></h1>
+                      <h2></h2>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            {/* Driving Section */}
+            <div className="loading-section">
+              <div className="skeleton-title"></div>
+              <div className="grid">
+                {Array.from({ length: 5 }).map((_, index) => (
+                  <div key={`driving-${index}`} className="card loading">
+                    <div className="image"></div>
+                    <div className="content">
+                      <h1></h1>
+                      <h2></h2>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </>
+        )}
+      </div>
     );
   }
 
@@ -52,48 +113,48 @@ useEffect(() => {
 
   // CATEGORY ENGINE — matches your sidebar
   const categories = {
-  // ⭐ FEATURED → H5 only
-  featured: games.slice(0, 12),
+    // ⭐ FEATURED → H5 only
+    featured: games.slice(0, 12),
 
-  recent: games.slice(12, 24),
+    recent: games.slice(12, 50),
 
-  christmas: games.filter(g => g.tagList.includes("christmas")),
+    christmas: games.filter(g => g.tagList.includes("christmas")),
 
-  puzzles: games.filter(g => g.category === "puzzles"),
+    puzzles: games.filter(g => g.category === "puzzles"),
 
-  action: games.filter(g => g.tagList.includes("action")),
+    action: games.filter(g => g.tagList.includes("action")),
 
-  skill: games.filter(g => g.tagList.includes("skill")),
+    skill: games.filter(g => g.tagList.includes("skill")),
 
-  driving: games.filter(g => g.tagList.includes("driving") || g.tagList.includes("cars")),
+    driving: games.filter(g => g.tagList.includes("driving") || g.tagList.includes("cars")),
 
-  basketball: games.filter(g => g.tagList.includes("basketball")),
+    basketball: games.filter(g => g.tagList.includes("basketball")),
 
-  horror: games.filter(g => g.tagList.includes("zombie")),
+    horror: games.filter(g => g.tagList.includes("zombie")),
 
-  halloween: games.filter(g => g.tagList.includes("halloween")),
+    halloween: games.filter(g => g.tagList.includes("halloween")),
 
-  football: games.filter(g => g.tagList.includes("football")),
+    football: games.filter(g => g.tagList.includes("football")),
 
-  simulation: games.filter(g => g.tagList.includes("simulation")),
+    simulation: games.filter(g => g.tagList.includes("simulation")),
 
-  endlessrunner: games.filter(g => g.tagList.includes("endless runner")),
+    endlessrunner: games.filter(g => g.tagList.includes("endless runner")),
 
-  platformers: games.filter(g => g.tagList.includes("platformers")),
+    platformers: games.filter(g => g.tagList.includes("platformers")),
 
-  card: games.filter(g => g.tagList.includes("card")),
+    card: games.filter(g => g.tagList.includes("card")),
 
-  all: games,
-};
+    all: games,
+  };
 
   return (
     <div className="home-wrapper">
 
       {search && (
-        <GameSection 
-        id="searchResults" 
-        title="Search Results" 
-        games={filteredGames} />
+        <GameSection
+          id="searchResults"
+          title={translate("searchResults", lang)}
+          games={filteredGames} />
       )}
 
       <GameSection
@@ -101,6 +162,19 @@ useEffect(() => {
         title={`⭐ ${translate("featuredGames", lang)}`}
         games={categories.featured}
         slider={true}
+      />
+
+      <GameSection
+        id="driving"
+        title={`🚗 ${translate("driving", lang)}`}
+        games={categories.driving}
+      />
+
+      {/* 🔥 TRENDING SECTION */}
+      <TrendingSection
+        id="trending"
+        title={`🔥 ${translate("trendingGames", lang)}`}
+        games={categories.featured.slice(0, 8)}
       />
 
       <GameSection
@@ -115,10 +189,11 @@ useEffect(() => {
         games={categories.action}
       />
 
-      <GameSection
-        id="driving"
-        title={`🚗 ${translate("driving", lang)}`}
-        games={categories.driving}
+      {/* 🎯 TOP PICKS FOR YOU SECTION */}
+      <TopPicksSection
+        id="top-picks"
+        title={`🌶️ ${translate("topPicks", lang)}`}
+        games={categories.recent.slice(0, 27)}
       />
 
       <GameSection
@@ -156,7 +231,7 @@ useEffect(() => {
         title={`🎯 ${translate("skill", lang)}`}
         games={categories.skill}
       />
-      
+
       <GameSection
         id="horror_games"
         title={`💀 ${translate("horror", lang)} ${translate("games", lang)}`}
@@ -165,16 +240,15 @@ useEffect(() => {
 
       <GameSection
         id="endless_runner"
-        title={`💀 ${translate("endlessRunner", lang)}`}
+        title={`🏃 ${translate("endlessRunner", lang)}`}
         games={categories.endlessrunner}
       />
 
-       <GameSection
+      <GameSection
         id="puzzles"
         title={`🧩 ${translate("puzzles", lang)}`}
         games={categories.puzzles}
       />
-
 
       <GameSection
         id="gamesAll"
@@ -183,7 +257,6 @@ useEffect(() => {
       />
 
       <FAQ />
-
 
     </div>
   );

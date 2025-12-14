@@ -80,7 +80,7 @@
   top: 50%;
   transform: translateY(-50%);
   z-index: 5;
-  background: rgba(0,0,0,0.6);
+  background: rgba(0, 0, 0, 0.6);
   border: none;
   color: white;
   font-size: 26px;
@@ -100,7 +100,7 @@
 
 /* Game card inside slider */
 .slider-container .game-card {
- 
+
   flex-shrink: 0;
 }
 
@@ -112,7 +112,8 @@
 
 @media (max-width: 768px) {
   .game-grid {
-    grid-template-columns: repeat(2, 1fr); /* 2 cards per row */
+    grid-template-columns: repeat(2, 1fr);
+    /* 2 cards per row */
     gap: 16px;
   }
 
@@ -131,7 +132,8 @@
 
 @media (max-width: 480px) {
   .game-grid {
-    grid-template-columns: repeat(1, 1fr); /* 1 card per row */
+    grid-template-columns: repeat(1, 1fr);
+    /* 1 card per row */
   }
 
   .game-card img {
@@ -165,88 +167,91 @@
 }
 
 
-#featuredSection{
-   
-    box-shadow:inset 0 0 25px rgba(0, 150, 255, 0.25),inset 0 0 50px rgba(0, 150, 255, 0.15),0 4px 20px rgba(0, 0, 0, 0.4);
-    border-radius: 40px;
-    background: linear-gradient(45deg, #161616 13%, #061c58 66%, rgba(111, 38, 41, 0));
-    padding-top: 17px;
-    padding-bottom: 15px;
+#featuredSection {
+
+  /* box-shadow:inset 0 0 25px rgba(0, 150, 255, 0.25),inset 0 0 50px rgba(0, 150, 255, 0.15),0 4px 20px rgba(0, 0, 0, 0.4); */
+  border-radius: 40px;
+  /* background: linear-gradient(45deg, #161616 13%, #061c58 66%, rgba(111, 38, 41, 0)); */
+  padding-top: 30px;
+  padding-bottom: 15px;
+  border: 1px solid #30363d;
 }
 
 
-#featuredSection .game-card:hover{
-  box-shadow:0 23px 32px rgb(9 40 101);
+#featuredSection .game-card:hover {
+  box-shadow: 0 23px 32px rgb(9 40 101);
 }
 
-#featuredSection .slider-container{
-      padding: 10px 0px 30px 0px;
+#featuredSection .slider-container {
+  padding: 10px 0px 30px 0px;
 }
 
-.game-card:hover .play-button{
+.game-card:hover .play-button {
   background: linear-gradient(90deg, #042d44 0%, #3753c5 100%);
 }
 
-.game-card:hover{
-box-shadow: 0 23px 32px rgb(9 40 101) !important;
+.game-card:hover {
+  box-shadow: 0 23px 32px rgb(9 40 101) !important;
 
 }
 
 
 @media (max-width: 430px) {
-.game-section {
-  padding-left: 15px;
-  padding-right: 15px;
-  padding-top: 15px;
-  padding-bottom: 15px;
-  margin-bottom: 25px;
-}
+  .game-section {
+    padding-left: 15px;
+    padding-right: 15px;
+    padding-top: 15px;
+    padding-bottom: 15px;
+    margin-bottom: 25px;
+  }
 }
 
 
 @media (max-width: 430px) {
-#featuredSection.game-section {
-  padding-left: 20px;
-  padding-right: 0px;
-}
-}
-
-
-.game-section:hover{
-   transition: box-shadow 0.6s ease, transform 0.6s ease;
-    background: linear-gradient(180deg, #14243d 0%, #0b1624 100%);
-  
-   box-shadow:inset 0 0 25px rgba(0, 150, 255, 0.25),inset 0 0 50px rgba(0, 150, 255, 0.15),0 4px 20px rgba(0, 0, 0, 0.4);
-}
-
-
-
-.game-section {
-    transition: box-shadow 0.6s ease, transform 0.6s ease, background 0.6s ease;
-    border-radius: 40px;
-    box-shadow: 
-        inset 0 0 40px rgba(255, 255, 255, 0.03),
-        inset 0 0 80px rgba(0, 150, 255, 0.12),
-        0 0 50px rgba(0, 0, 0, 0.7);
+  #featuredSection.game-section {
+    padding-left: 20px;
+    padding-right: 0px;
+  }
 }
 
 
 .game-section:hover {
-    transform: translateY(-4px);
-   /* background: linear-gradient(180deg, #14243d 0%, #0b1624 100%);*/
-    background: linear-gradient(45deg, #161616 13%, #061c58 66%, rgba(111, 38, 41, 0));
-    animation: gameGlow 1.5s ease-in-out forwards;
+  transition: box-shadow 0.6s ease, transform 0.6s ease;
+  background: linear-gradient(45deg, #161616 13%, #1e458f 66%, rgba(111, 38, 41, 0));
+
+  box-shadow: inset 0 0 25px rgba(0, 150, 255, 0.25), inset 0 0 50px rgba(0, 150, 255, 0.15), 0 4px 20px rgba(0, 0, 0, 0.4);
+}
+
+
+
+.game-section {
+  transition: box-shadow 0.6s ease, transform 0.6s ease, background 0.6s ease;
+  border-radius: 40px;
+  box-shadow:
+    inset 0 0 40px rgba(255, 255, 255, 0.03),
+    inset 0 0 80px rgba(0, 150, 255, 0.12),
+    0 0 50px rgba(0, 0, 0, 0.7);
+}
+
+
+.game-section:hover {
+  transform: translateY(-4px);
+  /* background: linear-gradient(180deg, #14243d 0%, #0b1624 100%); */
+
+
+  animation: gameGlow 1s ease-in-out forwards;
 }
 
 
 @keyframes gameGlow {
-    0% {
+  0% {
     box-shadow: inset 0 0 20px rgba(0, 160, 255, 0.15);
   }
+
   100% {
     box-shadow:
-      inset 0 0 40px rgba(0, 160, 255, 0.35),
-      inset 0 0 80px rgba(0, 160, 255, 0.15);
+      inset 0 0 40px rgba(44, 166, 236, 0.35),
+      inset 0 0 80px rgba(31, 159, 233, 0.15);
   }
 }
 
@@ -267,20 +272,24 @@ box-shadow: 0 23px 32px rgb(9 40 101) !important;
   initial-value: 0deg;
   inherits: false;
 }
+
 @property --glowColor {
   syntax: "<color>";
   initial-value: #58dd93;
 }
+
 @keyframes rotate {
   0% {
     --angle: 0deg;
     --glowColor: var(--color-green);
   }
+
   100% {
     --angle: 360deg;
     --glowColor: var(--color-green);
   }
 }
+
 * {
   box-sizing: border-box;
 }
@@ -309,7 +318,9 @@ box-shadow: 0 23px 32px rgb(9 40 101) !important;
   transition: all 0.18s ease-in-out;
   transform: translate3d(0, 0, 0);
 }
-.btn:after, .btn:before {
+
+.btn:after,
+.btn:before {
   content: "";
   display: block;
   position: absolute;
@@ -323,10 +334,12 @@ box-shadow: 0 23px 32px rgb(9 40 101) !important;
   background-image: conic-gradient(from var(--angle) at 50% 50%, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0) 33%, #4080f8 50%, rgba(0, 0, 0, 0) 66%, rgba(0, 0, 0, 0) 100%);
   animation: rotate 2s infinite linear;
 }
+
 .btn:before {
   animation: rotate 2s infinite linear;
   filter: blur(20px);
 }
+
 .btn .btnInner {
   position: relative;
   display: flex;
@@ -343,10 +356,210 @@ box-shadow: 0 23px 32px rgb(9 40 101) !important;
   backdrop-filter: blur(40px);
   backface-visibility: hidden;
 }
+
 .btn:hover .btnInner {
   background: rgba(88, 221, 147, 0.1);
   color: #ffffff;
 }
+
 .btn:active {
   transform: scale(0.95);
+}
+
+
+/* Trending section  - STARTR */
+
+/* Add these styles to your existing GameSection.css */
+
+/* ========== TRENDING SECTION ========== */
+.trending-section {
+  background: linear-gradient(180deg, #0a0e1a 0%, #1a1f35 100%);
+  padding: 4rem 0;
+}
+
+.trending-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 2rem;
+  padding: 0 2rem;
+}
+
+.trending-nav {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.nav-btn {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.1);
+  border: none;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  backdrop-filter: blur(10px);
+}
+
+.nav-btn:hover {
+  background: rgba(255, 255, 255, 0.2);
+  transform: scale(1.05);
+}
+
+.nav-btn:active {
+  transform: scale(0.95);
+}
+
+/* Trending Wrapper */
+.trending-wrapper {
+  position: relative;
+  padding: 2rem 0;
+}
+
+.trending-container {
+  display: flex;
+  gap: 2rem;
+  overflow-x: auto;
+  scroll-behavior: smooth;
+  padding: 0 2rem 2rem;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.trending-container::-webkit-scrollbar {
+  display: none;
+}
+
+/* Trending Item */
+.trending-item {
+  position: relative;
+  flex-shrink: 0;
+  min-width: 250px;
+}
+
+/* Background Number */
+.trending-number {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 280px;
+  font-weight: 900;
+  color: rgba(255, 255, 255, 0.03);
+  line-height: 1;
+  font-family: 'Arial Black', sans-serif;
+  -webkit-text-stroke: 2px rgba(255, 255, 255, 0.08);
+  text-shadow: 0 0 30px rgba(0, 0, 0, 0.5);
+  pointer-events: none;
+  user-select: none;
+  z-index: 1;
+}
+
+/* Game Card Wrapper */
+.trending-card-wrapper {
+  position: relative;
+  z-index: 10;
+  margin-left: 2rem;
+  transition: transform 0.3s ease;
+}
+
+.trending-card-wrapper:hover {
+  transform: scale(1.05);
+}
+
+/* Rank Badge */
+.rank-badge {
+  position: absolute;
+  bottom: 1rem;
+  right: 1rem;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #ffd700 0%, #ffed4e 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  font-size: 1.1rem;
+  color: #1a1f35;
+  box-shadow: 0 4px 12px rgba(255, 215, 0, 0.4);
+  z-index: 20;
+}
+
+/* Gradient Overlays */
+.gradient-left {
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 128px;
+  background: linear-gradient(90deg, #0a0e1a 0%, transparent 100%);
+  pointer-events: none;
+  z-index: 100;
+}
+
+.gradient-right {
+  position: absolute;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  width: 128px;
+  background: linear-gradient(270deg, #1a1f35 0%, transparent 100%);
+  pointer-events: none;
+  z-index: 100;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .trending-number {
+    font-size: 180px;
+  }
+
+  .trending-item {
+    min-width: 200px;
+  }
+
+  .trending-card-wrapper {
+    margin-left: 1rem;
+  }
+
+  .trending-header {
+    padding: 0 1rem;
+  }
+
+  .trending-container {
+    padding: 0 1rem 2rem;
+  }
+
+  .nav-btn {
+    width: 40px;
+    height: 40px;
+  }
+}
+
+@media (max-width: 480px) {
+  .trending-number {
+    font-size: 140px;
+  }
+
+  .trending-item {
+    min-width: 160px;
+  }
+
+  .rank-badge {
+    width: 32px;
+    height: 32px;
+    font-size: 0.9rem;
+  }
+}
+
+/* Trend section  - END */
+
+
+#featuredSection .game-card {
+  max-height: 120px !important;
 }

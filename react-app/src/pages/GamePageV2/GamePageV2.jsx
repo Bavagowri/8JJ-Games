@@ -14,6 +14,11 @@ export default function GamePageV2() {
 
   const isLocal = window.location.hostname === "localhost";
 
+  // Scroll to top when page loads or game changes
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }, [index]);
+
   useEffect(() => {
     let mounted = true;
 

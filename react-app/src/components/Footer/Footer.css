@@ -245,3 +245,7 @@
   }
 
 }
+
+.VisibilityNone{
+  visibility: hidden;
+}

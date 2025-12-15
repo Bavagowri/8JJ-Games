@@ -62,11 +62,10 @@ export default function Footer() {
           <div className="footer-column">
             <h3>{translate("browse", lang)}</h3>
             <ul>
-              <li onClick={() => goToSection("popularSection")}>{translate("popularGames", lang)}</li>
-              <li onClick={() => goToSection("hotSection")}>{translate("hotGames", lang)}</li>
               <li onClick={() => goToSection("featuredSection")}>{translate("featuredGames", lang)}</li>
+              <li onClick={() => goToSection("trending")}>{translate("trendingGames", lang)}</li>
+              <li onClick={() => goToSection("top-picks")}>{translate("topPicks", lang)}</li>
               <li onClick={() => goToSection("gamesAll")}>{translate("allGames", lang)}</li>
-              <li onClick={() => goToSection("recentSection")}>{translate("recentlyPlayed", lang)}</li>
             </ul>
           </div>
 
@@ -74,19 +73,29 @@ export default function Footer() {
           <div className="footer-column">
             <h3>{translate("categories", lang)}</h3>
             <ul>
-              <li onClick={() => goToSection("number_games")}>{translate("cricket", lang)} {translate("games", lang)}</li>
+              <li onClick={() => goToSection("action")}>{translate("action", lang)}</li>
+              <li onClick={() => goToSection("driving")}>{translate("driving", lang)}</li>
+              <li onClick={() => goToSection("puzzles")}>{translate("puzzles", lang)}</li>
+              <li onClick={() => goToSection("skill_games")}>{translate("skill", lang)}</li>
+              <li onClick={() => goToSection("simulation_games")}>{translate("simulation", lang)}</li>
+              <li onClick={() => goToSection("platformer")}>{translate("platformer", lang)}</li>
+              <li onClick={() => goToSection("christmas")}>{translate("christmas", lang)} {translate("games", lang)}</li>
+              <li onClick={() => goToSection("halloween_games")}>{translate("halloween", lang)} {translate("games", lang)}</li>
               <li onClick={() => goToSection("football_games")}>{translate("football", lang)} {translate("games", lang)}</li>
               <li onClick={() => goToSection("basketball_games")}>{translate("basketball", lang)} {translate("games", lang)}</li>
-              <li onClick={() => goToSection("hotSection")}>{translate("racing", lang)}</li>
-              <li onClick={() => goToSection("gamesAll")}>{translate("cardPuzzle", lang)}</li>
+              <li onClick={() => goToSection("card_games")}>{translate("card", lang)} {translate("games", lang)}</li>
+              <li onClick={() => goToSection("horror_games")}>{translate("horror", lang)} {translate("games", lang)}</li>
+              <li onClick={() => goToSection("endless_runner")}>{translate("endlessRunner", lang)}</li>
             </ul>
           </div>
+
+        
 
           {/* SUPPORT */}
           <div className="footer-column">
             <h3>{translate("support", lang)}</h3>
             <ul>
-              <li onClick={() => goToSection("faqSection")}>{translate("faq", lang)}</li>
+              <li onClick={() => goToSection("faqSection")}>FAQ</li>
             </ul>
           </div>
 
@@ -99,7 +108,7 @@ export default function Footer() {
       {/* BOTTOM COPYRIGHT ROW */}
       <div className="footer-bottom">
         <p>© 2025 8JJ Games — {translate("allGames", lang)}.</p>
-        <button onClick={scrollToId} className="back-to-top">
+        <button onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })} className="back-to-top">
           {translate("backToTop", lang)}
         </button>
       </div>

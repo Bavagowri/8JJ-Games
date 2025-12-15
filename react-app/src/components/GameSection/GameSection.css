@@ -611,3 +611,17 @@
 
 
 }
+
+
+/* Add to GameSection.css */
+#featuredSection .slider-container {
+  padding: 10px 0px 30px 0px;
+  /* Prevent layout shift on hover */
+  will-change: scroll-position;
+}
+
+/* Disable section hover effects on featured slider to reduce conflicts */
+#featuredSection:hover {
+  transform: none;
+  animation: none;
+}

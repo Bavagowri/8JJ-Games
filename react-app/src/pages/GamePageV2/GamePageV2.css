@@ -224,7 +224,9 @@
 
   .play-title {
     font-size: 22px;
+    display: contents;
   }
+
 }
 
 .page-loader {
@@ -404,7 +406,8 @@
     display: contents;
   }
 
-  .side-column,.more-games-grid{
+  .side-column,
+  .more-games-grid {
     grid-template-columns: repeat(auto-fill, minmax(110px, 2fr)) !important;
   }
 }
@@ -423,6 +426,6 @@
   margin-bottom: 10px;
 }
 
-.more-title.section-title{
-      margin-top: 30px;
+.more-title.section-title {
+  margin-top: 30px;
 }

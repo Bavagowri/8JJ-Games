@@ -6,7 +6,7 @@ export default function GameSection({ title, games, id, slider = false }) {
   const sliderRef = useRef(null);
   const [showAll, setShowAll] = useState(false);
 
-  // AUTOPLAY slider
+  // AUTOPLAY slider with pause on hover
   useEffect(() => {
     if (!slider) return;
 
@@ -15,29 +15,49 @@ export default function GameSection({ title, games, id, slider = false }) {
 
     let rafId;
     let speed = 0.4; // px per frame
+    let isPaused = false;
 
     const animate = () => {
-      if (
-        sliderEl.scrollLeft + sliderEl.clientWidth >=
-        sliderEl.scrollWidth
-      ) {
-        sliderEl.scrollLeft = 0;
-      } else {
-        sliderEl.scrollLeft += speed;
+      if (!isPaused) {
+        if (
+          sliderEl.scrollLeft + sliderEl.clientWidth >=
+          sliderEl.scrollWidth
+        ) {
+          sliderEl.scrollLeft = 0;
+        } else {
+          sliderEl.scrollLeft += speed;
+        }
       }
       rafId = requestAnimationFrame(animate);
     };
 
+    // Pause animation when hovering over slider
+    const handleMouseEnter = () => {
+      isPaused = true;
+    };
+
+    const handleMouseLeave = () => {
+      isPaused = false;
+    };
+
+    // Add event listeners to the slider container
+    sliderEl.addEventListener('mouseenter', handleMouseEnter);
+    sliderEl.addEventListener('mouseleave', handleMouseLeave);
+
     rafId = requestAnimationFrame(animate);
 
-    return () => cancelAnimationFrame(rafId);
+    return () => {
+      cancelAnimationFrame(rafId);
+      sliderEl.removeEventListener('mouseenter', handleMouseEnter);
+      sliderEl.removeEventListener('mouseleave', handleMouseLeave);
+    };
   }, [slider]);
 
   const visibleGames = slider ? games : showAll ? games : games.slice(0, 12);
 
   return (
     <section className="game-section" id={id}>
-      
+
       <div className="content-anim">
 
         <h2 className="section-title">{title}</h2>
@@ -76,7 +96,7 @@ export default function GameSection({ title, games, id, slider = false }) {
         )}
 
       </div>
-     
+
 
     </section>
   );

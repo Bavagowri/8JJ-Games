@@ -140,7 +140,7 @@ export default function Home({ search }) {
 
     endlessrunner: games.filter(g => g.tagList.includes("endless runner")),
 
-    platformers: games.filter(g => g.tagList.includes("platformers")),
+    platformers: games.filter(g => g.tagList.includes("platformer")),
 
     card: games.filter(g => g.tagList.includes("card")),
 
@@ -242,6 +242,12 @@ export default function Home({ search }) {
         id="endless_runner"
         title={`🏃 ${translate("endlessRunner", lang)}`}
         games={categories.endlessrunner}
+      />
+
+      <GameSection
+        id="platformer"
+        title={`🏃 ${translate("platformer", lang)}`}
+        games={categories.platformers}
       />
 
       <GameSection

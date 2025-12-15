@@ -12,6 +12,7 @@ const sidebarItems = [
   { id: "christmas", icon: "🎅🏻", label: "christmas" },
   { id: "action", icon: "🥊", label: "action" },
   { id: "top-picks", icon: "🌶️", label: "topPicks" },
+  { id: "platformer", icon:"🏃", label: "platofrmer"},
   { id: "halloween_games", icon: "🎃", label: "halloween" },
   { id: "card_games", icon: "🃏", label: "card" },
   { id: "football_games", icon: "⚽", label: "football" },

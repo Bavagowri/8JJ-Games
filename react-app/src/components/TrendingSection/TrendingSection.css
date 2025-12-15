@@ -26,7 +26,7 @@
   color: white;
   margin: 0;
 }
-
+Í
 .trending-nav {
   display: flex;
   gap: 0.5rem;
@@ -36,7 +36,7 @@
   width: 48px;
   height: 48px;
   border-radius: 50%;
-  background: rgba(255, 255, 255, 0.1);
+  background: #ffffff0a !important;
   border: none;
   color: white;
   display: flex;

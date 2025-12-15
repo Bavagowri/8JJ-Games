@@ -39,6 +39,8 @@
   width: 120px;
   height: auto;
   opacity: 0.95;
+  filter: brightness(1.7) contrast(1.1) drop-shadow(0 0 6px rgb(63, 99, 172));
+  transition: filter 0.3s ease, transform 0.2s ease;
 }
 
 /* Title */
@@ -170,11 +172,12 @@
   }
 
   .footer-logo {
-    width: 60px;
+    width: 100px;
   }
 
   .footer-heading {
     font-size: 22px;
+    margin-bottom: 15px;
   }
 
   /* Description text centered */
@@ -183,6 +186,7 @@
     margin-left: auto;
     margin-right: auto;
     line-height: 1.6;
+    margin-bottom: 30px;
   }
 
   /* Badges stacked or centered */
@@ -190,6 +194,7 @@
     justify-content: center;
     gap: 10px;
     flex-wrap: wrap;
+    margin-bottom: 15px;
   }
 
   .badge {
@@ -226,4 +231,17 @@
   .back-to-top {
     margin-top: 5px;
   }
+
+  .footer-left {
+    max-width: 100%;
+  }
+
+  .footer-brand-row {
+    display: block;
+  }
+
+  .footer-tile-row {
+    margin-top: 15px;
+  }
+
 }

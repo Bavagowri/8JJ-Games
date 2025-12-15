@@ -12,7 +12,7 @@
 /* SIDE COLUMNS */
 .side-column {
   display: grid;
-  grid-template-columns: 1fr 1fr; 
+  grid-template-columns: 1fr 1fr;
   gap: 12px;
   height: fit-content;
   background: #15366448;
@@ -41,7 +41,8 @@
 /* TITLE */
 .play-title {
   font-size: 26px;
-  font-weight: 800; /* slightly stronger for titles */
+  font-weight: 400;
+  /* slightly stronger for titles */
   margin-bottom: 20px;
   background: rgba(21, 54, 100, 0.28);
   padding: 20px;
@@ -82,10 +83,8 @@
 .poster-overlay {
   position: absolute;
   inset: 0;
-  background: linear-gradient(
-    rgba(0,0,0,0.2),
-    rgba(0,0,0,0.75)
-  );
+  background: linear-gradient(rgba(0, 0, 0, 0.2),
+      rgba(0, 0, 0, 0.75));
   display: flex;
   align-items: center;
   justify-content: center;
@@ -171,22 +170,24 @@
 
   /* CENTER COLUMN SHOULD COME FIRST */
   .center-column {
-    order: 0;                /* FIRST on mobile */
+    order: 0;
+    /* FIRST on mobile */
   }
 
   /* SIDE THUMB COLUMNS COME AFTER GAMEPLAY */
   .right-column {
-    order: 1;                /* AFTER gameplay */
+    order: 1;
+    /* AFTER gameplay */
     grid-template-columns: repeat(4, 1fr);
     margin: 20px 0;
   }
 
   /* INFO BAR BELOW SIDE THUMBS */
   .game-info-bar {
-   text-align: center;
-   display: grid;
-   grid-template-columns: 1fr 1fr;
-   gap: 12px;
+    text-align: center;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
   }
 
   /* MORE GAMES GRID AFTER EVERYTHING */
@@ -254,4 +255,174 @@
   to {
     transform: rotate(360deg);
   }
+}
+
+
+
+/* Skeleton Loader Styles */
+
+@keyframes Shine {
+  to {
+    background-position-x: -20%;
+  }
+}
+
+.skeleton-layout {
+  animation: fadeIn 0.3s ease-in-out;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+/* Common skeleton element base */
+.skeleton-game-title,
+.skeleton-game-frame,
+.skeleton-info-block,
+.skeleton-more-title,
+.skeleton-more-game,
+.skeleton-side-thumb {
+  background-color: #ededed0f;
+  background: linear-gradient(100deg,
+      #ffffff00 40%,
+      #ffffff12 50%,
+      #ffffff00 60%) #ededed0f;
+  background-size: 200% 100%;
+  background-position-x: 180%;
+  animation: 1.6s Shine ease-in-out infinite;
+  border-radius: 8px;
+}
+
+/* Title skeleton */
+.skeleton-game-title {
+  height: 32px;
+  width: 60%;
+  max-width: 400px;
+  margin-bottom: 20px;
+  border-radius: 6px;
+}
+
+/* Game frame skeleton */
+.skeleton-game-frame {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  max-height: 600px;
+  margin-bottom: 20px;
+  border-radius: 12px;
+  animation-delay: 0.1s;
+}
+
+/* Info bar skeleton */
+.skeleton-info-bar {
+  display: flex;
+  gap: 16px;
+  margin-bottom: 40px;
+  flex-wrap: wrap;
+}
+
+.skeleton-info-block {
+  flex: 1;
+  min-width: 120px;
+  height: 60px;
+  border-radius: 8px;
+  animation-delay: 0.15s;
+}
+
+/* More games title skeleton */
+.skeleton-more-title {
+  height: 28px;
+  width: 180px;
+  margin-bottom: 20px;
+  border-radius: 6px;
+  animation-delay: 0.2s;
+}
+
+/* More games grid skeleton */
+.skeleton-more-game {
+  aspect-ratio: 1;
+  border-radius: 8px;
+  animation-delay: 0.25s;
+}
+
+/* Side column skeleton */
+.skeleton-side-thumb {
+  aspect-ratio: 1;
+  border-radius: 8px;
+  margin-bottom: 16px;
+  animation-delay: 0.3s;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .skeleton-game-title {
+    width: 80%;
+    height: 28px;
+  }
+
+  .skeleton-info-bar {
+    gap: 12px;
+  }
+
+  .skeleton-info-block {
+    min-width: 100px;
+    height: 50px;
+  }
+
+  .skeleton-more-title {
+    height: 24px;
+    width: 150px;
+  }
+}
+
+@media (max-width: 480px) {
+  .skeleton-game-title {
+    width: 90%;
+    height: 24px;
+  }
+
+  .skeleton-info-bar {
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .skeleton-info-block {
+    width: 100%;
+    min-width: unset;
+  }
+}
+
+
+
+@media (max-width: 768px) {
+  .center-column {
+    display: contents;
+  }
+
+  .side-column,.more-games-grid{
+    grid-template-columns: repeat(auto-fill, minmax(110px, 2fr)) !important;
+  }
+}
+
+
+.game-title-span {
+  font-weight: 600;
+  letter-spacing: 1px;
+}
+
+.game-info-bar .value {
+  text-transform: capitalize;
+}
+
+.game-info-bar .label {
+  margin-bottom: 10px;
+}
+
+.more-title.section-title{
+      margin-top: 30px;
 }

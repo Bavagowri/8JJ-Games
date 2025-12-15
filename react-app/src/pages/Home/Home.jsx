@@ -166,7 +166,7 @@ export default function Home({ search }) {
 
       <GameSection
         id="driving"
-        title={`🚗 ${translate("driving", lang)}`}
+        title={`🏎️ ${translate("driving", lang)}`}
         games={categories.driving}
       />
 
@@ -185,7 +185,7 @@ export default function Home({ search }) {
 
       <GameSection
         id="action"
-        title={`🔥 ${translate("action", lang)}`}
+        title={`🥊 ${translate("action", lang)}`}
         games={categories.action}
       />
 

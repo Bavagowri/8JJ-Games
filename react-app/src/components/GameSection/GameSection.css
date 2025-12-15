@@ -117,9 +117,7 @@
     gap: 16px;
   }
 
-  .game-card {
-    width: 100%;
-  }
+
 
   .game-card img {
     height: 140px;
@@ -562,4 +560,54 @@
 
 #featuredSection .game-card {
   max-height: 120px !important;
+}
+
+
+@media (max-width: 600px) {
+  .slider-container .game-card {
+    min-width: 110px;
+  }
+
+  #featuredSection .game-card {
+    max-height: 110px !important;
+  }
+
+  #featuredSection.game-section {
+    padding-left: 0px;
+    padding-right: 0px;
+    border: none;
+    box-shadow: none;
+    margin-top: 20px;
+  }
+
+  .section-title {
+    padding-left: 10px;
+  }
+
+  .game-section {
+    margin-bottom: 10px !important;
+    box-shadow: none;
+  }
+
+  .games-grid {
+    grid-template-columns: repeat(3, 1fr) !important;
+  }
+
+  .game-card {
+    max-height: 110px;
+    max-width: 110px;
+  }
+
+  #trending .game-card {
+    max-height: 125px;
+    max-width: 125px;
+  }
+
+  .top-picks-section .top-picks-featured .game-card {
+    max-width: none !important;
+    width: 100% !important;
+  }
+
+
+
 }

@@ -16,7 +16,8 @@ export default function TrendingSection({ title, games, id }) {
   };
 
   return (
-    <section className="trending-section" id={id}>
+    <section className="trending-section game-section" id={id}>
+      <div className="content-anim">
       <div className="trending-content">
 
         {/* Header with Navigation */}
@@ -64,6 +65,7 @@ export default function TrendingSection({ title, games, id }) {
          
         </div>
 
+      </div>
       </div>
     </section>
   );

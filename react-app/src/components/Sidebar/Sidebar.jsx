@@ -6,23 +6,28 @@ import "./Sidebar.css";
 
 const sidebarItems = [
   { id: "top", icon: "🏠", label: "home" },
+  { id: "featuredSection", icon: "⭐", label: "featuredGames" },
+  { id: "driving", icon: "🏎️", label: "driving" },
+  { id: "trending", icon: "🔥", label: "trendingGames" },
   { id: "christmas", icon: "🎅🏻", label: "christmas" },
-  { id: "endless_runner", icon:"🏃‍♂️", label:"endlessRunner"},
+  { id: "action", icon: "🥊", label: "action" },
+  { id: "top-picks", icon: "🌶️", label: "topPicks" },
+  { id: "halloween_games", icon: "🎃", label: "halloween" },
   { id: "card_games", icon: "🃏", label: "card" },
   { id: "football_games", icon: "⚽", label: "football" },
   { id: "basketball_games", icon: "🏀", label: "basketball" },
-  { id: "platformer", icon:"🧗‍♂️", label: "platformer"},
-  { id: "halloween_games", icon: "🎃", label: "halloween" },
+  { id: "simulation_games", icon: "🎮", label: "simulation" },
+  { id: "skill_games", icon: "🎯", label: "skill" },
   { id: "horror_games", icon: "💀", label: "horror" },
-  { id: "skill_games", icon:"🎯", label:"skill"},
-  { id: "simulation_games", icon:"🎮", label:"simulation"},
+  { id: "endless_runner", icon: "🏃", label: "endlessRunner" },
+  { id: "puzzles", icon: "🧩", label: "puzzles" },
   { id: "gamesAll", icon: "👾", label: "allGames" },
   { id: "faqSection", icon: "❓", label: "faq" }
 ];
 
 export default function Sidebar() {
   const [open, setOpen] = useState(false);
-  const [hidden, setHidden] = useState(false); // New state for desktop hide
+  const [hidden, setHidden] = useState(false);
   const [activeItem, setActiveItem] = useState("top");
   const { lang } = useLanguage();
   const navigate = useNavigate();
@@ -34,7 +39,6 @@ export default function Sidebar() {
     return () => document.removeEventListener("openDrawer", handler);
   }, []);
 
-  // Add listener for toggle event from header
   useEffect(() => {
     const handler = () => setHidden(prev => !prev);
     document.addEventListener("toggleSidebar", handler);

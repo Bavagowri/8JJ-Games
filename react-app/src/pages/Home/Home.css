@@ -199,3 +199,21 @@
 
 
 /*    Skeleton Loading ------ END   */
+
+
+
+/* Responsive Design */
+@media (max-width: 768px) {
+
+
+  html, body {
+    overscroll-behavior: none;
+    scroll-padding-top: 70px;
+}
+
+}
+
+
+.game-category{
+  text-transform: capitalize;
+}

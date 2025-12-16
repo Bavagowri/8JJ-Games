@@ -369,6 +369,11 @@
     grid-template-columns: repeat(2, 1fr);
     gap: 10px;
   }
+
+  .big-play-btn {
+    font-size: 14px;
+    padding: 8px 16px;
+  }
 }
 
 /* Responsive adjustments */
@@ -430,7 +435,11 @@
   .side-column {
     display: none;
   }
+  .big-play-btn {
+    font-size: 14px;
+    padding: 8px 16px;
   }
+}
 
   
 

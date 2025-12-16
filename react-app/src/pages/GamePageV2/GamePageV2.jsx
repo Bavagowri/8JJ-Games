@@ -1,14 +1,12 @@
 import { useParams, useNavigate } from "react-router-dom";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useLayoutEffect } from "react";
 import "./GamePageV2.css";
 import { fetchH5Games } from "../../api/fetchH5Games";
 import { selfHostedGames } from "../../data/selfHostedGames";
-import { useLayoutEffect } from "react";
 import ScrollToTop from "../../components/ScrollToTop";
 
-
 export default function GamePageV2() {
-  const { id } = useParams();                // ✅ use ID, not index
+  const { id } = useParams(); // ✅ ID-based
   const navigate = useNavigate();
 
   const [games, setGames] = useState([]);
@@ -16,12 +14,7 @@ export default function GamePageV2() {
   const [playing, setPlaying] = useState(false);
   const [pageLoading, setPageLoading] = useState(true);
 
-  // Scroll to top when page loads or game changes
-useLayoutEffect(() => {
-  window.scrollTo(0, 0);
-}, [id]);
 
-  // ✅ Load games + selected game by ID
   useEffect(() => {
     let mounted = true;
 
@@ -30,24 +23,27 @@ useLayoutEffect(() => {
       setPageLoading(true);
 
       let list = JSON.parse(localStorage.getItem("games"));
-      if (!list) {
-        list = await fetchH5Games();
+
+      // ✅ Ensure BOTH self-hosted + H5 exist
+      if (!Array.isArray(list) || list.length === 0) {
+        const h5 = await fetchH5Games();
         list = [...selfHostedGames, ...h5];
         localStorage.setItem("games", JSON.stringify(list));
       }
 
-      // const selected = list.find(g => g.id === id);
-      const selected = list.find(g => String(g.id) === String(id));
+      const selected = list.find(
+        g => String(g.id) === String(id)
+      );
 
       if (!mounted) return;
 
-      // ⛔ invalid game id → redirect home
+      // ❌ DO NOT redirect — just fail safely
       if (!selected) {
-        navigate("/");
+        console.warn("Game not found:", id);
+        setPageLoading(false);
         return;
       }
 
-      // Ensure loader visible at least 600ms
       const elapsed = Date.now() - start;
       const delay = Math.max(600 - elapsed, 0);
 
@@ -63,44 +59,52 @@ useLayoutEffect(() => {
 
     load();
     return () => { mounted = false; };
-  }, [id, navigate]);
+  }, [id]);
 
-  // ✅ Navigate by ID (not index)
+  // ✅ Navigate using ID
   const changeGame = (gameId) => {
-    if (gameId === id) return;
+    if (String(gameId) === String(id)) return;
     navigate(`/game/${gameId}`);
   };
 
   if (!game) return null;
 
-  // ✅ Exclude current game safely
-  const otherGames = games.filter(g => g.id !== id);
+  // ✅ Normalize ID comparison
+  const otherGames = games.filter(
+    g => String(g.id) !== String(id)
+  );
+
   const moreGames = otherGames.slice(0, 12);
   const sideGames = otherGames.slice(12, 24);
 
+  // ✅ Fix iframe src for self-hosted games
+  const iframeSrc =
+    game.source === "self"
+      ? `${window.location.origin}${game.embed}`
+      : game.embed;
 
   return (
     <div className="gamepage-layout">
+      <ScrollToTop />
 
-      {/* 🔄 Page Loader */}
       {pageLoading && (
         <div className="page-loader">
           <div className="spinner"></div>
           <p>Loading game…</p>
         </div>
       )}
-            <ScrollToTop />
 
       {/* 🎮 CENTER */}
       <div className="center-column">
         <h2 className="play-title">
-          Click Play to Start <span className="game-title-span">{game.title}</span>
+          Click Play to Start{" "}{game.title}
+          {/* <span className="game-title-span">{game.title}</span> */}
         </h2>
 
         <div className="game-frame-container" key={game.id}>
           {playing ? (
             <iframe
-              src={game.embed}
+              src={iframeSrc}
               className="game-iframe"
               allowFullScreen
               sandbox="allow-same-origin allow-scripts allow-pointer-lock allow-forms allow-modals"
@@ -122,11 +126,15 @@ useLayoutEffect(() => {
         <div className="game-info-bar">
           <div className="info-block">
             <span className="label">CATEGORY</span>
-            <span className="value">{game.category || game.tagList?.[0]}</span>
+            <span className="value">
+              {game.category || game.tagList?.[0]}
+            </span>
           </div>
           <div className="info-block">
             <span className="label">PLAYS</span>
-            <span className="value">{Math.floor(Math.random() * 8000 + 2000)}</span>
+            <span className="value">
+              {Math.floor(Math.random() * 8000 + 2000)}
+            </span>
           </div>
           <div className="info-block">
             <span className="label">RATING</span>
@@ -151,7 +159,9 @@ useLayoutEffect(() => {
               <div className="play-button">Play Now</div>
               <div className="game-overlay">
                 <div className="game-title">{g.title}</div>
-                {g.category && <div className="game-category">{g.category}</div>}
+                {g.category && (
+                  <div className="game-category">{g.category}</div>
+                )}
               </div>
             </div>
           ))}

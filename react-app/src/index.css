@@ -6,7 +6,7 @@
 
 body {
   margin: 0;
-  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Inter", sans-serif;
+  font-family: 'Nunito', Arial, Helvetica, sans-serif;
   background: linear-gradient(45deg, #161616 13%, #081127 66%, rgb(1 3 33));
   color: #fff;
 }

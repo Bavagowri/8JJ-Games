@@ -59,31 +59,34 @@ export default function Sidebar() {
   }, [location.pathname]);
 
   const handleItemClick = (item) => {
-    setOpen(false);
-    setActiveItem(item.id);
+  setOpen(false);
+  setActiveItem(item.id);
 
-    // If it's a route (like All Games), navigate to that route
-    if (item.isRoute) {
-      navigate(item.id);
-      return;
-    }
+  // 1️⃣ Route-based navigation
+  if (item.isRoute) {
+    navigate(item.id);
+    return;
+  }
 
-    // If it's a section and we're not on home page, navigate to home first
-    if (location.pathname !== "/") {
-      navigate("/", { state: { scrollTo: item.id } });
-      return;
-    }
+  // 2️⃣ Not on home → go home WITH scroll target
+  if (location.pathname !== "/") {
+    navigate("/", {
+      state: { scrollTo: item.id },
+    });
+    return;
+  }
 
-    // Scroll to section on home page
-    if (item.id === "top") {
-      window.scrollTo({ top: 0, behavior: "smooth" });
-    } else {
-      document.getElementById(item.id)?.scrollIntoView({
-        behavior: "smooth",
-        block: "start",
-      });
+  // 3️⃣ Already on home → scroll directly
+  if (item.id === "top") {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  } else {
+    const el = document.getElementById(item.id);
+    if (el) {
+      el.scrollIntoView({ behavior: "smooth", block: "start" });
     }
-  };
+  }
+};
+
 
   return (
     <>

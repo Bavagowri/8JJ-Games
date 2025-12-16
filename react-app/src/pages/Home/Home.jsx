@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useLocation } from "react";
 import GameSection from "../../components/GameSection/GameSection";
 import TrendingSection from "../../components/TrendingSection/TrendingSection";
 import TopPicksSection from "../../components/TopPicksSection/TopPicksSection";
@@ -14,6 +14,8 @@ export default function Home({ search }) {
   const [games, setGames] = useState([]);
   const [loading, setLoading] = useState(true);
   const { lang } = useLanguage();
+  // const location = useLocation();
+
 
   useEffect(() => {
     const load = async () => {

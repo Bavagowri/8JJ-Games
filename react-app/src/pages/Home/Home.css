@@ -208,10 +208,11 @@
 
   html, body {
     overscroll-behavior: none !important;
-    scroll-padding-top: 90px !important;
+    scroll-padding-top: 100px !important;
 }
 
 }
+
 
 
 .game-category{

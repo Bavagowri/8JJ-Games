@@ -13,7 +13,7 @@ export default function GameCard({ game, index }) {
   };
 
   return (
-    <div className="game-card" onClick={openGame}>
+    <div className="game-card" onClick={() => navigate(`/game/${game.id}`)}>
       <img src={game.image} alt={game.title} className="game-image" />
 
       {/* Play Now Button */}

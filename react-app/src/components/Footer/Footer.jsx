@@ -153,7 +153,7 @@ export default function Footer() {
           <div className={`accordion ${open === "browse" ? "open" : ""}`}>
             <div className="accordion-header" onClick={() => toggleAccordion("browse")}>
               <span>{translate("browse", lang)}</span>
-              <span className="arrow"></span>
+              <span className="arrow"><svg class="faq-icon-chevron" width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M5 7.5L10 12.5L15 7.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg></span>
             </div>
 
             <ul className="accordion-body">
@@ -168,7 +168,7 @@ export default function Footer() {
           <div className={`accordion ${open === "categories" ? "open" : ""}`}>
             <div className="accordion-header" onClick={() => toggleAccordion("categories")}>
               <span>{translate("categories", lang)}</span>
-              <span className="arrow"></span>
+              <span className="arrow"><svg class="faq-icon-chevron" width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M5 7.5L10 12.5L15 7.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg></span>
             </div>
 
             <ul className="accordion-body">

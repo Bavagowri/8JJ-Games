@@ -36,7 +36,7 @@ export default function TopPicksSection({ title, games, id }) {
     <section className="top-picks-section game-section" id={id}>
       <div className="top-picks-content">
         
-        <div className="top-picks-header">
+        <div className="">
           <h2 className="section-title">{title}</h2>
         </div>
 

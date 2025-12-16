@@ -156,59 +156,76 @@
 /* ========== MOBILE FOOTER (EXACT MATCH TO ORIGINAL) ========== */
 
 @media (max-width: 768px) {
+  .footer-container {
+    width: 100%;
+    padding: 5px 10px 10px;
+    background: linear-gradient(to bottom, #0c1119 0%, #0b0f17 100%);
 
+}
   /* Stack everything vertically */
   .footer-inner {
     flex-direction: column;
     align-items: center;
     text-align: center;
-    gap: 40px;
+    gap: 20px;
+  }
+
+  .footer-left {
+    display: flexbox;
+    max-width: 100%;
   }
 
   /* Center logo + title row */
   .footer-brand-row {
     justify-content: center;
-    margin-bottom: 10px;
+    margin-bottom: 5px;
+    display: flex;
   }
 
   .footer-logo {
-    width: 100px;
+    width: 70px;
   }
 
+  .footer-tile-row {
+   gap: 1px;
+   margin-left: 20px;
+}
   .footer-heading {
-    font-size: 22px;
-    margin-bottom: 15px;
+    font-size: 18px;
+    margin-top: 10px;
+    margin-bottom: 5px;
+    text-align: left;
   }
 
   /* Description text centered */
   .footer-description {
-    max-width: 300px;
-    margin-left: auto;
-    margin-right: auto;
-    line-height: 1.6;
-    margin-bottom: 30px;
+    max-width: 100%;
+    line-height: 1.3;
+    margin-bottom: 10px;
+    font-size: 11px;
+    text-align: left;
   }
 
   /* Badges stacked or centered */
   .footer-badges {
     justify-content: center;
-    gap: 10px;
-    flex-wrap: wrap;
-    margin-bottom: 15px;
+    flex-wrap: nowrap;
+    display: flex;
   }
 
   .badge {
     width: fit-content;
     justify-content: center;
+    font-size: 11px;
   }
 
   /* Columns stacked in a single column */
   .footer-right {
     width: 100%;
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-    gap: 30px;
+    flex-direction: row;
+    text-align: left;
+    margin-left: 20px;
+    gap: 140px;
   }
 
   .footer-column ul {
@@ -232,16 +249,195 @@
     margin-top: 5px;
   }
 
+}
+
+@media (max-width: 480px) {
+  .footer-container {
+    width: 100%;
+    padding: 5px 10px 10px;
+}
+  /* Stack everything vertically */
+  .footer-inner {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 20px;
+  }
+
   .footer-left {
+    display: flexbox;
     max-width: 100%;
   }
 
+  /* Center logo + title row */
   .footer-brand-row {
-    display: block;
+    justify-content: center;
+    margin-bottom: 5px;
+    display: flex;
+  }
+
+  .footer-logo {
+    width: 70px;
   }
 
   .footer-tile-row {
-    margin-top: 15px;
+   gap: 1px;
+   margin-left: 20px;
+}
+  .footer-heading {
+    font-size: 18px;
+    margin-top: 10px;
+    margin-bottom: 5px;
+    text-align: left;
+  }
+
+  /* Description text centered */
+  .footer-description {
+    max-width: 100%;
+    line-height: 1.3;
+    margin-bottom: 10px;
+    font-size: 11px;
+    text-align: left;
+  }
+
+  /* Badges stacked or centered */
+  .footer-badges {
+    justify-content: center;
+    flex-wrap: nowrap;
+    display: flex;
+  }
+
+  .badge {
+    width: fit-content;
+    justify-content: center;
+    font-size: 11px;
+  }
+
+  /* Columns stacked in a single column */
+  .footer-right {
+    width: 100%;
+    flex-direction: row;
+    text-align: left;
+    margin-left: 20px;
+    gap: 140px;
+  }
+
+  .footer-column ul {
+    padding: 0;
+  }
+
+  /* Divider stays centered */
+  .footer-divider {
+    margin: 30px auto;
+    width: 90%;
+  }
+
+  /* Bottom section centered */
+  .footer-bottom {
+    flex-direction: column;
+    text-align: center;
+    gap: 15px;
+  }
+
+  .back-to-top {
+    margin-top: 5px;
+  }
+
+}
+
+@media (max-width: 380px) {
+  .footer-container {
+    width: 100%;
+    padding: 5px 10px 10px;
+}
+  /* Stack everything vertically */
+  .footer-inner {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 20px;
+  }
+
+  .footer-left {
+    display: flexbox;
+    max-width: 100%;
+  }
+
+  /* Center logo + title row */
+  .footer-brand-row {
+    justify-content: center;
+    margin-bottom: 5px;
+    display: flex;
+    margin-left: 10px;
+    margin-right: 10px;
+  }
+
+  .footer-logo {
+    width: 70px;
+  }
+
+  .footer-tile-row {
+   gap: 1px;
+   margin-left: 20px;
+}
+  .footer-heading {
+    font-size: 18px;
+    margin-top: 10px;
+    margin-bottom: 5px;
+    text-align: left;
+  }
+
+  /* Description text centered */
+  .footer-description {
+    max-width: 100%;
+    line-height: 1.3;
+    margin-bottom: 10px;
+    font-size: 11px;
+    text-align: left;
+  }
+
+  /* Badges stacked or centered */
+  .footer-badges {
+    justify-content: center;
+    flex-wrap: nowrap;
+    display: flex;
+  }
+
+  .badge {
+    width: fit-content;
+    justify-content: center;
+    font-size: 11px;
+  }
+
+  /* Columns stacked in a single column */
+  .footer-right {
+    width: 100%;
+    flex-direction: row;
+    text-align: left;
+    margin-left: 20px;
+    gap: 120px;
+  }
+
+  .footer-column ul {
+    padding: 0;
+  }
+
+  /* Divider stays centered */
+  .footer-divider {
+    margin: 30px auto;
+    width: 90%;
+  }
+
+  /* Bottom section centered */
+  .footer-bottom {
+    flex-direction: column;
+    text-align: center;
+    gap: 15px;
+  }
+
+  .back-to-top {
+    margin-top: 5px;
+    margin-bottom: 15px;
   }
 
 }

@@ -73,31 +73,31 @@ export default function Footer() {
           <div className="footer-column">
             <h3>{translate("categories", lang)}</h3>
             <ul>
-              <li onClick={() => goToSection("action")}>{translate("action", lang)}</li>
-              <li onClick={() => goToSection("driving")}>{translate("driving", lang)}</li>
-              <li onClick={() => goToSection("puzzles")}>{translate("puzzles", lang)}</li>
-              <li onClick={() => goToSection("skill_games")}>{translate("skill", lang)}</li>
-              <li onClick={() => goToSection("simulation_games")}>{translate("simulation", lang)}</li>
+              {/* <li onClick={() => goToSection("action")}>{translate("action", lang)}</li> */}
+              {/* <li onClick={() => goToSection("driving")}>{translate("driving", lang)}</li> */}
+              {/* <li onClick={() => goToSection("puzzles")}>{translate("puzzles", lang)}</li> */}
+              {/* <li onClick={() => goToSection("skill_games")}>{translate("skill", lang)}</li> */}
+              {/* <li onClick={() => goToSection("simulation_games")}>{translate("simulation", lang)}</li> */}
               <li onClick={() => goToSection("platformer")}>{translate("platformer", lang)}</li>
               <li onClick={() => goToSection("christmas")}>{translate("christmas", lang)} {translate("games", lang)}</li>
               <li onClick={() => goToSection("halloween_games")}>{translate("halloween", lang)} {translate("games", lang)}</li>
-              <li onClick={() => goToSection("football_games")}>{translate("football", lang)} {translate("games", lang)}</li>
-              <li onClick={() => goToSection("basketball_games")}>{translate("basketball", lang)} {translate("games", lang)}</li>
-              <li onClick={() => goToSection("card_games")}>{translate("card", lang)} {translate("games", lang)}</li>
+              {/* <li onClick={() => goToSection("football_games")}>{translate("football", lang)} {translate("games", lang)}</li> */}
+              {/* <li onClick={() => goToSection("basketball_games")}>{translate("basketball", lang)} {translate("games", lang)}</li> */}
+              {/* <li onClick={() => goToSection("card_games")}>{translate("card", lang)} {translate("games", lang)}</li> */}
               <li onClick={() => goToSection("horror_games")}>{translate("horror", lang)} {translate("games", lang)}</li>
-              <li onClick={() => goToSection("endless_runner")}>{translate("endlessRunner", lang)}</li>
+              {/* <li onClick={() => goToSection("endless_runner")}>{translate("endlessRunner", lang)}</li> */}
             </ul>
           </div>
 
         
 
           {/* SUPPORT */}
-          <div className="footer-column">
+          {/* <div className="footer-column">
             <h3>{translate("support", lang)}</h3>
             <ul>
               <li onClick={() => goToSection("faqSection")}>FAQ</li>
             </ul>
-          </div>
+          </div> */}
 
         </div>
       </div>

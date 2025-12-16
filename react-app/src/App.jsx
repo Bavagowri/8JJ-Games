@@ -30,7 +30,7 @@ export default function App() {
     <LanguageProvider>
       <BrowserRouter>
         <div className="app-root">
-          <Snow />
+          {/* <Snow /> */}
           {/* <TopPromoBar /> */}
           {/* Always visible */}
           <Header onSearch={setSearch} />

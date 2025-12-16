@@ -5,25 +5,25 @@ import { translate } from "../../data/translations";
 import "./Sidebar.css";
 
 const sidebarItems = [
-  { id: "top", icon: "🏠", label: "home" },
-  { id: "featuredSection", icon: "⭐", label: "featuredGames" },
-  { id: "driving", icon: "🏎️", label: "driving" },
-  { id: "trending", icon: "🔥", label: "trendingGames" },
-  { id: "christmas", icon: "🎅🏻", label: "christmas" },
-  { id: "action", icon: "🥊", label: "action" },
-  { id: "top-picks", icon: "🌶️", label: "topPicks" },
-  { id: "platformer", icon:"🏃", label: "platformer"},
-  { id: "halloween_games", icon: "🎃", label: "halloween" },
-  { id: "card_games", icon: "🃏", label: "card" },
-  { id: "football_games", icon: "⚽", label: "football" },
-  { id: "basketball_games", icon: "🏀", label: "basketball" },
-  { id: "simulation_games", icon: "🎮", label: "simulation" },
-  { id: "skill_games", icon: "🎯", label: "skill" },
-  { id: "horror_games", icon: "💀", label: "horror" },
-  { id: "endless_runner", icon: "🏃", label: "endlessRunner" },
-  { id: "puzzles", icon: "🧩", label: "puzzles" },
-  { id: "gamesAll", icon: "👾", label: "allGames" },
-  { id: "faqSection", icon: "❓", label: "faq" }
+  { id: "top", icon: "🏠", label: "home", isRoute: false },
+  { id: "featuredSection", icon: "⭐", label: "featuredGames", isRoute: false },
+  { id: "driving", icon: "🏎️", label: "driving", isRoute: false },
+  { id: "trending", icon: "🔥", label: "trendingGames", isRoute: false },
+  { id: "christmas", icon: "🎅🏻", label: "christmas", isRoute: false },
+  { id: "action", icon: "🥊", label: "action", isRoute: false },
+  { id: "top-picks", icon: "🌶️", label: "topPicks", isRoute: false },
+  { id: "platformer", icon:"🏃", label: "platformer", isRoute: false },
+  { id: "halloween_games", icon: "🎃", label: "halloween", isRoute: false },
+  { id: "card_games", icon: "🃏", label: "card", isRoute: false },
+  { id: "football_games", icon: "⚽", label: "football", isRoute: false },
+  { id: "basketball_games", icon: "🏀", label: "basketball", isRoute: false },
+  { id: "simulation_games", icon: "🎮", label: "simulation", isRoute: false },
+  { id: "skill_games", icon: "🎯", label: "skill", isRoute: false },
+  { id: "horror_games", icon: "💀", label: "horror", isRoute: false },
+  { id: "endless_runner", icon: "🏃", label: "endlessRunner", isRoute: false },
+  { id: "puzzles", icon: "🧩", label: "puzzles", isRoute: false },
+  { id: "/all-games", icon: "👾", label: "allGames", isRoute: true },
+  { id: "faqSection", icon: "❓", label: "faq", isRoute: false }
 ];
 
 export default function Sidebar() {
@@ -46,19 +46,39 @@ export default function Sidebar() {
     return () => document.removeEventListener("toggleSidebar", handler);
   }, []);
 
-  const scrollTo = (id) => {
-    setOpen(false);
-    setActiveItem(id);
+  // Update active item based on current route
+  useEffect(() => {
+    if (location.pathname === "/all-games") {
+      setActiveItem("/all-games");
+    } else if (location.pathname === "/") {
+      // Set to home or keep the active section
+      if (activeItem !== "top" && !document.getElementById(activeItem)) {
+        setActiveItem("top");
+      }
+    }
+  }, [location.pathname]);
 
-    if (location.pathname !== "/") {
-      navigate("/", { state: { scrollTo: id } });
+  const handleItemClick = (item) => {
+    setOpen(false);
+    setActiveItem(item.id);
+
+    // If it's a route (like All Games), navigate to that route
+    if (item.isRoute) {
+      navigate(item.id);
       return;
     }
 
-    if (id === "top") {
+    // If it's a section and we're not on home page, navigate to home first
+    if (location.pathname !== "/") {
+      navigate("/", { state: { scrollTo: item.id } });
+      return;
+    }
+
+    // Scroll to section on home page
+    if (item.id === "top") {
       window.scrollTo({ top: 0, behavior: "smooth" });
     } else {
-      document.getElementById(id)?.scrollIntoView({
+      document.getElementById(item.id)?.scrollIntoView({
         behavior: "smooth",
         block: "start",
       });
@@ -76,7 +96,7 @@ export default function Sidebar() {
           {sidebarItems.map((item) => (
             <li
               key={item.id}
-              onClick={() => scrollTo(item.id)}
+              onClick={() => handleItemClick(item)}
               className={`sidebar-item ${activeItem === item.id ? "active" : ""}`}
             >
               <span className="icon">{item.icon}</span>

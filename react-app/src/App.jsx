@@ -8,6 +8,7 @@ import Sidebar from "./components/Sidebar/Sidebar";
 // import TopPromoBar from "./components/TopPromoBar/TopPromoBar";
 
 import Home from "./pages/Home/Home";
+import AllGames from "./pages/AllGames/AllGames";
 import GamePage from "./pages/GamePage/GamePage";
 import Footer from "./components/Footer/Footer";
 import GamePageV2 from "./pages/GamePageV2/GamePageV2";
@@ -31,6 +32,7 @@ export default function App() {
           {/* Page content changes here */}
           <Routes>
             <Route path="/" element={<Home search={search} />} />
+            <Route path="/all-games" element={<AllGames />} />
             <Route path="/game/:index" element={<GamePageV2 />} />
           </Routes>
 

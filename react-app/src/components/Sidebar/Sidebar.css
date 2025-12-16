@@ -411,3 +411,12 @@
 .sidebar-item:nth-child(16):hover .icon { animation: puzzle-rotate 0.8s ease; } /* 🧩 Puzzles */
 .sidebar-item:nth-child(17):hover .icon { animation: wiggle 0.6s ease; } /* 👾 All Games */
 .sidebar-item:nth-child(18):hover .icon { animation: question-bounce 0.7s ease; } /* ❓ FAQ */
+
+
+
+
+.sidebar{
+-ms-overflow-style: none;
+    scrollbar-width: none;
+}
+  

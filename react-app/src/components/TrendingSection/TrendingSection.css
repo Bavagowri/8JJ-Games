@@ -17,7 +17,7 @@
   justify-content: space-between;
   margin-bottom: 0px;
   padding-bottom: 15px !important;
-  padding: 0 2rem;
+  
 }
 
 .trending-title {
@@ -123,6 +123,8 @@
 
 /* Responsive Design */
 @media (max-width: 768px) {
+
+  
   .trending-section {
     padding: 5px 0;
   }
@@ -142,6 +144,10 @@
   .nav-btn {
     width: 40px;
     height: 40px;
+  }
+
+  #featuredSection .section-title{
+    padding-left: 25px !important;
   }
 }
 

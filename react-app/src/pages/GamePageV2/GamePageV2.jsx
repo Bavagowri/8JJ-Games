@@ -16,6 +16,10 @@ export default function GamePageV2() {
   const [playing, setPlaying] = useState(false);
   const [pageLoading, setPageLoading] = useState(true);
 
+  // Scroll to top when page loads or game changes
+useLayoutEffect(() => {
+  window.scrollTo(0, 0);
+}, [id]);
 
   // ✅ Load games + selected game by ID
   useEffect(() => {

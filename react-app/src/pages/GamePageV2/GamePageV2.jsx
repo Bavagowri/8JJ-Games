@@ -170,6 +170,7 @@ export default function GamePageV2() {
 
       {/* 📌 SIDE COLUMN */}
       <div className="side-column">
+        
         {sideGames.map(g => (
           <div
             key={g.id}

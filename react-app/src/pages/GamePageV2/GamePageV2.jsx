@@ -2,9 +2,9 @@ import { useParams, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import "./GamePageV2.css";
 import { fetchH5Games } from "../../api/fetchH5Games";
+import { selfHostedGames } from "../../data/selfHostedGames";
 import { useLayoutEffect } from "react";
 import ScrollToTop from "../../components/ScrollToTop";
-
 
 
 export default function GamePageV2() {
@@ -16,10 +16,6 @@ export default function GamePageV2() {
   const [playing, setPlaying] = useState(false);
   const [pageLoading, setPageLoading] = useState(true);
 
-  // Scroll to top when page loads or game changes
-useLayoutEffect(() => {
-  window.scrollTo(0, 0);
-}, [id]);
 
   // ✅ Load games + selected game by ID
   useEffect(() => {
@@ -32,10 +28,14 @@ useLayoutEffect(() => {
       let list = JSON.parse(localStorage.getItem("games"));
       if (!list) {
         list = await fetchH5Games();
+        list = [...selfHostedGames, ...h5];
         localStorage.setItem("games", JSON.stringify(list));
       }
 
-      const selected = list.find(g => g.id === id);
+      // const selected = list.find(g => g.id === id);
+      const selected = list.find(g => String(g.id) === String(id));
+
+      if (!mounted) return;
 
       // ⛔ invalid game id → redirect home
       if (!selected) {
@@ -74,10 +74,10 @@ useLayoutEffect(() => {
   const moreGames = otherGames.slice(0, 12);
   const sideGames = otherGames.slice(12, 24);
 
+
   return (
     <div className="gamepage-layout">
 
-      <ScrollToTop />
       {/* 🔄 Page Loader */}
       {pageLoading && (
         <div className="page-loader">
@@ -85,6 +85,7 @@ useLayoutEffect(() => {
           <p>Loading game…</p>
         </div>
       )}
+            <ScrollToTop />
 
       {/* 🎮 CENTER */}
       <div className="center-column">

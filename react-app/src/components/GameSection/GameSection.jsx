@@ -14,7 +14,7 @@ export default function GameSection({ title, games, id, slider = false }) {
     if (!sliderEl) return;
 
     let rafId;
-    let speed = 0.4; // px per frame
+    let speed = 0.5; // px per frame
     let isPaused = false;
 
     const animate = () => {

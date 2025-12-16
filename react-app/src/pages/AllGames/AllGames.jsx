@@ -7,45 +7,42 @@ import "./AllGames.css";
 const GAMES_PER_PAGE = 50;
 
 export default function AllGames() {
-  const [games, setGames] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [searchTerm, setSearchTerm] = useState("");
-  const [displayedGames, setDisplayedGames] = useState([]);
-  const [page, setPage] = useState(1);
-  const [hasMore, setHasMore] = useState(true);
   const { lang } = useLanguage();
   const observerTarget = useRef(null);
 
-  /* ✅ Load games from cache */
+  const [games, setGames] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [searchTerm, setSearchTerm] = useState("");
+  const [page, setPage] = useState(1);
+
+  /* ✅ Load cached games ONCE */
   useEffect(() => {
     const cached = localStorage.getItem("games");
     if (cached) {
       setGames(JSON.parse(cached));
-      setLoading(false);
     }
+    setLoading(false);
   }, []);
 
+  /* ✅ Filter is derived — no state */
   const filteredGames = games.filter(game =>
     game.title.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
-  /* Reset pagination on search */
+  /* ✅ Paginated slice (derived, no loop) */
+  const displayedGames = filteredGames.slice(
+    0,
+    page * GAMES_PER_PAGE
+  );
+
+  const hasMore = displayedGames.length < filteredGames.length;
+
+  /* Reset page on search */
   useEffect(() => {
     setPage(1);
-    setDisplayedGames([]);
-    setHasMore(true);
   }, [searchTerm]);
 
-  /* Paginate */
-  useEffect(() => {
-    const endIndex = page * GAMES_PER_PAGE;
-    const slice = filteredGames.slice(0, endIndex);
-
-    setDisplayedGames(slice);
-    setHasMore(endIndex < filteredGames.length);
-  }, [page, filteredGames]);
-
-  /* Infinite scroll */
+  /* Infinite scroll observer */
   const handleObserver = useCallback(
     entries => {
       if (entries[0].isIntersecting && hasMore && !loading) {
@@ -60,7 +57,10 @@ export default function AllGames() {
       threshold: 0.1,
     });
 
-    if (observerTarget.current) observer.observe(observerTarget.current);
+    if (observerTarget.current) {
+      observer.observe(observerTarget.current);
+    }
+
     return () => observer.disconnect();
   }, [handleObserver]);
 
@@ -69,7 +69,7 @@ export default function AllGames() {
       <div className="all-games-page">
         <div className="all-games-header">
           <h1>{translate("allGames", lang)}</h1>
-          <p>Loading games...</p>
+          <p>Loading games…</p>
         </div>
       </div>
     );
@@ -81,7 +81,8 @@ export default function AllGames() {
       <div className="all-games-header">
         <h1>🎮 {translate("allGames", lang)}</h1>
         <p className="all-games-count">
-          {filteredGames.length} {translate("games", lang).toLowerCase()}
+          {filteredGames.length}{" "}
+          {translate("games", lang).toLowerCase()}
           {displayedGames.length < filteredGames.length &&
             ` (showing ${displayedGames.length})`}
         </p>
@@ -90,11 +91,10 @@ export default function AllGames() {
       {/* Search */}
       <div className="all-games-search">
         <input
-          type="text"
-          placeholder={`${translate("search", lang)} games...`}
+          className="search-input"
+          placeholder={`${translate("search", lang)} games…`}
           value={searchTerm}
           onChange={e => setSearchTerm(e.target.value)}
-          className="search-input"
         />
       </div>
 
@@ -103,23 +103,23 @@ export default function AllGames() {
         {displayedGames.map(game => (
           <GameCard
             key={game.id}
-            game={game}      // ✅ GameCard navigates via game.id
+            game={game}   // ✅ GameCard navigates by game.id
           />
         ))}
       </div>
 
-      {/* Loader */}
+      {/* Infinite loader */}
       {hasMore && (
         <div ref={observerTarget} className="loading-indicator">
-          <div className="loading-spinner"></div>
-          <p>Loading more games...</p>
+          <div className="loading-spinner" />
+          <p>Loading more games…</p>
         </div>
       )}
 
-      {/* Empty state */}
+      {/* Empty */}
       {!loading && filteredGames.length === 0 && (
         <div className="no-results">
-          <p>No games found for “{searchTerm}”</p>
+          <p>No games found</p>
         </div>
       )}
     </div>

@@ -14,7 +14,6 @@ import Footer from "./components/Footer/Footer";
 import GamePageV2 from "./pages/GamePageV2/GamePageV2";
 
 import Snow from "./components/Snow/Snow";
-import ScrollToTop from "./components/ScrollToTop";
 
 export default function App() {
   const [search, setSearch] = useState("");
@@ -23,7 +22,6 @@ export default function App() {
     <LanguageProvider>
       <BrowserRouter>
         <div className="app-root">
-          <ScrollToTop />
           <Snow />
           {/* <TopPromoBar /> */}
           {/* Always visible */}

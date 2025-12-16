@@ -3,6 +3,8 @@ import { useEffect, useState } from "react";
 import "./GamePageV2.css";
 import { fetchH5Games } from "../../api/fetchH5Games";
 import { useLayoutEffect } from "react";
+import ScrollToTop from "../../components/ScrollToTop";
+
 
 
 export default function GamePageV2() {
@@ -75,6 +77,7 @@ useLayoutEffect(() => {
   return (
     <div className="gamepage-layout">
 
+      <ScrollToTop />
       {/* 🔄 Page Loader */}
       {pageLoading && (
         <div className="page-loader">

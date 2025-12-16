@@ -185,14 +185,14 @@
   /* INFO BAR BELOW SIDE THUMBS */
   .game-info-bar {
     text-align: center;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
+    display: flex;
     gap: 12px;
   }
 
   /* MORE GAMES GRID AFTER EVERYTHING */
   .more-games-grid {
-    order: 2;
+    order: 0;
+    margin-top: 10px;
   }
 }
 
@@ -206,8 +206,12 @@
     font-size: 16px;
   }
 
-  .value {
-    font-size: 16px;
+  .game-info-bar .value {
+    font-size: 12px;
+  }
+
+  .game-info-bar .label {
+    font-size: 11px;
   }
 }
 
@@ -408,7 +412,7 @@
 
   .side-column,
   .more-games-grid {
-    grid-template-columns: repeat(auto-fill, minmax(110px, 2fr)) !important;
+    grid-template-columns: repeat(auto-fill, minmax(95px, 2fr)) !important;
   }
 }
 

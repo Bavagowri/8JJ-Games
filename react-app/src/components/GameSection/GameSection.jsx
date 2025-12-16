@@ -6,54 +6,50 @@ export default function GameSection({ title, games, id, slider = false }) {
   const sliderRef = useRef(null);
   const [showAll, setShowAll] = useState(false);
 
-  // AUTOPLAY slider with pause on hover
+  /* ✅ AUTOPLAY slider (NO vibration) */
   useEffect(() => {
     if (!slider) return;
 
-    const sliderEl = sliderRef.current;
-    if (!sliderEl) return;
+    const el = sliderRef.current;
+    if (!el) return;
 
-    let rafId;
-    let speed = 0.5; // px per frame
-    let isPaused = false;
+    const speed = 0.4; // px per frame
+
+    const canScroll = () =>
+      el.scrollWidth > el.clientWidth + 5;
 
     const animate = () => {
-      if (!isPaused) {
-        if (
-          sliderEl.scrollLeft + sliderEl.clientWidth >=
-          sliderEl.scrollWidth
-        ) {
-          sliderEl.scrollLeft = 0;
+      if (!pausedRef.current && canScroll()) {
+        // Smooth loop without snapping
+        if (el.scrollLeft >= el.scrollWidth - el.clientWidth - 1) {
+          el.scrollLeft = 0;
         } else {
-          sliderEl.scrollLeft += speed;
+          el.scrollLeft += speed;
         }
       }
-      rafId = requestAnimationFrame(animate);
+      rafRef.current = requestAnimationFrame(animate);
     };
 
-    // Pause animation when hovering over slider
-    const handleMouseEnter = () => {
-      isPaused = true;
-    };
+    const onEnter = () => (pausedRef.current = true);
+    const onLeave = () => (pausedRef.current = false);
 
-    const handleMouseLeave = () => {
-      isPaused = false;
-    };
+    el.addEventListener("mouseenter", onEnter);
+    el.addEventListener("mouseleave", onLeave);
 
-    // Add event listeners to the slider container
-    sliderEl.addEventListener('mouseenter', handleMouseEnter);
-    sliderEl.addEventListener('mouseleave', handleMouseLeave);
-
-    rafId = requestAnimationFrame(animate);
+    rafRef.current = requestAnimationFrame(animate);
 
     return () => {
-      cancelAnimationFrame(rafId);
-      sliderEl.removeEventListener('mouseenter', handleMouseEnter);
-      sliderEl.removeEventListener('mouseleave', handleMouseLeave);
+      cancelAnimationFrame(rafRef.current);
+      el.removeEventListener("mouseenter", onEnter);
+      el.removeEventListener("mouseleave", onLeave);
     };
-  }, [slider]);
+  }, [slider, games.length]); // 👈 games.length is important
 
-  const visibleGames = slider ? games : showAll ? games : games.slice(0, 12);
+  const visibleGames = slider
+    ? games
+    : showAll
+    ? games
+    : games.slice(0, 12);
 
   return (
     <section className="game-section" id={id}>

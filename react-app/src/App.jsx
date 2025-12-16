@@ -15,7 +15,6 @@ import GamePageV2 from "./pages/GamePageV2/GamePageV2";
 
 import Snow from "./components/Snow/Snow";
 
-
 export default function App() {
   const [search, setSearch] = useState("");
 
@@ -33,7 +32,7 @@ export default function App() {
           <Routes>
             <Route path="/" element={<Home search={search} />} />
             <Route path="/all-games" element={<AllGames />} />
-            <Route path="/game/:index" element={<GamePageV2 />} />
+            <Route path="/game/:id" element={<GamePageV2 />} />
           </Routes>
 
           <Footer />

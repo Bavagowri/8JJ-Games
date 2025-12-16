@@ -1,7 +1,7 @@
 import "./GameCard.css";
 import { useNavigate } from "react-router-dom";
 
-export default function GameCard({ game, index }) {
+export default function GameCard({ game }) {
   const navigate = useNavigate();
 
   const openGame = () => {
@@ -9,11 +9,11 @@ export default function GameCard({ game, index }) {
     const list = JSON.parse(localStorage.getItem("games"));
     if (!list) return;
 
-    navigate(`/game/${index}`);
+    navigate(`/game/${game.id}`);
   };
 
   return (
-    <div className="game-card" onClick={openGame}>
+    <div className="game-card" onClick={() => navigate(`/game/${game.id}`)}>
       <img src={game.image} alt={game.title} className="game-image" />
 
       {/* Play Now Button */}

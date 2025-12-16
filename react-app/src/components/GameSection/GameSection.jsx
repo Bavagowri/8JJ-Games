@@ -66,14 +66,14 @@ export default function GameSection({ title, games, id, slider = false }) {
           <div className="slider-wrapper">
             <div className="slider-container" ref={sliderRef}>
               {visibleGames.map((g, i) => (
-                <GameCard key={i} game={g} index={i} />
+                <GameCard key={i} game={g}/>
               ))}
             </div>
           </div>
         ) : (
           <div className="games-grid">
             {visibleGames.map((g, i) => (
-              <GameCard key={i} game={g} index={i} />
+              <GameCard key={i} game={g} />
             ))}
           </div>
         )}

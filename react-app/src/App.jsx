@@ -43,7 +43,7 @@ export default function App() {
             <Route path="/game/:id" element={<GamePageV2 />} />
           </Routes>
 
-          <Footer />
+          {/* <Footer /> */}
         </div>
       </BrowserRouter>
     </LanguageProvider>

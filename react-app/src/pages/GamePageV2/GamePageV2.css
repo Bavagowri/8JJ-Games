@@ -84,7 +84,7 @@
   width: 100%;
   height: 100%;
   border: none;
-    display: block;
+  display: block;
 
 }
 
@@ -405,6 +405,11 @@
 
 /* Responsive adjustments */
 @media (max-width: 768px) {
+  .center-column {
+  display: block;
+}
+
+
   .skeleton-game-title {
     width: 80%;
     height: 28px;
@@ -422,6 +427,11 @@
   .skeleton-more-title {
     height: 24px;
     width: 150px;
+  }
+  
+  .side-column,
+  .more-games-grid {
+    grid-template-columns: repeat(auto-fill, minmax(95px, 2fr)) !important;
   }
 }
 
@@ -442,15 +452,3 @@
   }
 }
 
-
-
-@media (max-width: 768px) {
-  .center-column {
-    display: contents;
-  }
-
-  .side-column,
-  .more-games-grid {
-    grid-template-columns: repeat(auto-fill, minmax(95px, 2fr)) !important;
-  }
-}

@@ -52,7 +52,7 @@
 }
 
 /* FEATURED SLIDER */
-.slider-wrapper {
+/* .slider-wrapper {
   position: relative;
   width: 100%;
   overflow: hidden;
@@ -65,6 +65,18 @@
   overflow-x: auto;
   scroll-behavior: smooth;
   padding: 10px 0;
+} */
+
+.slider-wrapper {
+  overflow: hidden;
+  width: 100%;
+}
+
+.slider-track {
+  display: flex;
+  gap: 16px;
+  width: max-content;
+  will-change: transform;
 }
 
 .slider-container::-webkit-scrollbar {

@@ -2,6 +2,9 @@ import { useEffect, useState, useRef, useCallback } from "react";
 import { useLanguage } from "../../context/LanguageContext";
 import { translate } from "../../data/translations";
 import GameCard from "../../components/GameCard/GameCard";
+import HorizontalGameSlider from "../../components/HorizontalGameSlider/HorizontalGameSlider";
+import WhatWeOffer from "../../components/WhatWeOffer/WhatWeOffer";
+
 import "./AllGames.css";
 
 const GAMES_PER_PAGE = 50;
@@ -97,6 +100,13 @@ export default function AllGames() {
           onChange={e => setSearchTerm(e.target.value)}
         />
       </div>
+
+      <WhatWeOffer />
+
+      <HorizontalGameSlider
+        title="🔥 Top Picks for You"
+        games={games.slice(0, 20)}
+      />
 
       {/* Grid */}
       <div className="all-games-grid">

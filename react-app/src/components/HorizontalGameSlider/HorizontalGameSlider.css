@@ -1,0 +1,65 @@
+.h-slider-section {
+  margin: 30px 0;
+}
+
+.h-slider-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
+}
+
+.h-slider-header h2 {
+  font-size: 20px;
+  font-weight: 600;
+  color: #fff;
+}
+
+/* Arrow buttons */
+.h-slider-arrows button {
+  background: rgba(255, 255, 255, 0.08);
+  border: none;
+  color: #fff;
+  font-size: 20px;
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  cursor: pointer;
+  margin-left: 6px;
+}
+
+.h-slider-arrows button:hover {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+/* Scroll container */
+.h-slider-wrapper {
+  display: flex;
+  gap: 14px;
+  overflow-x: auto;
+  scroll-behavior: smooth;
+  padding-bottom: 6px;
+
+  /* hide scrollbar */
+  scrollbar-width: none;
+}
+
+.h-slider-wrapper::-webkit-scrollbar {
+  display: none;
+}
+
+/* Card wrapper */
+.h-slider-item {
+  flex: 0 0 180px;
+}
+
+/* Mobile tweaks */
+@media (max-width: 768px) {
+  .h-slider-item {
+    flex: 0 0 140px;
+  }
+
+  .h-slider-arrows {
+    display: none; /* swipe only on mobile */
+  }
+}

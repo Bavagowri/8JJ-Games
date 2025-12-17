@@ -25,6 +25,6 @@ export function pushRecent(game) {
     externalUrl: game.externalUrl,
     ts: Date.now(),
   });
-  if (list.length > 6) list.length = 6;
+  if (list.length > 12) list.length = 12;
   saveRecent(list);
 }

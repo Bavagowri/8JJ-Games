@@ -174,26 +174,26 @@ export default function Home({ search }) {
         slider={true}
       />
       
-      <CategoriesSection 
+      {/* <CategoriesSection 
         title="📂 Browse Categories"
         id="categoriesSection"
-      />
+      /> */}
 
       {/* ⏱️ RECENT SECTION - 12 games from localStorage */}
-      <RecentSection 
+      {/* <RecentSection 
         id="recentSection"
-      />
+      /> */}
 
       {/* 💥 POPULAR SECTION - 12 games from localStorage */}
-      <PopularSection 
+      {/* <PopularSection 
         id="popularSection"
-      />
+      /> */}
 
       {/* 🔥 HOT SECTION - 12 games */}
-      <HotSection 
+      {/* <HotSection 
         id="hotSection"
         games={categories.hot}
-      />
+      /> */}
 
       <GameSection
         id="driving"

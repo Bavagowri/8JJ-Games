@@ -4,7 +4,6 @@
   position: relative;
   z-index: 1;
   max-width: 1280px;
-  margin: 0 auto;
   padding: 0 24px;
 }
 
@@ -208,11 +207,10 @@
 
   html, body {
     overscroll-behavior: none !important;
-    scroll-padding-top: 100px !important;
+    scroll-padding-top: 90px !important;
 }
 
 }
-
 
 
 .game-category{

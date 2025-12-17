@@ -160,7 +160,7 @@
   .top-picks-grid-item {
     min-height: 100px;
     max-width: 92px;
-
+    margin: auto;
   }
 }
 

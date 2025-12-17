@@ -5,7 +5,7 @@
   padding: 60px 20px 30px;
   margin-top: 60px;
   color: #cbd5e1;
-  margin-left: 40px;
+  
 }
 
 /* INNER CONTENT ALIGNMENT */
@@ -164,7 +164,10 @@
     width: 100%;
     padding: 5px 10px 10px;
     background: linear-gradient(to bottom, #0c1119 0%, #0b0f17 100%);
-
+    margin: 0px !important;
+  }
+  .more-games-grid .game-card{
+    margin: auto;
   }
 
   /* Stack everything vertically */

@@ -3,8 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { pushRecent } from "../../utils/localStorage";
 import { trackGameClick } from "../../utils/popularGamesUtils";
 
-
-export default function GameCard({ game }) {
+export default function GameCard({ game, index }) {
   const navigate = useNavigate();
 
   const openGame = () => {
@@ -32,12 +31,11 @@ export default function GameCard({ game }) {
     const list = JSON.parse(localStorage.getItem("games"));
     if (!list) return;
 
-    navigate(`/game/${index}`);
+    navigate(`/game/${game.id}`, { state: { game, index } });
   };
 
-
   return (
-    <div className="game-card" onClick={() => navigate(`/game/${game.id}`)}>
+    <div className="game-card" onClick={openGame}>
       <img src={game.image} alt={game.title} className="game-image" />
 
       {/* Play Now Button */}

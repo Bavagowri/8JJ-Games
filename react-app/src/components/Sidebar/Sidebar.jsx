@@ -22,7 +22,7 @@ const sidebarItems = [
   { id: "horror_games", icon: "💀", label: "horror", isRoute: false },
   { id: "endless_runner", icon: "🏃", label: "endlessRunner", isRoute: false },
   { id: "puzzles", icon: "🧩", label: "puzzles", isRoute: false },
-  { id: "/all-games", icon: "👾", label: "allGames", isRoute: true },
+  { id: "/all-mosaic-games", icon: "👾", label: "allGames", isRoute: true },
   { id: "faqSection", icon: "❓", label: "faq", isRoute: false }
 ];
 

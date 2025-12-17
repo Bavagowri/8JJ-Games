@@ -1,7 +1,7 @@
 /* TrendingSection.css */
 
 .trending-section {
-  background: linear-gradient(180deg, #0a0e1a 0%, #1a1f35 100%);
+ /* background: linear-gradient(180deg, #0a0e1a 0%, #1a1f35 100%); */
 
 
 }
@@ -17,7 +17,7 @@
   justify-content: space-between;
   margin-bottom: 0px;
   padding-bottom: 15px !important;
-  
+
 }
 
 .trending-title {
@@ -26,8 +26,8 @@
   color: white;
   margin: 0;
 }
-Í
-.trending-nav {
+
+Í .trending-nav {
   display: flex;
   gap: 0.5rem;
 }
@@ -124,7 +124,11 @@
 /* Responsive Design */
 @media (max-width: 768px) {
 
-  
+  .trending-section{
+    box-shadow: none;
+  }
+
+
   .trending-section {
     padding: 5px 0;
   }
@@ -132,11 +136,14 @@
 
 
   .trending-number {
-    font-size: 180px;
+    font-size: 140px !important;
+    left: 50px !important;
   }
 
   .trending-item {
-    min-width: 200px;
+    min-width: 160px;
+    padding-left: 30px !important;
+    padding-bottom: 50px;
   }
 
 
@@ -146,7 +153,7 @@
     height: 40px;
   }
 
-  #featuredSection .section-title{
+  #featuredSection .section-title {
     padding-left: 25px !important;
   }
 }
@@ -161,11 +168,14 @@
   }
 
   .trending-number {
-    font-size: 140px;
+    font-size: 140px !important;
+    left: 50px !important;
   }
 
   .trending-item {
     min-width: 160px;
+    padding-left: 30px !important;
+    padding-bottom: 50px;
   }
 
   .rank-badge {
@@ -180,7 +190,7 @@
   /* box-shadow: inset 0 0 25px rgba(0, 150, 255, 0.25), inset 0 0 50px rgba(0, 150, 255, 0.15), 0 4px 20px rgba(0, 0, 0, 0.4); */
   border-radius: 40px;
   /* background: linear-gradient(45deg, #161616 13%, #061c58 66%, rgba(111, 38, 41, 0)); */
-  margin-bottom: 40px; 
+  margin-bottom: 40px;
   padding-top: 30px;
   padding-bottom: 10px;
   box-shadow: inset 0 0 40px rgba(255, 255, 255, 0.03), inset 0 0 80px rgba(0, 150, 255, 0.12), 0 0 50px rgba(0, 0, 0, 0.7);
@@ -188,24 +198,25 @@
 }
 
 
-.trending-section:hover{
-   transition: box-shadow 0.6s ease, transform 0.6s ease;
-    background: linear-gradient(180deg, #14243d 0%, #0b1624 100%);
-  
-   box-shadow:inset 0 0 25px rgba(0, 150, 255, 0.25),inset 0 0 50px rgba(0, 150, 255, 0.15),0 4px 20px rgba(0, 0, 0, 0.4);
+.trending-section:hover {
+  transition: box-shadow 0.6s ease, transform 0.6s ease;
+  background: linear-gradient(180deg, #14243d 0%, #0b1624 100%);
+
+  box-shadow: inset 0 0 25px rgba(0, 150, 255, 0.25), inset 0 0 50px rgba(0, 150, 255, 0.15), 0 4px 20px rgba(0, 0, 0, 0.4);
 }
 
 .trending-section:hover {
-    transform: translateY(-4px);
-    background: linear-gradient(45deg, #161616 13%, #061c58 66%, rgba(111, 38, 41, 0));
-    animation: gameGlow 1.5s ease-in-out forwards;
+  transform: translateY(-4px);
+  background: linear-gradient(45deg, #161616 13%, #061c58 66%, rgba(111, 38, 41, 0));
+  animation: gameGlow 1.5s ease-in-out forwards;
 }
 
 
 @keyframes gameGlow {
-    0% {
+  0% {
     box-shadow: inset 0 0 20px rgba(0, 160, 255, 0.15);
   }
+
   100% {
     box-shadow:
       inset 0 0 40px rgba(0, 160, 255, 0.35),
@@ -214,15 +225,15 @@
 }
 
 
-#trending .game-card:hover{
-      transform: translateY(0px) !important;
+#trending .game-card:hover {
+  transform: translateY(0px) !important;
 }
 
-#trending .game-card{
-      max-height: 158px !important;
+#trending .game-card {
+  max-height: 158px !important;
 }
 
 
-#trending  .game-card{
+#trending .game-card {
   box-shadow: 24px 20px 20px rgb(9 40 101) !important;
 }

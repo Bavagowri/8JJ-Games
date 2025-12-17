@@ -178,7 +178,7 @@
 
   /* Smaller logo */
   .brand-logo {
-    height: 80px;
+    height: 59px;
   }
 
   /* Search bar shrink more */
@@ -199,29 +199,6 @@
 
 }
 
-
-/* Show hamburger on all mobile devices */
-@media (max-width: 768px) {
-
-  .brand-logo {
-    height: 80px;
-  }
-
-  .search input {
-    min-width: 120px;
-  }
-}
-
-/* Extra small screens */
-@media (max-width: 430px) {
-  .brand-logo {
-    height: 80px;
-  }
-
-  .search input {
-    min-width: 100px;
-  }
-}
 /* Show hamburger ONLY on mobile */
 @media (max-width: 900px) {
   .menu-toggle {

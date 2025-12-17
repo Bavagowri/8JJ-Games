@@ -1,10 +1,4 @@
-/* TrendingSection.css */
 
-.trending-section {
-  /* background: linear-gradient(180deg, #0a0e1a 0%, #1a1f35 100%); */
-
-
-}
 
 .trending-content {
   max-width: 1400px;
@@ -85,7 +79,7 @@
   min-width: 250px;
   display: flex;
   padding-left: 70px !important;
-  padding-bottom: 55px;
+  padding-bottom: 25px;
 }
 
 /* Background Number */

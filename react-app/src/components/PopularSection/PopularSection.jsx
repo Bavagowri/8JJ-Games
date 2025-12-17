@@ -4,7 +4,7 @@ import GameCard from "../GameCard/GameCard";
 import { loadPopular } from "../../utils/popularGamesUtils";
 import "./PopularSection.css";
 
-export default function PopularSection({ id }) {
+export default function PopularSection({ id, lang, translate }) {
   const [popularGames, setPopularGames] = useState([]);
   const [loading, setLoading] = useState(true);
 
@@ -31,9 +31,7 @@ export default function PopularSection({ id }) {
     return (
       <section className="popular-section game-section" id={id}>
         <div className="content-anim">
-          
-            <h2 className="section-title">💥 Popular Games</h2>
-         
+          <h2 className="section-title">💥 {translate("popularGames", lang)}</h2>
           <div className="games-grid">
             <p>Loading popular games...</p>
           </div>
@@ -45,8 +43,7 @@ export default function PopularSection({ id }) {
   return (
     <section className="popular-section game-section" id={id}>
       <div className="content-anim">
-       
-          <h2 className="section-title">💥 Popular Games</h2>
+        <h2 className="section-title">💥 {translate("popularGames", lang)}</h2>
         
         {popularGames && popularGames.length > 0 ? (
           <div className="games-grid">

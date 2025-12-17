@@ -146,6 +146,14 @@ export default function Home({ search }) {
       {/* ⏱️ RECENT SECTION - 12 games from localStorage */}
       <RecentSection
         id="recentSection"
+        lang={lang}
+        translate={translate}
+      />
+
+      <TrendingSection
+        id="trending"
+        title={`🔥 ${translate("trendingGames", lang)}`}
+        games={categories.featured.slice(0, 8)}
       />
 
 
@@ -165,10 +173,7 @@ export default function Home({ search }) {
 
 
 
-      {/* 💥 POPULAR SECTION - 12 games from localStorage */}
-      <PopularSection
-        id="popularSection"
-      />
+
 
 
       {/* ⭐ TOP 100 SECTION */}
@@ -184,17 +189,20 @@ export default function Home({ search }) {
         games={categories.driving}
       />
 
-      <TrendingSection
-        id="trending"
-        title={`🔥 ${translate("trendingGames", lang)}`}
-        games={categories.featured.slice(0, 8)}
-      />
 
       <GameSection
         id="christmas"
         title={`🎅🏻 ${translate("christmas", lang)} ${translate("games", lang)}`}
         games={categories.christmas}
       />
+
+      {/* 💥 POPULAR SECTION - 12 games from localStorage */}
+      <PopularSection
+        id="popularSection"
+        lang={lang}
+        translate={translate}
+      />
+
 
       <GameSection
         id="action"
@@ -255,6 +263,8 @@ export default function Home({ search }) {
       <HotSection
         id="hotSection"
         games={categories.hot}
+        lang={lang}
+        translate={translate}
       />
 
 

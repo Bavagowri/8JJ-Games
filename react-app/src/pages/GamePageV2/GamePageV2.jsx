@@ -70,8 +70,13 @@ export default function GamePageV2() {
         {/* Title Skeleton */}
         <div className="skeleton skeleton-title"></div>
 
-        {/* Game Frame Skeleton */}
-        <div className="skeleton skeleton-game-frame"></div>
+        {/* Game Frame Skeleton with Preloader */}
+        <div className="skeleton skeleton-game-frame">
+          <div className="skeleton-preloader">
+            <div className="spinner"></div>
+            <div className="loading-text">Loading...</div>
+          </div>
+        </div>
 
         {/* Info Bar Skeleton */}
         <div className="skeleton-info-bar">

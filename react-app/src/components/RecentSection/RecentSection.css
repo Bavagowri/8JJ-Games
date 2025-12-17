@@ -1,0 +1,285 @@
+/* RecentSection.css */
+
+#recentSection {
+    margin-bottom: 25px;
+    position: relative;
+}
+
+#recentSection .recent-header {
+    padding-left: 8px;
+    min-height: 32px;
+    display: flex;
+    align-items: flex-end;
+    margin-bottom: 12px;
+}
+
+#recentSection .section-title {
+    user-select: none;
+    padding-bottom: 3px;
+}
+
+/* Carousel Wrapper */
+#recentSection .recent-carousel-wrapper {
+    position: relative;
+    overflow: hidden;
+    margin: 0;
+    contain: layout paint;
+    padding: 0;
+}
+
+/* Carousel Container */
+#recentSection .recent-carousel-container {
+    position: relative;
+}
+
+#recentSection .recent-carousel-container:hover .carousel-arrow {
+    opacity: 1;
+}
+
+/* Carousel List */
+#recentSection .recent-carousel {
+    display: flex;
+    overflow-x: scroll;
+    overflow-y: hidden;
+    scroll-behavior: smooth;
+    list-style: none;
+    margin: 0;
+    padding: 10px 8px;
+    gap: 4px;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+    scroll-padding: 50px;
+}
+
+#recentSection .recent-carousel::-webkit-scrollbar {
+    display: none;
+}
+
+/* Carousel Items */
+#recentSection .recent-carousel-item {
+    flex-shrink: 0;
+    list-style: none;
+    position: relative;
+}
+
+/* Recently Played Label */
+#recentSection .recent-label-item {
+    width: 100px;
+    margin-right: 4px;
+}
+
+#recentSection .recent-label {
+    font-weight: 800;
+    font-size: 13px;
+    width: 100px;
+    line-height: 100%;
+    cursor: pointer;
+    white-space: normal;
+    box-shadow: inset 0 0 40px rgba(255, 255, 255, 0.03), inset 0 0 80px rgba(0, 150, 255, 0.12), 0 0 50px rgba(0, 0, 0, 0.7);
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px;
+    border: 1px solid transparent;
+    height: 100%;
+    transition: all 0.2s ease;
+}
+
+#recentSection .recent-label:hover {
+    transition: box-shadow 0.6s ease, transform 0.6s ease;
+    box-shadow: inset 0 0 25px rgba(0, 150, 255, 0.25), inset 0 0 50px rgba(0, 150, 255, 0.15), 0 4px 20px rgba(0, 0, 0, 0.4);
+}
+
+#recentSection .recent-label-arrow {
+    width: 16px;
+    height: 16px;
+    color: rgb(255, 255, 255);
+    flex-shrink: 0;
+}
+
+/* Navigation Arrows */
+#recentSection .carousel-arrow {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 50px;
+    height: calc(100% - 20px);
+    background-color: rgba(0, 0, 0, 0.7);
+    border: none;
+    cursor: pointer;
+    z-index: 10;
+    opacity: 0;
+    transition: opacity 0.25s ease, background-color 0.25s ease;
+    background-repeat: no-repeat;
+    background-position: center;
+    border-radius: 0;
+}
+
+#recentSection .carousel-arrow:hover {
+    background-color: rgba(0, 0, 0, 0.9);
+}
+
+#recentSection .carousel-arrow-left {
+    left: 0;
+    background-image: url("data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTgiIGhlaWdodD0iMzIiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PHBhdGggZD0iTTMuMjM3IDE3LjIzN3YtMi40NzRsMTQgMTRjLjY4NC42ODMuNjg0IDEuNzkgMCAyLjQ3NGExLjc0OCAxLjc0OCAwIDAxLTIuNDc0IDBsLTE0LTE0YTEuNzQ4IDEuNzQ4IDAgMDEwLTIuNDc0bDE0LTE0YTEuNzQ4IDEuNzQ4IDAgMDEyLjQ3NCAwYy42ODQuNjgzLjY4NCAxLjc5IDAgMi40NzRsLTE0IDE0eiIgZmlsbD0iI0VGRjFGMSIvPjwvc3ZnPg==");
+}
+
+#recentSection .carousel-arrow-right {
+    right: 0;
+    background-image: url("data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTgiIGhlaWdodD0iMzIiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PHBhdGggZD0iTTE0Ljc2MyAxNy4yMzd2LTIuNDc0bC0xNCAxNGExLjc0OCAxLjc0OCAwIDAwMCAyLjQ3NGMuNjgzLjY4NCAxLjc5LjY4NCAyLjQ3NCAwbDE0LTE0YTEuNzQ4IDEuNzQ4IDAgMDAwLTIuNDc0bC0xNC0xNEExLjc1IDEuNzUgMCAwMC43NjMgMy4yMzdsMTQgMTR6IiBmaWxsPSIjRUZGMUYxIi8+PC9zdmc+");
+}
+
+/* Empty Message */
+#recentSection .empty-message {
+    padding: 40px 20px;
+    text-align: center;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 12px;
+    margin: 20px 8px;
+}
+
+#recentSection .empty-message p {
+    font-size: 16px;
+    color: rgba(255, 255, 255, 0.6);
+    margin: 0;
+}
+
+/* Skeleton Loading Styles */
+@keyframes skeleton-pulse {
+
+    0%,
+    100% {
+        opacity: 1;
+    }
+
+    50% {
+        opacity: 0.5;
+    }
+}
+
+#recentSection .skeleton-label {
+    background: rgba(255, 255, 255, 0.05);
+    cursor: default;
+    pointer-events: none;
+}
+
+#recentSection .skeleton-label:hover {
+    border-color: transparent;
+    background: rgba(255, 255, 255, 0.05);
+}
+
+#recentSection .skeleton-text {
+    width: 60px;
+    height: 12px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 4px;
+    animation: skeleton-pulse 1.5s ease-in-out infinite;
+}
+
+#recentSection .skeleton-arrow {
+    width: 16px;
+    height: 16px;
+    background: rgba(164, 142, 255, 0.2);
+    border-radius: 50%;
+    animation: skeleton-pulse 1.5s ease-in-out infinite;
+}
+
+#recentSection .skeleton-card {
+    width: 80px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+#recentSection .skeleton-image {
+    width: 80px;
+    height: 80px;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 8px;
+    animation: skeleton-pulse 1.5s ease-in-out infinite;
+    position: relative;
+    overflow: hidden;
+}
+
+#recentSection .skeleton-image::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg,
+            transparent,
+            rgba(255, 255, 255, 0.1),
+            transparent);
+    animation: skeleton-shimmer 2s infinite;
+}
+
+@keyframes skeleton-shimmer {
+    0% {
+        left: -100%;
+    }
+
+    100% {
+        left: 100%;
+    }
+}
+
+#recentSection .skeleton-title {
+    width: 60px;
+    height: 10px;
+    background: rgba(255, 255, 255, 0.08);
+    border-radius: 4px;
+    animation: skeleton-pulse 1.5s ease-in-out infinite;
+    animation-delay: 0.1s;
+}
+
+/* Mobile Adjustments */
+@media (max-width: 768px) {
+    #recentSection .recent-header {
+        padding-left: 0;
+        min-height: 21px;
+    }
+
+    #recentSection .section-title {
+        font-size: 20px;
+        padding-left: 12px;
+    }
+
+    #recentSection .carousel-arrow {
+        display: none;
+    }
+
+    #recentSection .recent-label {
+        font-size: 12px;
+        width: 90px;
+    }
+
+    #recentSection .recent-label-item {
+        width: 90px;
+    }
+
+    #recentSection .skeleton-card {
+        width: 70px;
+    }
+
+    #recentSection .skeleton-image {
+        width: 70px;
+        height: 70px;
+    }
+
+    #recentSection .skeleton-title {
+        width: 50px;
+    }
+}
+
+
+#recentSection .game-card {
+    max-width: 80px;
+}
+
+
+#recentSection .game-card:hover .play-button {
+    display: none;
+}

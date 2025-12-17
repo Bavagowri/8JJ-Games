@@ -21,28 +21,28 @@ export default function Header({ onSearch }) {
   return (
     <>
       <header className="header">
-      {/* Light and Dark Mode - Bubble Switch
+        {/* Light and Dark Mode - Bubble Switch
       <label className="bubble-label"><input class="bubble" type="checkbox" name="dummy" value="on"/></label>
       - End */}
 
         {/* Center categories bar */}
-          <div className="header-categories">
-            {/* Animated sidebar toggle button for desktop */}
-            <label className="sidebar-toggle-btn">
-              <input 
-                type="checkbox" 
-                checked={sidebarHidden}
-                onChange={toggleSidebar}
-                aria-label="Toggle sidebar"
-              />
-              <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-                <circle cx="50" cy="50" r="30" />
-                <path className="line--1" d="M0 40h62c18 0 18-20-17 5L31 55" />
-                <path className="line--2" d="M0 50h80" />
-                <path className="line--3" d="M0 60h62c18 0 18 20-17-5L31 45" />
-              </svg>
-            </label>
-          </div>
+        <div className="header-categories">
+          {/* Animated sidebar toggle button for desktop */}
+          <label className="sidebar-toggle-btn">
+            <input
+              type="checkbox"
+              checked={sidebarHidden}
+              onChange={toggleSidebar}
+              aria-label="Toggle sidebar"
+            />
+            <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+              <circle cx="50" cy="50" r="30" />
+              <path className="line--1" d="M0 40h62c18 0 18-20-17 5L31 55" />
+              <path className="line--2" d="M0 50h80" />
+              <path className="line--3" d="M0 60h62c18 0 18 20-17-5L31 45" />
+            </svg>
+          </label>
+        </div>
 
         <div className="header-container">
           {/* Left brand */}
@@ -69,14 +69,14 @@ export default function Header({ onSearch }) {
             </a>
           </div>
 
-          
+
 
           {/* Right actions */}
           <div className="header-actions">
             <div className="search MarginLeftRight">
               <input
                 type="text"
-                placeholder={translate("Search", lang)}
+                placeholder={translate("search", lang)}
                 aria-label="Search games"
                 onChange={handleSearch}
               />
@@ -115,25 +115,25 @@ export default function Header({ onSearch }) {
 
 
         {/* Center categories bar - HIdden */}
-          <div className="header-categories ForcedHidden">
-            {/* Animated sidebar toggle button for desktop */}
-            <label className="sidebar-toggle-btn">
-              <input 
-                type="checkbox" 
-                checked={sidebarHidden}
-                onChange={toggleSidebar}
-                aria-label="Toggle sidebar"
-              />
-              <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-                <circle cx="50" cy="50" r="30" />
-                <path className="line--1" d="M0 40h62c18 0 18-20-17 5L31 55" />
-                <path className="line--2" d="M0 50h80" />
-                <path className="line--3" d="M0 60h62c18 0 18 20-17-5L31 45" />
-              </svg>
-            </label>
-          </div>
+        <div className="header-categories ForcedHidden">
+          {/* Animated sidebar toggle button for desktop */}
+          <label className="sidebar-toggle-btn">
+            <input
+              type="checkbox"
+              checked={sidebarHidden}
+              onChange={toggleSidebar}
+              aria-label="Toggle sidebar"
+            />
+            <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+              <circle cx="50" cy="50" r="30" />
+              <path className="line--1" d="M0 40h62c18 0 18-20-17 5L31 55" />
+              <path className="line--2" d="M0 50h80" />
+              <path className="line--3" d="M0 60h62c18 0 18 20-17-5L31 45" />
+            </svg>
+          </label>
+        </div>
       </header>
-      
+
       <ShareModal
         open={shareOpen}
         onClose={() => setShareOpen(false)}

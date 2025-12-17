@@ -56,7 +56,7 @@ html {
 .home-wrapper,
 #searchResults,
 #top-picks,
-.all-games-page {
+.all-games-page,#recentSection {
   scroll-snap-align: start;
   view-timeline: --section;
 }
@@ -68,7 +68,7 @@ html {
 .home-wrapper,
 #searchResults,
 #top-picks,
-.all-games-page {
+.all-games-page,#recentSection {
   animation: backwards-scroll ease-in-out both;
   animation-timeline: --section;
   position: relative;

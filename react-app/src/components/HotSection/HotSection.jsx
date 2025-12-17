@@ -19,7 +19,7 @@ export default function HotSection({ games, id }) {
   if (loading) {
     return (
       <section className="hot-section game-section" id={id}>
-        <div className="hot-content">
+        <div className="content-anim">
           <div className="hot-header">
             <h2 className="section-title">🔥 Hot Games</h2>
           </div>
@@ -33,10 +33,10 @@ export default function HotSection({ games, id }) {
 
   return (
     <section className="hot-section game-section" id={id}>
-      <div className="hot-content">
-        <div className="hot-header">
+      <div className="content-anim">
+        
           <h2 className="section-title">🔥 Hot Games</h2>
-        </div>
+       
         {hotGames && hotGames.length > 0 ? (
           <div className="games-grid">
             {hotGames.map((game, index) => (

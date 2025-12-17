@@ -1,7 +1,7 @@
 /* TrendingSection.css */
 
 .trending-section {
- /* background: linear-gradient(180deg, #0a0e1a 0%, #1a1f35 100%); */
+  /* background: linear-gradient(180deg, #0a0e1a 0%, #1a1f35 100%); */
 
 
 }
@@ -15,8 +15,7 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin-bottom: 0px;
-  padding-bottom: 15px !important;
+
 
 }
 
@@ -27,9 +26,10 @@
   margin: 0;
 }
 
-Í .trending-nav {
+.trending-nav {
   display: flex;
   gap: 0.5rem;
+  margin-top: -15px;
 }
 
 .nav-btn {
@@ -124,8 +124,8 @@
 /* Responsive Design */
 @media (max-width: 768px) {
 
-  .trending-section{
-    box-shadow: none;
+  .trending-section {
+    box-shadow: none !important;
   }
 
 
@@ -153,9 +153,7 @@
     height: 40px;
   }
 
-  #featuredSection .section-title {
-    padding-left: 25px !important;
-  }
+  
 }
 
 @media (max-width: 480px) {

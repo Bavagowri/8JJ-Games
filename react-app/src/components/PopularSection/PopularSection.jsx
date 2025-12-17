@@ -30,10 +30,10 @@ export default function PopularSection({ id }) {
   if (loading) {
     return (
       <section className="popular-section game-section" id={id}>
-        <div className="popular-content">
-          <div className="popular-header">
+        <div className="content-anim">
+          
             <h2 className="section-title">💥 Popular Games</h2>
-          </div>
+         
           <div className="games-grid">
             <p>Loading popular games...</p>
           </div>
@@ -44,10 +44,10 @@ export default function PopularSection({ id }) {
 
   return (
     <section className="popular-section game-section" id={id}>
-      <div className="popular-content">
-        <div className="popular-header">
+      <div className="content-anim">
+       
           <h2 className="section-title">💥 Popular Games</h2>
-        </div>
+        
         {popularGames && popularGames.length > 0 ? (
           <div className="games-grid">
             {popularGames.map((game, index) => (

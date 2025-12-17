@@ -142,33 +142,34 @@ export default function Home({ search }) {
         />
       )}
 
+
+      {/* ⏱️ RECENT SECTION - 12 games from localStorage */}
+      <RecentSection
+        id="recentSection"
+      />
+
+
       <GameSection
         id="featuredSection"
         title={`⭐ ${translate("featuredGames", lang)}`}
         games={categories.featured}
         slider={true}
       />
-      
+
+      {/*  
       <CategoriesSection 
         title="📂 Browse Categories"
         id="categoriesSection"
       /> 
+      */}
 
-      {/* ⏱️ RECENT SECTION - 12 games from localStorage */}
-     <RecentSection 
-        id="recentSection"
-      /> 
+
 
       {/* 💥 POPULAR SECTION - 12 games from localStorage */}
-     <PopularSection 
+      <PopularSection
         id="popularSection"
-      /> 
-
-      {/* 🔥 HOT SECTION - 12 games */}
-       <HotSection 
-        id="hotSection"
-        games={categories.hot}
       />
+
 
       {/* ⭐ TOP 100 SECTION */}
       {/* <Top100Section 
@@ -248,6 +249,14 @@ export default function Home({ search }) {
         title={`💀 ${translate("horror", lang)} ${translate("games", lang)}`}
         games={categories.horror}
       />
+
+
+      {/* 🔥 HOT SECTION - 12 games */}
+      <HotSection
+        id="hotSection"
+        games={categories.hot}
+      />
+
 
       <GameSection
         id="endless_runner"

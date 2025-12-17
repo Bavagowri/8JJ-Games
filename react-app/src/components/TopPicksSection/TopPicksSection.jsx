@@ -13,10 +13,10 @@ export default function TopPicksSection({ title, games, id }) {
     const checkMobile = () => {
       setIsMobile(window.innerWidth <= 768);
     };
-    
+
     checkMobile();
     window.addEventListener('resize', checkMobile);
-    
+
     return () => window.removeEventListener('resize', checkMobile);
   }, []);
 
@@ -44,7 +44,7 @@ export default function TopPicksSection({ title, games, id }) {
   // Group games into slides - adjust based on mobile/desktop
   const gamesPerSlide = isMobile ? 10 : 9; // 1 featured + 9 grid (mobile) or 1 featured + 8 grid (desktop)
   const gridGamesCount = isMobile ? 9 : 8;
-  
+
   const slides = [];
   for (let i = 0; i < games.length; i += gamesPerSlide) {
     slides.push(games.slice(i, i + gamesPerSlide));
@@ -52,11 +52,11 @@ export default function TopPicksSection({ title, games, id }) {
 
   return (
     <section className="top-picks-section game-section" id={id}>
-      <div className="top-picks-content">
-        
-        <div className="">
-          <h2 className="section-title">{title}</h2>
-        </div>
+      <div className="content-anim">
+
+
+        <h2 className="section-title">{title}</h2>
+
 
         <div className="top-picks-wrapper">
           {/* Navigation Buttons */}
@@ -72,14 +72,14 @@ export default function TopPicksSection({ title, games, id }) {
             </button>
           )}
 
-          <div 
-            className="top-picks-container" 
+          <div
+            className="top-picks-container"
             ref={containerRef}
             onScroll={checkScrollButtons}
           >
             {slides.map((slideGames, slideIndex) => (
               <div key={slideIndex} className="top-picks-slide">
-                
+
                 {/* Large Featured Game (Left) */}
                 {slideGames[0] && (
                   <div className="top-picks-featured">

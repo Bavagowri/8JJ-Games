@@ -44,7 +44,7 @@
   border: none;
   background: transparent;
   color: #fffafa;
-  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  font-family: 'Nunito','Nunito Fallback',Arial,"Helvetica Neue",Helvetica,sans-serif;
   user-select: none;
   font-weight: 100;
   box-sizing: border-box;

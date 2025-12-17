@@ -1,19 +1,18 @@
 import { useParams, useNavigate } from "react-router-dom";
-import { useEffect, useState, useLayoutEffect } from "react";
+import { useEffect, useState } from "react";
 import "./GamePageV2.css";
 import { fetchH5Games } from "../../api/fetchH5Games";
 import { selfHostedGames } from "../../data/selfHostedGames";
 import ScrollToTop from "../../components/ScrollToTop";
 
 export default function GamePageV2() {
-  const { id } = useParams(); // ✅ ID-based
+  const { id } = useParams();
   const navigate = useNavigate();
 
   const [games, setGames] = useState([]);
   const [game, setGame] = useState(null);
   const [playing, setPlaying] = useState(false);
   const [pageLoading, setPageLoading] = useState(true);
-
 
   useEffect(() => {
     let mounted = true;
@@ -24,7 +23,6 @@ export default function GamePageV2() {
 
       let list = JSON.parse(localStorage.getItem("games"));
 
-      // ✅ Ensure BOTH self-hosted + H5 exist
       if (!Array.isArray(list) || list.length === 0) {
         const h5 = await fetchH5Games();
         list = [...selfHostedGames, ...h5];
@@ -37,7 +35,6 @@ export default function GamePageV2() {
 
       if (!mounted) return;
 
-      // ❌ DO NOT redirect — just fail safely
       if (!selected) {
         console.warn("Game not found:", id);
         setPageLoading(false);
@@ -61,15 +58,61 @@ export default function GamePageV2() {
     return () => { mounted = false; };
   }, [id]);
 
-  // ✅ Navigate using ID
   const changeGame = (gameId) => {
     if (String(gameId) === String(id)) return;
     navigate(`/game/${gameId}`);
   };
 
-  if (!game) return null;
+  // Skeleton Loading Component
+  const SkeletonLoader = () => (
+    <div className="gamepage-layout">
+      <div className="center-column">
+        {/* Title Skeleton */}
+        <div className="skeleton skeleton-title"></div>
 
-  // ✅ Normalize ID comparison
+        {/* Game Frame Skeleton */}
+        <div className="skeleton skeleton-game-frame"></div>
+
+        {/* Info Bar Skeleton */}
+        <div className="skeleton-info-bar">
+          {[1, 2, 3, 4].map(i => (
+            <div key={i} className="skeleton-info-block">
+              <div className="skeleton skeleton-label"></div>
+              <div className="skeleton skeleton-value"></div>
+            </div>
+          ))}
+        </div>
+
+        {/* More Games Title Skeleton */}
+        <div className="skeleton skeleton-section-title"></div>
+
+        {/* More Games Grid Skeleton */}
+        <div className="more-games-grid">
+          {[...Array(12)].map((_, i) => (
+            <div key={i} className="skeleton skeleton-game-card"></div>
+          ))}
+        </div>
+      </div>
+
+      {/* Side Column Skeleton */}
+      <div className="side-column">
+        {[...Array(12)].map((_, i) => (
+          <div key={i} className="skeleton skeleton-side-card"></div>
+        ))}
+      </div>
+    </div>
+  );
+
+  // Show skeleton while loading
+  if (pageLoading || !game) {
+    return (
+      <>
+        <ScrollToTop />
+        <SkeletonLoader />
+      </>
+    );
+  }
+
   const otherGames = games.filter(
     g => String(g.id) !== String(id)
   );
@@ -77,7 +120,6 @@ export default function GamePageV2() {
   const moreGames = otherGames.slice(0, 12);
   const sideGames = otherGames.slice(12, 24);
 
-  // ✅ Fix iframe src for self-hosted games
   const iframeSrc =
     game.source === "self"
       ? `${window.location.origin}${game.embed}`
@@ -87,18 +129,10 @@ export default function GamePageV2() {
     <div className="gamepage-layout">
       <ScrollToTop />
 
-      {pageLoading && (
-        <div className="page-loader">
-          <div className="spinner"></div>
-          <p>Loading game…</p>
-        </div>
-      )}
-
       {/* 🎮 CENTER */}
       <div className="center-column">
         <h2 className="play-title">
-          Click Play to Start{" "}{game.title}
-          {/* <span className="game-title-span">{game.title}</span> */}
+          Click Play to Start {game.title}
         </h2>
 
         <div className="game-frame-container" key={game.id}>
@@ -170,7 +204,6 @@ export default function GamePageV2() {
 
       {/* 📌 SIDE COLUMN */}
       <div className="side-column">
-        
         {sideGames.map(g => (
           <div
             key={g.id}
@@ -185,7 +218,6 @@ export default function GamePageV2() {
           </div>
         ))}
       </div>
-
     </div>
   );
 }

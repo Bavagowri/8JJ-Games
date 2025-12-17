@@ -1,11 +1,5 @@
 /* TopPicksSection.css */
 
-.top-picks-section {
-  padding-top: 30px;
-  padding-left: 0px;
-  padding-right: 0px;
-  padding-bottom: 10px;
-}
 
 .top-picks-content {
   max-width: 1400px;
@@ -156,12 +150,13 @@
   .top-picks-grid {
     grid-template-columns: repeat(3, 1fr) !important;
     grid-template-rows: repeat(3, 1fr) !important;
-    gap: 10px !important;
+    gap: 15px !important;
   }
 
   .top-picks-grid-item {
     min-height: 100px;
-    max-width: 92px;
+    max-width: 120px;
+    width: 100%;
     margin: auto;
   }
 
@@ -171,11 +166,11 @@
   }
 
   .top-picks-nav.right {
-    right: -14px;
+    right: 5px;
   }
 
   .top-picks-nav.left {
-    left: -14px;
+    left: 5px;
   }
 
   .top-picks-section .game-card {

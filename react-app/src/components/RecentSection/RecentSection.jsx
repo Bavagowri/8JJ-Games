@@ -20,10 +20,10 @@ export default function RecentSection({ id }) {
   if (loading) {
     return (
       <section className="recent-section game-section" id={id}>
-        <div className="recent-content">
-          <div className="recent-header">
+        <div className="content-anim">
+         
             <h2 className="section-title">⏱️ Recent Games</h2>
-          </div>
+         
           <div className="games-grid">
             <p>Loading recent games...</p>
           </div>
@@ -34,10 +34,10 @@ export default function RecentSection({ id }) {
 
   return (
     <section className="recent-section game-section" id={id}>
-      <div className="recent-content">
-        <div className="recent-header">
+      <div className="content-anim">
+        
           <h2 className="section-title">⏱️ Recent Games</h2>
-        </div>
+       
         {recentGames && recentGames.length > 0 ? (
           <div className="games-grid">
             {recentGames.map((game) => (

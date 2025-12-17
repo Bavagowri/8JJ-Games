@@ -1,14 +1,40 @@
 import "./GameCard.css";
 import { useNavigate } from "react-router-dom";
+import { pushRecent } from "../../utils/localStorage";
+import { trackGameClick } from "../../utils/popularGamesUtils";
 
 export default function GameCard({ game, index }) {
   const navigate = useNavigate();
 
   const openGame = () => {
-    // Save ENTIRE game list
-    const list = JSON.parse(localStorage.getItem("games"));
-    if (!list) return;
+    // Check if game has valid data
+    if (!game || !game.id) {
+      console.error("Invalid game object:", game);
+      return;
+    }
 
+    // Save game to recent games list
+    pushRecent({
+      id: game.id,
+      title: game.title,
+      image: game.image,
+      category: game.category || "",
+      gameId: game.gameId || game.id,
+      externalUrl: game.externalUrl || game.link,
+    });
+
+    // Track game click for popular games
+    trackGameClick({
+      id: game.id,
+      title: game.title,
+      image: game.image,
+      category: game.category || "",
+      gameId: game.gameId || game.id,
+      externalUrl: game.externalUrl || game.link,
+    });
+
+    // Navigate to game page with game data
+    // Pass the entire game object, not just index
     navigate(`/game/${game.id}`, { state: { game, index } });
   };
 

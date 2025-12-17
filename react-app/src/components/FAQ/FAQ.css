@@ -131,7 +131,7 @@
 /* Responsive for mobile */
 @media (max-width: 768px) {
   .faq-container {
-    
+    margin: 40px 16px;
     padding: 24px 16px;
   }
 

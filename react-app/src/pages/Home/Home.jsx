@@ -1,7 +1,11 @@
-import { useEffect, useState, useLocation } from "react";
+import { useEffect, useState } from "react";
 import GameSection from "../../components/GameSection/GameSection";
 import TrendingSection from "../../components/TrendingSection/TrendingSection";
 import TopPicksSection from "../../components/TopPicksSection/TopPicksSection";
+import CategoriesSection from "../../components/CategoriesSection/CategoriesSection";
+import RecentSection from "../../components/RecentSection/RecentSection";
+import PopularSection from "../../components/PopularSection/PopularSection";
+import HotSection from "../../components/HotSection/HotSection";
 import "./Home.css";
 import { useLanguage } from "../../context/LanguageContext";
 import { translate } from "../../data/translations";
@@ -9,13 +13,10 @@ import FAQ from "../../components/FAQ/FAQ";
 import { fetchH5Games } from "../../api/fetchH5Games";
 import { selfHostedGames } from "../../data/selfHostedGames";
 
-
 export default function Home({ search }) {
   const [games, setGames] = useState([]);
   const [loading, setLoading] = useState(true);
   const { lang } = useLanguage();
-  // const location = useLocation();
-
 
   useEffect(() => {
     const load = async () => {
@@ -31,12 +32,10 @@ export default function Home({ search }) {
   }, []);
 
   if (loading) {
-    // Check if mobile
     const isMobile = window.innerWidth <= 750;
 
     return (
       <div className="home-wrapper">
-        {/* Featured Section */}
         <div className="loading-section">
           <div className="skeleton-title"></div>
           <div className="grid">
@@ -52,10 +51,8 @@ export default function Home({ search }) {
           </div>
         </div>
 
-        {/* Only show these sections on desktop */}
         {!isMobile && (
           <>
-            {/* Christmas Section */}
             <div className="loading-section">
               <div className="skeleton-title"></div>
               <div className="grid">
@@ -71,7 +68,6 @@ export default function Home({ search }) {
               </div>
             </div>
 
-            {/* Action Section */}
             <div className="loading-section">
               <div className="skeleton-title"></div>
               <div className="grid">
@@ -87,7 +83,6 @@ export default function Home({ search }) {
               </div>
             </div>
 
-            {/* Driving Section */}
             <div className="loading-section">
               <div className="skeleton-title"></div>
               <div className="grid">
@@ -108,46 +103,33 @@ export default function Home({ search }) {
     );
   }
 
+  // Define categories
+  const categories = {
+    featured: games.slice(0, 12),
+    recent: games.slice(12, 50),
+    popular: games.slice(0, 30).sort(() => Math.random() - 0.5),
+    hot: games.slice(30, 42).sort(() => Math.random() - 0.5),
+    // top100: games.slice(0, 100),
+    christmas: games.filter(g => g.tagList?.includes("christmas")),
+    puzzles: games.filter(g => g.category === "puzzles"),
+    action: games.filter(g => g.tagList?.includes("action")),
+    skill: games.filter(g => g.tagList?.includes("skill")),
+    driving: games.filter(g => g.tagList?.includes("driving") || g.tagList?.includes("cars")),
+    basketball: games.filter(g => g.tagList?.includes("basketball")),
+    horror: games.filter(g => g.tagList?.includes("zombie")),
+    halloween: games.filter(g => g.tagList?.includes("halloween")),
+    football: games.filter(g => g.tagList?.includes("football")),
+    simulation: games.filter(g => g.tagList?.includes("simulation")),
+    endlessrunner: games.filter(g => g.tagList?.includes("endless runner")),
+    platformers: games.filter(g => g.tagList?.includes("platformer")),
+    card: games.filter(g => g.tagList?.includes("card")),
+    all: games,
+  };
+
   // Search filter
   const filteredGames = games.filter(g =>
     g.title.toLowerCase().includes(search.toLowerCase())
   );
-
-  // CATEGORY ENGINE — matches your sidebar
-  const categories = {
-    // ⭐ FEATURED → H5 only
-    featured: games.slice(0, 12),
-
-    recent: games.slice(12, 50),
-
-    christmas: games.filter(g => g.tagList.includes("christmas")),
-
-    puzzles: games.filter(g => g.category === "puzzles"),
-
-    action: games.filter(g => g.tagList.includes("action")),
-
-    skill: games.filter(g => g.tagList.includes("skill")),
-
-    driving: games.filter(g => g.tagList.includes("driving") || g.tagList.includes("cars")),
-
-    basketball: games.filter(g => g.tagList.includes("basketball")),
-
-    horror: games.filter(g => g.tagList.includes("zombie")),
-
-    halloween: games.filter(g => g.tagList.includes("halloween")),
-
-    football: games.filter(g => g.tagList.includes("football")),
-
-    simulation: games.filter(g => g.tagList.includes("simulation")),
-
-    endlessrunner: games.filter(g => g.tagList.includes("endless runner")),
-
-    platformers: games.filter(g => g.tagList.includes("platformer")),
-
-    card: games.filter(g => g.tagList.includes("card")),
-
-    all: games,
-  };
 
   return (
     <div className="home-wrapper">
@@ -156,7 +138,8 @@ export default function Home({ search }) {
         <GameSection
           id="searchResults"
           title={translate("searchResults", lang)}
-          games={filteredGames} />
+          games={filteredGames}
+        />
       )}
 
       <GameSection
@@ -166,13 +149,39 @@ export default function Home({ search }) {
         slider={true}
       />
 
+      <CategoriesSection 
+        title="📂 Browse Categories"
+        id="categoriesSection"
+      />
+
+      {/* ⏱️ RECENT SECTION - 12 games from localStorage */}
+      <RecentSection 
+        id="recentSection"
+      />
+
+      {/* 💥 POPULAR SECTION - 12 games from localStorage */}
+      <PopularSection 
+        id="popularSection"
+      />
+
+      {/* 🔥 HOT SECTION - 12 games */}
+      <HotSection 
+        id="hotSection"
+        games={categories.hot}
+      />
+
+      {/* ⭐ TOP 100 SECTION */}
+      {/* <Top100Section 
+        id="top100"
+        games={categories.top100}
+      /> */}
+
       <GameSection
         id="driving"
         title={`🏎️ ${translate("driving", lang)}`}
         games={categories.driving}
       />
 
-      {/* 🔥 TRENDING SECTION */}
       <TrendingSection
         id="trending"
         title={`🔥 ${translate("trendingGames", lang)}`}
@@ -191,7 +200,6 @@ export default function Home({ search }) {
         games={categories.action}
       />
 
-      {/* 🎯 TOP PICKS FOR YOU SECTION */}
       <TopPicksSection
         id="top-picks"
         title={`🌶️ ${translate("topPicks", lang)}`}

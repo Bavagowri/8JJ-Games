@@ -1,19 +1,23 @@
-import { useParams, useNavigate } from "react-router-dom";
-import { useEffect, useState, useLayoutEffect } from "react";
+import { useParams } from "react-router-dom";
+import { useEffect, useState } from "react";
 import "./GamePageV2.css";
 import { fetchH5Games } from "../../api/fetchH5Games";
-import { selfHostedGames } from "../../data/selfHostedGames";
-import ScrollToTop from "../../components/ScrollToTop";
+import { useNavigate } from "react-router-dom";
 
 export default function GamePageV2() {
-  const { id } = useParams(); // ✅ ID-based
-  const navigate = useNavigate();
-
+  const { index } = useParams();
   const [games, setGames] = useState([]);
   const [game, setGame] = useState(null);
   const [playing, setPlaying] = useState(false);
-  const [pageLoading, setPageLoading] = useState(true);
+  const [pageLoading, setPageLoading] = useState(false);
+  const navigate = useNavigate();
 
+  const isLocal = window.location.hostname === "localhost";
+
+  // Scroll to top when page loads or game changes
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }, [index]);
 
   useEffect(() => {
     let mounted = true;
@@ -22,71 +26,104 @@ export default function GamePageV2() {
       const start = Date.now();
       setPageLoading(true);
 
-      let list = JSON.parse(localStorage.getItem("games"));
+      let saved = localStorage.getItem("games");
+      let list;
 
-      // ✅ Ensure BOTH self-hosted + H5 exist
-      if (!Array.isArray(list) || list.length === 0) {
-        const h5 = await fetchH5Games();
-        list = [...selfHostedGames, ...h5];
+      if (saved) {
+        list = JSON.parse(saved);
+      } else {
+        list = await fetchH5Games();
         localStorage.setItem("games", JSON.stringify(list));
       }
 
-      const selected = list.find(
-        g => String(g.id) === String(id)
-      );
+      const selectedGame = list[Number(index)];
 
-      if (!mounted) return;
-
-      // ❌ DO NOT redirect — just fail safely
-      if (!selected) {
-        console.warn("Game not found:", id);
-        setPageLoading(false);
-        return;
-      }
-
+      // Ensure loader stays at least 600ms
       const elapsed = Date.now() - start;
-      const delay = Math.max(600 - elapsed, 0);
+      const remaining = Math.max(600, 600 - elapsed);
 
       setTimeout(() => {
         if (!mounted) return;
 
         setGames(list);
-        setGame(selected);
+        setGame(selectedGame);
         setPlaying(false);
         setPageLoading(false);
-      }, delay);
+      }, remaining);
     };
 
     load();
-    return () => { mounted = false; };
-  }, [id]);
 
-  // ✅ Navigate using ID
-  const changeGame = (gameId) => {
-    if (String(gameId) === String(id)) return;
-    navigate(`/game/${gameId}`);
+    return () => {
+      mounted = false;
+    };
+  }, [index]);
+
+  const changeGame = (newIndex) => {
+    if (newIndex === Number(index)) return;
+    navigate(`/game/${newIndex}`);
   };
 
-  if (!game) return null;
+  // Get games excluding the current one
+  const getFilteredGames = () => {
+    return games.filter((_, i) => i !== Number(index));
+  };
 
-  // ✅ Normalize ID comparison
-  const otherGames = games.filter(
-    g => String(g.id) !== String(id)
-  );
+  // Get games for "More Games" section (first 10 excluding current)
+  const getMoreGames = () => {
+    const filtered = getFilteredGames();
+    return filtered.slice(0, 12);
+  };
 
-  const moreGames = otherGames.slice(0, 12);
-  const sideGames = otherGames.slice(12, 24);
+  // Get games for side column (12 games excluding current)
+  const getSideGames = () => {
+    const filtered = getFilteredGames();
+    return filtered.slice(12, 24);
+  };
 
-  // ✅ Fix iframe src for self-hosted games
-  const iframeSrc =
-    game.source === "self"
-      ? `${window.location.origin}${game.embed}`
-      : game.embed;
+  if (!game) {
+    return (
+      <div className="gamepage-layout skeleton-layout">
+        <div className="center-column">
+          {/* Title Skeleton */}
+          <div className="skeleton-game-title"></div>
+
+          {/* Game Frame Skeleton */}
+          <div className="skeleton-game-frame"></div>
+
+          {/* Info Bar Skeleton */}
+          <div className="skeleton-info-bar">
+            {[1, 2, 3, 4].map((i) => (
+              <div key={i} className="skeleton-info-block"></div>
+            ))}
+          </div>
+
+          {/* More Games Title Skeleton */}
+          <div className="skeleton-more-title"></div>
+
+          {/* More Games Grid Skeleton */}
+          <div className="more-games-grid">
+            {Array.from({ length: 10 }).map((_, i) => (
+              <div key={i} className="skeleton-more-game"></div>
+            ))}
+          </div>
+        </div>
+
+        {/* Side Column Skeleton */}
+        <div className="side-column">
+          {Array.from({ length: 12 }).map((_, i) => (
+            <div key={i} className="skeleton-side-thumb"></div>
+          ))}
+        </div>
+      </div>
+    );
+  }
+
+  const moreGames = getMoreGames();
+  const sideGames = getSideGames();
 
   return (
     <div className="gamepage-layout">
-      <ScrollToTop />
-
       {pageLoading && (
         <div className="page-loader">
           <div className="spinner"></div>
@@ -94,17 +131,13 @@ export default function GamePageV2() {
         </div>
       )}
 
-      {/* 🎮 CENTER */}
       <div className="center-column">
-        <h2 className="play-title">
-          Click Play to Start{" "}{game.title}
-          {/* <span className="game-title-span">{game.title}</span> */}
-        </h2>
+        <h2 className="play-title">Click Play to Start <span className="game-title-span">{game.title}</span></h2>
 
-        <div className="game-frame-container" key={game.id}>
+        <div className="game-frame-container" key={game.id || index}>
           {playing ? (
             <iframe
-              src={iframeSrc}
+              src={game.embed}
               className="game-iframe"
               allowFullScreen
               sandbox="allow-same-origin allow-scripts allow-pointer-lock allow-forms allow-modals"
@@ -122,19 +155,14 @@ export default function GamePageV2() {
           )}
         </div>
 
-        {/* ℹ️ INFO */}
         <div className="game-info-bar">
           <div className="info-block">
             <span className="label">CATEGORY</span>
-            <span className="value">
-              {game.category || game.tagList?.[0]}
-            </span>
+            <span className="value">{game.tagList[0]}</span>
           </div>
           <div className="info-block">
             <span className="label">PLAYS</span>
-            <span className="value">
-              {Math.floor(Math.random() * 8000 + 2000)}
-            </span>
+            <span className="value">{Math.floor(Math.random() * 8000 + 2000)}</span>
           </div>
           <div className="info-block">
             <span className="label">RATING</span>
@@ -146,46 +174,71 @@ export default function GamePageV2() {
           </div>
         </div>
 
-        {/* 🔁 MORE GAMES */}
         <h3 className="more-title section-title">More Games</h3>
         <div className="more-games-grid">
-          {moreGames.map(g => (
-            <div
-              key={g.id}
-              className="game-card"
-              onClick={() => changeGame(g.id)}
-            >
-              <img src={g.image} alt={g.title} className="game-image" />
-              <div className="play-button">Play Now</div>
-              <div className="game-overlay">
-                <div className="game-title">{g.title}</div>
-                {g.category && (
-                  <div className="game-category">{g.category}</div>
+          {moreGames.map((g) => {
+            const originalIndex = games.findIndex(game => game === g);
+            return (
+              <div
+                key={originalIndex}
+                className="game-card"
+                onClick={() => changeGame(originalIndex)}
+              >
+                <img src={g.image} alt={g.title} className="game-image" />
+
+                {/* Play Now Button */}
+                <div className="play-button">Play Now</div>
+
+                {/* Hot Badge - only show if game.isHot is true */}
+                {g.isHot && (
+                  <div className="hot-badge">
+                    <img src="/images/game.png" className="game-image-hot" alt="" />
+                    Hot
+                  </div>
                 )}
+
+                {/* Game Info Overlay */}
+                <div className="game-overlay">
+                  <div className="game-title">{g.title}</div>
+                  {g.category && <div className="game-category">{g.category}</div>}
+                </div>
               </div>
-            </div>
-          ))}
+            );
+          })}
         </div>
       </div>
 
-      {/* 📌 SIDE COLUMN */}
       <div className="side-column">
-        
-        {sideGames.map(g => (
-          <div
-            key={g.id}
-            className="game-card game-card-side"
-            onClick={() => changeGame(g.id)}
-          >
-            <img src={g.image} alt={g.title} className="game-image" />
-            <div className="play-button">Play Now</div>
-            <div className="game-overlay">
-              <div className="game-title">{g.title}</div>
-            </div>
-          </div>
-        ))}
-      </div>
+        {sideGames.map((g) => {
+          const originalIndex = games.findIndex(game => game === g);
+          return (
+            <div
+              key={originalIndex}
+              className="game-card game-card-side"
+              onClick={() => changeGame(originalIndex)}
+            >
+              <img src={g.image} alt={g.title} className="game-image" />
 
+              {/* Play Now Button */}
+              <div className="play-button">Play Now</div>
+
+              {/* Hot Badge - only show if game.isHot is true */}
+              {g.isHot && (
+                <div className="hot-badge">
+                  <img src="/images/game.png" className="game-image-hot" alt="" />
+                  Hot
+                </div>
+              )}
+
+              {/* Game Info Overlay */}
+              <div className="game-overlay">
+                <div className="game-title">{g.title}</div>
+                {g.category && <div className="game-category">{g.category}</div>}
+              </div>
+            </div>
+          );
+        })}
+      </div>
     </div>
   );
 }

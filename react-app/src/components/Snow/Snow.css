@@ -9,7 +9,7 @@
 .snowflake {
   position: absolute;
   top: -20px;
-  color: rgba(255, 255, 255, 0.072);
+  color: white;
   user-select: none;
   animation-name: fall;
   animation-timing-function: linear;

@@ -8,31 +8,19 @@ export async function fetchH5Games() {
 
   const data = await res.json();
 
-  // return data.map((g, i) => ({
-  //   id: g.guid || i,
-  //   title: g.title,
+  return data.map((g, i) => ({
+    id: g.guid || i,
+    title: g.title,
 
-  //   // 🔥 IMAGE MUST ALSO GO THROUGH PROXY
-  //   image: `/api/proxy?url=${encodeURIComponent(g.thumb)}`,
+    // 🔥 IMAGE MUST ALSO GO THROUGH PROXY
+    image: `/api/proxy?url=${encodeURIComponent(g.thumb)}`,
 
-  //   embed: g.link,
-  //   description: g.description,
+    embed: g.link,
+    description: g.description,
 
-  //   category: g.category === "puzzle" ? "puzzles" : g.category,
-  //   tagList: g.tags.toLowerCase().split(","),
+    category: g.category === "puzzle" ? "puzzles" : g.category,
+    tagList: g.tags.toLowerCase().split(","),
 
-  //   source: "h5games"
-  // }));
-
-  return data.map((g) => ({
-  id: g.guid,                 // ✅ stable
-  title: g.title,
-  image: proxyImage,
-  embed: g.link,
-  description: g.description,
-  category: mappedCategory,
-  tagList: g.tags.toLowerCase().split(","),
-  source: "h5",
-}));
-
+    source: "h5games"
+  }));
 }

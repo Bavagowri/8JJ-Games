@@ -5,7 +5,6 @@
   padding: 60px 20px 30px;
   margin-top: 60px;
   color: #cbd5e1;
-  /* margin-left: 40px; */
 }
 
 /* INNER CONTENT ALIGNMENT */
@@ -28,18 +27,16 @@
   display: flex;
   align-items: center;
   gap: 14px;
-  margin-bottom: 10px;
+  margin-bottom: 12px;
 }
 
 .footer-tile-row {
-  gap: 4px;
-  margin-left: 20px;
-  margin-top: 10px;
+  gap: 2px;
 }
 
 /* Logo */
 .footer-logo {
-  width: 90px;
+  width: 120px;
   height: auto;
   opacity: 0.95;
   filter: brightness(1.7) contrast(1.1) drop-shadow(0 0 6px rgb(63, 99, 172));
@@ -60,8 +57,7 @@
   color: #9ca3af;
   font-size: 15px;
   line-height: 1.6;
-  margin-bottom: 10px;
-  margin-top: 5px;
+  margin-bottom: 18px;
 }
 
 /* BADGES */
@@ -152,7 +148,7 @@
   }
 
   .footer-bottom {
-    flex-direction: row;
+    flex-direction: column;
     gap: 12px;
   }
 }
@@ -160,86 +156,59 @@
 /* ========== MOBILE FOOTER (EXACT MATCH TO ORIGINAL) ========== */
 
 @media (max-width: 768px) {
-  .footer-container {
-    width: 100%;
-    padding: 5px 10px 10px;
-    background: linear-gradient(to bottom, #0c1119 0%, #0b0f17 100%);
-
-  }
 
   /* Stack everything vertically */
   .footer-inner {
     flex-direction: column;
     align-items: center;
     text-align: center;
-    gap: 20px;
-  }
-
-  .footer-left {
-    display: flexbox;
-    max-width: 100%;
+    gap: 40px;
   }
 
   /* Center logo + title row */
   .footer-brand-row {
     justify-content: center;
-    margin-bottom: 5px;
-    display: flex;
+    margin-bottom: 10px;
   }
 
   .footer-logo {
-    width: 70px;
-  }
-
-  .footer-tile-row {
-    gap: 1px;
-    margin-left: 20px;
+    width: 100px;
   }
 
   .footer-heading {
-    font-size: 18px;
-    margin-top: 10px;
-    margin-bottom: 5px;
-    text-align: left;
+    font-size: 22px;
+    margin-bottom: 15px;
   }
 
   /* Description text centered */
   .footer-description {
-    max-width: 100%;
-    line-height: 1.3;
-    margin-bottom: 10px;
-    font-size: 11px;
-    text-align: left;
+    max-width: 300px;
+    margin-left: auto;
+    margin-right: auto;
+    line-height: 1.6;
+    margin-bottom: 30px;
   }
 
   /* Badges stacked or centered */
   .footer-badges {
     justify-content: center;
-    flex-wrap: nowrap;
-    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    margin-bottom: 15px;
   }
 
   .badge {
     width: fit-content;
     justify-content: center;
-    font-size: 10px;
-    padding: 7px 9px;
-
-  }
-
-  .footer-mobile-actions {
-    margin-bottom: 10px !important;
-    margin-left: auto;
-    margin-right: auto;
   }
 
   /* Columns stacked in a single column */
   .footer-right {
     width: 100%;
-    flex-direction: row;
-    text-align: left;
-    margin-left: 20px;
-    gap: 140px;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 30px;
   }
 
   .footer-column ul {
@@ -260,321 +229,23 @@
   }
 
   .back-to-top {
-    margin-top: 20px;
-  }
-
-}
-
-@media (max-width: 480px) {
-  .footer-container {
-    width: 100%;
-    padding: 5px 10px 10px;
-  }
-
-  /* Stack everything vertically */
-  .footer-inner {
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-    gap: 20px;
+    margin-top: 5px;
   }
 
   .footer-left {
-    display: flexbox;
     max-width: 100%;
   }
 
-  /* Center logo + title row */
   .footer-brand-row {
-    justify-content: center;
-    margin-bottom: 5px;
-    display: flex;
-  }
-
-  .footer-logo {
-    width: 70px;
+    display: block;
   }
 
   .footer-tile-row {
-    gap: 1px;
-    margin-left: 20px;
-  }
-
-  .footer-heading {
-    font-size: 18px;
-    margin-top: 10px;
-    margin-bottom: 5px;
-    text-align: left;
-  }
-
-  /* Description text centered */
-  .footer-description {
-    max-width: 100%;
-    line-height: 1.3;
-    margin-bottom: 10px;
-    font-size: 11px;
-    text-align: left;
-  }
-
-  /* Badges stacked or centered */
-  .footer-badges {
-    justify-content: center;
-    flex-wrap: nowrap;
-    display: flex;
-  }
-
-
-
-  /* Columns stacked in a single column */
-  .footer-right {
-    width: 100%;
-    flex-direction: row;
-    text-align: left;
-    margin-left: 20px;
-    gap: 140px;
-  }
-
-  .footer-column ul {
-    padding: 0;
-  }
-
-  /* Divider stays centered */
-  .footer-divider {
-    margin: 30px auto;
-    width: 90%;
-  }
-
-  /* Bottom section centered */
-  .footer-bottom {
-    flex-direction: column;
-    text-align: center;
-    gap: 15px;
-  }
-
-  
-
-}
-
-@media (max-width: 380px) {
-  .footer-container {
-    width: 100%;
-    padding: 5px 10px 10px;
-  }
-
-  /* Stack everything vertically */
-  .footer-inner {
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-    gap: 20px;
-  }
-
-  .footer-left {
-    display: flexbox;
-    max-width: 100%;
-  }
-
-  /* Center logo + title row */
-  .footer-brand-row {
-    justify-content: center;
-    margin-bottom: 5px;
-    display: flex;
-    margin-left: 10px;
-    margin-right: 10px;
-  }
-
-  .footer-logo {
-    width: 70px;
-  }
-
-  .footer-tile-row {
-    gap: 1px;
-    margin-left: 20px;
-  }
-
-  .footer-heading {
-    font-size: 18px;
-    margin-top: 10px;
-    margin-bottom: 5px;
-    text-align: left;
-  }
-
-  /* Description text centered */
-  .footer-description {
-    max-width: 100%;
-    line-height: 1.3;
-    margin-bottom: 10px;
-    font-size: 11px;
-    text-align: left;
-  }
-
-  /* Badges stacked or centered */
-  .footer-badges {
-    justify-content: center;
-    flex-wrap: nowrap;
-    display: flex;
-  }
-
-
-
-  /* Columns stacked in a single column */
-  .footer-right {
-    width: 100%;
-    flex-direction: row;
-    text-align: left;
-    margin-left: 20px;
-    gap: 120px;
-  }
-
-  .footer-column ul {
-    padding: 0;
-  }
-
-  /* Divider stays centered */
-  .footer-divider {
-    margin: 30px auto;
-    width: 90%;
-  }
-
-  /* Bottom section centered */
-  .footer-bottom {
-    flex-direction: column;
-    text-align: center;
-    gap: 15px;
-  }
-
-  .back-to-top {
     margin-top: 15px;
-    margin-bottom: 10px;
   }
 
 }
 
-.VisibilityNone {
+.VisibilityNone{
   visibility: hidden;
-}
-
-/* ========== MOBILE FOOTER ACCORDION ========== */
-
-.FooterMobile {
-  padding: 20px 16px 28px;
-  background: radial-gradient(circle at top, #0f1a26, #070b12);
-  color: #fff;
-}
-
-/* QUICK ACTION BUTTONS */
-.footer-mobile-actions {
-  display: flex;
-  gap: 10px;
-  margin-bottom: 16px;
-}
-
-.footer-mobile-actions button {
-  flex: 1;
-  background: rgba(255, 255, 255, 0.06);
-  border: 1px solid rgba(255, 255, 255, 0.12);
-  border-radius: 14px;
-  padding: 12px 10px;
-  color: #fff;
-  font-weight: 600;
-  font-size: 14px;
-  backdrop-filter: blur(6px);
-}
-
-/* ACCORDION WRAPPER */
-.footer-mobile-accordions {
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-}
-
-/* ACCORDION CARD */
-.accordion {
-  background: rgba(255, 255, 255, 0.04);
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  border-radius: 16px;
-  overflow: hidden;
-}
-
-/* HEADER */
-.accordion-header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 16px 18px;
-  font-size: 16px;
-  font-weight: 600;
-  cursor: pointer;
-}
-
-/* ARROW */
-.accordion-header .arrow {
-  font-size: 18px;
-  transition: transform 0.25s ease;
-}
-
-/* ROTATE ARROW WHEN OPEN */
-.accordion.open .arrow {
-  transform: rotate(180deg);
-}
-
-/* BODY */
-.accordion-body {
-  list-style: none;
-  padding: 0 18px;
-  margin: 0;
-
-  max-height: 0;
-  overflow: hidden;
-  transition: max-height 0.35s ease, padding 0.25s ease;
-}
-
-/* OPEN STATE */
-.accordion.open .accordion-body {
-  max-height: 500px;
-  padding: 8px 18px 16px;
-}
-
-/* ITEMS */
-.accordion-body li {
-  padding: 10px 0;
-  font-size: 15px;
-  color: #cfd8e3;
-  cursor: pointer;
-}
-
-.accordion-body li:not(:last-child) {
-  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
-}
-
-/* COPYRIGHT */
-.footer-mobile-bottom {
-  text-align: center;
-  font-size: 13px;
-  color: rgba(255, 255, 255, 0.55);
-  margin-top: 22px;
-}
-
-
-
-@media (min-width: 768px) {
-  .FooterMobile {
-    display: none !important;
-  }
-
-  .FooterDesktop {
-    display: block !important;
-  }
-
-}
-
-@media (max-width: 768px) {
-  .FooterMobile {
-    display: block !important;
-  }
-
-  .FooterDesktop {
-    display: none !important;
-  }
-
 }

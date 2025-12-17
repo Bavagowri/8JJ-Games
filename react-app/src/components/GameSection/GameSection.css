@@ -33,7 +33,11 @@
   background: #334155;
 }
 
-
+@media (max-width: 480px) {
+  .games-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
 
 
 .game-section-title {
@@ -587,7 +591,6 @@
 
   .games-grid {
     grid-template-columns: repeat(3, 1fr) !important;
-    gap: 15px;
   }
 
   .game-card {
@@ -612,7 +615,7 @@
 
 /* Add to GameSection.css */
 #featuredSection .slider-container {
-  padding: 0px 0px 20px 0px;
+  padding: 10px 0px 30px 0px;
   /* Prevent layout shift on hover */
   will-change: scroll-position;
 }
@@ -621,33 +624,4 @@
 #featuredSection:hover {
   transform: none;
   animation: none;
-}
-
-
-
-@media (max-width: 768px) {
-  .game-section:hover {
-    transition: box-shadow 0.6s ease, transform 0.6s ease;
-    background: none !important;
-
-
-  }
-}
-
-@media (max-width: 600px) {
-  .game-section:hover {
-    transition: box-shadow 0.6s ease, transform 0.6s ease;
-    background: none !important;
-
-  }
-
-}
-
-@media (max-width: 480px) {
-  .game-section:hover {
-    transition: box-shadow 0.6s ease, transform 0.6s ease;
-    background: none !important;
-
-
-  }
 }

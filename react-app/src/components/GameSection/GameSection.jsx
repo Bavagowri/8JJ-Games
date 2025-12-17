@@ -14,7 +14,7 @@ export default function GameSection({ title, games, id, slider = false }) {
     if (!sliderEl) return;
 
     let rafId;
-    let speed = 0.5; // px per frame
+    let speed = 0.4; // px per frame
     let isPaused = false;
 
     const animate = () => {
@@ -66,14 +66,14 @@ export default function GameSection({ title, games, id, slider = false }) {
           <div className="slider-wrapper">
             <div className="slider-container" ref={sliderRef}>
               {visibleGames.map((g, i) => (
-                <GameCard key={i} game={g}/>
+                <GameCard key={i} game={g} index={i} />
               ))}
             </div>
           </div>
         ) : (
           <div className="games-grid">
             {visibleGames.map((g, i) => (
-              <GameCard key={i} game={g} />
+              <GameCard key={i} game={g} index={i} />
             ))}
           </div>
         )}

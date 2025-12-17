@@ -7,61 +7,72 @@ import "./AllGames.css";
 const GAMES_PER_PAGE = 50;
 
 export default function AllGames() {
-  const { lang } = useLanguage();
-  const observerTarget = useRef(null);
-
   const [games, setGames] = useState([]);
   const [loading, setLoading] = useState(true);
   const [searchTerm, setSearchTerm] = useState("");
+  const [displayedGames, setDisplayedGames] = useState([]);
   const [page, setPage] = useState(1);
+  const [hasMore, setHasMore] = useState(true);
+  const { lang } = useLanguage();
+  const observerTarget = useRef(null);
 
-  /* ✅ Load cached games ONCE */
   useEffect(() => {
-    const cached = localStorage.getItem("games");
-    if (cached) {
-      setGames(JSON.parse(cached));
+    // Load games from localStorage (already fetched in Home)
+    const cachedGames = localStorage.getItem("games");
+    if (cachedGames) {
+      setGames(JSON.parse(cachedGames));
+      setLoading(false);
     }
-    setLoading(false);
   }, []);
 
-  /* ✅ Filter is derived — no state */
-  const filteredGames = games.filter(game =>
+  const filteredGames = games.filter((game) =>
     game.title.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
-  /* ✅ Paginated slice (derived, no loop) */
-  const displayedGames = filteredGames.slice(
-    0,
-    page * GAMES_PER_PAGE
-  );
-
-  const hasMore = displayedGames.length < filteredGames.length;
-
-  /* Reset page on search */
+  // Reset pagination when search term changes
   useEffect(() => {
     setPage(1);
+    setDisplayedGames([]);
+    setHasMore(true);
   }, [searchTerm]);
 
-  /* Infinite scroll observer */
-  const handleObserver = useCallback(
-    entries => {
-      if (entries[0].isIntersecting && hasMore && !loading) {
-        setPage(p => p + 1);
-      }
-    },
-    [hasMore, loading]
-  );
-
+  // Load more games when page changes
   useEffect(() => {
-    const observer = new IntersectionObserver(handleObserver, {
-      threshold: 0.1,
-    });
-
-    if (observerTarget.current) {
-      observer.observe(observerTarget.current);
+    if (filteredGames.length === 0) {
+      setDisplayedGames([]);
+      setHasMore(false);
+      return;
     }
 
-    return () => observer.disconnect();
+    const startIndex = 0;
+    const endIndex = page * GAMES_PER_PAGE;
+    const newDisplayedGames = filteredGames.slice(startIndex, endIndex).map((game, idx) => ({
+      ...game,
+      originalIndex: games.findIndex(g => g.id === game.id || g.title === game.title)
+    }));
+    
+    setDisplayedGames(newDisplayedGames);
+    setHasMore(endIndex < filteredGames.length);
+  }, [page, filteredGames, games]);
+
+  // Intersection Observer for infinite scroll
+  const handleObserver = useCallback((entries) => {
+    const [target] = entries;
+    if (target.isIntersecting && hasMore && !loading) {
+      setPage((prev) => prev + 1);
+    }
+  }, [hasMore, loading]);
+
+  useEffect(() => {
+    const element = observerTarget.current;
+    const option = { threshold: 0.1 };
+    const observer = new IntersectionObserver(handleObserver, option);
+    
+    if (element) observer.observe(element);
+    
+    return () => {
+      if (element) observer.unobserve(element);
+    };
   }, [handleObserver]);
 
   if (loading) {
@@ -69,7 +80,7 @@ export default function AllGames() {
       <div className="all-games-page">
         <div className="all-games-header">
           <h1>{translate("allGames", lang)}</h1>
-          <p>Loading games…</p>
+          <p>Loading games...</p>
         </div>
       </div>
     );
@@ -77,49 +88,51 @@ export default function AllGames() {
 
   return (
     <div className="all-games-page">
-      {/* Header */}
+      {/* Header Section */}
       <div className="all-games-header">
         <h1>🎮 {translate("allGames", lang)}</h1>
         <p className="all-games-count">
-          {filteredGames.length}{" "}
-          {translate("games", lang).toLowerCase()}
-          {displayedGames.length < filteredGames.length &&
-            ` (showing ${displayedGames.length})`}
+          {filteredGames.length} {translate("games", lang).toLowerCase()}
+          {displayedGames.length < filteredGames.length && 
+            ` (showing ${displayedGames.length})`
+          }
         </p>
       </div>
 
-      {/* Search */}
+      {/* Search Bar */}
       <div className="all-games-search">
         <input
-          className="search-input"
-          placeholder={`${translate("search", lang)} games…`}
+          type="text"
+          placeholder={`${translate("search", lang) || "Search"} games...`}
           value={searchTerm}
-          onChange={e => setSearchTerm(e.target.value)}
+          onChange={(e) => setSearchTerm(e.target.value)}
+          className="search-input"
         />
       </div>
 
-      {/* Grid */}
+      {/* Games Grid - Masonry Layout */}
       <div className="all-games-grid">
-        {displayedGames.map(game => (
-          <GameCard
-            key={game.id}
-            game={game}   // ✅ GameCard navigates by game.id
+        {displayedGames.map((game) => (
+          <GameCard 
+            key={`${game.id}-${game.originalIndex}`} 
+            game={game} 
+            index={game.originalIndex} 
           />
         ))}
       </div>
 
-      {/* Infinite loader */}
-      {hasMore && (
+      {/* Loading Indicator */}
+      {hasMore && displayedGames.length > 0 && (
         <div ref={observerTarget} className="loading-indicator">
-          <div className="loading-spinner" />
-          <p>Loading more games…</p>
+          <div className="loading-spinner"></div>
+          <p>Loading more games...</p>
         </div>
       )}
 
-      {/* Empty */}
-      {!loading && filteredGames.length === 0 && (
+      {/* No Results */}
+      {filteredGames.length === 0 && !loading && (
         <div className="no-results">
-          <p>No games found</p>
+          <p>No games found matching "{searchTerm}"</p>
         </div>
       )}
     </div>

@@ -5,7 +5,11 @@
   padding: 60px 20px 30px;
   margin-top: 60px;
   color: #cbd5e1;
- 
+}
+
+.FooterDesktop {
+  margin-left: 8%;
+  margin-right: 8%;
 }
 
 /* INNER CONTENT ALIGNMENT */

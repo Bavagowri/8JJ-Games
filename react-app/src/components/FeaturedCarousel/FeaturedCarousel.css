@@ -8,8 +8,8 @@
 .featured-track {
   display: flex;
   gap: 14px;
-  padding: 4px 16px;
-  animation: marquee 30s linear infinite;
+  width: max-content;
+  will-change: transform;
 }
 
 .f-card {
@@ -31,13 +31,4 @@
 .f-title {
   padding: 8px 10px;
   font-size: 13px;
-}
-
-@keyframes marquee {
-  0% {
-    transform: translateX(0);
-  }
-  100% {
-    transform: translateX(-50%);
-  }
 }

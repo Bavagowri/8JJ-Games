@@ -8,6 +8,12 @@ import { translate } from "../../data/translations";
 import FAQ from "../../components/FAQ/FAQ";
 import { fetchH5Games } from "../../api/fetchH5Games";
 import { selfHostedGames } from "../../data/selfHostedGames";
+import CategoriesSection from "../../components/CategoriesSection/CategoriesSection";
+import RecentSection from "../../components/RecentSection/RecentSection";
+import PopularSection from "../../components/PopularSection/PopularSection";
+import HotSection from "../../components/HotSection/HotSection";
+
+
 
 
 export default function Home({ search }) {
@@ -119,6 +125,8 @@ export default function Home({ search }) {
     featured: games.slice(0, 12),
 
     recent: games.slice(12, 50),
+    popular: games.slice(0, 30).sort(() => Math.random() - 0.5),
+    hot: games.slice(30, 42).sort(() => Math.random() - 0.5),
 
     christmas: games.filter(g => g.tagList.includes("christmas")),
 
@@ -164,6 +172,27 @@ export default function Home({ search }) {
         title={`⭐ ${translate("featuredGames", lang)}`}
         games={categories.featured}
         slider={true}
+      />
+      
+      <CategoriesSection 
+        title="📂 Browse Categories"
+        id="categoriesSection"
+      />
+
+      {/* ⏱️ RECENT SECTION - 12 games from localStorage */}
+      <RecentSection 
+        id="recentSection"
+      />
+
+      {/* 💥 POPULAR SECTION - 12 games from localStorage */}
+      <PopularSection 
+        id="popularSection"
+      />
+
+      {/* 🔥 HOT SECTION - 12 games */}
+      <HotSection 
+        id="hotSection"
+        games={categories.hot}
       />
 
       <GameSection

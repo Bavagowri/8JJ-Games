@@ -12,6 +12,22 @@ const categories = [
   { id: "makeup", label: "girls", image: "/images/category-grid/makeup.png" },
   { id: "puzzle", label: "puzzles", image: "/images/category-grid/puzzle.png" },
   { id: "card", label: "card", image: "/images/category-grid/card.png" },
+  { id: "brain", label: "brain", image: "/images/category-grid/brain.png" },
+  { id: "haloween", label: "halloween", image: "/images/category-grid/halloween.png" },
+  { id: "horror", label: "horror", image: "/images/category-grid/zombie.png" },
+  { id: "kids", label: "kids", image: "/images/category-grid/kids.png" },
+  { id: "basketball", label: "basketball", image: "/images/category-grid/basketball.png" },
+  { id: "football", label: "football", image: "/images/category-grid/football.png" },
+  { id: "boys", label: "boys", image: "/images/category-grid/boys.png" },
+  { id: "skill", label: "skill", image: "/images/category-grid/skill.png" },
+  { id: "educational", label: "educational", image: "/images/category-grid/educational.png" },
+  { id: "action", label: "action", image: "/images/category-grid/action.png" },
+
+  { id: "matching", label: "skill", image: "/images/category-grid/matching.png" },
+  { id: "arcade", label: "arcade", image: "/images/category-grid/arcade.png" },
+  { id: "fun", label: "fun", image: "/images/category-grid/fun.png" },
+
+  { id: "all", label: "all", image: "/images/category-grid/all.png" }
 ];
 
   

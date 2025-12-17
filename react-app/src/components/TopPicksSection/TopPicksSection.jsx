@@ -1,4 +1,4 @@
-import { useRef, useState } from "react";
+import { useRef, useState, useEffect } from "react";
 import GameCard from "../GameCard/GameCard";
 import "./TopPicksSection.css";
 
@@ -6,6 +6,19 @@ export default function TopPicksSection({ title, games, id }) {
   const containerRef = useRef(null);
   const [canScrollLeft, setCanScrollLeft] = useState(false);
   const [canScrollRight, setCanScrollRight] = useState(true);
+  const [isMobile, setIsMobile] = useState(false);
+
+  // Detect mobile view
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth <= 768);
+    };
+    
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
 
   const checkScrollButtons = () => {
     if (containerRef.current) {
@@ -17,7 +30,9 @@ export default function TopPicksSection({ title, games, id }) {
 
   const scroll = (direction) => {
     if (containerRef.current) {
-      const scrollAmount = containerRef.current.clientWidth;
+      // Get the width of the container plus the gap between slides
+      const gap = 32; // 2rem = 32px
+      const scrollAmount = containerRef.current.clientWidth + gap;
       containerRef.current.scrollBy({
         left: direction === 'left' ? -scrollAmount : scrollAmount,
         behavior: 'smooth'
@@ -26,10 +41,13 @@ export default function TopPicksSection({ title, games, id }) {
     }
   };
 
-  // Group games into slides 
+  // Group games into slides - adjust based on mobile/desktop
+  const gamesPerSlide = isMobile ? 10 : 9; // 1 featured + 9 grid (mobile) or 1 featured + 8 grid (desktop)
+  const gridGamesCount = isMobile ? 9 : 8;
+  
   const slides = [];
-  for (let i = 0; i < games.length; i += 2) {
-    slides.push(games.slice(i, i + 9));
+  for (let i = 0; i < games.length; i += gamesPerSlide) {
+    slides.push(games.slice(i, i + gamesPerSlide));
   }
 
   return (
@@ -69,9 +87,9 @@ export default function TopPicksSection({ title, games, id }) {
                   </div>
                 )}
 
-                {/* Small Games Grid (Right) */}
+                {/* Small Games Grid (Right) - 8 games on desktop, 9 on mobile */}
                 <div className="top-picks-grid">
-                  {slideGames.slice(1, 9).map((game, index) => (
+                  {slideGames.slice(1, 1 + gridGamesCount).map((game, index) => (
                     <div key={index} className="top-picks-grid-item">
                       <GameCard game={game} index={index + 1} />
                     </div>

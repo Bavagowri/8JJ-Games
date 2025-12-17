@@ -1,32 +1,10 @@
 import "./GameCard.css";
 import { useNavigate } from "react-router-dom";
-import { pushRecent } from "../../utils/localStorage";
-import { trackGameClick } from "../../utils/popularGamesUtils";
 
 export default function GameCard({ game, index }) {
   const navigate = useNavigate();
 
   const openGame = () => {
-    // Save game to recent games list
-    pushRecent({
-      id: game.id,
-      title: game.title,
-      image: game.image,
-      category: game.category || "",
-      gameId: game.gameId || game.id,
-      externalUrl: game.externalUrl || game.link,
-    });
-
-    // Track game click for popular games
-    trackGameClick({
-      id: game.id,
-      title: game.title,
-      image: game.image,
-      category: game.category || "",
-      gameId: game.gameId || game.id,
-      externalUrl: game.externalUrl || game.link,
-    });
-
     // Save ENTIRE game list
     const list = JSON.parse(localStorage.getItem("games"));
     if (!list) return;

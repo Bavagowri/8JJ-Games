@@ -3,77 +3,79 @@ import GameCard from "../GameCard/GameCard";
 import "./GameSection.css";
 
 export default function GameSection({ title, games, id, slider = false }) {
-  const sliderRef = useRef(null);
+  const trackRef = useRef(null);
+  const firstSetWidth = useRef(0);
   const [showAll, setShowAll] = useState(false);
 
-  // AUTOPLAY slider with pause on hover
   useEffect(() => {
     if (!slider) return;
 
-    const sliderEl = sliderRef.current;
-    if (!sliderEl) return;
+    const track = trackRef.current;
+    if (!track) return;
 
+    let x = 0;
     let rafId;
-    let speed = 0.5; // px per frame
-    let isPaused = false;
+    let paused = false;
+    const speed = 0.4;
+
+    // 🔥 Measure width of FIRST set only
+    requestAnimationFrame(() => {
+      firstSetWidth.current = track.scrollWidth / 2;
+    });
 
     const animate = () => {
-      if (!isPaused) {
-        if (
-          sliderEl.scrollLeft + sliderEl.clientWidth >=
-          sliderEl.scrollWidth
-        ) {
-          sliderEl.scrollLeft = 0;
-        } else {
-          sliderEl.scrollLeft += speed;
+      if (!paused) {
+        x -= speed;
+
+        // ✅ PERFECT reset point
+        if (Math.abs(x) >= firstSetWidth.current) {
+          x = 0;
         }
+
+        track.style.transform = `translate3d(${x}px, 0, 0)`;
       }
+
       rafId = requestAnimationFrame(animate);
     };
 
-    // Pause animation when hovering over slider
-    const handleMouseEnter = () => {
-      isPaused = true;
-    };
+    const pause = () => (paused = true);
+    const play = () => (paused = false);
 
-    const handleMouseLeave = () => {
-      isPaused = false;
-    };
-
-    // Add event listeners to the slider container
-    sliderEl.addEventListener('mouseenter', handleMouseEnter);
-    sliderEl.addEventListener('mouseleave', handleMouseLeave);
+    track.addEventListener("mouseenter", pause);
+    track.addEventListener("mouseleave", play);
 
     rafId = requestAnimationFrame(animate);
 
     return () => {
       cancelAnimationFrame(rafId);
-      sliderEl.removeEventListener('mouseenter', handleMouseEnter);
-      sliderEl.removeEventListener('mouseleave', handleMouseLeave);
+      track.removeEventListener("mouseenter", pause);
+      track.removeEventListener("mouseleave", play);
     };
-  }, [slider]);
+  }, [slider, games]);
 
-  const visibleGames = slider ? games : showAll ? games : games.slice(0, 12);
+  const visibleGames = slider
+    ? [...games, ...games] // ✅ duplication
+    : showAll
+    ? games
+    : games.slice(0, 12);
 
   return (
     <section className="game-section" id={id}>
-
       <div className="content-anim">
-
         <h2 className="section-title">{title}</h2>
 
         {slider ? (
           <div className="slider-wrapper">
-            <div className="slider-container" ref={sliderRef}>
+            <div className="slider-track" ref={trackRef}>
               {visibleGames.map((g, i) => (
-                <GameCard key={i} game={g}/>
+                <GameCard key={`${g.id}-${i}`} game={g} />
               ))}
             </div>
           </div>
         ) : (
           <div className="games-grid">
-            {visibleGames.map((g, i) => (
-              <GameCard key={i} game={g} />
+            {visibleGames.map((g) => (
+              <GameCard key={g.id} game={g} />
             ))}
           </div>
         )}
@@ -81,8 +83,8 @@ export default function GameSection({ title, games, id, slider = false }) {
         {!slider && games.length > 12 && (
           <div className="container">
             <a
-              className="btn"
               href="#"
+              className="btn"
               onClick={(e) => {
                 e.preventDefault();
                 setShowAll(!showAll);
@@ -94,10 +96,7 @@ export default function GameSection({ title, games, id, slider = false }) {
             </a>
           </div>
         )}
-
       </div>
-
-
     </section>
   );
 }

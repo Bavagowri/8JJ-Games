@@ -381,7 +381,7 @@
 
 /* ========== TRENDING SECTION ========== */
 .trending-section {
-  background: linear-gradient(180deg, #0a0e1a 0%, #1a1f35 100%);
+ /* background: linear-gradient(180deg, #0a0e1a 0%, #1a1f35 100%); */
   padding: 4rem 0;
 }
 
@@ -573,7 +573,7 @@
 }
 
 
-@media (max-width: 600px) {
+@media (max-width: 768px) {
   .slider-container .game-card {
     min-width: 110px;
   }
@@ -607,6 +607,8 @@
   .game-card {
     max-height: 110px;
     max-width: 110px;
+    margin: auto;
+
   }
 
   #trending .game-card {

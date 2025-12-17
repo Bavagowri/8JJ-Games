@@ -5,7 +5,6 @@
   padding-left: 0px;
   padding-right: 0px;
   padding-bottom: 10px;
-
 }
 
 .top-picks-content {
@@ -72,6 +71,7 @@
   scrollbar-width: none;
   -ms-overflow-style: none;
   padding: 0.5rem 0;
+  scroll-snap-type: x mandatory;
 }
 
 .top-picks-container::-webkit-scrollbar {
@@ -85,6 +85,8 @@
   flex-shrink: 0;
   width: 100%;
   min-width: 100%;
+  scroll-snap-align: start;
+  scroll-snap-stop: always;
 }
 
 /* Large Featured Game (Left Side) */
@@ -102,7 +104,6 @@
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   grid-template-rows: repeat(2, 1fr);
-
 }
 
 .top-picks-grid-item {
@@ -151,6 +152,7 @@
     min-height: 250px;
   }
 
+  /* 9 games grid - 3x3 layout for mobile */
   .top-picks-grid {
     grid-template-columns: repeat(3, 1fr) !important;
     grid-template-rows: repeat(3, 1fr) !important;
@@ -162,40 +164,21 @@
     max-width: 92px;
     margin: auto;
   }
-}
 
-
-
-
-
-
-.top-picks-featured .game-card {
-  max-height: 100%;
-  max-width: 100%;
-  width: 100%;
-  height: 100%;
-}
-
-
-
-
-@media (min-width: 768px) {
-  .top-picks-featured {
-
-    padding-right: 10px;
+  .top-picks-nav {
+    display: block;
+    background: #ffffff00 !important;
   }
 
-  .top-picks-grid {
-
-    gap: 15px;
+  .top-picks-nav.right {
+    right: -14px;
   }
-}
 
+  .top-picks-nav.left {
+    left: -14px;
+  }
 
-
-@media (max-width: 768px) {
   .top-picks-section .game-card {
-
     max-width: none !important;
   }
 
@@ -207,36 +190,25 @@
     max-width: 100% !important;
     padding: 0px;
   }
+}
 
-  .top-picks-nav {
-    display: block;
+.top-picks-featured .game-card {
+  max-height: 100%;
+  max-width: 100%;
+  width: 100%;
+  height: 100%;
+}
+
+@media (min-width: 768px) {
+  .top-picks-featured {
+    padding-right: 10px;
   }
 
   .top-picks-grid {
-    grid-template-columns: repeat(3, 1fr);
-    grid-template-rows: repeat(3, 1fr);
     gap: 15px;
   }
-
-  .top-picks-nav {
-    background: #ffffff00 !important;
-
-  }
-
-  .top-picks-nav.right {
-    right: -14px;
-  }
-
-  .top-picks-nav.left {
-    left: -14px;
-  }
-
-
-
 }
 
-
 .top-picks-featured .game-card:hover {
-
   box-shadow: none;
 }

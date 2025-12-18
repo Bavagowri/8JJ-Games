@@ -170,7 +170,8 @@
     background: linear-gradient(to bottom, #0c1119 0%, #0b0f17 100%);
     margin: 0px !important;
   }
-  .more-games-grid .game-card{
+
+  .more-games-grid .game-card {
     margin: auto;
   }
 
@@ -358,7 +359,7 @@
     gap: 15px;
   }
 
-  
+
 
 }
 
@@ -464,7 +465,7 @@
 /* ========== MOBILE FOOTER ACCORDION ========== */
 
 .FooterMobile {
-  padding: 20px 16px 28px;
+  padding: 20px 16px 5px;
   background: radial-gradient(circle at top, #0f1a26, #070b12);
   color: #fff;
 }
@@ -521,7 +522,7 @@
 }
 
 /* ROTATE ARROW WHEN OPEN */
-.FooterMobile.accordion.open .arrow {
+.FooterMobile .accordion.open .arrow {
   transform: rotate(180deg);
 }
 
@@ -534,6 +535,12 @@
   max-height: 0;
   overflow: hidden;
   transition: max-height 0.35s ease, padding 0.25s ease;
+}
+
+
+.FooterMobile .faq-icon-chevron {
+  position: relative;
+  top: 3px;
 }
 
 /* OPEN STATE */

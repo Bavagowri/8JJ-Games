@@ -13,8 +13,8 @@ export default function RecentSection({ id, lang, translate }) {
   useEffect(() => {
     // Load recent games from localStorage
     const games = loadRecent();
-    // Keep only 12 games
-    const limitedGames = games.slice(0, 12);
+    // Keep only 30 games
+    const limitedGames = games.slice(0, 30);
     setRecentGames(limitedGames);
     setLoading(false);
   }, []);

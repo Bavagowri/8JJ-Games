@@ -49,14 +49,16 @@ export default function PopularSection({ id, lang, translate }) {
           <div className="games-grid">
             {popularGames.map((game, index) => (
               <div key={game.id} className="game-card-wrapper">
-                <GameCard 
-                  game={game} 
-                  index={index}
-                />
+
                 {/* Show click count badge */}
                 <div className="click-count">
                   {game.clicks} plays
                 </div>
+                <GameCard 
+                  game={game} 
+                  index={index}
+                />
+                
               </div>
             ))}
           </div>

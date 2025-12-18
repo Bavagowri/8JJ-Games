@@ -7,14 +7,13 @@
 body {
   margin: 0;
   font-family: 'Nunito', Arial, Helvetica, sans-serif;
-  background: linear-gradient(45deg, #161616 13%, #02132b 66%, rgb(1 3 33));
+  background: linear-gradient(45deg, #161616 13%, #081127 66%, rgb(1 3 33));
   color: #fff;
-  /* background: linear-gradient(
-    90deg,
-    #56a7d5 0%,
-     #3753c5 100%
-  );
-  background-attachment: fixed; */
+  background-image: url("/images/bg10.png");
+  background-size: cover;
+  background-position: center top;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
 }
 
 
@@ -63,8 +62,7 @@ html {
 .home-wrapper,
 #searchResults,
 #top-picks,
-.all-games-page,
-#recentSection {
+.all-games-page {
   scroll-snap-align: start;
   view-timeline: --section;
 }
@@ -76,8 +74,7 @@ html {
 .home-wrapper,
 #searchResults,
 #top-picks,
-.all-games-page,
-#recentSection {
+.all-games-page {
   animation: backwards-scroll ease-in-out both;
   animation-timeline: --section;
   position: relative;

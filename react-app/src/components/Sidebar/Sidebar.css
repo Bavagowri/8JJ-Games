@@ -4,13 +4,15 @@
 
 .sidebar {
   width: 80px;
-  background: #0d1117;
+  /* background: #0d1117; */
+  backdrop-filter: blur(14px);
+  background: linear-gradient(to top, rgba(12, 45, 111, 0.95),  rgba(12, 69, 182, 0.189), transparent);
   position: fixed;
   top: 110px;
   left: 0;
   height: calc(100vh - 110px);
   padding-top: 20px;
-  border-right: 1px solid #1f2937;
+  border-right: 1px solid #5c6e8774;
   transition: width 0.25s ease, left 0.25s ease; /* Added left transition */
   z-index: 10;
   overflow-y: auto;

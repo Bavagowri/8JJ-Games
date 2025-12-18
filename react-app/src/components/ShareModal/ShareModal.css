@@ -52,6 +52,7 @@
   background: #111827;
   border: 1px solid #1f2937;
   transition: 0.2s;
+  display: grid;
 }
 
 .share-btn:hover {
@@ -59,6 +60,7 @@
 }
 
 .share-icon {
+  margin: auto;
   padding: 12px;
   border-radius: 12px;
   background: #111827;

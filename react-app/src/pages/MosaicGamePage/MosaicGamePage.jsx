@@ -27,9 +27,9 @@ export default function MosaicGamesPage() {
       ...g,
       size:
         i % 12 === 0 ? "large" :
-        i % 9 === 0 ? "wide" :
-        i % 7 === 0 ? "tall" :
-        "small",
+          i % 9 === 0 ? "wide" :
+            i % 7 === 0 ? "tall" :
+              "small",
     }));
 
     setGames(withSizes);
@@ -49,58 +49,69 @@ export default function MosaicGamesPage() {
   const visibleGames = filteredGames.slice(0, visibleCount);
 
   return (
-    <div className="mosaic-page home-wrapper">
-      <ScrollToTop />
-      {/* Heading */}
-      <h1 className="page-title">🎮 {translate("allGames", lang)}</h1>
+    <div className="ScrollSnap">
+      <div className="mosaic-page home-wrapper">
+        <ScrollToTop />
+        {/* Heading */}
+        <h1 className="page-title">🎮 {translate("allGames", lang)}</h1>
 
-      {/* ✅ SEARCH BAR */}
-      <div className="mosaic-search">
-        <input
-          type="text"
-          className="mosaic-search-input"
-          placeholder={`${translate("searchGames", lang)}`}
-          value={searchTerm}
-          onChange={(e) => setSearchTerm(e.target.value)}
-        />
-      </div>
-
-      <WhatWeOffer />
-
-      {/* Games grid */}
-      <div className="mosaic-grid">
-        {visibleGames.map(game => (
-          <MosaicGameCard key={game.id} game={game} />
-        ))}
-      </div>
-
-      {/* No results */}
-      {filteredGames.length === 0 && (
-        <div className="no-results">
-          {translate("noGamesFound", lang)} "{searchTerm}"
+        {/* ✅ SEARCH BAR */}
+        <div className="mosaic-search">
+          <input
+            type="text"
+            className="mosaic-search-input"
+            placeholder={`${translate("searchGames", lang)}`}
+            value={searchTerm}
+            onChange={(e) => setSearchTerm(e.target.value)}
+          />
         </div>
-      )}
 
-     {/* View more */}
-      {visibleCount < filteredGames.length && (
-        <div className="container">
-          <a
-            href="#"
-            className="btn"
-            onClick={(e) => {
-              e.preventDefault();
-              setVisibleCount(filteredGames.length);
-            }}
-          >
-            <span className="btnInner">
-              {translate("viewMoreGames", lang)}
-            </span>
-          </a>
+        <WhatWeOffer />
+
+        {/* Games grid */}
+        <div className="mosaic-grid">
+          {visibleGames.map(game => (
+            <MosaicGameCard key={game.id} game={game} />
+          ))}
         </div>
-      )}
 
+        {/* No results */}
+        {filteredGames.length === 0 && (
+          <div className="no-results">
+            {translate("noGamesFound", lang)} "{searchTerm}"
+          </div>
+        )}
+
+        {/* View more */}
+        {visibleCount < filteredGames.length && (
+          <div className="container">
+            <a
+              href="#"
+              className="btn"
+              onClick={(e) => {
+                e.preventDefault();
+                setVisibleCount(prev => prev + 40);
+              }}
+            >
+              <span className="btnInner">
+                {translate("viewMoreGames", lang)}
+              </span>
+            </a>
+          </div>
+        )}
+
+      </div>
       {/* Categories */}
-      <CategoryGrid />
+
+      {/* Heading */}
+      <div className="ScrollSnap">
+        <div className="mosaic-page home-wrapper">
+          <h2 className="Cat-title">{translate("MoreCategories", lang)}</h2>
+          <CategoryGrid />
+        </div>
+
+
+      </div>
     </div>
   );
 }

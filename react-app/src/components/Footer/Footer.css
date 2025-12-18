@@ -614,9 +614,10 @@
   .brand-logo {
     height: 48px !important;
   }
-    .header-actions {
-        gap: 5px !important;
-    }
+
+  .header-actions {
+    gap: 5px !important;
+  }
 
 }
 
@@ -626,9 +627,10 @@
   .brand-logo {
     height: 48px !important;
   }
-    .header-actions {
-        gap: 5px !important;
-    }
+
+  .header-actions {
+    gap: 5px !important;
+  }
 
 }
 
@@ -776,3 +778,26 @@
 /* ========================================
    NOTES
    ======================================== */
+
+
+.lang-ta #recentSection .recent-label span, .lang-ml #recentSection .recent-label span {
+  font-size: 9px !important;
+}
+
+
+@media (max-width: 768px) {
+
+.lang-ta .click-count, .lang-ml .click-count{
+  font-size: 8px !important;
+}
+
+.lang-ta .play-button, .lang-ml .play-button{
+   font-size: 7px !important;
+}
+
+}
+
+
+.lang-ta .sidebar .label,  .lang-ml .sidebar .label{
+  font-size: 10px;
+}

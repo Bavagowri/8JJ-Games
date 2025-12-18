@@ -1,10 +1,14 @@
 import "./ShareModal.css";
+import { translate } from "../../data/translations";
+import { useLanguage } from "../../context/LanguageContext";
 
 export default function ShareModal({ open, onClose }) {
+  const { lang } = useLanguage();
+  
   if (!open) return null;
 
   const url = window.location.href;
-  const text = "Play free games on 8JJ Games 🎮";
+  const text = encodeURIComponent(translate("playFreeGames", lang));
 
   return (
     <>
@@ -23,43 +27,43 @@ export default function ShareModal({ open, onClose }) {
 
         <div className="share-grid">
           <a
-            href={`https://www.facebook.com/sharer/sharer.php?u=file%3A%2F%2F%2FUsers%2Fbavagowripanchadcharasivam%2FDownloads%2F8JJ%2520gaming_11%2Findex.html%23catHalloween`}
+            href={`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(url)}`}
             target="_blank"
             rel="noreferrer"
             className="share-btn fb"
           >
             <img src="/images/social-share/fb.png" alt="fb" className="share-icon fb" />
-            Facebook
+            {translate("facebook", lang)}
           </a>
 
           <a
-            href={`https://api.whatsapp.com/send/?text=8JJ+-+Free+Online+Games+file%3A%2F%2F%2FUsers%2Fbavagowripanchadcharasivam%2FDownloads%2F8JJ%2520gaming_11%2Findex.html%23catHalloween&type=custom_url&app_absent=0`}
+            href={`https://api.whatsapp.com/send/?text=${text}%20${encodeURIComponent(url)}&type=custom_url&app_absent=0`}
             target="_blank"
             rel="noreferrer"
             className="share-btn wa"
           >
             <img src="/images/social-share/whatsapp.png" alt="whatsapp" className="share-icon whatsapp" />
-            WhatsApp
+            {translate("whatsapp", lang)}
           </a>
 
           <a
-            href={`https://www.instagram.com/?url=file%3A%2F%2F%2FUsers%2Fbavagowripanchadcharasivam%2FDownloads%2F8JJ%2520gaming_11%2Findex.html%23catHalloween`}
+            href={`https://www.instagram.com/?url=${encodeURIComponent(url)}`}
             target="_blank"
             rel="noreferrer"
             className="share-btn ig"
           >
             <img src="/images/social-share/insta.png" alt="insta" className="share-icon insta" />
-            Instagram
+            {translate("instagram", lang)}
           </a>
 
           <a
-            href={`https://t.me/share/url?url=file%3A%2F%2F%2FUsers%2Fbavagowripanchadcharasivam%2FDownloads%2F8JJ%2520gaming_11%2Findex.html%23catHalloween&text=8JJ%20-%20Free%20Online%20Games`}
+            href={`https://t.me/share/url?url=${encodeURIComponent(url)}&text=${text}`}
             target="_blank"
             rel="noreferrer"
             className="share-btn tg"
           >
             <img src="/images/social-share/telegram.png" alt="telegram" className="share-icon telegram" />
-            Telegram
+            {translate("telegram", lang)}
           </a>
         </div>
       </div>

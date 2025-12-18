@@ -13,7 +13,7 @@ const categories = [
   { id: "puzzle", label: "puzzles", image: "/images/category-grid/puzzle.png" },
   { id: "card", label: "card", image: "/images/category-grid/card.png" },
   { id: "brain", label: "brain", image: "/images/category-grid/brain.png" },
-  { id: "haloween", label: "halloween", image: "/images/category-grid/halloween.png" },
+  { id: "halloween", label: "halloween", image: "/images/category-grid/halloween.png" },
   { id: "horror", label: "horror", image: "/images/category-grid/zombie.png" },
   { id: "kids", label: "kids", image: "/images/category-grid/kids.png" },
   { id: "basketball", label: "basketball", image: "/images/category-grid/basketball.png" },

@@ -9,11 +9,12 @@
   overflow: hidden;
   display: flex;
   align-items: flex-end;
-  transition: transform 0.25s ease, box-shadow 0.25s ease;
+/* REMOVE transform transition */
+  transition: box-shadow 0.25s ease;
 }
 
 .category-card:hover {
-  transform: translateY(-6px);
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.45);
 }
 
 /* Base overlay */
@@ -42,7 +43,13 @@
   padding: 16px;
   pointer-events: none;
 }
+.category-card {
+  box-shadow: 0 6px 14px rgba(0,0,0,0.25);
+}
 
+.category-card:hover {
+  box-shadow: 0 14px 36px rgba(0,0,0,0.45);
+}
 .overlay-shooting .category-overlay,
 .overlay-action .category-overlay {
   background: linear-gradient(
@@ -62,19 +69,102 @@
   );
 }
 
-.overlay-puzzle .category-overlay {
+.overlay-puzzle .category-overlay,
+.overlay-brain .category-overlay,
+.overlay-adventure .category-overlay{
   background: linear-gradient(
     to top,
-    rgba(20, 140, 80, 0.9),
-    rgba(20, 140, 80, 0.35),
+    rgba(0, 150, 120, 0.9),
+    rgba(0, 150, 120, 0.45),
     transparent
   );
 }
-.overlay-horror .category-overlay {
+
+.overlay-horror .category-overlay,
+.overlay-halloween .category-overlay {
   background: linear-gradient(
     to top,
-    rgba(20, 0, 40, 0.95),
-    rgba(80, 0, 120, 0.45),
+    rgba(30, 0, 50, 0.95),
+    rgba(90, 0, 120, 0.5),
+    transparent
+  );
+}
+
+.overlay-christmas .category-overlay {
+  background: linear-gradient(
+    to top,
+    rgba(0, 120, 60, 0.95),
+    rgba(0, 180, 90, 0.45),
+    transparent
+  );
+}
+
+.overlay-card .category-overlay {
+  background: linear-gradient(
+    to top,
+    rgba(30, 30, 30, 0.95),
+    rgba(80, 80, 80, 0.5),
+    transparent
+  );
+}
+
+.overlay-makeup .category-overlay,
+.overlay-kids .category-overlay {
+  background: linear-gradient(
+    to top,
+    rgba(255, 80, 160, 0.85),
+    rgba(255, 140, 200, 0.45),
+    transparent
+  );
+}
+
+.overlay-football .category-overlay,
+.overlay-basketball .category-overlay,
+.overlay-sports .category-overlay {
+  background: linear-gradient(
+    to top,
+    rgba(20, 100, 40, 0.95),
+    rgba(50, 180, 90, 0.45),
+    transparent
+  );
+}
+
+.overlay-skill .category-overlay,
+.overlay-educational .category-overlay,
+.overlay-platformer .category-overlay {
+  background: linear-gradient(
+    to top,
+    rgba(120, 60, 200, 0.9),
+    rgba(160, 100, 255, 0.45),
+    transparent
+  );
+}
+
+.overlay-arcade .category-overlay,
+.overlay-fun .category-overlay {
+  background: linear-gradient(
+    to top,
+    rgba(255, 140, 0, 0.9),
+    rgba(255, 190, 90, 0.45),
+    transparent
+  );
+}
+
+.overlay-boys .category-overlay {
+  background: linear-gradient(
+    to top,
+    rgba(0, 80, 160, 0.95),
+    rgba(0, 140, 220, 0.45),
+    transparent
+  );
+}
+
+.overlay-all .category-overlay,
+.overlay-all-category .category-overlay {
+  background: linear-gradient(
+    to top,
+    rgba(20, 20, 20, 0.95),
+    rgba(80, 80, 80, 0.5),
     transparent
   );
 }

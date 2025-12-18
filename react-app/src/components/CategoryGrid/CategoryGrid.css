@@ -5,3 +5,11 @@
   margin-bottom: 40px;
   margin-top: 40px;
 }
+
+
+@media (max-width: 786px) {
+  .category-grid {
+    margin-top: 30px;
+    grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+  }
+}

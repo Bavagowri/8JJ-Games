@@ -41,19 +41,14 @@ export default function PopularSection({ id, lang, translate }) {
     };
   }, []);
 
+  // Hide section while loading
   if (loading) {
-    return (
-      <section className="popular-section game-section" id={id}>
-        <div className="content-anim">
-          <h2 className="section-title">
-            💥 {translate("popularGames", lang)}
-          </h2>
-          <div className="games-grid">
-            <p>Loading popular games...</p>
-          </div>
-        </div>
-      </section>
-    );
+    return null;
+  }
+
+  // Hide section if no popular games
+  if (!popularGames || popularGames.length === 0) {
+    return null;
   }
 
   return (
@@ -63,27 +58,21 @@ export default function PopularSection({ id, lang, translate }) {
           💥 {translate("popularGames", lang)}
         </h2>
 
-        {popularGames && popularGames.length > 0 ? (
-          <div className="games-grid">
-            {popularGames.map((game, index) => (
-              <div key={game.id} className="game-card-wrapper">
-                {/* Click count badge */}
-                <div className="click-count">
-                  {game.clicks} plays
-                </div>
-
-                <GameCard
-                  game={game}
-                  index={index}
-                />
+        <div className="games-grid">
+          {popularGames.map((game, index) => (
+            <div key={game.id} className="game-card-wrapper">
+              {/* Click count badge */}
+              <div className="click-count">
+                {game.clicks} {translate("playsCount", lang)}
               </div>
-            ))}
-          </div>
-        ) : (
-          <div className="empty-message">
-            <p>No popular games yet. Play games to see them here!</p>
-          </div>
-        )}
+
+              <GameCard
+                game={game}
+                index={index}
+              />
+            </div>
+          ))}
+        </div>
       </div>
     </section>
   );

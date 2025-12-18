@@ -199,7 +199,7 @@
 
 .trending-section:hover {
   transform: translateY(-4px);
-  background: linear-gradient(45deg, #161616 13%, #061c58 66%, rgba(111, 38, 41, 0));
+  background: linear-gradient(45deg, #161616 13%, #0e3949 66%, rgba(111, 38, 41, 0));
   animation: gameGlow 1.5s ease-in-out forwards;
 }
 

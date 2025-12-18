@@ -203,7 +203,7 @@
 }
 
 .game-card:hover .play-button {
-  background: linear-gradient(90deg, #042d44 0%, #3753c5 100%);
+  background: linear-gradient(58deg, #0d3648 13%, #3753c5 100%);
 }
 
 .game-card:hover {
@@ -223,7 +223,7 @@
 
 .game-section:hover {
   transition: box-shadow 0.6s ease, transform 0.6s ease;
-  background: linear-gradient(45deg, #161616 13%, #1e458f 66%, rgba(111, 38, 41, 0));
+  background: linear-gradient(45deg, #161616 13%, #0f3848 66%, rgba(111, 38, 41, 0));
 
   box-shadow: inset 0 0 25px rgba(0, 150, 255, 0.25), inset 0 0 50px rgba(0, 150, 255, 0.15), 0 4px 20px rgba(0, 0, 0, 0.4);
 }
@@ -232,9 +232,6 @@
 
 .game-section:hover {
   transform: translateY(-4px);
-  /* background: linear-gradient(180deg, #14243d 0%, #0b1624 100%); */
-
-
   animation: gameGlow 1s ease-in-out forwards;
 }
 
@@ -327,7 +324,7 @@
   border-radius: calc(100px + 1.5px);
   background-size: 100% 100%;
   background-position: 0px 0px;
-  background-image: conic-gradient(from var(--angle) at 50% 50%, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0) 33%, #4080f8 50%, rgba(0, 0, 0, 0) 66%, rgba(0, 0, 0, 0) 100%);
+  background-image: conic-gradient(from var(--angle) at 50% 50%, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0) 33%, #0f7196 50%, rgba(0, 0, 0, 0) 66%, rgba(0, 0, 0, 0) 100%);
   animation: rotate 2s infinite linear;
 }
 

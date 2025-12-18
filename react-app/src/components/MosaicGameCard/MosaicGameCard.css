@@ -62,9 +62,9 @@
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%) scale(0);
-  background: linear-gradient(90deg, #56a7d5 0%, #3753c5 100%);
+  background:linear-gradient(58deg, #0d3648 13%, #3753c5 100%);
   display: flex;
-  border-radius: 10px;
+  border-radius: 30px;
   font-weight: 700;
   padding: 10px 18px;
   align-items: center;

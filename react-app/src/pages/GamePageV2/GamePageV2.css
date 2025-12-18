@@ -114,6 +114,7 @@
   border: none;
   cursor: pointer;
   transition: transform 0.2s ease, box-shadow 0.2s ease;
+  
 }
 
 .big-play-btn:hover {

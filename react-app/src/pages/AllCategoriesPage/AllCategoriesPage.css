@@ -1,0 +1,19 @@
+.all-categories-page {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 2rem 1rem 4rem;
+  min-height: 80vh;
+}
+
+.page-title {
+  text-align: center;
+  font-size: 2.4rem;
+  color: #fff;
+  margin-bottom: 0.5rem;
+}
+
+.page-subtitle {
+  text-align: center;
+  color: #9aa4b2;
+  margin-bottom: 2.5rem;
+}

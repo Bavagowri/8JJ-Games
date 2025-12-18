@@ -17,6 +17,7 @@ import Snow from "./components/Snow/Snow";
 import ScrollToTop from "./components/ScrollToTop";
 import MosaicGamePage from "./pages/MosaicGamePage/MosaicGamePage";
 import CategoryGamesPage from "./pages/CategoryGamesPage/CategoryGamesPage";
+import AllCategoriesPage from "./pages/AllCategoriesPage/AllCategoriesPage";
 
 function AppContent() {
   const [search, setSearch] = useState("");

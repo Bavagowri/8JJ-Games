@@ -12,8 +12,9 @@
   left: 0;
   height: calc(100vh - 110px);
   padding-top: 20px;
-  border-right: 1px solid #5c6e8774;
   transition: width 0.25s ease, left 0.25s ease; /* Added left transition */
+  background: linear-gradient(60deg, rgba(6, 171, 226, 0.329), transparent);
+  border-right: 1px solid #5c6e8774;
   z-index: 10;
   overflow-y: auto;
   padding-bottom: 10px;

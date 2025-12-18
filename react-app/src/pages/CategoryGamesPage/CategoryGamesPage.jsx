@@ -1,5 +1,5 @@
 import { useParams } from "react-router-dom";
-import { useEffect, useState } from "react";
+import { useLayoutEffect, useEffect, useState } from "react";
 import MosaicGameCard from "../../components/MosaicGameCard/MosaicGameCard";
 import { translate } from "../../data/translations";
 import { useLanguage } from "../../context/LanguageContext";
@@ -10,9 +10,14 @@ export default function CategoryGamesPage() {
   const { lang } = useLanguage();
   const [games, setGames] = useState([]);
 
-  useEffect(() => {
-    window.scrollTo(0, 0);
+  // ✅ FORCE scroll to top AFTER render
+  useLayoutEffect(() => {
+    requestAnimationFrame(() => {
+      window.scrollTo(0, 0);
+    });
+  }, [categoryId]);
 
+  useEffect(() => {
     const cached = localStorage.getItem("games");
     if (!cached) return;
 
@@ -31,7 +36,6 @@ export default function CategoryGamesPage() {
         <h1 className="category-title">
          🎮 {translate(categoryId, lang)}
         </h1>
-
       <div className="mosaic-grid">
         {games.map(game => (
           <MosaicGameCard key={game.id} game={game} />

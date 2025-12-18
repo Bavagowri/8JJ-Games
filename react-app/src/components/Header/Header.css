@@ -514,3 +514,51 @@
 .ForcedHidden{
   visibility: hidden;
 }
+
+
+
+/* Opera-specific fixes - These styles ONLY apply in Opera browser */
+@supports (-o-object-fit: contain) {
+  .lang-switch {
+    overflow: hidden;
+  }
+  
+  .language-select {
+    /* Remove default appearance in Opera */
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    
+    /* Hide any white artifacts */
+    background-image: none !important;
+  }
+  
+  /* Remove Opera's default dropdown indicator */
+  .language-select::-webkit-calendar-picker-indicator {
+    display: none;
+  }
+  
+  .language-select::-ms-expand {
+    display: none;
+  }
+}
+
+/* Alternative Opera detection using CSS hack */
+@media all and (-webkit-min-device-pixel-ratio:0) and (min-resolution: .001dpcm) {
+  .language-select::-webkit-calendar-picker-indicator {
+    display: none;
+    opacity: 0;
+  }
+}
+
+/* Most reliable Opera-only selector using _:-o-prefocus */
+_:-o-prefocus, .language-select {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  background-image: none;
+}
+
+_:-o-prefocus, .lang-switch {
+  overflow: hidden;
+}

@@ -14,6 +14,7 @@
   transition: width 0.25s ease, left 0.25s ease; /* Added left transition */
   z-index: 10;
   overflow-y: auto;
+  padding-bottom: 10px;
 }
 
 /* Hidden state for desktop */
@@ -82,7 +83,7 @@
     width: 240px;
     transform: translateX(-100%);
     display: block;
-    top: 70px;
+    top: 65px;
     height: calc(100vh - 70px);
     transition: transform 0.3s ease;
   }

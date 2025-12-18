@@ -31,6 +31,13 @@ export default function Home({ search }) {
     load();
   }, []);
 
+  // Scroll to top when search term changes and has value
+  useEffect(() => {
+    if (search) {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+  }, [search]);
+
   if (loading) {
     const isMobile = window.innerWidth <= 750;
 
@@ -135,11 +142,31 @@ export default function Home({ search }) {
     <div className="home-wrapper">
 
       {search && (
-        <GameSection
-          id="searchResults"
-          title={translate("searchResults", lang)}
-          games={filteredGames}
-        />
+        filteredGames.length > 0 ? (
+          <GameSection
+            id="searchResults"
+            title={translate("searchResults", lang)}
+            games={filteredGames}
+          />
+        ) : (
+          <div style={{
+            textAlign: 'center',
+            padding: '60px 20px',
+            minHeight: '400px',
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center',
+            justifyContent: 'center'
+          }}>
+            <div style={{ fontSize: '80px', marginBottom: '20px' }}>🔍</div>
+            <h2 style={{ fontSize: '28px', marginBottom: '10px', color: '#fff' }}>
+              {translate("noGamesFound", lang)}
+            </h2>
+            <p style={{ fontSize: '16px', color: '#999', maxWidth: '400px' }}>
+              {translate("noGamesFoundMessage", lang).replace("{search}", search)}
+            </p>
+          </div>
+        )
       )}
 
 

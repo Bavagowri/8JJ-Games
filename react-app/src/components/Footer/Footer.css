@@ -229,7 +229,7 @@
   .badge {
     width: fit-content;
     justify-content: center;
-    font-size: 10px;
+    font-size: 9px;
     padding: 7px 9px;
 
   }
@@ -504,29 +504,29 @@
 }
 
 /* HEADER */
-.accordion-header {
+.FooterMobile .accordion-header {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 16px 18px;
-  font-size: 16px;
+  padding: 10px 20px;
+  font-size: 13px;
   font-weight: 600;
   cursor: pointer;
 }
 
 /* ARROW */
-.accordion-header .arrow {
-  font-size: 18px;
+.FooterMobile .accordion-header .arrow {
+  font-size: 10px;
   transition: transform 0.25s ease;
 }
 
 /* ROTATE ARROW WHEN OPEN */
-.accordion.open .arrow {
+.FooterMobile.accordion.open .arrow {
   transform: rotate(180deg);
 }
 
 /* BODY */
-.accordion-body {
+.FooterMobile .accordion-body {
   list-style: none;
   padding: 0 18px;
   margin: 0;

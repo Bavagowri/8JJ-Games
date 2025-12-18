@@ -229,3 +229,12 @@
 #trending .game-card {
   box-shadow: 15px 10px 20px rgb(9 40 101) !important;
 }
+
+
+
+@media (max-width: 768px) {
+    .trending-header {
+        
+        padding: 0px;
+    }
+}

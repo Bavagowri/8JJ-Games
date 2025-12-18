@@ -574,15 +574,15 @@
   }
 
   #featuredSection.game-section {
-    padding-left: 0px;
-    padding-right: 0px;
+    padding-left: 10px;
+    padding-right: 10px;
     border: none;
     box-shadow: none;
     margin-top: 20px;
   }
 
   .section-title {
-    padding-left: 10px;
+    padding-left: 0px;
   }
 
   .game-section {
@@ -613,7 +613,10 @@
     width: 100% !important;
   }
 
-
+.trending-section{
+  padding-left: 10px !important;
+  padding-right: 10px !important;
+}
 
 }
 

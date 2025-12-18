@@ -103,6 +103,10 @@
 }
 
 @media (max-width: 640px) {
+  .mosaic-page {
+    margin-left: 10px;
+    margin-right: 10px;
+}
   .mosaic-grid {
     grid-template-columns: repeat(2, 1fr);
     grid-auto-rows: 110px;

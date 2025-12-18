@@ -16,6 +16,7 @@ import GamePageV2 from "./pages/GamePageV2/GamePageV2";
 import Snow from "./components/Snow/Snow";
 import ScrollToTop from "./components/ScrollToTop";
 import MosaicGamePage from "./pages/MosaicGamePage/MosaicGamePage";
+import CategoryGamesPage from "./pages/CategoryGamesPage/CategoryGamesPage";
 
 export default function App() {
   const [search, setSearch] = useState("");
@@ -43,7 +44,7 @@ export default function App() {
             <Route path="/all-games" element={<AllGames />} />
             <Route path="/game/:id" element={<GamePageV2 />} />
             <Route path="/all-mosaic-games" element={<MosaicGamePage />} />
-
+            <Route path="/category/:categoryId" element={<CategoryGamesPage />} />
           </Routes>
 
           <Footer />

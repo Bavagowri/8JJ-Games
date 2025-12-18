@@ -1,6 +1,6 @@
 import CategoryCard from "../CategoryCard/CategoryCard";
 import "./CategoryGrid.css";
-
+import { useNavigate } from "react-router-dom";
 import { translate } from "../../data/translations";
 import { useLanguage } from "../../context/LanguageContext";
 
@@ -32,6 +32,7 @@ const categories = [
 
 export default function CategoryGrid() {
     const { lang } = useLanguage();
+    const navigate = useNavigate();
 
   return (
     <div className="category-grid">
@@ -40,7 +41,8 @@ export default function CategoryGrid() {
           key={cat.id}
           title={`${translate(cat.label, lang)} ${translate("games", lang)}`}
           image={cat.image}
-          onClick={() => console.log(cat.id)}
+          // onClick={() => console.log(cat.id)}
+          onClick={() => navigate(`/category/${cat.id}`)}
         />
       ))}
     </div>

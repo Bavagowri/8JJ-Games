@@ -6,7 +6,7 @@
   width: 80px;
   /* background: #0d1117; */
   backdrop-filter: blur(14px);
-  background: linear-gradient(to top, rgba(12, 45, 111, 0.95),  rgba(12, 69, 182, 0.189), transparent);
+  background: linear-gradient(to top, rgba(2, 19, 53, 0.95),  rgba(12, 69, 182, 0.189), transparent);
   position: fixed;
   top: 110px;
   left: 0;

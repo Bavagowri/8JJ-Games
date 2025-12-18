@@ -28,7 +28,7 @@ export default function Header({ onSearch }) {
         {/* Center categories bar */}
         <div className="header-categories">
           {/* Animated sidebar toggle button for desktop */}
-          <label className="sidebar-toggle-btn">
+          {/* <label className="sidebar-toggle-btn">
             <input
               type="checkbox"
               checked={sidebarHidden}
@@ -41,7 +41,23 @@ export default function Header({ onSearch }) {
               <path className="line--2" d="M0 50h80" />
               <path className="line--3" d="M0 60h62c18 0 18 20-17-5L31 45" />
             </svg>
-          </label>
+          </label> */}
+
+          <button
+            className="sidebar-toggle-btn"
+            onClick={toggleSidebar}
+            aria-label="Toggle sidebar"
+          >
+            <img
+              src={
+                sidebarHidden
+                  ? "/images/show.png"
+                  : "/images/show.png"
+              }
+              alt="Toggle sidebar"
+              className="sidebar-toggle-icon"
+            />
+          </button>
         </div>
 
         <div className="header-container">

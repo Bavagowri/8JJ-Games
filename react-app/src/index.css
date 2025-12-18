@@ -7,14 +7,10 @@
 body {
   margin: 0;
   font-family: 'Nunito', Arial, Helvetica, sans-serif;
-  background: linear-gradient(45deg, #161616 13%, #1c232d 66%,  rgb(29, 40, 47));
-  /* background: rgb(29, 40, 47); */
+  /* background: linear-gradient(45deg, #161616 13%, #1c232d 66%,  rgb(29, 40, 47)); */
+  background: rgb(4, 4, 4);
   color: #fff;
-  /* background-image: url("/images/bg10.png");
-  background-size: cover;
-  background-position: center top;
-  background-repeat: no-repeat;
-  background-attachment: fixed; */
+  
 }
 
 

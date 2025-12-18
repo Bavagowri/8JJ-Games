@@ -1,5 +1,5 @@
 import { useParams } from "react-router-dom";
-import { useEffect, useState, useRef, useCallback } from "react";
+import { useLayoutEffect, useEffect, useState } from "react";
 import MosaicGameCard from "../../components/MosaicGameCard/MosaicGameCard";
 import { translate } from "../../data/translations";
 import { useLanguage } from "../../context/LanguageContext";
@@ -16,10 +16,14 @@ export default function CategoryGamesPage() {
   
   const GAMES_PER_PAGE = 24;
 
+  // ✅ FORCE scroll to top AFTER render
+  useLayoutEffect(() => {
+    requestAnimationFrame(() => {
+      window.scrollTo(0, 0);
+    });
+  }, [categoryId]);
+
   useEffect(() => {
-    // Force scroll to top immediately and after render
-    window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
-    
     const cached = localStorage.getItem("games");
     if (!cached) return;
 
@@ -67,12 +71,10 @@ export default function CategoryGamesPage() {
   }, [hasMore, loadMoreGames]);
 
   return (
-    <div className="ScrollSnap">
-      <div className="category-page">
-      <h1 className="category-title">
-        🎮 {translate(categoryId, lang)}
-      </h1>
-
+    <div className="category-page">
+        <h1 className="category-title">
+         🎮 {translate(categoryId, lang)}
+        </h1>
       <div className="mosaic-grid">
         {displayedGames.map((game, index) => {
           if (displayedGames.length === index + 1) {
@@ -93,6 +95,6 @@ export default function CategoryGamesPage() {
         </div>
       )}
     </div>
-    </div>
+    
   );
 }

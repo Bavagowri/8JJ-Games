@@ -1,32 +1,80 @@
 .category-card {
-  background: linear-gradient(42deg, #00588ae3 0%, #00102e 100%);
-  border-radius: 18px;
-  padding: 16px;
+  position: relative;
+  height: 180px;
+  border-radius: 20px;
   border: none;
   cursor: pointer;
+  background-size: cover;
+  background-position: center;
+  overflow: hidden;
   display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 12px;
-  transition: transform 0.15s ease, box-shadow 0.15s ease;
-  color: black;
+  align-items: flex-end;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
 }
 
 .category-card:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 12px 30px rgba(0,0,0,0.15);
-  color: aliceblue;
+  transform: translateY(-6px);
 }
 
-.category-card img {
-  width: 64px;
-  height: 64px;
-  object-fit: contain;
-}
-
-.category-card span {
-  font-size: 13px;
-  font-weight: 700;
-  color: #fdfdff;
+/* Base overlay */
+.category-overlay {
+  width: 100%;
+  padding: 16px;
   text-align: center;
+}
+
+/* Title text */
+.category-card-title {
+  color: #ffffff;
+  font-size: 18px;
+  font-weight: bolder;
+  letter-spacing: 0.5px;
+  text-align: center;
+  display: block;
+}
+
+.category-overlay {
+  position: absolute;
+  inset: 0;               /* ⬅ fills entire card */
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  padding: 16px;
+  pointer-events: none;
+}
+
+.overlay-shooting .category-overlay,
+.overlay-action .category-overlay {
+  background: linear-gradient(
+    to top,
+    rgba(180, 0, 0, 0.85),
+    rgba(180, 0, 0, 0.4),
+    transparent
+  );
+}
+
+.overlay-driving .category-overlay {
+  background: linear-gradient(
+    to top,
+    rgba(0, 90, 200, 0.85),
+    rgba(0, 90, 200, 0.35),
+    transparent
+  );
+}
+
+.overlay-puzzle .category-overlay {
+  background: linear-gradient(
+    to top,
+    rgba(20, 140, 80, 0.9),
+    rgba(20, 140, 80, 0.35),
+    transparent
+  );
+}
+.overlay-horror .category-overlay {
+  background: linear-gradient(
+    to top,
+    rgba(20, 0, 40, 0.95),
+    rgba(80, 0, 120, 0.45),
+    transparent
+  );
 }

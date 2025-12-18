@@ -4,7 +4,7 @@
   top: 0;
   z-index: 20;
   backdrop-filter: blur(14px);
-  background: linear-gradient(to bottom, rgba(5, 21, 52, 0.95),  rgba(12, 69, 182, 0.189),transparent);
+  background: linear-gradient(to bottom, rgba(6, 171, 226, 0.329), transparent);
   border-bottom: 1px solid #5c6e8774;
   margin-right: 0px;
 }
@@ -399,102 +399,6 @@
 
 
 
-/* Sidebar Toggle Button ---- START */
-
-.sidebar-toggle-btn {
-  padding: 10px 0px;
-    display: block;
-    cursor: pointer;
-    position: relative;
-    width: 50px;
-    height: 120px;
-    background: rgba(255, 255, 255, 0.05);
-    border-radius: 8px;
-    transition: background 0.3s ease;
-}
-
-.sidebar-toggle-btn input {
-  display: none;
-}
-
-.sidebar-toggle-btn svg {
-  width: 100%;
-  height: 100%;
-}
-
-.sidebar-toggle-btn circle {
-  fill: rgba(255, 255, 255, 0.2);
-  opacity: 0;
-  transition: opacity 0.3s ease;
-}
-
-.sidebar-toggle-btn:hover {
-  background: rgba(255, 255, 255, 0.1);
-}
-
-.sidebar-toggle-btn:hover circle {
-  opacity: 1;
-}
-
-.sidebar-toggle-btn path {
-  fill: none;
-  stroke: #ffffff;
-  stroke-width: 3;
-  stroke-linecap: round;
-  stroke-linejoin: round;
-  stroke-dasharray: var(--length) var(--total-length);
-  stroke-dashoffset: var(--offset);
-  transition: all 0.8s cubic-bezier(0.645, 0.045, 0.355, 1);
-}
-
-/* Default state (unchecked) - ARROW pointing left ◀ */
-.sidebar-toggle-btn .line--1 {
-  --total-length: 126.38166809082031;
-  --length: 8.602325267;
-  --offset: -109.1770175568;
-}
-
-.sidebar-toggle-btn .line--2 {
-  --total-length: 80;
-  --length: 24;
-  --offset: -38;
-}
-
-.sidebar-toggle-btn .line--3 {
-  --total-length: 126.38166809082031;
-  --length: 8.602325267;
-  --offset: -109.1770175568;
-}
-
-/* Checked state (sidebar hidden) - HAMBURGER MENU ≡ */
-.sidebar-toggle-btn input:checked + svg .line--1 {
-  --length: 24;
-  --offset: -38;
-}
-
-.sidebar-toggle-btn input:checked + svg .line--2 {
-  --length: 24;
-  --offset: -38;
-}
-
-.sidebar-toggle-btn input:checked + svg .line--3 {
-  --length: 24;
-  --offset: -38;
-}
-
-/* Hide on mobile */
-@media (max-width: 900px) {
-  .sidebar-toggle-btn {
-    display: none;
-  }
-}
-
-/* Sidebar Toggle Button ---- END */
-
-
-
-
-
 
 
 .MarginLeftRight{
@@ -563,3 +467,120 @@ _:-o-prefocus, .language-select {
 _:-o-prefocus, .lang-switch {
   overflow: hidden;
 }
+
+/* Sidebar Toggle Button ---- START */
+
+.sidebar-toggle-btn {
+  padding: 10px 0px;
+    display: block;
+    cursor: pointer;
+    position: relative;
+    width: 50px;
+    height: 120px;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 8px;
+    transition: background 0.3s ease;
+}
+
+.sidebar-toggle-btn input {
+  display: none;
+}
+
+.sidebar-toggle-btn svg {
+  width: 100%;
+  height: 100%;
+}
+
+.sidebar-toggle-btn circle {
+  fill: rgba(255, 255, 255, 0.2);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+/* .sidebar-toggle-btn:hover {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.sidebar-toggle-btn:hover circle {
+  opacity: 1;
+} */
+
+.sidebar-toggle-btn path {
+  fill: none;
+  stroke: #ffffff;
+  stroke-width: 3;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-dasharray: var(--length) var(--total-length);
+  stroke-dashoffset: var(--offset);
+  transition: all 0.8s cubic-bezier(0.645, 0.045, 0.355, 1);
+}
+
+/* Default state (unchecked) - ARROW pointing left ◀ */
+.sidebar-toggle-btn .line--1 {
+  --total-length: 126.38166809082031;
+  --length: 8.602325267;
+  --offset: -109.1770175568;
+}
+
+.sidebar-toggle-btn .line--2 {
+  --total-length: 80;
+  --length: 24;
+  --offset: -38;
+}
+
+.sidebar-toggle-btn .line--3 {
+  --total-length: 126.38166809082031;
+  --length: 8.602325267;
+  --offset: -109.1770175568;
+}
+
+/* Checked state (sidebar hidden) - HAMBURGER MENU ≡ */
+.sidebar-toggle-btn input:checked + svg .line--1 {
+  --length: 24;
+  --offset: -38;
+}
+
+.sidebar-toggle-btn input:checked + svg .line--2 {
+  --length: 24;
+  --offset: -38;
+}
+
+.sidebar-toggle-btn input:checked + svg .line--3 {
+  --length: 24;
+  --offset: -38;
+}
+
+/* Hide on mobile */
+@media (max-width: 900px) {
+  .sidebar-toggle-btn {
+    display: none;
+  }
+}
+
+/* Sidebar Toggle Button ---- END */
+
+
+
+.sidebar-toggle-btn {
+  background: none;
+  border: none;
+  padding: 8px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-left: 20px;
+}
+
+.sidebar-toggle-icon {
+  width: 32px;
+  height: 32px;
+  transition: opacity 0.2s ease, transform 0.2s ease;
+}
+
+.sidebar-toggle-btn:hover .sidebar-toggle-icon {
+  opacity: 0.85;
+  background: rgba(5, 144, 175, 0.257);
+}
+

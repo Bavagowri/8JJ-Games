@@ -45,6 +45,7 @@ function AppContent() {
           <Route path="/game/:id" element={<GamePageV2 />} />
           <Route path="/all-mosaic-games" element={<MosaicGamePage />} />
           <Route path="/category/:categoryId" element={<CategoryGamesPage />} />
+          <Route path="/categories" element={<AllCategoriesPage />} />
         </Routes>
 
         <Footer />

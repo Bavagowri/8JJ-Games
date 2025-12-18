@@ -191,30 +191,7 @@ export default function Home({ search }) {
         slider={true}
       />
 
-      {/*  
-      <CategoriesSection 
-        title="📂 Browse Categories"
-        id="categoriesSection"
-      /> 
-      */}
-
-
-
-
-
-
-      {/* ⭐ TOP 100 SECTION */}
-      {/* <Top100Section 
-        id="top100"
-        games={categories.top100}
-      /> 
-     */}
-
-      <GameSection
-        id="driving"
-        title={`🏎️ ${translate("driving", lang)}`}
-        games={categories.driving}
-      />
+      
 
 
       <GameSection
@@ -222,7 +199,14 @@ export default function Home({ search }) {
         title={`🎅🏻 ${translate("christmas", lang)} ${translate("games", lang)}`}
         games={categories.christmas}
       />
+      
+      <GameSection
+        id="driving"
+        title={`🏎️ ${translate("driving", lang)}`}
+        games={categories.driving}
+      />
 
+      
       {/* 💥 POPULAR SECTION - 12 games from localStorage */}
       <PopularSection
         id="popularSection"

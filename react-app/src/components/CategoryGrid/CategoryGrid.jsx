@@ -38,7 +38,7 @@ export default function CategoryGrid() {
       if (cat.isAll) {
         navigate("/categories"); // 👈 ALL CATEGORY
       } else {
-        navigate(`/category/${cat.id}`); // 👈 specific category
+        navigate(`/categories/${cat.id}`); // 👈 specific category
       }
     };
 

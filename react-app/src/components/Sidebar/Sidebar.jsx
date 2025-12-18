@@ -6,10 +6,12 @@ import "./Sidebar.css";
 
 const sidebarItems = [
   { id: "top", icon: "🏠", label: "home", isRoute: false },
+  { id: "trending", icon: "🔥", label: "trendingGames", isRoute: false },
   { id: "featuredSection", icon: "⭐", label: "featuredGames", isRoute: false },
+  { id: "makeup", icon:"💋💄", label:"girlsGames", isRoute: false},
+  { id: "christmas", icon: "🎅🏻", label: "christmas", isRoute: false },
   { id: "driving", icon: "🏎️", label: "driving", isRoute: false },
   { id: "trending", icon: "🔥", label: "trendingGames", isRoute: false },
-  { id: "christmas", icon: "🎅🏻", label: "christmas", isRoute: false },
   { id: "action", icon: "🥊", label: "action", isRoute: false },
   { id: "top-picks", icon: "🌶️", label: "topPicks", isRoute: false },
   { id: "platformer", icon:"🏃", label: "platformer", isRoute: false },

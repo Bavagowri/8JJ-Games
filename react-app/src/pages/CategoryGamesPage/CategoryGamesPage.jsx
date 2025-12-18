@@ -1,5 +1,5 @@
 import { useParams } from "react-router-dom";
-import { useLayoutEffect, useEffect, useState } from "react";
+import { useLayoutEffect, useEffect, useState, useRef, useCallback  } from "react";
 import MosaicGameCard from "../../components/MosaicGameCard/MosaicGameCard";
 import { translate } from "../../data/translations";
 import { useLanguage } from "../../context/LanguageContext";
@@ -71,7 +71,8 @@ export default function CategoryGamesPage() {
   }, [hasMore, loadMoreGames]);
 
   return (
-    <div className="category-page">
+    <div className="ScrollSnap">
+      <div className="category-page">
         <h1 className="category-title">
          🎮 {translate(categoryId, lang)}
         </h1>
@@ -94,6 +95,7 @@ export default function CategoryGamesPage() {
           <div className="loader-spinner"></div>
         </div>
       )}
+    </div>
     </div>
     
   );

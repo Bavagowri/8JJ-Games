@@ -130,6 +130,7 @@ export default function Home({ search }) {
     endlessrunner: games.filter(g => g.tagList?.includes("endless runner")),
     platformers: games.filter(g => g.tagList?.includes("platformer")),
     card: games.filter(g => g.tagList?.includes("card")),
+    makeup: games.filter(g => g.tagList?.includes("princess")|| g.tagList?.includes("makeover")),
     all: games,
   };
 
@@ -192,12 +193,16 @@ export default function Home({ search }) {
       />
 
       
-
-
       <GameSection
         id="christmas"
         title={`🎅🏻 ${translate("christmas", lang)} ${translate("games", lang)}`}
         games={categories.christmas}
+      />
+
+      <GameSection
+        id="makeup"
+        title={`💄 ${translate("girlsGames", lang)}`}
+        games={categories.makeup}
       />
       
       <GameSection
@@ -206,7 +211,7 @@ export default function Home({ search }) {
         games={categories.driving}
       />
 
-      
+
       {/* 💥 POPULAR SECTION - 12 games from localStorage */}
       <PopularSection
         id="popularSection"

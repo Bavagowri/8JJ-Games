@@ -227,7 +227,7 @@
 
 
 #trending .game-card {
-  box-shadow: 15px 10px 20px rgb(9 40 101) !important;
+  box-shadow: 15px 10px 20px rgb(37 55 68) !important;
 }
 
 
@@ -236,5 +236,8 @@
     .trending-header {
         
         padding: 0px;
+    }
+    .trending-nav{
+      display: none;
     }
 }

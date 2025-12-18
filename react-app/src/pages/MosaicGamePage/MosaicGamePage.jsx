@@ -49,7 +49,7 @@ export default function MosaicGamesPage() {
   const visibleGames = filteredGames.slice(0, visibleCount);
 
   return (
-    <div className="mosaic-page">
+    <div className="mosaic-page home-wrapper">
       <ScrollToTop />
       {/* Heading */}
       <h1 className="page-title">🎮 {translate("allGames", lang)}</h1>
@@ -59,7 +59,7 @@ export default function MosaicGamesPage() {
         <input
           type="text"
           className="mosaic-search-input"
-          placeholder={`${translate("search", lang)} games...`}
+          placeholder={`${translate("searchGames", lang)}`}
           value={searchTerm}
           onChange={(e) => setSearchTerm(e.target.value)}
         />
@@ -77,19 +77,25 @@ export default function MosaicGamesPage() {
       {/* No results */}
       {filteredGames.length === 0 && (
         <div className="no-results">
-          No games found for “{searchTerm}”
+          {translate("noGamesFound", lang)} "{searchTerm}"
         </div>
       )}
 
-      {/* View more */}
+     {/* View more */}
       {visibleCount < filteredGames.length && (
-        <div className="view-more-wrapper">
-          <button
-            className="view-more-btn"
-            onClick={() => setVisibleCount(filteredGames.length)}
+        <div className="container">
+          <a
+            href="#"
+            className="btn"
+            onClick={(e) => {
+              e.preventDefault();
+              setVisibleCount(filteredGames.length);
+            }}
           >
-            View More Games
-          </button>
+            <span className="btnInner">
+              {translate("viewMoreGames", lang)}
+            </span>
+          </a>
         </div>
       )}
 

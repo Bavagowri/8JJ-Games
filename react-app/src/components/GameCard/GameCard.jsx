@@ -2,9 +2,12 @@ import "./GameCard.css";
 import { useNavigate } from "react-router-dom";
 import { pushRecent } from "../../utils/localStorage";
 import { trackGameClick } from "../../utils/popularGamesUtils";
+import { useLanguage } from "../../context/LanguageContext";
+import { translate } from "../../data/translations";
 
 export default function GameCard({ game, index }) {
   const navigate = useNavigate();
+  const { lang } = useLanguage();
 
   const openGame = () => {
     // Check if game has valid data
@@ -44,14 +47,14 @@ export default function GameCard({ game, index }) {
 
       {/* Play Now Button */}
       <div className="play-button">
-        Play Now
+        {translate("playNow", lang)}
       </div>
 
       {/* Hot Badge - only show if game.isHot is true */}
       {game.isHot && (
         <div className="hot-badge">
           <img src="/images/game.png" className="game-image-hot" alt="" />
-          Hot
+          {translate("hot", lang)}
         </div>
       )}
 

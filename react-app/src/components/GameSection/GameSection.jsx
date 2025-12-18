@@ -1,8 +1,11 @@
 import { useRef, useEffect, useState } from "react";
 import GameCard from "../GameCard/GameCard";
+import { useLanguage } from "../../context/LanguageContext";
+import { translate } from "../../data/translations";
 import "./GameSection.css";
 
 export default function GameSection({ title, games, id, slider = false }) {
+  const { lang } = useLanguage();
   const trackRef = useRef(null);
   const firstSetWidth = useRef(0);
   const [showAll, setShowAll] = useState(false);
@@ -91,7 +94,7 @@ export default function GameSection({ title, games, id, slider = false }) {
               }}
             >
               <span className="btnInner">
-                {showAll ? "View Less" : "View More"}
+                {showAll ? translate("viewLess", lang) : translate("viewMore", lang)}
               </span>
             </a>
           </div>

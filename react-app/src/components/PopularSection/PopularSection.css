@@ -16,7 +16,8 @@
 .click-count {
   position: absolute;
   top: -15px;
-  background: linear-gradient(135deg, #0c3a5d 0%, #44c2ff 100%);
+  background: linear-gradient(90deg, #042d44 0%, #3753c5 100%);
+  /* background: linear-gradient(135deg, #0c3a5d 0%, #44c2ff 100%); */
   color: white;
   padding: 6px 12px;
   border-radius: 20px;
@@ -24,7 +25,7 @@
   font-weight: 700;
   text-align: center;
   box-shadow: 0 4px 12px rgb(0 74 146 / 40%);
-  z-index: 10;
+  z-index: 11;
   backdrop-filter: blur(10px);
 }
 
@@ -37,4 +38,14 @@
 
 .game-card-wrapper {
   position: relative;
+}
+
+
+@media (max-width: 768px) {
+ #popularSection .play-button{
+  display: none;
+ }
+ #popularSection .game-card{
+  margin-bottom: 10px !important;
+ }
 }

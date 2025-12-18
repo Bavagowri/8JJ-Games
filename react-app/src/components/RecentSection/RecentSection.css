@@ -75,7 +75,7 @@
     line-height: 100%;
     cursor: pointer;
     white-space: normal;
-    box-shadow: inset 0 0 40px rgba(255, 255, 255, 0.03), inset 0 0 80px rgba(0, 150, 255, 0.12), 0 0 50px rgba(0, 0, 0, 0.7);
+   
     border-radius: 8px;
     display: flex;
     align-items: center;
@@ -88,7 +88,7 @@
 
 #recentSection .recent-label:hover {
     transition: box-shadow 0.6s ease, transform 0.6s ease;
-    box-shadow: inset 0 0 25px rgba(0, 150, 255, 0.25), inset 0 0 50px rgba(0, 150, 255, 0.15), 0 4px 20px rgba(0, 0, 0, 0.4);
+    box-shadow: inset 0 0 5px rgba(255, 255, 255, 0.03), inset 0 0 5px rgb(0 150 255 / 11%), 0 0 5px rgba(0, 0, 0, 0.7);
 }
 
 #recentSection .recent-label-arrow {
@@ -254,6 +254,10 @@
     #recentSection .recent-label {
         font-size: 12px;
         width: 90px;
+            box-shadow: inset 0 0 5px rgba(255, 255, 255, 0.03), inset 0 0 5px rgba(0, 150, 255, 0.12), 0 0 10px rgb(0 0 0 / 22%);
+    }
+    #recentSection{
+        margin-bottom: 0px;
     }
 
     #recentSection .recent-label-item {

@@ -4,10 +4,13 @@ import "./GamePageV2.css";
 import { fetchH5Games } from "../../api/fetchH5Games";
 import { selfHostedGames } from "../../data/selfHostedGames";
 import ScrollToTop from "../../components/ScrollToTop";
+import { useLanguage } from "../../context/LanguageContext";
+import { translate } from "../../data/translations";
 
 export default function GamePageV2() {
   const { id } = useParams();
   const navigate = useNavigate();
+  const { lang } = useLanguage();
 
   const [games, setGames] = useState([]);
   const [game, setGame] = useState(null);
@@ -74,7 +77,7 @@ export default function GamePageV2() {
         <div className="skeleton skeleton-game-frame">
           <div className="skeleton-preloader">
             <div className="spinner"></div>
-            <div className="loading-text">Loading...</div>
+            <div className="loading-text">{translate("loading", lang)}</div>
           </div>
         </div>
 
@@ -137,7 +140,7 @@ export default function GamePageV2() {
       {/* 🎮 CENTER */}
       <div className="center-column">
         <h2 className="play-title">
-          Click Play to Start {game.title}
+          {translate("clickPlayToStart", lang)} {game.title}
         </h2>
 
         <div className="game-frame-container" key={game.id}>
@@ -155,7 +158,7 @@ export default function GamePageV2() {
               onClick={() => setPlaying(true)}
             >
               <div className="poster-overlay">
-                <button className="big-play-btn">▶ Play Now</button>
+                <button className="big-play-btn">▶ {translate("playNow", lang)}</button>
               </div>
             </div>
           )}
@@ -164,29 +167,29 @@ export default function GamePageV2() {
         {/* ℹ️ INFO */}
         <div className="game-info-bar">
           <div className="info-block">
-            <span className="label">CATEGORY</span>
+            <span className="label">{translate("category", lang)}</span>
             <span className="value">
               {game.category || game.tagList?.[0]}
             </span>
           </div>
           <div className="info-block">
-            <span className="label">PLAYS</span>
+            <span className="label">{translate("plays", lang)}</span>
             <span className="value">
               {Math.floor(Math.random() * 8000 + 2000)}
             </span>
           </div>
           <div className="info-block">
-            <span className="label">RATING</span>
+            <span className="label">{translate("rating", lang)}</span>
             <span className="value">4.5 ★</span>
           </div>
           <div className="info-block">
-            <span className="label">ADDED</span>
+            <span className="label">{translate("added", lang)}</span>
             <span className="value">2025</span>
           </div>
         </div>
 
         {/* 🔁 MORE GAMES */}
-        <h3 className="more-title section-title">More Games</h3>
+        <h3 className="more-title section-title">{translate("moreGames", lang)}</h3>
         <div className="more-games-grid">
           {moreGames.map(g => (
             <div
@@ -195,7 +198,7 @@ export default function GamePageV2() {
               onClick={() => changeGame(g.id)}
             >
               <img src={g.image} alt={g.title} className="game-image" />
-              <div className="play-button">Play Now</div>
+              <div className="play-button">{translate("playNow", lang)}</div>
               <div className="game-overlay">
                 <div className="game-title">{g.title}</div>
                 {g.category && (
@@ -216,7 +219,7 @@ export default function GamePageV2() {
             onClick={() => changeGame(g.id)}
           >
             <img src={g.image} alt={g.title} className="game-image" />
-            <div className="play-button">Play Now</div>
+            <div className="play-button">{translate("playNow", lang)}</div>
             <div className="game-overlay">
               <div className="game-title">{g.title}</div>
             </div>

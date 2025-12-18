@@ -9,29 +9,45 @@ export default function PopularSection({ id, lang, translate }) {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    // Load popular games from localStorage
-    const games = loadPopular();
-    // Keep only 12 games
-    const limitedGames = games.slice(0, 12);
-    setPopularGames(limitedGames);
-    setLoading(false);
+    // Decide card limit based on screen size
+    const getLimit = () => (window.innerWidth <= 768 ? 9 : 12);
 
-    // Refresh popular games when storage changes
-    const handleStorageChange = () => {
-      const updatedGames = loadPopular();
-      const limited = updatedGames.slice(0, 12);
-      setPopularGames(limited);
+    const loadGames = () => {
+      const games = loadPopular();
+      const limitedGames = games.slice(0, getLimit());
+      setPopularGames(limitedGames);
+      setLoading(false);
     };
 
+    // Initial load
+    loadGames();
+
+    // Refresh on resize (mobile ↔ desktop)
+    const handleResize = () => {
+      loadGames();
+    };
+
+    // Refresh when localStorage changes
+    const handleStorageChange = () => {
+      loadGames();
+    };
+
+    window.addEventListener("resize", handleResize);
     window.addEventListener("storage", handleStorageChange);
-    return () => window.removeEventListener("storage", handleStorageChange);
+
+    return () => {
+      window.removeEventListener("resize", handleResize);
+      window.removeEventListener("storage", handleStorageChange);
+    };
   }, []);
 
   if (loading) {
     return (
       <section className="popular-section game-section" id={id}>
         <div className="content-anim">
-          <h2 className="section-title">💥 {translate("popularGames", lang)}</h2>
+          <h2 className="section-title">
+            💥 {translate("popularGames", lang)}
+          </h2>
           <div className="games-grid">
             <p>Loading popular games...</p>
           </div>
@@ -43,22 +59,23 @@ export default function PopularSection({ id, lang, translate }) {
   return (
     <section className="popular-section game-section" id={id}>
       <div className="content-anim">
-        <h2 className="section-title">💥 {translate("popularGames", lang)}</h2>
-        
+        <h2 className="section-title">
+          💥 {translate("popularGames", lang)}
+        </h2>
+
         {popularGames && popularGames.length > 0 ? (
           <div className="games-grid">
             {popularGames.map((game, index) => (
               <div key={game.id} className="game-card-wrapper">
-
-                {/* Show click count badge */}
+                {/* Click count badge */}
                 <div className="click-count">
                   {game.clicks} plays
                 </div>
-                <GameCard 
-                  game={game} 
+
+                <GameCard
+                  game={game}
                   index={index}
                 />
-                
               </div>
             ))}
           </div>

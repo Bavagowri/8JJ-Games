@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
-import { LanguageProvider } from "./context/LanguageContext";
+import { LanguageProvider, useLanguage } from "./context/LanguageContext";
 
 import Header from "./components/Header/Header";
 import Sidebar from "./components/Sidebar/Sidebar";
@@ -18,38 +18,44 @@ import ScrollToTop from "./components/ScrollToTop";
 import MosaicGamePage from "./pages/MosaicGamePage/MosaicGamePage";
 import CategoryGamesPage from "./pages/CategoryGamesPage/CategoryGamesPage";
 
-export default function App() {
+function AppContent() {
   const [search, setSearch] = useState("");
+  const { lang } = useLanguage();
 
   useEffect(() => {
-  if ("scrollRestoration" in window.history) {
-    window.history.scrollRestoration = "manual";
-  }
-}, []);
-
+    if ("scrollRestoration" in window.history) {
+      window.history.scrollRestoration = "manual";
+    }
+  }, []);
 
   return (
+    <BrowserRouter>
+      <div className={`app-root lang-${lang}`}>
+        {/* <Snow /> */}
+        {/* <TopPromoBar /> */}
+        {/* Always visible */}
+        <Header onSearch={setSearch} />
+        <Sidebar />
+
+        {/* Page content changes here */}
+        <Routes>
+          <Route path="/" element={<Home search={search} />} />
+          <Route path="/all-games" element={<AllGames />} />
+          <Route path="/game/:id" element={<GamePageV2 />} />
+          <Route path="/all-mosaic-games" element={<MosaicGamePage />} />
+          <Route path="/category/:categoryId" element={<CategoryGamesPage />} />
+        </Routes>
+
+        <Footer />
+      </div>
+    </BrowserRouter>
+  );
+}
+
+export default function App() {
+  return (
     <LanguageProvider>
-      <BrowserRouter>
-        <div className="app-root">
-          {/* <Snow /> */}
-          {/* <TopPromoBar /> */}
-          {/* Always visible */}
-          <Header onSearch={setSearch} />
-          <Sidebar />
-
-          {/* Page content changes here */}
-          <Routes>
-            <Route path="/" element={<Home search={search} />} />
-            <Route path="/all-games" element={<AllGames />} />
-            <Route path="/game/:id" element={<GamePageV2 />} />
-            <Route path="/all-mosaic-games" element={<MosaicGamePage />} />
-            <Route path="/category/:categoryId" element={<CategoryGamesPage />} />
-          </Routes>
-
-          <Footer />
-        </div>
-      </BrowserRouter>
+      <AppContent />
     </LanguageProvider>
   );
 }

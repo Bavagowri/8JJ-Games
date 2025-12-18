@@ -1,22 +1,26 @@
+import { translate } from "../../data/translations";
+import { useLanguage } from "../../context/LanguageContext";
 import "./WhatWeOffer.css";
 
 export default function WhatWeOffer() {
+  const { lang } = useLanguage();
+
   const items = [
     {
       icon: "/images/whatweoffer/game-console.png",
-      text: "100+ games",
+      text: translate("hundredPlusGames", lang),
     },
     {
       icon: "/images/whatweoffer/no-download.png",
-      text: "No install needed",
+      text: translate("noInstallNeeded", lang),
     },
     {
       icon: "/images/whatweoffer/all-device.png",
-      text: "On any device",
+      text: translate("onAnyDevice", lang),
     },
     {
       icon: "/images/whatweoffer/free.png",
-      text: "All for free",
+      text: translate("allForFree", lang),
     },
   ];
 

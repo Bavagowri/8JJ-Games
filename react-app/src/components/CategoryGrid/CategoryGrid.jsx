@@ -9,7 +9,7 @@ const categories = [
   { id: "shooting", label: "shooting", image: "/images/category-grid/shooting.png" },
   { id: "driving", label: "driving", image: "/images/category-grid/driving.png" },
   { id: "christmas", label: "christmas", image: "/images/category-grid/christmas.png" },
-  { id: "princess", label: "girls", image: "/images/category-grid/makeup.png" },
+  { id: "princess", label: "princess", image: "/images/category-grid/makeup.png" },
   { id: "puzzle", label: "puzzles", image: "/images/category-grid/puzzle.png" },
   { id: "card", label: "card", image: "/images/category-grid/card.png" },
   { id: "brain", label: "brain", image: "/images/category-grid/brain.png" },

@@ -358,3 +358,8 @@
   border-top: none;
   overflow: hidden;
 }
+
+#top-picks .game-card:hover {
+  transform: translateY(0px) scale(1.01) !important;
+  box-shadow: none !important;
+}

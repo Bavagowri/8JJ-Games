@@ -8,52 +8,36 @@ export default function Header({ onSearch }) {
   const { lang, changeLanguage } = useLanguage();
   const [shareOpen, setShareOpen] = useState(false);
   const [sidebarHidden, setSidebarHidden] = useState(false);
+  const [searchText, setSearchText] = useState("");
 
   const handleSearch = (e) => {
-    onSearch?.(e.target.value);
+    const value = e.target.value;
+    setSearchText(value);
+    onSearch?.(value);
+  };
+
+  const clearSearch = () => {
+    setSearchText("");
+    onSearch?.("");
   };
 
   const toggleSidebar = () => {
-    setSidebarHidden(prev => !prev);
+    setSidebarHidden((prev) => !prev);
     document.dispatchEvent(new CustomEvent("toggleSidebar"));
   };
 
   return (
     <>
       <header className="header">
-        {/* Light and Dark Mode - Bubble Switch
-      <label className="bubble-label"><input class="bubble" type="checkbox" name="dummy" value="on"/></label>
-      - End */}
-
-        {/* Center categories bar */}
+        {/* Sidebar toggle button */}
         <div className="header-categories">
-          {/* Animated sidebar toggle button for desktop */}
-          {/* <label className="sidebar-toggle-btn">
-            <input
-              type="checkbox"
-              checked={sidebarHidden}
-              onChange={toggleSidebar}
-              aria-label="Toggle sidebar"
-            />
-            <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-              <circle cx="50" cy="50" r="30" />
-              <path className="line--1" d="M0 40h62c18 0 18-20-17 5L31 55" />
-              <path className="line--2" d="M0 50h80" />
-              <path className="line--3" d="M0 60h62c18 0 18 20-17-5L31 45" />
-            </svg>
-          </label> */}
-
           <button
             className="sidebar-toggle-btn"
             onClick={toggleSidebar}
             aria-label="Toggle sidebar"
           >
             <img
-              src={
-                sidebarHidden
-                  ? "/images/show.png"
-                  : "/images/show.png"
-              }
+              src={sidebarHidden ? "/images/show.png" : "/images/show.png"}
               alt="Toggle sidebar"
               className="sidebar-toggle-icon"
             />
@@ -61,7 +45,7 @@ export default function Header({ onSearch }) {
         </div>
 
         <div className="header-container">
-          {/* Left brand */}
+          {/* Brand */}
           <div className="brand">
             <button
               className="icon-btn menu-toggle"
@@ -85,20 +69,26 @@ export default function Header({ onSearch }) {
             </a>
           </div>
 
-
-
-          {/* Right actions */}
+          {/* Actions */}
           <div className="header-actions">
+            {/* Search */}
             <div className="search MarginLeftRight">
               <input
                 type="text"
                 placeholder={translate("searchHeader", lang)}
                 aria-label="Search games"
+                value={searchText}
                 onChange={handleSearch}
               />
-              <span className="search-icon">🔍</span>
+              <button
+                className="search-icon-btn"
+                onClick={searchText ? clearSearch : undefined}
+              >
+                {searchText ? "✖" : "🔍"}
+              </button>
             </div>
 
+            {/* Language switch */}
             <div className="lang-switch MarginLeftRight">
               <span className="language-label">🌐</span>
               <select
@@ -115,6 +105,7 @@ export default function Header({ onSearch }) {
               </select>
             </div>
 
+            {/* Share */}
             <button
               className="icon-btn"
               onClick={() => setShareOpen(true)}
@@ -126,27 +117,6 @@ export default function Header({ onSearch }) {
               />
             </button>
           </div>
-        </div>
-
-
-
-        {/* Center categories bar - HIdden */}
-        <div className="header-categories ForcedHidden">
-          {/* Animated sidebar toggle button for desktop */}
-          <label className="sidebar-toggle-btn">
-            <input
-              type="checkbox"
-              checked={sidebarHidden}
-              onChange={toggleSidebar}
-              aria-label="Toggle sidebar"
-            />
-            <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-              <circle cx="50" cy="50" r="30" />
-              <path className="line--1" d="M0 40h62c18 0 18-20-17 5L31 55" />
-              <path className="line--2" d="M0 50h80" />
-              <path className="line--3" d="M0 60h62c18 0 18 20-17-5L31 45" />
-            </svg>
-          </label>
         </div>
       </header>
 

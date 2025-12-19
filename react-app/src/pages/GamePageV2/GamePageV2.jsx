@@ -33,7 +33,6 @@ export default function GamePageV2() {
     platformer: ["endless_runner", "skill"],
   };
 
-  /* 🔹 Normalize categories */
   const getGameCategories = (game) => {
     const cats = [];
     if (game.category) cats.push(game.category);
@@ -41,6 +40,11 @@ export default function GamePageV2() {
     return [...new Set(cats.map(c => c.toLowerCase()))];
   };
 
+  const isIOS = /iPhone|iPad|iPod/i.test(navigator.userAgent);
+
+  /* =======================
+     LOAD GAME DATA
+  ======================== */
   useEffect(() => {
     let mounted = true;
 
@@ -48,7 +52,6 @@ export default function GamePageV2() {
       setPageLoading(true);
 
       let list = JSON.parse(localStorage.getItem("games"));
-
       if (!Array.isArray(list) || list.length === 0) {
         const h5 = await fetchH5Games();
         list = [...selfHostedGames, ...h5];
@@ -56,7 +59,6 @@ export default function GamePageV2() {
       }
 
       const selected = list.find(g => String(g.id) === String(id));
-
       if (!mounted) return;
 
       setGames(list);
@@ -73,6 +75,14 @@ export default function GamePageV2() {
      FULLSCREEN HANDLING
   ======================== */
   const enterFullscreen = () => {
+    if (!game) return;
+
+    if (isIOS) {
+      // iOS Safari cannot do native fullscreen: open game in new tab
+      window.open(game.embed, "_blank");
+      return;
+    }
+
     const el = frameRef.current;
     if (!el) return;
 
@@ -101,12 +111,8 @@ export default function GamePageV2() {
   }, []);
 
   const startGame = () => {
+    // Only start the game in-page
     setPlaying(true);
-
-    // Auto fullscreen on mobile
-    if (window.innerWidth < 768) {
-      setTimeout(enterFullscreen, 300);
-    }
   };
 
   const changeGame = (gameId) => {
@@ -121,14 +127,12 @@ export default function GamePageV2() {
     <div className="gamepage-layout">
       <div className="center-column">
         <div className="skeleton skeleton-title"></div>
-
         <div className="skeleton skeleton-game-frame">
           <div className="skeleton-preloader">
             <div className="spinner"></div>
             <div className="loading-text">{translate("loading", lang)}</div>
           </div>
         </div>
-
         <div className="skeleton-info-bar">
           {[1, 2, 3, 4].map(i => (
             <div key={i} className="skeleton-info-block">
@@ -137,16 +141,13 @@ export default function GamePageV2() {
             </div>
           ))}
         </div>
-
         <div className="skeleton skeleton-section-title"></div>
-
         <div className="more-games-grid">
           {[...Array(12)].map((_, i) => (
             <div key={i} className="skeleton skeleton-game-card"></div>
           ))}
         </div>
       </div>
-
       <div className="side-column">
         {[...Array(12)].map((_, i) => (
           <div key={i} className="skeleton skeleton-side-card"></div>
@@ -155,50 +156,31 @@ export default function GamePageV2() {
     </div>
   );
 
-  if (pageLoading || !game) {
-    return (
-      <>
-        <ScrollToTop />
-        <div className="page-loader">
-          <div className="spinner" />
-        </div>
-      </>
-    );
-  }
+  if (pageLoading || !game) return <SkeletonLoader />;
 
-  /* 🔹 RELATED GAME LOGIC */
+  /* =======================
+     RELATED GAMES LOGIC
+  ======================== */
   const currentCategories = getGameCategories(game);
 
-  const sameCategoryGames = games.filter(g =>
-    g.id !== game.id &&
-    currentCategories.includes(g.category?.toLowerCase())
+  const sameCategoryGames = games.filter(
+    g => g.id !== game.id && currentCategories.includes(g.category?.toLowerCase())
   );
 
-  const relatedCategories = currentCategories.flatMap(
-    c => RELATED_CATEGORIES[c] || []
-  );
+  const relatedCategories = currentCategories.flatMap(c => RELATED_CATEGORIES[c] || []);
 
-  const relatedGames = games.filter(g =>
-    g.id !== game.id &&
-    (
-      relatedCategories.includes(g.category?.toLowerCase()) ||
-      g.tagList?.some(t => relatedCategories.includes(t.toLowerCase()))
-    )
+  const relatedGames = games.filter(
+    g =>
+      g.id !== game.id &&
+      (relatedCategories.includes(g.category?.toLowerCase()) ||
+        g.tagList?.some(t => relatedCategories.includes(t.toLowerCase())))
   );
 
   const fallbackGames = games.filter(
-    g =>
-      g.id !== game.id &&
-      !sameCategoryGames.includes(g) &&
-      !relatedGames.includes(g)
+    g => g.id !== game.id && !sameCategoryGames.includes(g) && !relatedGames.includes(g)
   );
 
-  const prioritizedGames = [
-    ...sameCategoryGames,
-    ...relatedGames,
-    ...fallbackGames,
-  ];
-
+  const prioritizedGames = [...sameCategoryGames, ...relatedGames, ...fallbackGames];
   const moreGames = prioritizedGames.slice(0, 12);
   const sideGames = prioritizedGames.slice(12, 24);
 
@@ -234,7 +216,6 @@ export default function GamePageV2() {
                 allowFullScreen
                 sandbox="allow-same-origin allow-scripts allow-pointer-lock allow-forms allow-modals"
               />
-
               <button
                 className="fullscreen-btn"
                 onClick={isFullscreen ? exitFullscreen : enterFullscreen}
@@ -257,64 +238,48 @@ export default function GamePageV2() {
           )}
         </div>
 
-        {/* ℹ️ INFO */} 
-        <div className="game-info-bar"> 
-          <div className="info-block"> 
-            <span className="label">{translate("category", lang)}</span> 
-            <span className="value"> {game.category || game.tagList?.[0]} </span> 
-          </div> 
+        {/* ℹ️ INFO */}
+        <div className="game-info-bar">
           <div className="info-block">
-            <span className="label">{translate("plays", lang)}</span> 
-            <span className="value"> {Math.floor(Math.random() * 8000 + 2000)} </span> 
-          </div> 
-          <div className="info-block"> 
-            <span className="label">{translate("rating", lang)}</span> 
-            <span className="value">4.5 ★</span> </div> <div className="info-block"> 
-              <span className="label">{translate("added", lang)}</span> <span className="value">2025</span> 
-          </div> 
+            <span className="label">{translate("category", lang)}</span>
+            <span className="value">{game.category || game.tagList?.[0]}</span>
+          </div>
+          <div className="info-block">
+            <span className="label">{translate("plays", lang)}</span>
+            <span className="value">{Math.floor(Math.random() * 8000 + 2000)}</span>
+          </div>
+          <div className="info-block">
+            <span className="label">{translate("rating", lang)}</span>
+            <span className="value">4.5 ★</span>
+          </div>
+          <div className="info-block">
+            <span className="label">{translate("added", lang)}</span>
+            <span className="value">2025</span>
+          </div>
         </div>
 
         {/* 🔁 MORE GAMES */}
-        <h3 className="more-title section-title">
-          {translate("moreGames", lang)}
-        </h3>
-
+        <h3 className="more-title section-title">{translate("moreGames", lang)}</h3>
         <div className="more-games-grid">
           {moreGames.map(g => (
-            <div
-              key={g.id}
-              className="game-card"
-              onClick={() => changeGame(g.id)}
-            >
+            <div key={g.id} className="game-card" onClick={() => changeGame(g.id)}>
               <img src={g.image} alt={g.title} />
-              <div className="play-button">
-                {translate("playNow", lang)}
-              </div>
+              <div className="play-button">{translate("playNow", lang)}</div>
               <div className="game-overlay">
                 <div className="game-title">{g.title}</div>
-                {g.category && (
-                  <div className="game-category">
-                    {translate(g.category, lang)}
-                  </div>
-                )}
+                {g.category && <div className="game-category">{g.category}</div>}
               </div>
             </div>
           ))}
         </div>
       </div>
 
-      {/* 📌 SIDE */}
+      {/* 📌 SIDE COLUMN */}
       <div className="side-column">
         {sideGames.map(g => (
-          <div
-            key={g.id}
-            className="game-card game-card-side"
-            onClick={() => changeGame(g.id)}
-          >
+          <div key={g.id} className="game-card game-card-side" onClick={() => changeGame(g.id)}>
             <img src={g.image} alt={g.title} />
-            <div className="play-button">
-              {translate("playNow", lang)}
-            </div>
+            <div className="play-button">{translate("playNow", lang)}</div>
             <div className="game-overlay">
               <div className="game-title">{g.title}</div>
             </div>

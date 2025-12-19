@@ -46,9 +46,38 @@ export default function MosaicGamesPage() {
   }, [searchTerm]);
 
   /* Filtered games */
-  const filteredGames = games.filter((game) =>
-    game.title.toLowerCase().includes(searchTerm.toLowerCase())
-  );
+  // const filteredGames = games.filter((game) =>
+  //   game.title.toLowerCase().includes(searchTerm.toLowerCase())
+  // );
+
+   /* ================================
+     🔍 OPTIMIZED SEARCH LOGIC
+  ================================= */
+  const normalizedSearch = search.trim().toLowerCase();
+
+  const filteredGames = games.filter((g) => {
+    const title = g.title.toLowerCase();
+
+    // no search → show all
+    if (!normalizedSearch) return true;
+
+    // 1 letter → startsWith
+    if (normalizedSearch.length === 1) {
+      return title.startsWith(normalizedSearch);
+    }
+
+    // 2+ letters → startsWith
+    if (title.startsWith(normalizedSearch)) {
+      return true;
+    }
+
+    // OPTIONAL fallback (commented)
+    // return title.includes(normalizedSearch);
+
+    return false;
+  });
+
+
 
   /* Visible slice */
   const visibleGames = filteredGames.slice(0, visibleCount);

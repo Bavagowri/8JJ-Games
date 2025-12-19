@@ -5,6 +5,7 @@ import { translate } from "../../data/translations";
 import { useLanguage } from "../../context/LanguageContext";
 import WhatWeOffer from "../../components/WhatWeOffer/WhatWeOffer";
 import ScrollToTop from "../../components/ScrollToTop";
+import { useNavigate } from "react-router-dom";
 import "./MosaicGamePage.css";
 
 const INITIAL_COUNT = 40;
@@ -15,6 +16,8 @@ export default function MosaicGamesPage() {
   const [games, setGames] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
   const [visibleCount, setVisibleCount] = useState(INITIAL_COUNT);
+      const navigate = useNavigate();
+
 
   /* Load games once */
   useEffect(() => {
@@ -107,10 +110,19 @@ export default function MosaicGamesPage() {
       <div className="ScrollSnap">
         <div className="mosaic-page home-wrapper">
           <h2 className="Cat-title">{translate("MoreCategories", lang)}</h2>
-          <CategoryGrid />
+          <CategoryGrid limit={14} />
+
+          <div className="container">
+            <button
+              className="btn"
+              onClick={() => navigate(`/categories`)}
+            >
+              <span className="btnInner">
+                {translate("viewMore", lang)}
+              </span>
+            </button>
+          </div>
         </div>
-
-
       </div>
     </div>
   );

@@ -27,12 +27,16 @@ const categories = [
   { id: "arcade", label: "arcade", image: "/images/category-grid/arcade.png" },
   { id: "fun", label: "fun", image: "/images/category-grid/fun.png" },
 
-  { id: "all", label: "all-category", image: "/images/category-grid/all.png", isAll: true}
+  // { id: "all", label: "all-category", image: "/images/category-grid/all.png", isAll: true}
 ];
 
-export default function CategoryGrid() {
+export default function CategoryGrid({ limit }) {
     const { lang } = useLanguage();
     const navigate = useNavigate();
+
+    const visibleCategories = limit
+    ? categories.slice(0, limit)
+    : categories;
 
     const handleClick = (cat) => {
       if (cat.isAll) {
@@ -43,16 +47,28 @@ export default function CategoryGrid() {
     };
 
   return (
+    // <div className="category-grid">
+    //   {categories.map(cat => (
+    //     <CategoryCard
+    //       key={cat.id}
+    //       title={`${translate(cat.label, lang)}`}
+    //       image={cat.image}
+    //       categoryId={cat.id}
+    //       // onClick={() => console.log(cat.id)}
+    //       // onClick={() => navigate(`/category/${cat.id}`)}
+    //       onClick={() => handleClick(cat)}
+    //     />
+    //   ))}
+    // </div>
+
     <div className="category-grid">
-      {categories.map(cat => (
+      {visibleCategories.map(cat => (
         <CategoryCard
           key={cat.id}
           title={`${translate(cat.label, lang)}`}
           image={cat.image}
           categoryId={cat.id}
-          // onClick={() => console.log(cat.id)}
-          // onClick={() => navigate(`/category/${cat.id}`)}
-          onClick={() => handleClick(cat)}
+          onClick={() => navigate(`/categories/${cat.id}`)}
         />
       ))}
     </div>

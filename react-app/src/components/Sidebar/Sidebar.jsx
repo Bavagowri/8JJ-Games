@@ -11,7 +11,7 @@ const sidebarItems = [
   { id: "christmas", icon: "🎅🏻", label: "christmas", isRoute: false },
   { id: "makeup", icon:"💄", label:"girls", isRoute: false},
   { id: "driving", icon: "🏎️", label: "drivingGames", isRoute: false },
-  { id: "popularSection", icon: "🔥", label: "popularGames", isRoute: false },
+  { id: "popularSection", icon: "🚀", label: "popularGames", isRoute: false },
   { id: "action", icon: "🥊", label: "actionGames", isRoute: false },
   { id: "top-picks", icon: "🌶️", label: "topPicks", isRoute: false },
   { id: "platformer", icon:"🏃", label: "platformerGames", isRoute: false },

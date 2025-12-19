@@ -13,11 +13,13 @@ import FAQ from "../../components/FAQ/FAQ";
 import { fetchH5Games } from "../../api/fetchH5Games";
 import { selfHostedGames } from "../../data/selfHostedGames";
 import CategoryGrid from "../../components/CategoryGrid/CategoryGrid";
+import { useNavigate } from "react-router-dom";
 
 export default function Home({ search }) {
   const [games, setGames] = useState([]);
   const [loading, setLoading] = useState(true);
   const { lang } = useLanguage();
+  const navigate = useNavigate();
 
   useEffect(() => {
     const load = async () => {
@@ -254,7 +256,7 @@ export default function Home({ search }) {
 
       <GameSection
         id="card_games"
-        title={`🃏 ${translate("card", lang)} ${translate("games", lang)}`}
+        title={`🃏 ${translate("card", lang)}`}
         games={categories.card}
       />
 
@@ -274,8 +276,20 @@ export default function Home({ search }) {
 
       <div className="ScrollSnap">
         <div className="mosaic-page home-wrapper">
-          <h2 className="Cat-title">{translate("MoreCategories", lang)}</h2>
-          <CategoryGrid />
+          <h2 className="Cat-title">{translate("Categories", lang)}</h2>
+          <CategoryGrid limit={12} />
+
+          <div className="container">
+            <button
+              className="btn"
+              onClick={() => navigate(`/categories`)}
+            >
+              <span className="btnInner">
+                {translate("viewMore", lang)}
+              </span>
+            </button>
+          </div>
+
         </div>
       </div>
 

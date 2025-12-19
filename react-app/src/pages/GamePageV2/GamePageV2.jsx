@@ -41,9 +41,6 @@ export default function GamePageV2() {
     return [...new Set(cats.map(c => c.toLowerCase()))];
   };
 
-  /* =======================
-     LOAD GAME DATA
-  ======================== */
   useEffect(() => {
     let mounted = true;
 
@@ -260,17 +257,21 @@ export default function GamePageV2() {
           )}
         </div>
 
-        <div className="game-info-bar">
+        {/* ℹ️ INFO */} 
+        <div className="game-info-bar"> 
+          <div className="info-block"> 
+            <span className="label">{translate("category", lang)}</span> 
+            <span className="value"> {game.category || game.tagList?.[0]} </span> 
+          </div> 
           <div className="info-block">
-            <span className="label">{translate("category", lang)}</span>
-            <span className="value">
-              {translate(game.category || game.tagList?.[0], lang)}
-            </span>
-          </div>
-          <div className="info-block">
-            <span className="label">{translate("rating", lang)}</span>
-            <span className="value">4.5 ★</span>
-          </div>
+            <span className="label">{translate("plays", lang)}</span> 
+            <span className="value"> {Math.floor(Math.random() * 8000 + 2000)} </span> 
+          </div> 
+          <div className="info-block"> 
+            <span className="label">{translate("rating", lang)}</span> 
+            <span className="value">4.5 ★</span> </div> <div className="info-block"> 
+              <span className="label">{translate("added", lang)}</span> <span className="value">2025</span> 
+          </div> 
         </div>
 
         {/* 🔁 MORE GAMES */}

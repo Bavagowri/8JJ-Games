@@ -275,10 +275,10 @@ export default function Home({ search }) {
         categoryId="basketball"
       />
 
-      <div className="ScrollSnap">
+      <div className="ScrollSnap" id="categories">
         <div className="mosaic-page home-wrapper">
-          <h2 className="Cat-title">{translate("Categories", lang)}</h2>
-          <CategoryGrid limit={12} />
+          <h2 className="Cat-title">🗂 {translate("Categories", lang)}</h2>
+          <CategoryGrid limit={12}/>
 
           <div className="container">
             <button

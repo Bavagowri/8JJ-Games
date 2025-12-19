@@ -199,6 +199,14 @@ export const t = {
     kn: "ಹುಡುಗಿಯರ ಆಟಗಳು",
     bn: "মেয়েদের গেম",
   },
+  girls: {
+  en: "Girls",
+  hi: "लड़कियाँ",
+  ta: "பெண்கள்",
+  ml: "പെൺകുട്ടികൾ",
+  kn: "ಹುಡುಗಿಯರು",
+  bn: "মেয়েরা",
+},
   // ------------------------------
   // CATEGORY NAMES
   // ------------------------------
@@ -266,6 +274,14 @@ export const t = {
     kn: "ಕ್ರಿಸ್ಮಸ್",
     bn: "ক্রিসমাস",
   },
+  christmasGames: {
+    en: "Christmas Games",
+    hi: "क्रिसमस गेम्स",
+    ta: "கிறிஸ்துமஸ் விளையாட்டுகள்",
+    ml: "ക്രിസ്മസ് ഗെയിമുകൾ",
+    kn: "ಕ್ರಿಸ್ಮಸ್ ಆಟಗಳು",
+    bn: "ক্রিসমাস গেমস",
+  },
   puzzles: {
     en: "Puzzle Games",
     hi: "पहेली गेम्स",
@@ -274,6 +290,15 @@ export const t = {
     kn: "ಪಜಲ್ ಆಟಗಳು",
     bn: "পাজল গেমস",
   },
+  puzzlesGames: {
+  en: "Puzzles",
+  hi: "पहेलियाँ",
+  ta: "புதிர்கள்",
+  ml: "പസിലുകൾ",
+  kn: "ಪಜಲ್‌ಗಳು",
+  bn: "পাজল",
+},
+
   action: {
     en: "Action Games",
     hi: "एक्शन गेम्स",
@@ -282,6 +307,15 @@ export const t = {
     kn: "ಆಕ್ಷನ್ ಆಟಗಳು",
     bn: "অ্যাকশন গেমস",
   },
+  actionGames: {
+  en: "Action",
+  hi: "एक्शन",
+  ta: "ஆக்‌ஷன்",
+  ml: "ആക്ഷൻ",
+  kn: "ಆಕ್ಷನ್",
+  bn: "অ্যাকশন",
+},
+
   skill: {
     en: "Skill Games",
     hi: "कौशल गेम्स",
@@ -298,6 +332,15 @@ export const t = {
     kn: "ಕಾರ್ಡ್ ಆಟಗಳು",
     bn: "কার্ড গেমস",
   },
+  cardGames: {
+    en: "Card",
+    hi: "ताश",
+    ta: "அட்டை",
+    ml: "കാർഡ്",
+    kn: "ಕಾರ್ಡ್",
+    bn: "কার্ড",
+  },
+
   driving: {
     en: "Driving Games",
     hi: "ड्राइविंग गेम्स",
@@ -306,6 +349,15 @@ export const t = {
     kn: "ಡ್ರೈವಿಂಗ್ ಆಟಗಳು",
     bn: "ড্রাইভিং গেমস",
   },
+  drivingGames: {
+  en: "Driving",
+  hi: "ड्राइविंग",
+  ta: "ஓட்டுதல்",
+  ml: "ഡ്രൈവിംഗ്",
+  kn: "ಡ್ರೈವಿಂಗ್",
+  bn: "ড্রাইভিং",
+},
+
   racing: {
     en: "Racing Games",
     hi: "रेसिंग गेम्स",
@@ -322,6 +374,15 @@ export const t = {
     kn: "ಸಿಮ್ಯುಲೇಶನ್ ಆಟಗಳು",
     bn: "সিমুলেশন গেমস",
   },
+  simulationGames: {
+  en: "Simulation",
+  hi: "सिमुलेशन",
+  ta: "ஒத்திகை",
+  ml: "സിമുലേഷൻ",
+  kn: "ಸಿಮ್ಯುಲೇಶನ್",
+  bn: "সিমুলেশন",
+},
+
   endlessRunner: {
     en: "Endless Runner Games",
     hi: "एंडलेस रनर गेम्स",
@@ -330,6 +391,15 @@ export const t = {
     kn: "ಎಂಡ್ಲೆಸ್ ರನ್ನರ್ ಆಟಗಳು",
     bn: "এন্ডলেস রানার গেমস",
   },
+  endlessRunnerGames: {
+  en: "Endless Runner",
+  hi: "एंडलेस रनर",
+  ta: "முடிவற்ற ஓட்டம்",
+  ml: "എൻഡ്ലസ് റണ്ണർ",
+  kn: "ಎಂಡ್ಲೆಸ್ ರನ್ನರ್",
+  bn: "এন্ডলেস রানার",
+},
+
   platformer: {
     en: "Platformer Games",
     hi: "प्लेटफ़ॉर्मर गेम्स",
@@ -338,6 +408,15 @@ export const t = {
     kn: "ಪ್ಲಾಟ್‌ಫಾರ್ಮರ್ ಆಟಗಳು",
     bn: "প্ল্যাটফর্মার গেমস",
   },
+  platformerGames: {
+  en: "Platformer",
+  hi: "प्लेटफ़ॉर्मर",
+  ta: "மேடை விளையாட்டு",
+  ml: "പ്ലാറ്റ്ഫോം",
+  kn: "ಪ್ಲಾಟ್‌ഫಾರ್ಮರ್",
+  bn: "প্ল্যাটফর্মার",
+},
+
   all: {
     en: "All Games",
     hi: "सभी गेम्स",

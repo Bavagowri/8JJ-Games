@@ -3,14 +3,19 @@ const fetch = global.fetch; // Node 18+
 const path = require("path");
 
 const app = express();
+const ROOT_DIR = path.resolve(__dirname);
 
 /* ======================
-   🔐 CORS (optional)
+   🔐 CORS
 ====================== */
 app.use((req, res, next) => {
   res.setHeader("Access-Control-Allow-Origin", "*");
+  res.setHeader("Access-Control-Allow-Methods", "GET,POST,OPTIONS");
+  res.setHeader("Access-Control-Allow-Headers", "Content-Type");
   next();
 });
+
+app.use(express.json());
 
 /* ======================
    🔁 PROXY ENDPOINT
@@ -22,7 +27,7 @@ app.get("/api/proxy", async (req, res) => {
     return res.status(400).json({ error: "Missing URL" });
   }
 
-  // Security allowlist
+  // 🔐 Allowlist
   if (
     !target.startsWith("https://h5games.online") &&
     !target.startsWith("https://s.h5games.online")
@@ -31,7 +36,11 @@ app.get("/api/proxy", async (req, res) => {
   }
 
   try {
+    const controller = new AbortController();
+    setTimeout(() => controller.abort(), 15000);
+
     const response = await fetch(target, {
+      signal: controller.signal,
       headers: {
         "User-Agent": "Mozilla/5.0",
         "Referer": "https://h5games.online/",
@@ -49,7 +58,7 @@ app.get("/api/proxy", async (req, res) => {
 
     res.send(buffer);
   } catch (err) {
-    console.error("Proxy error:", err);
+    console.error("Proxy error:", err.message);
     res.status(500).json({ error: "Proxy failed" });
   }
 });
@@ -57,16 +66,17 @@ app.get("/api/proxy", async (req, res) => {
 /* ======================
    🌐 SERVE FRONTEND
 ====================== */
-app.use(express.static(path.join(__dirname, "dist")));
+app.use(express.static(path.join(ROOT_DIR, "dist")));
 
 app.get("*", (_, res) => {
-  res.sendFile(path.join(__dirname, "dist", "index.html"));
+  res.sendFile(path.join(ROOT_DIR, "dist", "index.html"));
 });
 
 /* ======================
    🚀 START SERVER
 ====================== */
 const PORT = process.env.PORT || 3000;
+
 app.listen(PORT, () => {
-  console.log(`Server running on port ${PORT}`);
+  console.log(`✅ Server running on port ${PORT}`);
 });

@@ -12,6 +12,7 @@ import { translate } from "../../data/translations";
 import FAQ from "../../components/FAQ/FAQ";
 import { fetchH5Games } from "../../api/fetchH5Games";
 import { selfHostedGames } from "../../data/selfHostedGames";
+import CategoryGrid from "../../components/CategoryGrid/CategoryGrid";
 
 export default function Home({ search }) {
   const [games, setGames] = useState([]);
@@ -271,6 +272,13 @@ export default function Home({ search }) {
         categoryId="basketball"
       />
 
+      <div className="ScrollSnap">
+        <div className="mosaic-page home-wrapper">
+          <h2 className="Cat-title">{translate("MoreCategories", lang)}</h2>
+          <CategoryGrid />
+        </div>
+      </div>
+
       <GameSection
         id="simulation_games"
         title={`🎮 ${translate("simulation", lang)}`}
@@ -319,6 +327,7 @@ export default function Home({ search }) {
         title={`🎮 ${translate("allGames", lang)}`}
         games={categories.all}
         categoryId="gamesAll"
+        allGamesPage
       />
 
       <FAQ />

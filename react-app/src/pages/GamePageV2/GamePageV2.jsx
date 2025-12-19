@@ -17,11 +17,30 @@ export default function GamePageV2() {
   const [playing, setPlaying] = useState(false);
   const [pageLoading, setPageLoading] = useState(true);
 
+  const RELATED_CATEGORIES = {
+    shooting: ["action", "war", "fps", "gun"],
+    driving: ["racing", "car", "truck"],
+    racing: ["driving", "car"],
+    action: ["shooting", "fighting", "war"],
+    horror: ["halloween", "scary"],
+    puzzle: ["brain", "logic"],
+    kids: ["girls", "fun", "educational"],
+    arcade: ["fun", "classic"],
+    platformer: ["endless_runner", "skill"],
+  };
+
+  /* 🔹 Normalize categories */
+  const getGameCategories = (game) => {
+    const cats = [];
+    if (game.category) cats.push(game.category);
+    if (Array.isArray(game.tagList)) cats.push(...game.tagList);
+    return [...new Set(cats.map(c => c.toLowerCase()))];
+  };
+
   useEffect(() => {
     let mounted = true;
 
     const load = async () => {
-      const start = Date.now();
       setPageLoading(true);
 
       let list = JSON.parse(localStorage.getItem("games"));
@@ -32,29 +51,13 @@ export default function GamePageV2() {
         localStorage.setItem("games", JSON.stringify(list));
       }
 
-      const selected = list.find(
-        g => String(g.id) === String(id)
-      );
-
+      const selected = list.find(g => String(g.id) === String(id));
       if (!mounted) return;
 
-      if (!selected) {
-        console.warn("Game not found:", id);
-        setPageLoading(false);
-        return;
-      }
-
-      const elapsed = Date.now() - start;
-      const delay = Math.max(600 - elapsed, 0);
-
-      setTimeout(() => {
-        if (!mounted) return;
-
-        setGames(list);
-        setGame(selected);
-        setPlaying(false);
-        setPageLoading(false);
-      }, delay);
+      setGames(list);
+      setGame(selected || null);
+      setPlaying(false);
+      setPageLoading(false);
     };
 
     load();
@@ -66,67 +69,52 @@ export default function GamePageV2() {
     navigate(`/game/${gameId}`);
   };
 
-  // Skeleton Loading Component
-  const SkeletonLoader = () => (
-    <div className="gamepage-layout">
-      <div className="center-column">
-        {/* Title Skeleton */}
-        <div className="skeleton skeleton-title"></div>
-
-        {/* Game Frame Skeleton with Preloader */}
-        <div className="skeleton skeleton-game-frame">
-          <div className="skeleton-preloader">
-            <div className="spinner"></div>
-            <div className="loading-text">{translate("loading", lang)}</div>
-          </div>
-        </div>
-
-        {/* Info Bar Skeleton */}
-        <div className="skeleton-info-bar">
-          {[1, 2, 3, 4].map(i => (
-            <div key={i} className="skeleton-info-block">
-              <div className="skeleton skeleton-label"></div>
-              <div className="skeleton skeleton-value"></div>
-            </div>
-          ))}
-        </div>
-
-        {/* More Games Title Skeleton */}
-        <div className="skeleton skeleton-section-title"></div>
-
-        {/* More Games Grid Skeleton */}
-        <div className="more-games-grid">
-          {[...Array(12)].map((_, i) => (
-            <div key={i} className="skeleton skeleton-game-card"></div>
-          ))}
-        </div>
-      </div>
-
-      {/* Side Column Skeleton */}
-      <div className="side-column">
-        {[...Array(12)].map((_, i) => (
-          <div key={i} className="skeleton skeleton-side-card"></div>
-        ))}
-      </div>
-    </div>
-  );
-
-  // Show skeleton while loading
   if (pageLoading || !game) {
     return (
       <>
         <ScrollToTop />
-        <SkeletonLoader />
+        <div className="page-loader">
+          <div className="spinner" />
+        </div>
       </>
     );
   }
 
-  const otherGames = games.filter(
-    g => String(g.id) !== String(id)
+  /* 🔹 RELATED GAME LOGIC */
+  const currentCategories = getGameCategories(game);
+
+  const sameCategoryGames = games.filter(g =>
+    g.id !== game.id &&
+    currentCategories.includes(g.category?.toLowerCase())
   );
 
-  const moreGames = otherGames.slice(0, 12);
-  const sideGames = otherGames.slice(12, 24);
+  const relatedCategories = currentCategories.flatMap(
+    c => RELATED_CATEGORIES[c] || []
+  );
+
+  const relatedGames = games.filter(g =>
+    g.id !== game.id &&
+    (
+      relatedCategories.includes(g.category?.toLowerCase()) ||
+      g.tagList?.some(t => relatedCategories.includes(t.toLowerCase()))
+    )
+  );
+
+  const fallbackGames = games.filter(
+    g =>
+      g.id !== game.id &&
+      !sameCategoryGames.includes(g) &&
+      !relatedGames.includes(g)
+  );
+
+  const prioritizedGames = [
+    ...sameCategoryGames,
+    ...relatedGames,
+    ...fallbackGames,
+  ];
+
+  const moreGames = prioritizedGames.slice(0, 12);
+  const sideGames = prioritizedGames.slice(12, 24);
 
   const iframeSrc =
     game.source === "self"
@@ -143,7 +131,7 @@ export default function GamePageV2() {
           {translate("clickPlayToStart", lang)} {game.title}
         </h2>
 
-        <div className="game-frame-container" key={game.id}>
+        <div className="game-frame-container">
           {playing ? (
             <iframe
               src={iframeSrc}
@@ -158,7 +146,9 @@ export default function GamePageV2() {
               onClick={() => setPlaying(true)}
             >
               <div className="poster-overlay">
-                <button className="big-play-btn">▶ {translate("playNow", lang)}</button>
+                <button className="big-play-btn">
+                  ▶ {translate("playNow", lang)}
+                </button>
               </div>
             </div>
           )}
@@ -169,27 +159,20 @@ export default function GamePageV2() {
           <div className="info-block">
             <span className="label">{translate("category", lang)}</span>
             <span className="value">
-              {game.category || game.tagList?.[0]}
-            </span>
-          </div>
-          <div className="info-block">
-            <span className="label">{translate("plays", lang)}</span>
-            <span className="value">
-              {Math.floor(Math.random() * 8000 + 2000)}
+              {translate(game.category || game.tagList?.[0], lang)}
             </span>
           </div>
           <div className="info-block">
             <span className="label">{translate("rating", lang)}</span>
             <span className="value">4.5 ★</span>
           </div>
-          <div className="info-block">
-            <span className="label">{translate("added", lang)}</span>
-            <span className="value">2025</span>
-          </div>
         </div>
 
         {/* 🔁 MORE GAMES */}
-        <h3 className="more-title section-title">{translate("moreGames", lang)}</h3>
+        <h3 className="more-title section-title">
+          {translate("moreGames", lang)}
+        </h3>
+
         <div className="more-games-grid">
           {moreGames.map(g => (
             <div
@@ -197,12 +180,16 @@ export default function GamePageV2() {
               className="game-card"
               onClick={() => changeGame(g.id)}
             >
-              <img src={g.image} alt={g.title} className="game-image" />
-              <div className="play-button">{translate("playNow", lang)}</div>
+              <img src={g.image} alt={g.title} />
+              <div className="play-button">
+                {translate("playNow", lang)}
+              </div>
               <div className="game-overlay">
                 <div className="game-title">{g.title}</div>
                 {g.category && (
-                  <div className="game-category">{g.category}</div>
+                  <div className="game-category">
+                    {translate(g.category, lang)}
+                  </div>
                 )}
               </div>
             </div>
@@ -210,7 +197,7 @@ export default function GamePageV2() {
         </div>
       </div>
 
-      {/* 📌 SIDE COLUMN */}
+      {/* 📌 SIDE */}
       <div className="side-column">
         {sideGames.map(g => (
           <div
@@ -218,8 +205,10 @@ export default function GamePageV2() {
             className="game-card game-card-side"
             onClick={() => changeGame(g.id)}
           >
-            <img src={g.image} alt={g.title} className="game-image" />
-            <div className="play-button">{translate("playNow", lang)}</div>
+            <img src={g.image} alt={g.title} />
+            <div className="play-button">
+              {translate("playNow", lang)}
+            </div>
             <div className="game-overlay">
               <div className="game-title">{g.title}</div>
             </div>

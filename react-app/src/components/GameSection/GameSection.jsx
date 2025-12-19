@@ -5,7 +5,7 @@ import { useLanguage } from "../../context/LanguageContext";
 import { translate } from "../../data/translations";
 import "./GameSection.css";
 
-export default function GameSection({ title, games, id, categoryId, slider = false }) {
+export default function GameSection({ title, games, id, categoryId, allGamesPage = false, slider = false }) {
   const { lang } = useLanguage();
   const trackRef = useRef(null);
   const firstSetWidth = useRef(0);
@@ -103,7 +103,13 @@ export default function GameSection({ title, games, id, categoryId, slider = fal
 
             <button
               className="btn"
-              onClick={() => navigate(`/categories/${categoryId}`)}
+              onClick={() => {
+                if (allGamesPage) {
+                  navigate("/all-mosaic-games");
+                } else {
+                  navigate(`/categories/${categoryId}`);
+                }
+              }}
             >
               <span className="btnInner">
                 {translate("viewMore", lang)}

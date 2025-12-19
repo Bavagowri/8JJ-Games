@@ -29,21 +29,31 @@ export default function Header() {
       <header className="header">
         <div className="header-categories">
           <button
-            className="sidebar-toggle-btn"
+            className={`sidebar-toggle-btn ${sidebarHidden ? 'open' : ''}`}
             onClick={toggleSidebar}
             aria-label="Toggle sidebar"
           >
-            <img
-              src="/images/show.png"
-              alt="Toggle sidebar"
-              className="sidebar-toggle-icon"
-            />
+            <svg 
+              viewBox="0 0 24 24" 
+              xmlns="http://www.w3.org/2000/svg" 
+              aria-hidden="true" 
+              focusable="false" 
+              className="menu-icon"
+            >
+              <rect x="3" y="3" width="18" height="2" rx="0.5" className="bar" />
+              <rect x="3" y="11" width="10" height="2" rx="0.5" className="bar" />
+              <rect x="3" y="19" width="18" height="2" rx="0.5" className="bar" />
+              <polygon 
+                points="15.36,11.15 20.47,7.96 20.47,16.04 15.36,12.85" 
+                className="play" 
+              />
+            </svg>
           </button>
         </div>
 
         <div className="header-container">
           <div className="brand">
-            <button
+             <button
               className="icon-btn menu-toggle"
               type="button"
               aria-label="Open menu"
@@ -51,10 +61,23 @@ export default function Header() {
                 document.dispatchEvent(new CustomEvent("openDrawer"))
               }
             >
-              <span className="hamburger-line"></span>
-              <span className="hamburger-line"></span>
-              <span className="hamburger-line"></span>
+              <svg 
+              viewBox="0 0 24 24" 
+              xmlns="http://www.w3.org/2000/svg" 
+              aria-hidden="true" 
+              focusable="false" 
+              className="menu-icon"
+            >
+              <rect x="3" y="3" width="18" height="2" rx="0.5" className="bar" />
+              <rect x="3" y="11" width="10" height="2" rx="0.5" className="bar" />
+              <rect x="3" y="19" width="18" height="2" rx="0.5" className="bar" />
+              <polygon 
+                points="15.36,11.15 20.47,7.96 20.47,16.04 15.36,12.85" 
+                className="play" 
+              />
+            </svg>
             </button>
+
 
             <a href="/" aria-label="8JJ Home">
               <img
@@ -106,6 +129,31 @@ export default function Header() {
               />
             </button>
           </div>
+
+          {/* Sidebar toggle button */}
+        <div className="header-categories" id="HIDEHIDEHIDE">
+          <button
+            className={`sidebar-toggle-btn ${sidebarHidden ? 'open' : ''}`}
+            onClick={toggleSidebar}
+            aria-label="Toggle sidebar"
+          >
+            <svg 
+              viewBox="0 0 24 24" 
+              xmlns="http://www.w3.org/2000/svg" 
+              aria-hidden="true" 
+              focusable="false" 
+              className="menu-icon"
+            >
+              <rect x="3" y="3" width="18" height="2" rx="0.5" className="bar" />
+              <rect x="3" y="11" width="10" height="2" rx="0.5" className="bar" />
+              <rect x="3" y="19" width="18" height="2" rx="0.5" className="bar" />
+              <polygon 
+                points="15.36,11.15 20.47,7.96 20.47,16.04 15.36,12.85" 
+                className="play" 
+              />
+            </svg>
+          </button>
+        </div>
         </div>
       </header>
 

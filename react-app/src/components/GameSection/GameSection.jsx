@@ -1,14 +1,17 @@
 import { useRef, useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import GameCard from "../GameCard/GameCard";
 import { useLanguage } from "../../context/LanguageContext";
 import { translate } from "../../data/translations";
 import "./GameSection.css";
 
-export default function GameSection({ title, games, id, slider = false }) {
+export default function GameSection({ title, games, id, categoryId, slider = false }) {
   const { lang } = useLanguage();
   const trackRef = useRef(null);
   const firstSetWidth = useRef(0);
   const [showAll, setShowAll] = useState(false);
+  const navigate = useNavigate();
+
 
   useEffect(() => {
     if (!slider) return;
@@ -85,7 +88,7 @@ export default function GameSection({ title, games, id, slider = false }) {
 
         {!slider && games.length > 12 && (
           <div className="container">
-            <a
+            {/* <a
               href="#"
               className="btn"
               onClick={(e) => {
@@ -96,7 +99,16 @@ export default function GameSection({ title, games, id, slider = false }) {
               <span className="btnInner">
                 {showAll ? translate("viewLess", lang) : translate("viewMore", lang)}
               </span>
-            </a>
+            </a> */}
+
+            <button
+              className="btn"
+              onClick={() => navigate(`/categories/${categoryId}`)}
+            >
+              <span className="btnInner">
+                {translate("viewMore", lang)}
+              </span>
+            </button>
           </div>
         )}
       </div>

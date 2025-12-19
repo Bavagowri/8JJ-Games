@@ -2,6 +2,8 @@
 .footer-container {
   width: 100%;
   background: linear-gradient(to bottom, #0c1119 0%, #0b0f17 100%);
+  background: linear-gradient(to top, rgba(6, 171, 226, 0.329),  rgba(35, 141, 176, 0.408), rgba(3, 86, 113, 0.182));
+  border-top: 1px solid #5c6e8774;
   padding: 60px 20px 30px;
   margin-top: 60px;
   color: #cbd5e1;
@@ -121,7 +123,7 @@
 .footer-divider {
   width: 100%;
   height: 1px;
-  background: #1f2937;
+  background: #2a6186e3;
   margin: 40px 0 20px;
 }
 

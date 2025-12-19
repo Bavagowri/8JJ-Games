@@ -251,20 +251,21 @@ export default function Home({ search }) {
         id="halloween_games"
         title={`🎃 ${translate("halloween", lang)} ${translate("games", lang)}`}
         games={categories.halloween}
-        categoryId="halloween_games"
+        categoryId="halloween"
       />
 
       <GameSection
         id="card_games"
         title={`🃏 ${translate("card", lang)}`}
         games={categories.card}
+        categoryId="card"
       />
 
       <GameSection
         id="football_games"
         title={`⚽ ${translate("football", lang)} ${translate("games", lang)}`}
         games={categories.football}
-        categoryId="football_games"
+        categoryId="football"
       />
 
       <GameSection
@@ -297,27 +298,28 @@ export default function Home({ search }) {
         id="simulation_games"
         title={`🎮 ${translate("simulation", lang)}`}
         games={categories.simulation}
+        categoryId="simulation"
       />
 
       <GameSection
         id="skill_games"
         title={`🎯 ${translate("skill", lang)}`}
         games={categories.skill}
-        categoryId="skill_games"
+        categoryId="skill"
       />
 
       <GameSection
         id="horror_games"
         title={`💀 ${translate("horror", lang)} ${translate("games", lang)}`}
         games={categories.horror}
-        categoryId="horror_games"
+        categoryId="zombie"
       />
 
       <GameSection
         id="endless_runner"
         title={`🏃 ${translate("endlessRunner", lang)}`}
         games={categories.endlessrunner}
-        categoryId="endless_runner"
+        categoryId="endless runner"
       />
 
       <GameSection

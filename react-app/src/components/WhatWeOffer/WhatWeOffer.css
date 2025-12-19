@@ -41,6 +41,7 @@
     padding: 10px 12px;
     display: inline-flex;
     gap: 10px;
+    display: none;
   }
 
   .offer-item {

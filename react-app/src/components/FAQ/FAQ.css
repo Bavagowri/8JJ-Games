@@ -26,8 +26,15 @@
 }
 
 @keyframes pulse {
-  0%, 100% { transform: scale(1); }
-  50% { transform: scale(1.1); }
+
+  0%,
+  100% {
+    transform: scale(1);
+  }
+
+  50% {
+    transform: scale(1.1);
+  }
 }
 
 /* FAQ list - two column accordion */
@@ -131,7 +138,7 @@
 /* Responsive for mobile */
 @media (max-width: 768px) {
   .faq-container {
-    
+
     padding: 24px 16px;
   }
 
@@ -146,9 +153,11 @@
   .faq-question {
     padding: 16px 20px;
     font-size: 12px;
+    align-items: center;
   }
 
   .faq-answer {
     font-size: 12px;
+    align-items: center;
   }
 }

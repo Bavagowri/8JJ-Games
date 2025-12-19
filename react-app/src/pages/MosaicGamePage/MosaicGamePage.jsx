@@ -40,18 +40,30 @@ export default function MosaicGamesPage() {
     setGames(withSizes);
   }, []);
 
+
   /* Reset visible count on search */
   useEffect(() => {
     setVisibleCount(INITIAL_COUNT);
   }, [searchTerm]);
 
-  /* Filtered games */
-  const filteredGames = games.filter((game) =>
-    game.title.toLowerCase().includes(searchTerm.toLowerCase())
-  );
+/* Optimized search */
+  const normalizedSearch = searchTerm.trim().toLowerCase();
+
+  const filteredGames = games.filter((game) => {
+    const title = game.title.toLowerCase();
+
+    if (!normalizedSearch) return true;
+
+    if (normalizedSearch.length === 1) {
+      return title.startsWith(normalizedSearch);
+    }
+
+    return title.startsWith(normalizedSearch);
+  });
 
   /* Visible slice */
   const visibleGames = filteredGames.slice(0, visibleCount);
+
 
   const clearSearch = () => {
     setSearchTerm("");

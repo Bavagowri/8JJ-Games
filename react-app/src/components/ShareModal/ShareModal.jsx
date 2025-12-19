@@ -27,7 +27,7 @@ export default function ShareModal({ open, onClose }) {
 
         <div className="share-grid">
           <a
-            href={`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(url)}`}
+            href={`https://www.facebook.com/games8jj/`}
             target="_blank"
             rel="noreferrer"
             className="share-btn fb"
@@ -37,7 +37,7 @@ export default function ShareModal({ open, onClose }) {
           </a>
 
           <a
-            href={`https://api.whatsapp.com/send/?text=${text}%20${encodeURIComponent(url)}&type=custom_url&app_absent=0`}
+            href={`https://chat.whatsapp.com/Jj2GX9riQWxLEErESqbiNQ`}
             target="_blank"
             rel="noreferrer"
             className="share-btn wa"
@@ -47,7 +47,7 @@ export default function ShareModal({ open, onClose }) {
           </a>
 
           <a
-            href={`https://www.instagram.com/?url=${encodeURIComponent(url)}`}
+            href={`https://www.instagram.com/8jjgames/`}
             target="_blank"
             rel="noreferrer"
             className="share-btn ig"
@@ -57,7 +57,7 @@ export default function ShareModal({ open, onClose }) {
           </a>
 
           <a
-            href={`https://t.me/share/url?url=${encodeURIComponent(url)}&text=${text}`}
+            href={`https://t.me/+EqU2725tjvthYWRl`}
             target="_blank"
             rel="noreferrer"
             className="share-btn tg"

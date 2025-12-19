@@ -19,6 +19,7 @@ const sidebarItems = [
   { id: "card_games", icon: "🃏", label: "cardGames", isRoute: false },
   { id: "football_games", icon: "⚽", label: "football", isRoute: false },
   { id: "basketball_games", icon: "🏀", label: "basketball", isRoute: false },
+  { id: "categories", icon: "🗂 ", label: "categories", isRoute: false},
   { id: "simulation_games", icon: "🎮", label: "simulationGames", isRoute: false },
   { id: "skill_games", icon: "🎯", label: "skill", isRoute: false },
   { id: "horror_games", icon: "💀", label: "horror", isRoute: false },

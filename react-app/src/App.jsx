@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
+
 import { LanguageProvider, useLanguage } from "./context/LanguageContext";
 
 import Header from "./components/Header/Header";
@@ -32,7 +33,8 @@ function AppContent() {
   return (
     <BrowserRouter>
       <div className={`app-root lang-${lang}`}>
-        <Snow />
+        
+        {/* <Snow /> */}
         {/* <TopPromoBar /> */}
         {/* Always visible */}
         <Header onSearch={setSearch} />

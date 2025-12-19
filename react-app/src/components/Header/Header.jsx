@@ -25,6 +25,7 @@ export default function Header({ onSearch }) {
     setSidebarHidden((prev) => !prev);
     document.dispatchEvent(new CustomEvent("toggleSidebar"));
   };
+  
 
   return (
     <>

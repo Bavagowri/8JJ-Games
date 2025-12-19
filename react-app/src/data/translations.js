@@ -191,6 +191,14 @@ export const t = {
     kn: "⚙️ ಹೆಚ್ಚಿನ ವಿಭಾಗಗಳು",
     bn: "⚙️ আরও বিভাগ",
   },
+  Categories: {
+    en: "Categories",
+    hi: "श्रेणियाँ",
+    ta: "வகைகள்",
+    ml: "വിഭാഗങ്ങൾ",
+    kn: "ವಿಭಾಗಗಳು",
+    bn: "বিভাগ",
+  },
   girlsGames: {
     en: "Girls Games",
     hi: "लड़कियों के गेम",

@@ -138,9 +138,37 @@ export default function Home({ search }) {
   };
 
   // Search filter
-  const filteredGames = games.filter(g =>
-    g.title.toLowerCase().includes(search.toLowerCase())
-  );
+  // const filteredGames = games.filter(g =>
+  //   g.title.toLowerCase().includes(search.toLowerCase())
+  // );
+
+   /* ================================
+     🔍 OPTIMIZED SEARCH LOGIC
+  ================================= */
+  const normalizedSearch = search.trim().toLowerCase();
+
+  const filteredGames = games.filter((g) => {
+    const title = g.title.toLowerCase();
+
+    // no search → show all
+    if (!normalizedSearch) return true;
+
+    // 1 letter → startsWith
+    if (normalizedSearch.length === 1) {
+      return title.startsWith(normalizedSearch);
+    }
+
+    // 2+ letters → startsWith
+    if (title.startsWith(normalizedSearch)) {
+      return true;
+    }
+
+    // OPTIONAL fallback (commented)
+    // return title.includes(normalizedSearch);
+
+    return false;
+  });
+
 
   return (
     <div className="home-wrapper">

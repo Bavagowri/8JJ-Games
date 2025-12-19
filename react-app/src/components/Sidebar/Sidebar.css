@@ -8,10 +8,10 @@
   backdrop-filter: blur(14px);
   background: linear-gradient(to top, rgba(2, 19, 53, 0.95), rgba(12, 69, 182, 0.189), transparent);
   position: fixed;
-  top: 110px;
+  top: 105px;
   left: 0;
   height: calc(100vh - 110px);
-  padding-top: 20px;
+  padding-top: 5px;
   transition: width 0.25s ease, left 0.25s ease;
   /* Added left transition */
   background: linear-gradient(60deg, rgba(6, 171, 226, 0.329), transparent);

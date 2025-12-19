@@ -14,7 +14,7 @@ const sidebarItems = [
   { id: "popularSection", icon: "🚀", label: "popularGames", isRoute: false },
   { id: "action", icon: "🥊", label: "actionGames", isRoute: false },
   { id: "top-picks", icon: "🌶️", label: "topPicks", isRoute: false },
-  { id: "platformer", icon:"🏃", label: "platformerGames", isRoute: false },
+  { id: "platformer", icon:"🧗", label: "platformerGames", isRoute: false },
   { id: "halloween_games", icon: "🎃", label: "halloween", isRoute: false },
   { id: "card_games", icon: "🃏", label: "cardGames", isRoute: false },
   { id: "football_games", icon: "⚽", label: "football", isRoute: false },
@@ -24,6 +24,7 @@ const sidebarItems = [
   { id: "horror_games", icon: "💀", label: "horror", isRoute: false },
   { id: "endless_runner", icon: "🏃", label: "endlessRunnerGames", isRoute: false },
   { id: "puzzles", icon: "🧩", label: "puzzlesGames", isRoute: false },
+  { id: "hotGames", icon: "🔥", label: "hotGames", isRoute: false},
   { id: "/all-mosaic-games", icon: "👾", label: "allGames", isRoute: true },
   { id: "faqSection", icon: "❓", label: "faq", isRoute: false }
 ];

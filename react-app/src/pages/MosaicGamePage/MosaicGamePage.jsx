@@ -12,12 +12,11 @@ const INITIAL_COUNT = 40;
 
 export default function MosaicGamesPage() {
   const { lang } = useLanguage();
+  const navigate = useNavigate();
 
   const [games, setGames] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
   const [visibleCount, setVisibleCount] = useState(INITIAL_COUNT);
-      const navigate = useNavigate();
-
 
   /* Load games once */
   useEffect(() => {
@@ -29,10 +28,13 @@ export default function MosaicGamesPage() {
     const withSizes = parsed.map((g, i) => ({
       ...g,
       size:
-        i % 12 === 0 ? "large" :
-          i % 9 === 0 ? "wide" :
-            i % 7 === 0 ? "tall" :
-              "small",
+        i % 12 === 0
+          ? "large"
+          : i % 9 === 0
+          ? "wide"
+          : i % 7 === 0
+          ? "tall"
+          : "small",
     }));
 
     setGames(withSizes);
@@ -44,12 +46,16 @@ export default function MosaicGamesPage() {
   }, [searchTerm]);
 
   /* Filtered games */
-  const filteredGames = games.filter(game =>
+  const filteredGames = games.filter((game) =>
     game.title.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
   /* Visible slice */
   const visibleGames = filteredGames.slice(0, visibleCount);
+
+  const clearSearch = () => {
+    setSearchTerm("");
+  };
 
   return (
     <div className="ScrollSnap">
@@ -67,13 +73,19 @@ export default function MosaicGamesPage() {
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
           />
+          <button
+            className="mosaic-search-icon-btn"
+            onClick={searchTerm ? clearSearch : undefined}
+          >
+            {searchTerm ? "✖" : ""}
+          </button>
         </div>
 
         <WhatWeOffer />
 
         {/* Games grid */}
         <div className="mosaic-grid">
-          {visibleGames.map(game => (
+          {visibleGames.map((game) => (
             <MosaicGameCard key={game.id} game={game} />
           ))}
         </div>
@@ -93,7 +105,7 @@ export default function MosaicGamesPage() {
               className="btn"
               onClick={(e) => {
                 e.preventDefault();
-                setVisibleCount(prev => prev + 40);
+                setVisibleCount((prev) => prev + 40);
               }}
             >
               <span className="btnInner">
@@ -102,24 +114,17 @@ export default function MosaicGamesPage() {
             </a>
           </div>
         )}
-
       </div>
-      {/* Categories */}
 
-      {/* Heading */}
+      {/* Categories */}
       <div className="ScrollSnap">
         <div className="mosaic-page home-wrapper">
           <h2 className="Cat-title">{translate("MoreCategories", lang)}</h2>
           <CategoryGrid limit={14} />
 
           <div className="container">
-            <button
-              className="btn"
-              onClick={() => navigate(`/categories`)}
-            >
-              <span className="btnInner">
-                {translate("viewMore", lang)}
-              </span>
+            <button className="btn" onClick={() => navigate(`/categories`)}>
+              <span className="btnInner">{translate("viewMore", lang)}</span>
             </button>
           </div>
         </div>

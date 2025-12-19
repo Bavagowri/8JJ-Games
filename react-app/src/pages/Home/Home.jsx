@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import GameSection from "../../components/GameSection/GameSection";
 import TrendingSection from "../../components/TrendingSection/TrendingSection";
 import TopPicksSection from "../../components/TopPicksSection/TopPicksSection";
@@ -15,12 +15,15 @@ import { selfHostedGames } from "../../data/selfHostedGames";
 import CategoryGrid from "../../components/CategoryGrid/CategoryGrid";
 import { useNavigate } from "react-router-dom";
 
+
 export default function Home({ search }) {
   const [games, setGames] = useState([]);
   const [loading, setLoading] = useState(true);
   const { lang } = useLanguage();
   const navigate = useNavigate();
-
+  const prevSearchRef = useRef("");
+  
+    /* ================= LOAD GAMES ================= */
   useEffect(() => {
     const load = async () => {
       const h5 = await fetchH5Games();
@@ -34,13 +37,21 @@ export default function Home({ search }) {
     load();
   }, []);
 
-  // Scroll to top when search term changes and has value
+    // ----------------Scroll to top when search term changes and has value
   useEffect(() => {
-    if (search) {
-      window.scrollTo({ top: 0, behavior: 'smooth' });
+    const prev = prevSearchRef.current;
+    const current = search?.trim() || "";
+
+    // 🔑 Scroll ONLY when search starts (empty → non-empty)
+    if (!prev && current) {
+      window.scrollTo({ top: 0, behavior: "auto" });
     }
+
+    // update previous value
+    prevSearchRef.current = current;
   }, [search]);
 
+  //====================  mobile loading =============   
   if (loading) {
     const isMobile = window.innerWidth <= 750;
 
@@ -143,239 +154,450 @@ export default function Home({ search }) {
   // );
 
    /* ================================
-     🔍 OPTIMIZED SEARCH LOGIC
-  ================================= */
-  const normalizedSearch = search.trim().toLowerCase();
+        🔍 OPTIMIZED SEARCH LOGIC
+      ================================= */
+      const normalizedSearch = search.trim().toLowerCase();
 
-  const filteredGames = games.filter((g) => {
-    const title = g.title.toLowerCase();
+      const filteredGames = games.filter((g) => {
+        const title = g.title.toLowerCase();
 
-    // no search → show all
-    if (!normalizedSearch) return true;
+        // no search → show all
+        if (!normalizedSearch) return true;
 
-    // 1 letter → startsWith
-    if (normalizedSearch.length === 1) {
-      return title.startsWith(normalizedSearch);
-    }
+        // 1 letter → startsWith
+        if (normalizedSearch.length === 1) {
+          return title.startsWith(normalizedSearch);
+        }
 
-    // 2+ letters → startsWith
-    if (title.startsWith(normalizedSearch)) {
-      return true;
-    }
+        // 2+ letters → startsWith
+        if (title.startsWith(normalizedSearch)) {
+          return true;
+        }
 
-    // OPTIONAL fallback (commented)
-    // return title.includes(normalizedSearch);
+        // OPTIONAL fallback (commented)
+        // return title.includes(normalizedSearch);
 
-    return false;
-  });
+        return false;
+      });
 
+      // 🔍 SEARCH MODE (locks page to top, no scroll jump)
+      if (search && search.trim()) {
+        return (
+          <div className="home-wrapper">
+            {filteredGames.length > 0 ? (
+              <GameSection
+                id="searchResults"
+                title={translate("searchResults", lang)}
+                games={filteredGames}
+              />
+            ) : (
+              <div
+                style={{
+                  textAlign: "center",
+                  padding: "60px 20px",
+                  minHeight: "500px",
+                  display: "flex",
+                  flexDirection: "column",
+                  alignItems: "center",
+                  justifyContent: "center",
+                }}
+              >
+                <div style={{ fontSize: "80px", marginBottom: "20px" }}>🔍</div>
+                <h2 style={{ fontSize: "28px", marginBottom: "10px", color: "#fff" }}>
+                  {translate("noGamesFound", lang)}
+                </h2>
+                <p style={{ fontSize: "16px", color: "#999", maxWidth: "400px" }}>
+                  {translate("noGamesFoundMessage", lang).replace("{search}", search)}
+                </p>
+              </div>
+            )}
+          </div>
+        );
+      }
+
+
+
+  // return (
+
+  //   <div className="home-wrapper">
+  //     {search && (
+  //       filteredGames.length > 0 ? (
+  //         <GameSection
+  //           id="searchResults"
+  //           title={translate("searchResults", lang)}
+  //           games={filteredGames}
+  //         />
+  //       ) : (
+  //         <div style={{
+  //           textAlign: 'center',
+  //           padding: '60px 20px',
+  //           minHeight: '400px',
+  //           display: 'flex',
+  //           flexDirection: 'column',
+  //           alignItems: 'center',
+  //           justifyContent: 'center'
+  //         }}>
+  //           <div style={{ fontSize: '80px', marginBottom: '20px' }}>🔍</div>
+  //           <h2 style={{ fontSize: '28px', marginBottom: '10px', color: '#fff' }}>
+  //             {translate("noGamesFound", lang)}
+  //           </h2>
+  //           <p style={{ fontSize: '16px', color: '#999', maxWidth: '400px' }}>
+  //             {translate("noGamesFoundMessage", lang).replace("{search}", search)}
+  //           </p>
+  //         </div>
+  //       )
+  //     )}
+
+
+  //     {/* ⏱️ RECENT SECTION - 12 games from localStorage */}
+  //     <RecentSection
+  //       id="recentSection"
+  //       lang={lang}
+  //       translate={translate}
+  //     />
+
+  //     <TrendingSection
+  //       id="trending"
+  //       title={`⚡ ${translate("trendingGames", lang)}`}
+  //       games={categories.featured.slice(0, 8)}
+  //     />
+
+
+  //     <GameSection
+  //       id="featuredSection"
+  //       title={`⭐ ${translate("featuredGames", lang)}`}
+  //       games={categories.featured}
+  //       slider={true}
+  //       categoryId="featuredSection"
+  //     />
+
+      
+  //     <GameSection
+  //       id="christmas"
+  //       title={`🎅🏻 ${translate("christmas", lang)} ${translate("games", lang)}`}
+  //       games={categories.christmas}
+  //       categoryId="christmas"
+  //     />
+
+  //     <GameSection
+  //       id="makeup"
+  //       title={`💄 ${translate("girlsGames", lang)}`}
+  //       games={categories.makeup}
+  //       categoryId="princess"
+  //     />
+      
+  //     <GameSection
+  //       id="driving"
+  //       title={`🏎️ ${translate("driving", lang)}`}
+  //       games={categories.driving}
+  //       categoryId="driving"
+  //     />
+
+
+  //     {/* 💥 POPULAR SECTION - 12 games from localStorage */}
+  //     <PopularSection
+  //       id="popularSection"
+  //       lang={lang}
+  //       translate={translate}
+  //     />
+
+
+  //     <GameSection
+  //       id="action"
+  //       title={`🥊 ${translate("action", lang)}`}
+  //       games={categories.action}
+  //       categoryId="action"
+  //     />
+
+  //     <TopPicksSection
+  //       id="top-picks"
+  //       title={`🌶️ ${translate("topPicks", lang)}`}
+  //       games={categories.recent.slice(0, 27)}
+  //     />
+
+  //     <GameSection
+  //       id="platformer"
+  //       title={`🧗 ${translate("platformer", lang)}`}
+  //       games={categories.platformers}
+  //       categoryId="platformer"
+  //     />
+
+  //     <GameSection
+  //       id="halloween_games"
+  //       title={`🎃 ${translate("halloween", lang)} ${translate("games", lang)}`}
+  //       games={categories.halloween}
+  //       categoryId="halloween"
+  //     />
+
+  //     <GameSection
+  //       id="card_games"
+  //       title={`🃏 ${translate("card", lang)}`}
+  //       games={categories.card}
+  //       categoryId="card"
+  //     />
+
+  //     <GameSection
+  //       id="football_games"
+  //       title={`⚽ ${translate("football", lang)} ${translate("games", lang)}`}
+  //       games={categories.football}
+  //       categoryId="football"
+  //     />
+
+  //     <GameSection
+  //       id="basketball_games"
+  //       title={`🏀 ${translate("basketball", lang)} ${translate("games", lang)}`}
+  //       games={categories.basketball}
+  //       categoryId="basketball"
+  //     />
+
+  //     <div className="ScrollSnap" id="categories">
+  //       <div className="mosaic-page home-wrapper">
+  //         <h2 className="Cat-title">🗂 {translate("Categories", lang)}</h2>
+  //         <CategoryGrid limit={12}/>
+
+  //         <div className="container">
+  //           <button
+  //             className="btn"
+  //             onClick={() => navigate(`/categories`)}
+  //           >
+  //             <span className="btnInner">
+  //               {translate("viewMore", lang)}
+  //             </span>
+  //           </button>
+  //         </div>
+
+  //       </div>
+  //     </div>
+
+  //     <GameSection
+  //       id="simulation_games"
+  //       title={`🎮 ${translate("simulation", lang)}`}
+  //       games={categories.simulation}
+  //       categoryId="simulation"
+  //     />
+
+  //     <GameSection
+  //       id="skill_games"
+  //       title={`🎯 ${translate("skill", lang)}`}
+  //       games={categories.skill}
+  //       categoryId="skill"
+  //     />
+
+  //     <GameSection
+  //       id="horror_games"
+  //       title={`💀 ${translate("horror", lang)} ${translate("games", lang)}`}
+  //       games={categories.horror}
+  //       categoryId="zombie"
+  //     />
+
+  //     <GameSection
+  //       id="endless_runner"
+  //       title={`🏃 ${translate("endlessRunner", lang)}`}
+  //       games={categories.endlessrunner}
+  //       categoryId="endless runner"
+  //     />
+
+  //     <GameSection
+  //       id="puzzles"
+  //       title={`🧩 ${translate("puzzles", lang)}`}
+  //       games={categories.puzzles}
+  //       categoryId="puzzles"
+  //     />
+      
+  //     {/* 🔥 HOT SECTION - 12 games */}
+  //     <HotSection
+  //       id="hotGames"
+  //       games={categories.hot}
+  //       lang={lang}
+  //       translate={translate}
+  //     />
+      
+
+  //     <GameSection
+  //       id="gamesAll"
+  //       title={`🎮 ${translate("allGames", lang)}`}
+  //       games={categories.all}
+  //       categoryId="gamesAll"
+  //       allGamesPage
+  //     />
+
+  //     <FAQ />
+
+  //   </div>
+  // );
 
   return (
-    <div className="home-wrapper">
+  <div className="home-wrapper">
 
-      {search && (
-        filteredGames.length > 0 ? (
-          <GameSection
-            id="searchResults"
-            title={translate("searchResults", lang)}
-            games={filteredGames}
-          />
-        ) : (
-          <div style={{
-            textAlign: 'center',
-            padding: '60px 20px',
-            minHeight: '400px',
-            display: 'flex',
-            flexDirection: 'column',
-            alignItems: 'center',
-            justifyContent: 'center'
-          }}>
-            <div style={{ fontSize: '80px', marginBottom: '20px' }}>🔍</div>
-            <h2 style={{ fontSize: '28px', marginBottom: '10px', color: '#fff' }}>
-              {translate("noGamesFound", lang)}
-            </h2>
-            <p style={{ fontSize: '16px', color: '#999', maxWidth: '400px' }}>
-              {translate("noGamesFoundMessage", lang).replace("{search}", search)}
-            </p>
-          </div>
-        )
-      )}
+    {/* ⏱️ RECENT */}
+    <RecentSection
+      id="recentSection"
+      lang={lang}
+      translate={translate}
+    />
 
+    <TrendingSection
+      id="trending"
+      title={`⚡ ${translate("trendingGames", lang)}`}
+      games={categories.featured.slice(0, 8)}
+    />
 
-      {/* ⏱️ RECENT SECTION - 12 games from localStorage */}
-      <RecentSection
-        id="recentSection"
-        lang={lang}
-        translate={translate}
-      />
+    <GameSection
+      id="featuredSection"
+      title={`⭐ ${translate("featuredGames", lang)}`}
+      games={categories.featured}
+      slider
+      categoryId="featuredSection"
+    />
 
-      <TrendingSection
-        id="trending"
-        title={`⚡ ${translate("trendingGames", lang)}`}
-        games={categories.featured.slice(0, 8)}
-      />
+    <GameSection
+      id="christmas"
+      title={`🎅🏻 ${translate("christmas", lang)} ${translate("games", lang)}`}
+      games={categories.christmas}
+      categoryId="christmas"
+    />
 
+    <GameSection
+      id="makeup"
+      title={`💄 ${translate("girlsGames", lang)}`}
+      games={categories.makeup}
+      categoryId="princess"
+    />
 
-      <GameSection
-        id="featuredSection"
-        title={`⭐ ${translate("featuredGames", lang)}`}
-        games={categories.featured}
-        slider={true}
-        categoryId="featuredSection"
-      />
+    <GameSection
+      id="driving"
+      title={`🏎️ ${translate("driving", lang)}`}
+      games={categories.driving}
+      categoryId="driving"
+    />
 
-      
-      <GameSection
-        id="christmas"
-        title={`🎅🏻 ${translate("christmas", lang)} ${translate("games", lang)}`}
-        games={categories.christmas}
-        categoryId="christmas"
-      />
+    <PopularSection
+      id="popularSection"
+      lang={lang}
+      translate={translate}
+    />
 
-      <GameSection
-        id="makeup"
-        title={`💄 ${translate("girlsGames", lang)}`}
-        games={categories.makeup}
-        categoryId="princess"
-      />
-      
-      <GameSection
-        id="driving"
-        title={`🏎️ ${translate("driving", lang)}`}
-        games={categories.driving}
-        categoryId="driving"
-      />
+    <GameSection
+      id="action"
+      title={`🥊 ${translate("action", lang)}`}
+      games={categories.action}
+      categoryId="action"
+    />
 
+    <TopPicksSection
+      id="top-picks"
+      title={`🌶️ ${translate("topPicks", lang)}`}
+      games={categories.recent.slice(0, 27)}
+    />
 
-      {/* 💥 POPULAR SECTION - 12 games from localStorage */}
-      <PopularSection
-        id="popularSection"
-        lang={lang}
-        translate={translate}
-      />
+    <GameSection
+      id="platformer"
+      title={`🧗 ${translate("platformer", lang)}`}
+      games={categories.platformers}
+      categoryId="platformer"
+    />
 
+    <GameSection
+      id="halloween_games"
+      title={`🎃 ${translate("halloween", lang)} ${translate("games", lang)}`}
+      games={categories.halloween}
+      categoryId="halloween"
+    />
 
-      <GameSection
-        id="action"
-        title={`🥊 ${translate("action", lang)}`}
-        games={categories.action}
-        categoryId="action"
-      />
+    <GameSection
+      id="card_games"
+      title={`🃏 ${translate("card", lang)}`}
+      games={categories.card}
+      categoryId="card"
+    />
 
-      <TopPicksSection
-        id="top-picks"
-        title={`🌶️ ${translate("topPicks", lang)}`}
-        games={categories.recent.slice(0, 27)}
-      />
+    <GameSection
+      id="football_games"
+      title={`⚽ ${translate("football", lang)} ${translate("games", lang)}`}
+      games={categories.football}
+      categoryId="football"
+    />
 
-      <GameSection
-        id="platformer"
-        title={`🧗 ${translate("platformer", lang)}`}
-        games={categories.platformers}
-        categoryId="platformer"
-      />
+    <GameSection
+      id="basketball_games"
+      title={`🏀 ${translate("basketball", lang)} ${translate("games", lang)}`}
+      games={categories.basketball}
+      categoryId="basketball"
+    />
 
-      <GameSection
-        id="halloween_games"
-        title={`🎃 ${translate("halloween", lang)} ${translate("games", lang)}`}
-        games={categories.halloween}
-        categoryId="halloween"
-      />
+    <div className="ScrollSnap" id="categories">
+      <div className="mosaic-page home-wrapper">
+        <h2 className="Cat-title">
+          🗂 {translate("Categories", lang)}
+        </h2>
 
-      <GameSection
-        id="card_games"
-        title={`🃏 ${translate("card", lang)}`}
-        games={categories.card}
-        categoryId="card"
-      />
+        <CategoryGrid limit={12} />
 
-      <GameSection
-        id="football_games"
-        title={`⚽ ${translate("football", lang)} ${translate("games", lang)}`}
-        games={categories.football}
-        categoryId="football"
-      />
-
-      <GameSection
-        id="basketball_games"
-        title={`🏀 ${translate("basketball", lang)} ${translate("games", lang)}`}
-        games={categories.basketball}
-        categoryId="basketball"
-      />
-
-      <div className="ScrollSnap" id="categories">
-        <div className="mosaic-page home-wrapper">
-          <h2 className="Cat-title">🗂 {translate("Categories", lang)}</h2>
-          <CategoryGrid limit={12}/>
-
-          <div className="container">
-            <button
-              className="btn"
-              onClick={() => navigate(`/categories`)}
-            >
-              <span className="btnInner">
-                {translate("viewMore", lang)}
-              </span>
-            </button>
-          </div>
-
+        <div className="container">
+          <button
+            className="btn"
+            onClick={() => navigate("/categories")}
+          >
+            <span className="btnInner">
+              {translate("viewMore", lang)}
+            </span>
+          </button>
         </div>
       </div>
-
-      <GameSection
-        id="simulation_games"
-        title={`🎮 ${translate("simulation", lang)}`}
-        games={categories.simulation}
-        categoryId="simulation"
-      />
-
-      <GameSection
-        id="skill_games"
-        title={`🎯 ${translate("skill", lang)}`}
-        games={categories.skill}
-        categoryId="skill"
-      />
-
-      <GameSection
-        id="horror_games"
-        title={`💀 ${translate("horror", lang)} ${translate("games", lang)}`}
-        games={categories.horror}
-        categoryId="zombie"
-      />
-
-      <GameSection
-        id="endless_runner"
-        title={`🏃 ${translate("endlessRunner", lang)}`}
-        games={categories.endlessrunner}
-        categoryId="endless runner"
-      />
-
-      <GameSection
-        id="puzzles"
-        title={`🧩 ${translate("puzzles", lang)}`}
-        games={categories.puzzles}
-        categoryId="puzzles"
-      />
-      
-      {/* 🔥 HOT SECTION - 12 games */}
-      <HotSection
-        id="hotGames"
-        games={categories.hot}
-        lang={lang}
-        translate={translate}
-      />
-      
-
-      <GameSection
-        id="gamesAll"
-        title={`🎮 ${translate("allGames", lang)}`}
-        games={categories.all}
-        categoryId="gamesAll"
-        allGamesPage
-      />
-
-      <FAQ />
-
     </div>
-  );
+
+    <GameSection
+      id="simulation_games"
+      title={`🎮 ${translate("simulation", lang)}`}
+      games={categories.simulation}
+      categoryId="simulation"
+    />
+
+    <GameSection
+      id="skill_games"
+      title={`🎯 ${translate("skill", lang)}`}
+      games={categories.skill}
+      categoryId="skill"
+    />
+
+    <GameSection
+      id="horror_games"
+      title={`💀 ${translate("horror", lang)} ${translate("games", lang)}`}
+      games={categories.horror}
+      categoryId="zombie"
+    />
+
+    <GameSection
+      id="endless_runner"
+      title={`🏃 ${translate("endlessRunner", lang)}`}
+      games={categories.endlessrunner}
+      categoryId="endless runner"
+    />
+
+    <GameSection
+      id="puzzles"
+      title={`🧩 ${translate("puzzles", lang)}`}
+      games={categories.puzzles}
+      categoryId="puzzles"
+    />
+
+    <HotSection
+      id="hotGames"
+      games={categories.hot}
+      lang={lang}
+      translate={translate}
+    />
+
+    <GameSection
+      id="gamesAll"
+      title={`🎮 ${translate("allGames", lang)}`}
+      games={categories.all}
+      categoryId="gamesAll"
+      allGamesPage
+    />
+
+    <FAQ />
+  </div>
+);
+
 }

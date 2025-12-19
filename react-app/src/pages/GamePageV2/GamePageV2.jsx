@@ -1,5 +1,5 @@
 import { useParams, useNavigate } from "react-router-dom";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import "./GamePageV2.css";
 import { fetchH5Games } from "../../api/fetchH5Games";
 import { selfHostedGames } from "../../data/selfHostedGames";
@@ -12,11 +12,18 @@ export default function GamePageV2() {
   const navigate = useNavigate();
   const { lang } = useLanguage();
 
+  const frameRef = useRef(null);
+  const iframeRef = useRef(null);
+
   const [games, setGames] = useState([]);
   const [game, setGame] = useState(null);
   const [playing, setPlaying] = useState(false);
   const [pageLoading, setPageLoading] = useState(true);
+  const [isFullscreen, setIsFullscreen] = useState(false);
 
+  /* =======================
+     LOAD GAME DATA
+  ======================== */
   useEffect(() => {
     let mounted = true;
 
@@ -32,9 +39,7 @@ export default function GamePageV2() {
         localStorage.setItem("games", JSON.stringify(list));
       }
 
-      const selected = list.find(
-        g => String(g.id) === String(id)
-      );
+      const selected = list.find(g => String(g.id) === String(id));
 
       if (!mounted) return;
 
@@ -61,19 +66,59 @@ export default function GamePageV2() {
     return () => { mounted = false; };
   }, [id]);
 
+  /* =======================
+     FULLSCREEN HANDLING
+  ======================== */
+  const enterFullscreen = () => {
+    const el = frameRef.current;
+    if (!el) return;
+
+    if (el.requestFullscreen) el.requestFullscreen();
+    else if (el.webkitRequestFullscreen) el.webkitRequestFullscreen();
+    else if (el.msRequestFullscreen) el.msRequestFullscreen();
+  };
+
+  const exitFullscreen = () => {
+    if (document.exitFullscreen) document.exitFullscreen();
+    else if (document.webkitExitFullscreen) document.webkitExitFullscreen();
+  };
+
+  useEffect(() => {
+    const onChange = () => {
+      setIsFullscreen(!!document.fullscreenElement);
+    };
+
+    document.addEventListener("fullscreenchange", onChange);
+    document.addEventListener("webkitfullscreenchange", onChange);
+
+    return () => {
+      document.removeEventListener("fullscreenchange", onChange);
+      document.removeEventListener("webkitfullscreenchange", onChange);
+    };
+  }, []);
+
+  const startGame = () => {
+    setPlaying(true);
+
+    // Auto fullscreen on mobile
+    if (window.innerWidth < 768) {
+      setTimeout(enterFullscreen, 300);
+    }
+  };
+
   const changeGame = (gameId) => {
     if (String(gameId) === String(id)) return;
     navigate(`/game/${gameId}`);
   };
 
-  // Skeleton Loading Component
+  /* =======================
+     SKELETON LOADER
+  ======================== */
   const SkeletonLoader = () => (
     <div className="gamepage-layout">
       <div className="center-column">
-        {/* Title Skeleton */}
         <div className="skeleton skeleton-title"></div>
 
-        {/* Game Frame Skeleton with Preloader */}
         <div className="skeleton skeleton-game-frame">
           <div className="skeleton-preloader">
             <div className="spinner"></div>
@@ -81,7 +126,6 @@ export default function GamePageV2() {
           </div>
         </div>
 
-        {/* Info Bar Skeleton */}
         <div className="skeleton-info-bar">
           {[1, 2, 3, 4].map(i => (
             <div key={i} className="skeleton-info-block">
@@ -91,10 +135,8 @@ export default function GamePageV2() {
           ))}
         </div>
 
-        {/* More Games Title Skeleton */}
         <div className="skeleton skeleton-section-title"></div>
 
-        {/* More Games Grid Skeleton */}
         <div className="more-games-grid">
           {[...Array(12)].map((_, i) => (
             <div key={i} className="skeleton skeleton-game-card"></div>
@@ -102,7 +144,6 @@ export default function GamePageV2() {
         </div>
       </div>
 
-      {/* Side Column Skeleton */}
       <div className="side-column">
         {[...Array(12)].map((_, i) => (
           <div key={i} className="skeleton skeleton-side-card"></div>
@@ -111,7 +152,6 @@ export default function GamePageV2() {
     </div>
   );
 
-  // Show skeleton while loading
   if (pageLoading || !game) {
     return (
       <>
@@ -121,10 +161,7 @@ export default function GamePageV2() {
     );
   }
 
-  const otherGames = games.filter(
-    g => String(g.id) !== String(id)
-  );
-
+  const otherGames = games.filter(g => String(g.id) !== String(id));
   const moreGames = otherGames.slice(0, 12);
   const sideGames = otherGames.slice(12, 24);
 
@@ -133,38 +170,56 @@ export default function GamePageV2() {
       ? `${window.location.origin}${game.embed}`
       : game.embed;
 
+  /* =======================
+     RENDER
+  ======================== */
   return (
     <div className="gamepage-layout">
       <ScrollToTop />
 
-      {/* 🎮 CENTER */}
       <div className="center-column">
         <h2 className="play-title">
           {translate("clickPlayToStart", lang)} {game.title}
         </h2>
 
-        <div className="game-frame-container" key={game.id}>
+        <div
+          className={`game-frame-container ${isFullscreen ? "fullscreen" : ""}`}
+          ref={frameRef}
+          key={game.id}
+        >
           {playing ? (
-            <iframe
-              src={iframeSrc}
-              className="game-iframe"
-              allowFullScreen
-              sandbox="allow-same-origin allow-scripts allow-pointer-lock allow-forms allow-modals"
-            />
+            <>
+              <iframe
+                ref={iframeRef}
+                src={iframeSrc}
+                className="game-iframe"
+                allow="fullscreen; autoplay; gamepad; accelerometer; gyroscope"
+                allowFullScreen
+                sandbox="allow-same-origin allow-scripts allow-pointer-lock allow-forms allow-modals"
+              />
+
+              <button
+                className="fullscreen-btn"
+                onClick={isFullscreen ? exitFullscreen : enterFullscreen}
+              >
+                {isFullscreen ? "⤢ Exit Fullscreen" : "⤢ Fullscreen"}
+              </button>
+            </>
           ) : (
             <div
               className="game-poster"
               style={{ backgroundImage: `url(${game.image})` }}
-              onClick={() => setPlaying(true)}
+              onClick={startGame}
             >
               <div className="poster-overlay">
-                <button className="big-play-btn">▶ {translate("playNow", lang)}</button>
+                <button className="big-play-btn">
+                  {translate("playNow", lang)}
+                </button>
               </div>
             </div>
           )}
         </div>
 
-        {/* ℹ️ INFO */}
         <div className="game-info-bar">
           <div className="info-block">
             <span className="label">{translate("category", lang)}</span>
@@ -188,8 +243,10 @@ export default function GamePageV2() {
           </div>
         </div>
 
-        {/* 🔁 MORE GAMES */}
-        <h3 className="more-title section-title">{translate("moreGames", lang)}</h3>
+        <h3 className="more-title section-title">
+          {translate("moreGames", lang)}
+        </h3>
+
         <div className="more-games-grid">
           {moreGames.map(g => (
             <div
@@ -210,7 +267,6 @@ export default function GamePageV2() {
         </div>
       </div>
 
-      {/* 📌 SIDE COLUMN */}
       <div className="side-column">
         {sideGames.map(g => (
           <div

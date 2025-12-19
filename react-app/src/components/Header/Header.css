@@ -576,6 +576,11 @@ _:-o-prefocus, .lang-switch {
 
 .sidebar-toggle-btn:hover .sidebar-toggle-icon {
   opacity: 0.85;
-  background: rgba(5, 144, 175, 0.257);
+  
 }
 
+
+.sidebar-toggle-btn .sidebar-toggle-icon:hover {
+ 
+  transform: scale(1.1);
+}

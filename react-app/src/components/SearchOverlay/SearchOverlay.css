@@ -1,0 +1,9 @@
+.search-overlay {
+  margin: 0 auto;
+  /* centers horizontally */
+  /* position: relative;
+  z-index: 1; */
+  max-width: 1280px;
+  /* padding: 0 24px;
+  min-height: 60vh; */
+}

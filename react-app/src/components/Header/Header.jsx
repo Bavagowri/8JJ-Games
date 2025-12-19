@@ -24,6 +24,7 @@ export default function Header() {
     document.dispatchEvent(new CustomEvent("toggleSidebar"));
   };
 
+  
   return (
     <>
       <header className="header">

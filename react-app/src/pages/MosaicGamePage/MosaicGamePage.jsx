@@ -7,7 +7,7 @@ import WhatWeOffer from "../../components/WhatWeOffer/WhatWeOffer";
 import ScrollToTop from "../../components/ScrollToTop";
 import { useNavigate } from "react-router-dom";
 import "./MosaicGamePage.css";
-import { useSearch } from "../../context/SearchContext.jsx";
+// import { useSearch } from "../../context/SearchContext.jsx";
 
 const INITIAL_COUNT = 40;
 
@@ -18,7 +18,7 @@ export default function MosaicGamesPage() {
   const [games, setGames] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
   const [visibleCount, setVisibleCount] = useState(INITIAL_COUNT);
-  const { search } = useSearch();
+  // const { search } = useSearch();
   
 
 

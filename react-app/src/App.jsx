@@ -15,6 +15,9 @@ import GamePageV2 from "./pages/GamePageV2/GamePageV2";
 import MosaicGamePage from "./pages/MosaicGamePage/MosaicGamePage";
 import CategoryGamesPage from "./pages/CategoryGamesPage/CategoryGamesPage";
 import AllCategoriesPage from "./pages/AllCategoriesPage/AllCategoriesPage";
+import SearchOverlay from "./components/SearchOverlay/SearchOverlay";
+import { fetchH5Games } from "./api/fetchH5Games";
+import { selfHostedGames } from "./data/selfHostedGames";
 
 function AppContent() {
   const [search, setSearch] = useState("");
@@ -26,13 +29,26 @@ function AppContent() {
     }
   }, []);
 
+  const [games, setGames] = useState([]);
+
+  useEffect(() => {
+    const load = async () => {
+      const h5 = await fetchH5Games();
+      const all = [...selfHostedGames, ...h5];
+      setGames(all);
+      localStorage.setItem("games", JSON.stringify(all));
+    };
+    load();
+  }, []);
+
   return (
     <BrowserRouter>
       <div className={`app-root lang-${lang}`}>
         {/* Always visible */}
         <Header onSearch={setSearch} />
         <Sidebar />
-
+        {/* 🔍 GLOBAL SEARCH OVERLAY */}
+          <SearchOverlay games={games} />
         {/* Page content changes here */}
         <Routes>
           <Route path="/" element={<Home search={search} />} />

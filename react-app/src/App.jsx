@@ -32,7 +32,7 @@ function AppContent() {
   return (
     <BrowserRouter>
       <div className={`app-root lang-${lang}`}>
-        {/* <Snow /> */}
+        <Snow />
         {/* <TopPromoBar /> */}
         {/* Always visible */}
         <Header onSearch={setSearch} />

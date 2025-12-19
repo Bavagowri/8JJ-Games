@@ -3,34 +3,30 @@ import { useLanguage } from "../../context/LanguageContext";
 import { translate } from "../../data/translations";
 import { useState } from "react";
 import ShareModal from "../ShareModal/ShareModal";
+import { useSearch } from "../../context/SearchContext";
 
-export default function Header({ onSearch }) {
+export default function Header() {
   const { lang, changeLanguage } = useLanguage();
+  const { search, setSearch } = useSearch();
   const [shareOpen, setShareOpen] = useState(false);
   const [sidebarHidden, setSidebarHidden] = useState(false);
-  const [searchText, setSearchText] = useState("");
 
   const handleSearch = (e) => {
-    const value = e.target.value;
-    setSearchText(value);
-    onSearch?.(value);
+    setSearch(e.target.value);
   };
 
   const clearSearch = () => {
-    setSearchText("");
-    onSearch?.("");
+    setSearch("");
   };
 
   const toggleSidebar = () => {
     setSidebarHidden((prev) => !prev);
     document.dispatchEvent(new CustomEvent("toggleSidebar"));
   };
-  
 
   return (
     <>
       <header className="header">
-        {/* Sidebar toggle button */}
         <div className="header-categories">
           <button
             className="sidebar-toggle-btn"
@@ -38,7 +34,7 @@ export default function Header({ onSearch }) {
             aria-label="Toggle sidebar"
           >
             <img
-              src={sidebarHidden ? "/images/show.png" : "/images/show.png"}
+              src="/images/show.png"
               alt="Toggle sidebar"
               className="sidebar-toggle-icon"
             />
@@ -46,7 +42,6 @@ export default function Header({ onSearch }) {
         </div>
 
         <div className="header-container">
-          {/* Brand */}
           <div className="brand">
             <button
               className="icon-btn menu-toggle"
@@ -70,26 +65,23 @@ export default function Header({ onSearch }) {
             </a>
           </div>
 
-          {/* Actions */}
           <div className="header-actions">
-            {/* Search */}
             <div className="search MarginLeftRight">
               <input
                 type="text"
                 placeholder={translate("searchHeader", lang)}
                 aria-label="Search games"
-                value={searchText}
+                value={search}
                 onChange={handleSearch}
               />
               <button
                 className="search-icon-btn"
-                onClick={searchText ? clearSearch : undefined}
+                onClick={search ? clearSearch : undefined}
               >
-                {searchText ? "✖" : "🔍"}
+                {search ? "✖" : "🔍"}
               </button>
             </div>
 
-            {/* Language switch */}
             <div className="lang-switch MarginLeftRight">
               <span className="language-label">🌐</span>
               <select
@@ -106,11 +98,7 @@ export default function Header({ onSearch }) {
               </select>
             </div>
 
-            {/* Share */}
-            <button
-              className="icon-btn"
-              onClick={() => setShareOpen(true)}
-            >
+            <button className="icon-btn" onClick={() => setShareOpen(true)}>
               <img
                 src="/images/shared.png"
                 alt="Share"
@@ -121,10 +109,7 @@ export default function Header({ onSearch }) {
         </div>
       </header>
 
-      <ShareModal
-        open={shareOpen}
-        onClose={() => setShareOpen(false)}
-      />
+      <ShareModal open={shareOpen} onClose={() => setShareOpen(false)} />
     </>
   );
 }

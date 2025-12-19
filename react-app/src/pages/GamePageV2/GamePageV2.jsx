@@ -6,6 +6,7 @@ import { selfHostedGames } from "../../data/selfHostedGames";
 import ScrollToTop from "../../components/ScrollToTop";
 import { useLanguage } from "../../context/LanguageContext";
 import { translate } from "../../data/translations";
+import { useSearch } from "../../context/SearchContext";
 
 export default function GamePageV2() {
   const { id } = useParams();
@@ -20,6 +21,8 @@ export default function GamePageV2() {
   const [playing, setPlaying] = useState(false);
   const [pageLoading, setPageLoading] = useState(true);
   const [isFullscreen, setIsFullscreen] = useState(false);
+
+  const { search } = useSearch();
 
   const RELATED_CATEGORIES = {
     shooting: ["action", "war", "fps", "gun"],
@@ -119,6 +122,12 @@ export default function GamePageV2() {
     if (String(gameId) === String(id)) return;
     navigate(`/game/${gameId}`);
   };
+
+  useEffect(() => {
+  if (search && search.trim().length > 0) {
+    navigate("/", { replace: true });
+  }
+}, [search, navigate]);
 
   /* =======================
      SKELETON LOADER

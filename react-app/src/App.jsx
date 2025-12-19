@@ -1,7 +1,5 @@
 import { useState, useEffect } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-
-
 import { LanguageProvider, useLanguage } from "./context/LanguageContext";
 
 import Header from "./components/Header/Header";
@@ -14,8 +12,6 @@ import GamePage from "./pages/GamePage/GamePage";
 import Footer from "./components/Footer/Footer";
 import GamePageV2 from "./pages/GamePageV2/GamePageV2";
 
-import Snow from "./components/Snow/Snow";
-import ScrollToTop from "./components/ScrollToTop";
 import MosaicGamePage from "./pages/MosaicGamePage/MosaicGamePage";
 import CategoryGamesPage from "./pages/CategoryGamesPage/CategoryGamesPage";
 import AllCategoriesPage from "./pages/AllCategoriesPage/AllCategoriesPage";
@@ -33,9 +29,6 @@ function AppContent() {
   return (
     <BrowserRouter>
       <div className={`app-root lang-${lang}`}>
-        
-        {/* <Snow /> */}
-        {/* <TopPromoBar /> */}
         {/* Always visible */}
         <Header onSearch={setSearch} />
         <Sidebar />

@@ -14,15 +14,18 @@ import { fetchH5Games } from "../../api/fetchH5Games";
 import { selfHostedGames } from "../../data/selfHostedGames";
 import CategoryGrid from "../../components/CategoryGrid/CategoryGrid";
 import { useNavigate } from "react-router-dom";
+import { useSearch } from "../../context/SearchContext";
 
 
-export default function Home({ search }) {
+
+export default function Home() {
   const [games, setGames] = useState([]);
   const [loading, setLoading] = useState(true);
   const { lang } = useLanguage();
   const navigate = useNavigate();
   const prevSearchRef = useRef("");
-  
+  const { search } = useSearch();
+
     /* ================= LOAD GAMES ================= */
   useEffect(() => {
     const load = async () => {

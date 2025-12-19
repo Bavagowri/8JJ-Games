@@ -55,7 +55,7 @@ export default function PopularSection({ id, lang, translate }) {
     <section className="popular-section game-section" id={id}>
       <div className="content-anim">
         <h2 className="section-title">
-          💥 {translate("popularGames", lang)}
+          🚀 {translate("popularGames", lang)}
         </h2>
 
         <div className="games-grid">

@@ -242,7 +242,7 @@ export default function Home({ search }) {
 
       <GameSection
         id="platformer"
-        title={`🏃 ${translate("platformer", lang)}`}
+        title={`🧗 ${translate("platformer", lang)}`}
         games={categories.platformers}
         categoryId="platformer"
       />
@@ -329,7 +329,7 @@ export default function Home({ search }) {
       
       {/* 🔥 HOT SECTION - 12 games */}
       <HotSection
-        id="hotSection"
+        id="hotGames"
         games={categories.hot}
         lang={lang}
         translate={translate}

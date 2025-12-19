@@ -11,6 +11,7 @@
   .search input {
     min-width: 50px !important;
     width: 85px !important;
+            font-size: 10px;
   }
 }
 

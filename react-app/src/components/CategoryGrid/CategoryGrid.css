@@ -10,6 +10,22 @@
 @media (max-width: 786px) {
   .category-grid {
     margin-top: 30px;
-    grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(80px, 1fr));
+  }
+  .Cat-title{
+    text-align: left !important;
+  }
+
+  .category-card {
+    height: 100px;
+  }
+
+  .categorya-card-title {
+    font-size: 10px;
+  }
+
+  .mosaic-page.home-wrapper {
+    padding: 0px;
+    
   }
 }

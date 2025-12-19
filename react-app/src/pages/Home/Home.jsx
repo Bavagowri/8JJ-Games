@@ -160,11 +160,11 @@ export default function Home() {
       translate={translate}
     />
 
-    <TrendingSection
+    {/* <TrendingSection
       id="trending"
       title={`⚡ ${translate("trendingGames", lang)}`}
       games={categories.featured.slice(0, 8)}
-    />
+    /> */}
 
     <GameSection
       id="featuredSection"

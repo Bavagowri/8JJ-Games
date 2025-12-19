@@ -183,7 +183,7 @@ export default function Home({ search }) {
 
       <TrendingSection
         id="trending"
-        title={`🔥 ${translate("trendingGames", lang)}`}
+        title={`⚡ ${translate("trendingGames", lang)}`}
         games={categories.featured.slice(0, 8)}
       />
 
@@ -208,7 +208,7 @@ export default function Home({ search }) {
         id="makeup"
         title={`💄 ${translate("girlsGames", lang)}`}
         games={categories.makeup}
-        categoryId="makeup"
+        categoryId="princess"
       />
       
       <GameSection

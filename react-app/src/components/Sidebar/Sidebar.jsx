@@ -6,7 +6,7 @@ import "./Sidebar.css";
 
 const sidebarItems = [
   { id: "top", icon: "🏠", label: "home", isRoute: false },
-  { id: "trending", icon: "🔥", label: "trendingGames", isRoute: false },
+  { id: "trending", icon: "⚡", label: "trendingGames", isRoute: false },
   { id: "featuredSection", icon: "⭐", label: "featuredGames", isRoute: false },
   { id: "christmas", icon: "🎅🏻", label: "christmas", isRoute: false },
   { id: "makeup", icon:"💄", label:"girls", isRoute: false},

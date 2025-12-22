@@ -1,6 +1,11 @@
-const express = require("express");
-const fetch = global.fetch; // Node 18+
-const path = require("path");
+import express from "express";
+import path from "path";
+import { fileURLToPath } from "url";
+
+const fetch = global.fetch;
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 const app = express();
 const ROOT_DIR = path.resolve(__dirname);
@@ -27,7 +32,6 @@ app.get("/api/proxy", async (req, res) => {
     return res.status(400).json({ error: "Missing URL" });
   }
 
-  // 🔐 Allowlist
   if (
     !target.startsWith("https://h5games.online") &&
     !target.startsWith("https://s.h5games.online")
@@ -43,7 +47,7 @@ app.get("/api/proxy", async (req, res) => {
       signal: controller.signal,
       headers: {
         "User-Agent": "Mozilla/5.0",
-        "Referer": "https://h5games.online/",
+        Referer: "https://h5games.online/",
       },
     });
 
@@ -63,14 +67,16 @@ app.get("/api/proxy", async (req, res) => {
   }
 });
 
+
 /* ======================
-   🌐 SERVE FRONTEND
+   🌐 SERVE FRONTEND (Express 5 safe)
 ====================== */
 app.use(express.static(path.join(ROOT_DIR, "dist")));
 
-app.get("*", (_, res) => {
+app.use((req, res) => {
   res.sendFile(path.join(ROOT_DIR, "dist", "index.html"));
 });
+
 
 /* ======================
    🚀 START SERVER

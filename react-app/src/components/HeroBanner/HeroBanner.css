@@ -1,0 +1,150 @@
+.hero-banner {
+  position: relative;
+  height: 420px;
+  width: 100%;
+  background-size: cover;
+  background-position: center;
+  border-radius: 16px;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+  margin-top: 20px;
+}
+
+.hero-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to right,
+    rgba(4, 92, 121, 0.75),
+    rgba(0, 0, 0, 0.2)
+  );
+}
+
+.hero-content {
+  position: relative;
+  z-index: 2;
+  padding: 40px;
+  max-width: 720px;
+  color: #fff;
+}
+
+.hero-badge {
+  display: inline-block;
+  font-size: 12px;
+  letter-spacing: 1px;
+  margin-bottom: 12px;
+  opacity: 0.85;
+}
+
+.hero-title {
+  font-size: 42px;
+  font-weight: 800;
+  line-height: 1.2;
+  margin-bottom: 12px;
+}
+
+.highlight {
+  color: #ede20a;
+}
+
+.hero-subtitle {
+  font-size: 16px;
+  opacity: 0.9;
+  margin-bottom: 20px;
+}
+
+.hero-btn {
+  background: linear-gradient(90deg, #56a7d5 0%, #3753c5 100%);
+  color: #fff;
+  padding: 14px 28px;
+  font-weight: 700;
+  border-radius: 25px;
+  border: none;
+  cursor: pointer;
+}
+
+.hero-btn:hover {
+  opacity: 0.9;
+}
+
+.hero-arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 5;
+
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+
+  background: rgba(0, 0, 0, 0.5);
+  color: #fff;
+
+  border: none;
+  cursor: pointer;
+  font-size: 32px;
+  line-height: 1;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  transition: background 0.2s ease;
+}
+
+.hero-arrow:hover {
+  background: rgba(0, 0, 0, 0.75);
+}
+
+.hero-arrow.left {
+  left: 20px;
+}
+
+.hero-arrow.right {
+  right: 20px;
+}
+
+/* Styles for very small screens if needed */
+@media (max-width: 786px) {
+    .hero-banner {
+    height: fit-content;
+    background-size: cover;
+    background-repeat: no-repeat;
+    }
+    .hero-content {
+    padding: 20px;
+    max-width: 520px;
+    }
+
+    .hero-title {
+    font-size: 28px;
+    font-weight: 800;
+    line-height: 1.2;
+    margin-bottom: 12px;
+    }
+
+    .highlight {
+    color: #c2b80c;
+    }
+
+    .hero-btn {
+    padding: 8px 12px;
+    }
+
+    .hero-arrow {
+    width: 40px;
+    height: 40px;
+    font-size: 26px;
+  }
+}
+
+
+@media (max-width: 650px) {}
+
+@media (max-width: 450px) {}
+
+@media (max-width: 350px) {}
+
+

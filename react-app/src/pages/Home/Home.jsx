@@ -14,6 +14,7 @@ import { fetchH5Games } from "../../api/fetchH5Games";
 import { selfHostedGames } from "../../data/selfHostedGames";
 import CategoryGrid from "../../components/CategoryGrid/CategoryGrid";
 import { useNavigate } from "react-router-dom";
+import HeroBanner from "../../components/HeroBanner/HeroBanner";
 
 
 
@@ -149,9 +150,72 @@ export default function Home() {
     all: games,
   };
 
+
+  // ---------------------- Hero Banner ------------------
+  const bannerSlides = [
+  {
+    background: "/images/8JJ-GAMES1.jpg",
+    badge: "INCREDIBLE EXCLUSIVE",
+    titleHighlight: "PLAY FREE NOW!",
+    title: "100% FREE ONLINE GAMES!",
+    cta: "PLAY NOW",
+    link: "/categories/adventure",
+  },
+  {
+    background: "/images/8JJ-GAMES2.jpg",
+    badge: "HALLOWEEN GAMES",
+    titleHighlight: "HALLOWEEN",
+    title: "UNLIMITED FREE HALLOWEEN GAMES",
+    cta: "PLAY NOW",
+    link: "/categories/halloween",
+  },
+  {
+    background: "/images/8JJ-GAMES3.jpg",
+    badge: "CARD GAMES",
+    titleHighlight: "CARDS",
+    title: "FREE CARD GAMES",
+    cta: "PLAY NOW",
+    link: "/categories/card",
+  },
+  {
+    background: "/images/8JJ-GAMES4.jpg",
+    badge: "CHRISTMAS GAMES",
+    titleHighlight: "CHRISTMAS",
+    title: "FREE CHRISTMAS GAMES",
+    cta: "PLAY NOW",
+    link: "/categories/CHRISTMAS",
+  },
+  {
+    background: "/images/8JJ-GAMES5.jpg",
+    badge: "HORROR GAMES",
+    titleHighlight: "HORROR",
+    title: "FREE HORROR GAMES",
+    cta: "PLAY NOW",
+    link: "/categories/zombie",
+  },
+  {
+    background: "/images/8JJ-GAMES6.jpg",
+    badge: "SIMULATOR GAMES",
+    titleHighlight: "SIMULATOR",
+    title: "FREE SIMULATOR GAMES",
+    cta: "PLAY NOW",
+    link: "/categories/simulator",
+  },
+  {
+    background: "/images/8JJ-GAMES7.jpg",
+    badge: "DRIVING GAMES",
+    titleHighlight: "DRIVING",
+    title: "FREE DRIVING GAMES",
+    cta: "PLAY NOW",
+    link: "/categories/driving",
+  }
+];
+
   
   return (
   <div className="home-wrapper">
+
+    {/* <HeroBanner slides={bannerSlides} /> */}
 
     {/* ⏱️ RECENT */}
     <RecentSection
@@ -165,6 +229,8 @@ export default function Home() {
       title={`⚡ ${translate("trendingGames", lang)}`}
       games={categories.featured.slice(0, 8)}
     /> */}
+
+    <HeroBanner slides={bannerSlides} />
 
     <GameSection
       id="featuredSection"

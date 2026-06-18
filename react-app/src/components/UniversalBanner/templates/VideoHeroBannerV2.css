@@ -1,0 +1,742 @@
+/* react-app/src/components/UniversalBanner/templates/VideoHeroBannerV2.css */
+
+
+
+/* ── Wrapper ── */
+.vhb2-wrap {
+  position: relative;
+  width: 100%;
+  height: var(--h, 400px);
+  margin: 20px 0;
+  border-radius: 18px;
+  overflow: hidden;
+  background: #040810;
+  user-select: none;
+  touch-action: pan-y;
+  border: 1px solid rgba(255, 255, 255, 0.04);
+  box-shadow:
+    0 20px 60px rgba(0, 0, 0, 0.7),
+    0 0 0 1px rgba(255, 255, 255, 0.03) inset;
+  --accent: #00ff88;
+}
+
+/* ══════════════════════════════════════
+   FULL-BLEED MEDIA
+══════════════════════════════════════ */
+.vhb2-media {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+}
+
+.vhb2-video,
+.vhb2-bg-img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center top;
+  display: block;
+}
+
+.vhb2-no-media {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, #050d1a 0%, #0a1628 100%);
+}
+
+/* Solid dark base — the panel side needs near-black */
+.vhb2-ov-base {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(95deg,
+      rgba(3, 6, 16, 0.15) 0%,
+      rgba(3, 6, 16, 0.05) 35%,
+      transparent 55%);
+  z-index: 1;
+}
+
+/* Top/bottom vignette */
+.vhb2-ov-vignette {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background:
+    linear-gradient(to bottom,
+      rgba(3, 6, 16, 0.55) 0%,
+      transparent 20%,
+      transparent 75%,
+      rgba(3, 6, 16, 0.8) 100%);
+}
+
+/* CRT scanlines — media only, not panel */
+.vhb2-scanlines {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  pointer-events: none;
+  background-image: repeating-linear-gradient(0deg,
+      transparent,
+      transparent 3px,
+      rgba(0, 0, 0, 0.04) 3px,
+      rgba(0, 0, 0, 0.04) 6px);
+}
+
+/* Accent radial glow — opposite side from panel */
+.vhb2-glow-right {
+  position: absolute;
+  top: 20%;
+  right: 5%;
+  width: 45%;
+  height: 60%;
+  z-index: 2;
+  pointer-events: none;
+  background: radial-gradient(ellipse at center,
+      var(--accent, #00ff88) 0%,
+      transparent 70%);
+  opacity: 0.06;
+  filter: blur(2px);
+  animation: vhb2-glow-pulse 3.5s ease-in-out infinite;
+}
+
+@keyframes vhb2-glow-pulse {
+
+  0%,
+  100% {
+    opacity: 0.055;
+    transform: scale(1);
+  }
+
+  50% {
+    opacity: 0.1;
+    transform: scale(1.04);
+  }
+}
+
+/* ══════════════════════════════════════
+   OSCILLOSCOPE DECORATION LINES
+   Three horizontal lines across the media
+   that pulse and vary opacity
+══════════════════════════════════════ */
+.vhb2-osc {
+  position: absolute;
+  inset: 0;
+  z-index: 3;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.vhb2-osc-line {
+  position: absolute;
+  left: 32%;
+  /* start after the panel */
+  right: 0;
+  height: 1px;
+  background: linear-gradient(to right,
+      transparent 0%,
+      var(--accent, #00ff88) 15%,
+      var(--accent, #00ff88) 85%,
+      transparent 100%);
+  opacity: 0;
+  animation: vhb2-osc-flicker 4s ease-in-out infinite;
+}
+
+.vhb2-osc-line--1 {
+  top: 22%;
+  opacity: 0.06;
+  animation-delay: 0s;
+  animation-duration: 5.2s;
+}
+
+.vhb2-osc-line--2 {
+  top: 50%;
+  opacity: 0.04;
+  animation-delay: 1.3s;
+  animation-duration: 4.0s;
+}
+
+.vhb2-osc-line--3 {
+  top: 78%;
+  opacity: 0.05;
+  animation-delay: 0.7s;
+  animation-duration: 6.1s;
+}
+
+@keyframes vhb2-osc-flicker {
+
+  0%,
+  100% {
+    opacity: 0.02;
+    transform: scaleX(0.95);
+  }
+
+  30% {
+    opacity: 0.08;
+    transform: scaleX(1);
+  }
+
+  60% {
+    opacity: 0.04;
+    transform: scaleX(0.98);
+  }
+}
+
+/* ══════════════════════════════════════
+   CHARACTER IMAGE
+   Right side, bleeds off bottom edge
+══════════════════════════════════════ */
+.vhb2-char {
+  position: absolute;
+  right: 4%;
+  bottom: 0;
+
+  width: auto;
+  max-width: 44%;
+  object-fit: contain;
+  object-position: bottom center;
+  z-index: 4;
+  pointer-events: none;
+  user-select: none;
+  filter: drop-shadow(-6px 0 24px rgba(0, 0, 0, 0.65));
+  /* Fade into the right-side glow */
+  mask-image: linear-gradient(to left, rgba(0, 0, 0, 1) 60%, rgba(0, 0, 0, 0.7) 85%, rgba(0, 0, 0, 0.3) 100%);
+  -webkit-mask-image: linear-gradient(to left, rgba(0, 0, 0, 1) 60%, rgba(0, 0, 0, 0.7) 85%, rgba(0, 0, 0, 0.3) 100%);
+}
+
+/* ══════════════════════════════════════
+   FROSTED GLASS SIDE PANEL
+   The signature element of this component.
+   Vertical panel, left-anchored, semi-transparent.
+══════════════════════════════════════ */
+.vhb2-panel {
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  width: 450px;
+  z-index: 6;
+  display: flex;
+  flex-direction: column;
+
+  /* Frosted glass */
+  background: rgba(4, 8, 18, 0.72);
+  backdrop-filter: blur(20px) saturate(1.4);
+  -webkit-backdrop-filter: blur(20px) saturate(1.4);
+
+  /* Right edge — fades panel into the media */
+  border-right: 1px solid rgba(255, 255, 255, 0.06);
+  -webkit-mask-image: linear-gradient(to right, black 78%, rgba(0, 0, 0, 0.6) 90%, transparent 100%);
+  mask-image: linear-gradient(to right, black 78%, rgba(0, 0, 0, 0.6) 90%, transparent 100%);
+
+  transition: transform 0.12s ease;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.vhb2-panel--tap {
+  transform: scale(0.992);
+}
+
+/* Accent stripe at very top of panel */
+.vhb2-panel-stripe {
+  height: 2.5px;
+  width: 100%;
+  background: linear-gradient(to right,
+      var(--accent, #00ff88) 0%,
+      rgba(var(--accent, 0, 255, 136), 0.3) 70%,
+      transparent 100%);
+  background: var(--accent, #00ff88);
+  box-shadow: 0 0 12px var(--accent, #00ff88), 0 0 24px rgba(0, 255, 136, 0.3);
+  flex-shrink: 0;
+}
+
+/* ── HUD Bracket corners — panel only ── */
+.vhb2-bracket {
+  position: absolute;
+  width: 18px;
+  height: 18px;
+  pointer-events: none;
+  display: none !important;
+  z-index: 7;
+}
+
+.vhb2-bracket::before,
+.vhb2-bracket::after {
+  content: "";
+  position: absolute;
+  background: var(--accent, #00ff88);
+  box-shadow: 0 0 5px var(--accent, #00ff88);
+}
+
+/* Top-left bracket */
+.vhb2-bracket--tl {
+  top: 12px;
+  left: 12px;
+}
+
+.vhb2-bracket--tl::before {
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 2px;
+}
+
+.vhb2-bracket--tl::after {
+  top: 0;
+  left: 0;
+  width: 2px;
+  height: 100%;
+}
+
+/* Bottom-left bracket */
+.vhb2-bracket--bl {
+  bottom: 12px;
+  left: 12px;
+}
+
+.vhb2-bracket--bl::before {
+  bottom: 0;
+  top: unset;
+  left: 0;
+  width: 100%;
+  height: 2px;
+}
+
+.vhb2-bracket--bl::after {
+  bottom: 0;
+  top: unset;
+  left: 0;
+  width: 2px;
+  height: 100%;
+}
+
+/* ── Panel body (content area) ── */
+.vhb2-panel-body {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 14px;
+  padding: 28px 32px 20px 28px;
+}
+
+/* Transition states */
+.vhb2-out {
+  opacity: 0;
+  transform: translateX(-10px);
+  transition: opacity 0.38s ease, transform 0.38s ease;
+}
+
+.vhb2-in {
+  opacity: 0;
+  transform: translateX(8px);
+}
+
+.vhb2-idle {
+  opacity: 1;
+  transform: none;
+  transition: opacity 0.38s ease 0.06s, transform 0.38s cubic-bezier(0.22, 1, 0.36, 1) 0.06s;
+}
+
+/* ── Badge ── */
+.vhb2-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  width: fit-content;
+  padding: 4px 11px 4px 8px;
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-left: 2px solid var(--accent, #00ff88);
+  background: rgba(0, 0, 0, 0.35);
+}
+
+.vhb2-badge-pip {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: var(--accent, #00ff88);
+  box-shadow: 0 0 7px var(--accent, #00ff88);
+  animation: vhb2-pip 1.8s ease-in-out infinite;
+  flex-shrink: 0;
+}
+
+@keyframes vhb2-pip {
+
+  0%,
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+
+  50% {
+    opacity: 0.4;
+    transform: scale(0.65);
+  }
+}
+
+.vhb2-badge-label {
+  font-family: "Orbitron", sans-serif;
+  font-size: 8.5px;
+  font-weight: 700;
+  letter-spacing: 2.5px;
+  text-transform: uppercase;
+  color: var(--accent, #00ff88);
+}
+
+/* ── Eyebrow ── */
+.vhb2-eyebrow {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-family: "Orbitron", sans-serif;
+  font-size: 9px;
+  font-weight: 600;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.5);
+  margin: 0;
+}
+
+.vhb2-eyebrow-tick {
+  display: block;
+  width: 20px;
+  height: 1.5px;
+  background: var(--accent, #00ff88);
+  opacity: 0.65;
+  flex-shrink: 0;
+}
+
+/* ── Title ── */
+.vhb2-title {
+  font-family: "Orbitron", sans-serif;
+  font-size: 24px;
+  font-weight: 800;
+  color: #ffffff;
+  margin: 0;
+  line-height: 1.1;
+  letter-spacing: -0.3px;
+  text-shadow: 0 2px 20px rgba(0, 0, 0, 0.8), 0 0 40px rgba(255, 255, 255, 0.06);
+}
+
+/* ── Subtitle ── */
+.vhb2-subtitle {
+  font-family: "Nunito Sans", sans-serif;
+  font-size: 13px;
+  font-weight: 400;
+  color: rgba(255, 255, 255, 0.48);
+  margin: 0;
+  line-height: 1.6;
+}
+
+/* ══════════════════════════════════════
+   CTA — OUTLINE FILL-SWEEP
+   Completely different from all other CTAs:
+   — Stroked border only at rest
+   — On hover: accent colour floods in left→right
+   — On active: scale down
+   This is an outline-to-filled sweep, not a pill,
+   not a parallelogram, not a notch.
+══════════════════════════════════════ */
+.vhb2-cta {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  width: fit-content;
+  border: 1.5px solid var(--accent, #00ff88);
+  border-radius: 4px;
+  background: transparent;
+  cursor: pointer;
+  overflow: hidden;
+  padding: 0;
+  margin-top: 4px;
+  outline: none;
+  transition: box-shadow 0.22s ease, transform 0.15s ease;
+}
+
+.vhb2-cta:hover {
+  box-shadow: 0 0 18px var(--accent, #00ff88), 0 0 36px rgba(0, 255, 136, 0.18);
+}
+
+.vhb2-cta:active {
+  transform: scale(0.96);
+}
+
+/* Fill layer — slides in left→right on hover */
+.vhb2-cta-fill {
+  position: absolute;
+  inset: 0;
+  background: var(--accent, #00ff88);
+  transform: translateX(-101%);
+  transition: transform 0.28s cubic-bezier(0.22, 1, 0.36, 1);
+  z-index: 0;
+}
+
+.vhb2-cta:hover .vhb2-cta-fill {
+  transform: translateX(0);
+}
+
+/* Content sits above fill */
+.vhb2-cta-content {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 11px 22px;
+  transition: color 0.2s ease;
+}
+
+.vhb2-cta-text {
+  font-family: "Orbitron", sans-serif;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--accent, #00ff88);
+  transition: color 0.2s ease;
+}
+
+.vhb2-cta:hover .vhb2-cta-text {
+  color: #030c14;
+}
+
+.vhb2-cta-icon {
+  color: var(--accent, #00ff88);
+  transition: color 0.2s ease, transform 0.2s ease;
+  flex-shrink: 0;
+}
+
+.vhb2-cta:hover .vhb2-cta-icon {
+  color: #030c14;
+  transform: translateX(3px);
+}
+
+/* ══════════════════════════════════════
+   PANEL FOOTER — Waveform + Nav
+══════════════════════════════════════ */
+.vhb2-panel-footer {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 0 28px 18px;
+  flex-shrink: 0;
+}
+
+/* Waveform — individual bar segments */
+.vhb2-waveform {
+  display: flex;
+  align-items: flex-end;
+  gap: 2px;
+  height: 20px;
+}
+
+.vhb2-wave-seg {
+  display: block;
+  border-radius: 1px;
+  flex-shrink: 0;
+  background: rgba(255, 255, 255, 0.1);
+  transition: background 0.18s ease, box-shadow 0.18s ease;
+}
+
+.vhb2-wave-seg--lit {
+  background: var(--accent, #00ff88);
+  box-shadow: 0 0 6px var(--accent, #00ff88);
+}
+
+/* Nav row */
+.vhb2-nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+/* Dots */
+.vhb2-dots {
+  display: flex;
+  gap: 5px;
+  align-items: center;
+}
+
+.vhb2-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.2);
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  transition: all 0.25s ease;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.vhb2-dot--on {
+  background: var(--accent, #00ff88);
+  box-shadow: 0 0 8px var(--accent, #00ff88);
+  width: 18px;
+  border-radius: 3px;
+}
+
+/* Arrows — square, minimal */
+.vhb2-arrows {
+  display: flex;
+  gap: 4px;
+}
+
+.vhb2-arrow {
+  width: 28px;
+  height: 28px;
+  border-radius: 3px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: rgba(255, 255, 255, 0.55);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.18s, border-color 0.18s, color 0.18s;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.vhb2-arrow:hover {
+  background: rgba(0, 0, 0, 0.4);
+  border-color: var(--accent, #00ff88);
+  color: var(--accent, #00ff88);
+}
+
+/* ══════════════════════════════════════
+   SLIDE COUNTER — top right of whole wrap
+══════════════════════════════════════ */
+.vhb2-counter {
+  position: absolute;
+  top: 18px;
+  right: 20px;
+  z-index: 7;
+  display: none !important;
+  align-items: baseline;
+  gap: 2px;
+  pointer-events: none;
+}
+
+.vhb2-counter-cur {
+  font-family: "Orbitron", sans-serif;
+  font-size: 28px;
+  font-weight: 900;
+  color: var(--accent, #00ff88);
+  line-height: 1;
+  text-shadow: 0 0 18px var(--accent, #00ff88);
+  opacity: 0.8;
+}
+
+.vhb2-counter-sep {
+  font-family: "Orbitron", sans-serif;
+  font-size: 12px;
+  color: rgba(255, 255, 255, 0.2);
+  margin: 0 1px;
+  align-self: center;
+}
+
+.vhb2-counter-tot {
+  font-family: "Orbitron", sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.2);
+  line-height: 1;
+  align-self: flex-end;
+  margin-bottom: 4px;
+}
+
+/* ══════════════════════════════════════
+   RESPONSIVE
+══════════════════════════════════════ */
+@media (max-width: 1100px) {
+  .vhb2-panel {
+    width: 450px;
+  }
+
+  .vhb2-title {
+    font-size: clamp(18px, 2.5vw, 26px);
+  }
+
+  .vhb2-char {
+    right: 2%;
+    max-width: 42%;
+  }
+}
+
+@media (max-width: 860px) {
+  .vhb2-panel {
+    width: 270px;
+  }
+
+  .vhb2-panel-body {
+    gap: 11px;
+    padding: 22px 24px 16px 22px;
+  }
+
+  .vhb2-title {
+    font-size: clamp(16px, 3vw, 22px);
+  }
+
+  .vhb2-subtitle {
+    font-size: 12px;
+  }
+
+  .vhb2-char {
+    max-width: 38%;
+  }
+
+  .vhb2-counter {
+    display: none;
+  }
+}
+
+@media (max-width: 640px) {
+  .vhb2-wrap {
+    border-radius: 12px;
+  }
+
+  .vhb2-panel {
+    width: 58%;
+  }
+
+  .vhb2-char {
+    right: 0;
+    max-width: 44%;
+  }
+
+  .vhb2-osc-line {
+    left: 54%;
+  }
+
+  .vhb2-panel-body {
+    padding: 18px 18px 14px 18px;
+    gap: 9px;
+  }
+
+  .vhb2-subtitle {
+    display: none;
+  }
+
+  .vhb2-cta-text {
+    font-size: 9.5px;
+    letter-spacing: 1.5px;
+  }
+
+  .vhb2-cta-content {
+    padding: 9px 16px;
+  }
+}
+
+@media (max-width: 420px) {
+  .vhb2-panel {
+    width: 68%;
+  }
+
+  .vhb2-char {
+    max-width: 34%;
+  }
+
+  .vhb2-title {
+    font-size: 15px;
+  }
+}

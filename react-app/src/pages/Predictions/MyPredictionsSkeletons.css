@@ -1,0 +1,364 @@
+/* react-app/src/pages/Predictions/MyPredictionsSkeletons.css */
+
+/* ── Shimmer keyframe ──────────────────────────────────────── */
+@keyframes mpskShimmer {
+  0%   { background-position: -600px 0; }
+  100% { background-position:  600px 0; }
+}
+
+/* ── Base bone ─────────────────────────────────────────────── */
+.mpsk-bone {
+  border-radius: 7px;
+  background:
+    linear-gradient(
+      90deg,
+      rgba(79, 172, 254, 0.05) 0%,
+      rgba(79, 172, 254, 0.13) 30%,
+      rgba(79, 172, 254, 0.05) 60%
+    );
+  background-size: 600px 100%;
+  animation: mpskShimmer 1.6s ease-in-out infinite;
+  flex-shrink: 0;
+}
+
+/* ── Root wrapper ──────────────────────────────────────────── */
+.mpsk-root {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  width: 100%;
+}
+
+/* ════════════════════════════════════════════════════════════
+   PAGE HEADER SKELETON
+   Mirrors .mp-page-header: left block (h1 + sub) + right CTA
+   ════════════════════════════════════════════════════════════ */
+.mpsk-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 24px;
+  flex-wrap: wrap;
+}
+
+.mpsk-header__left {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+/* h1 */
+.mpsk-header__h1 {
+  height: 30px;
+  width: 220px;
+  border-radius: 8px;
+}
+
+/* subtitle */
+.mpsk-header__sub {
+  height: 14px;
+  width: 300px;
+  max-width: 80vw;
+  border-radius: 5px;
+}
+
+/* arena-link button */
+.mpsk-header__cta {
+  height: 38px;
+  width: 168px;
+  border-radius: 50px;
+  flex-shrink: 0;
+}
+
+/* ════════════════════════════════════════════════════════════
+   STATS GRID SKELETON
+   Mirrors .mp-stats-grid: 6 equal cards, big number + small label
+   ════════════════════════════════════════════════════════════ */
+.mpsk-stats {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 10px;
+  margin-bottom: 24px;
+}
+
+.mpsk-stat-card {
+  background: #081422;
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 16px;
+  padding: 18px 14px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  /* stagger */
+  animation: mpskCardIn 0.35s ease both;
+}
+
+.mpsk-stat-card:nth-child(1) { animation-delay: 0.00s; }
+.mpsk-stat-card:nth-child(2) { animation-delay: 0.04s; }
+.mpsk-stat-card:nth-child(3) { animation-delay: 0.08s; }
+.mpsk-stat-card:nth-child(4) { animation-delay: 0.12s; }
+.mpsk-stat-card:nth-child(5) { animation-delay: 0.16s; }
+.mpsk-stat-card:nth-child(6) { animation-delay: 0.20s; }
+
+@keyframes mpskCardIn {
+  from { opacity: 0; transform: translateY(8px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* Big number */
+.mpsk-stat__val {
+  height: 28px;
+  width: 40px;
+  border-radius: 6px;
+}
+
+/* Label */
+.mpsk-stat__lbl {
+  height: 10px;
+  width: 56px;
+  border-radius: 4px;
+}
+
+/* ════════════════════════════════════════════════════════════
+   TABS SKELETON
+   Mirrors .mp-tabs-bar + .mp-tabs frosted container with 3 tabs
+   ════════════════════════════════════════════════════════════ */
+.mpsk-tabs-bar {
+  margin-bottom: 16px;
+}
+
+.mpsk-tabs {
+  display: inline-flex;
+  gap: 4px;
+  background: rgba(8, 18, 38, 0.65);
+  backdrop-filter: blur(18px);
+  border-radius: 14px;
+  border: 1px solid rgba(79, 172, 254, 0.08);
+  padding: 6px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.04);
+}
+
+.mpsk-tab {
+  height: 36px;
+  border-radius: 10px;
+  /* width supplied inline per tab */
+}
+
+/* ════════════════════════════════════════════════════════════
+   ROW SKELETON
+   Mirrors .mp-row grid:
+   [match info] [pick] [odds] [result badge] [points] [arrow]
+   grid-template-columns: 1fr auto auto auto auto auto
+   ════════════════════════════════════════════════════════════ */
+.mpsk-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.mpsk-row {
+  background: #081422;
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 16px;
+  padding: 16px 20px;
+  display: grid;
+  grid-template-columns: 1fr auto auto auto auto auto;
+  align-items: center;
+  gap: 16px;
+  position: relative;
+  overflow: hidden;
+  /* stagger entrance */
+  animation: mpskRowIn 0.38s ease both;
+}
+
+.mpsk-row:nth-child(1) { animation-delay: 0.05s; }
+.mpsk-row:nth-child(2) { animation-delay: 0.09s; }
+.mpsk-row:nth-child(3) { animation-delay: 0.13s; }
+.mpsk-row:nth-child(4) { animation-delay: 0.17s; }
+.mpsk-row:nth-child(5) { animation-delay: 0.21s; }
+.mpsk-row:nth-child(6) { animation-delay: 0.25s; }
+.mpsk-row:nth-child(7) { animation-delay: 0.29s; }
+.mpsk-row:nth-child(8) { animation-delay: 0.33s; }
+
+@keyframes mpskRowIn {
+  from { opacity: 0; transform: translateX(-8px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+
+/* Left colour accent — mirrors real .mp-row::before */
+.mpsk-row::before {
+  content: '';
+  position: absolute;
+  left: 0; top: 0; bottom: 0;
+  width: 3px;
+  border-radius: 3px 0 0 3px;
+}
+
+.mpsk-row--won::before    { background: #22c55e; opacity: 0.5; }
+.mpsk-row--lost::before   { background: #ef4444; opacity: 0.4; }
+.mpsk-row--pending::before { background: #fbbf24; opacity: 0.4; }
+
+/* ── Match info column ── */
+.mpsk-row__match {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  min-width: 0;
+}
+
+/* "India vs Australia" team names line */
+.mpsk-row__teams {
+  height: 16px;
+  width: 180px;
+  max-width: 100%;
+  border-radius: 5px;
+}
+
+/* Meta row: tournament + date */
+.mpsk-row__meta {
+  display: flex;
+  gap: 10px;
+}
+
+.mpsk-row__meta-item {
+  height: 11px;
+  width: 80px;
+  border-radius: 4px;
+}
+
+.mpsk-row__meta-item--short {
+  width: 60px;
+}
+
+/* ── Pick ── */
+.mpsk-row__pick {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 4px;
+}
+
+.mpsk-row__pick-lbl {
+  height: 9px;
+  width: 26px;
+  border-radius: 3px;
+}
+
+.mpsk-row__pick-val {
+  height: 26px;
+  width: 80px;
+  border-radius: 8px;
+}
+
+/* ── Odds ── */
+.mpsk-row__odds {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+}
+
+.mpsk-row__odds-lbl {
+  height: 9px;
+  width: 26px;
+  border-radius: 3px;
+}
+
+.mpsk-row__odds-val {
+  height: 18px;
+  width: 32px;
+  border-radius: 5px;
+}
+
+/* ── Result badge ── */
+.mpsk-row__badge {
+  height: 24px;
+  width: 70px;
+  border-radius: 50px;
+}
+
+/* ── Points ── */
+.mpsk-row__pts {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 4px;
+  min-width: 80px;
+}
+
+.mpsk-row__pts-lbl {
+  height: 9px;
+  width: 36px;
+  border-radius: 3px;
+}
+
+.mpsk-row__pts-val {
+  height: 16px;
+  width: 64px;
+  border-radius: 5px;
+}
+
+/* ── Arrow ── */
+.mpsk-row__arrow {
+  height: 20px;
+  width: 14px;
+  border-radius: 4px;
+  opacity: 0.4;
+}
+
+/* ── Responsive ────────────────────────────────────────────── */
+@media (max-width: 900px) {
+  .mpsk-stats {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .mpsk-stats {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .mpsk-header__sub  { width: 200px; }
+  .mpsk-header__cta  { width: 140px; }
+
+  /* Mirrors the mobile .mp-row responsive grid */
+  .mpsk-row {
+    grid-template-columns: 1fr auto auto;
+    grid-template-rows: auto auto;
+    gap: 10px 12px;
+  }
+
+  .mpsk-row__match  { grid-column: 1; grid-row: 1; }
+  .mpsk-row__pick   { grid-column: 2; grid-row: 1; align-items: flex-end; }
+  .mpsk-row__arrow  { grid-column: 3; grid-row: 1; }
+  .mpsk-row__badge  { grid-column: 1; grid-row: 2; width: 70px; height: 22px; }
+  .mpsk-row__pts    { grid-column: 2; grid-row: 2; align-items: flex-end; }
+  /* Hide odds on mobile — matches real component */
+  .mpsk-row__odds   { display: none; }
+}
+
+@media (max-width: 560px) {
+  .mpsk-stats {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .mpsk-header {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .mpsk-header__cta {
+    width: 100%;
+    border-radius: 50px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .mpsk-bone,
+  .mpsk-stat-card,
+  .mpsk-row {
+    animation: none !important;
+  }
+}

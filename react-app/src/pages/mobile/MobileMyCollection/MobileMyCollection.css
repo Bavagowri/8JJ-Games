@@ -1,0 +1,1011 @@
+/* src/pages/mobile/MobileMyCollection/MobileMyCollection.css */
+
+/* ===========================
+   WRAPPER & LAYOUT
+=========================== */
+
+.mobile-collection-wrapper {
+  min-height: 100vh;
+  background: linear-gradient(to bottom, #0c1119 0%, #0b0f17 100%);
+  padding-top: 75px;
+  padding-bottom: 70px;
+}
+
+.mobile-content {
+  position: relative;
+}
+
+/* ===========================
+   LOADER
+=========================== */
+
+.mobile-collection-loader {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: calc(100vh - 145px);
+  padding: 40px 20px;
+}
+
+.mobile-spinner {
+  width: 48px;
+  height: 48px;
+  border: 4px solid rgba(79, 172, 254, 0.2);
+  border-top-color: #00d9ff;
+  border-radius: 50%;
+  animation: mobile-spin 0.8s linear infinite;
+  margin-bottom: 16px;
+}
+
+@keyframes mobile-spin {
+  to { transform: rotate(360deg); }
+}
+
+.mobile-collection-loader p {
+  color: #cbd5e1;
+  font-size: 14px;
+  margin: 0;
+  font-weight: 500;
+}
+
+/* ===========================
+   BREADCRUMB (from MobileAllGames)
+=========================== */
+
+.mobile-all-games-breadcrumb {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 16px;
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+
+.mobile-all-games-breadcrumb::-webkit-scrollbar {
+  display: none;
+}
+
+.mobile-all-games-breadcrumb-link {
+  background: none;
+  border: none;
+  color: rgba(255, 255, 255, 0.912);
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  padding: 4px 8px;
+  border-radius: 6px;
+  transition: all 0.2s ease;
+  white-space: nowrap;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.mobile-all-games-breadcrumb-link:active {
+  background: rgba(29, 105, 140, 0.2);
+  color: rgba(29, 105, 140, 1);
+}
+
+.mobile-all-games-breadcrumb-separator {
+  color: rgba(255, 255, 255, 0.3);
+  font-size: 16px;
+  user-select: none;
+}
+
+.mobile-all-games-breadcrumb-current {
+  color: rgba(29, 105, 140, 1);
+  font-size: 14px;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+/* ===========================
+   CATEGORY HEADER (from MobileAllGames)
+=========================== */
+
+.mobile-all-games-header {
+  padding: 24px 16px;
+  background: linear-gradient(
+    180deg,
+    rgba(10, 30, 43, 0.4) 0%,
+    transparent 100%
+  );
+  margin-bottom: 16px;
+}
+
+.mobile-all-games-header-content {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.mobile-all-games-header-icon-box {
+  width: 64px;
+  height: 64px;
+  background: linear-gradient(
+    135deg,
+    rgba(29, 105, 140, 0.4) 0%,
+    rgba(29, 105, 140, 0.2) 100%
+  );
+  border-radius: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  border: 1px solid rgba(29, 105, 140, 0.3);
+  box-shadow: 0 4px 12px rgba(29, 105, 140, 0.2);
+  animation: pulse-glow 3s ease-in-out infinite;
+}
+
+@keyframes pulse-glow {
+  0%, 100% {
+    box-shadow: 0 4px 12px rgba(29, 105, 140, 0.2);
+  }
+  50% {
+    box-shadow: 0 8px 24px rgba(29, 105, 140, 0.4);
+  }
+}
+
+.mobile-all-games-header-icon {
+  height: 42px;
+  width: 42px;
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.3));
+}
+
+.mobile-all-games-header-info {
+  flex: 1;
+  min-width: 0;
+}
+
+.mobile-all-games-header-title {
+  font-size: 28px;
+  font-weight: 700;
+  color: #fff;
+  margin: 0 0 6px 0;
+  line-height: 1.2;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.mobile-all-games-header-count {
+  font-size: 14px;
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.6);
+  margin: 0;
+}
+
+/* ===========================
+   CONTROLS BAR (from MobileAllGames)
+=========================== */
+
+.mobile-controls-bar {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 0 16px 16px;
+}
+
+.mobile-controls-left {
+  flex: 0 0 auto;
+}
+
+.mobile-controls-right {
+  flex: 1;
+  display: flex;
+  justify-content: flex-end;
+}
+
+/* View Toggle Button */
+.mobile-view-toggle {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 16px;
+  background: rgba(30, 41, 59, 0.6);
+  border: 1px solid rgba(79, 172, 254, 0.3);
+  border-radius: 12px;
+  color: #cbd5e1;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  white-space: nowrap;
+  -webkit-tap-highlight-color: transparent;
+  position: relative;
+}
+
+.mobile-view-toggle.active {
+  background: linear-gradient(135deg, rgba(0, 217, 255, 0.2), rgba(0, 153, 204, 0.15));
+  border-color: #00d9ff;
+  color: #00d9ff;
+}
+
+.mobile-view-toggle:active {
+  transform: scale(0.95);
+}
+
+.mobile-view-icon {
+  font-size: 16px;
+}
+
+.mobile-view-text {
+  font-size: 13px;
+}
+
+/* Sort Select (from MobileAllGames) */
+.mobile-sort-select {
+  padding: 10px 14px;
+  background: rgba(30, 41, 59, 0.6);
+  border: 1px solid rgba(79, 172, 254, 0.3);
+  border-radius: 12px;
+  color: #fff;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  outline: none;
+  transition: all 0.2s;
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%2300d9ff' d='M6 9L1 4h10z'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 10px center;
+  padding-right: 32px;
+}
+
+.mobile-sort-select:focus {
+  border-color: #00d9ff;
+  background-color: rgba(30, 41, 59, 0.8);
+}
+
+/* ===========================
+   TOAST NOTIFICATION
+=========================== */
+
+.mobile-collection-toast {
+  position: fixed;
+  top: 85px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 1000;
+  padding: 12px 24px;
+  background: linear-gradient(135deg, rgba(34, 197, 94, 0.95), rgba(22, 163, 74, 0.95));
+  color: #fff;
+  border-radius: 50px;
+  font-size: 14px;
+  font-weight: 600;
+  box-shadow: 0 8px 24px rgba(34, 197, 94, 0.4);
+  animation: toastSlideIn 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+  max-width: calc(100% - 32px);
+  text-align: center;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+@keyframes toastSlideIn {
+  from {
+    opacity: 0;
+    transform: translateX(-50%) translateY(-30px) scale(0.8);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0) scale(1);
+  }
+}
+
+.toast-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 20px;
+  height: 20px;
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 50%;
+  font-size: 12px;
+}
+
+/* ===========================
+   COLLECTION GRID (Enhanced)
+=========================== */
+
+.mobile-collection-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 12px;
+  padding: 0 16px 16px;
+  animation: fadeInUp 0.5s ease-out;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Mosaic Mode - Same as MobileAllGames */
+.mobile-collection-grid.mosaic-mode {
+  grid-template-columns: repeat(3, 1fr);
+  grid-auto-rows: 1fr;
+}
+
+.mobile-collection-card {
+  position: relative;
+  border-radius: 18px;
+  overflow: hidden;
+  background: #0b0f1a;
+  aspect-ratio: 1 / 1;
+  cursor: pointer;
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.35);
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+  animation: cardFadeIn 0.4s ease-out backwards;
+}
+
+@keyframes cardFadeIn {
+  from {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.mobile-collection-card:nth-child(1) { animation-delay: 0.05s; }
+.mobile-collection-card:nth-child(2) { animation-delay: 0.1s; }
+.mobile-collection-card:nth-child(3) { animation-delay: 0.15s; }
+.mobile-collection-card:nth-child(4) { animation-delay: 0.2s; }
+.mobile-collection-card:nth-child(5) { animation-delay: 0.25s; }
+.mobile-collection-card:nth-child(6) { animation-delay: 0.3s; }
+
+.mobile-collection-card:active {
+  transform: scale(0.97);
+}
+
+/* Big tiles in mosaic mode */
+.mobile-collection-grid.mosaic-mode .mobile-collection-card.big {
+  grid-column: span 2;
+  grid-row: span 2;
+  aspect-ratio: 1 / 1;
+}
+
+/* Remove Button */
+.mobile-collection-remove-btn {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  z-index: 20;
+  width: 32px;
+  height: 32px;
+  background: linear-gradient(135deg, rgba(239, 68, 68, 0.95), rgba(220, 38, 38, 0.95));
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  border-radius: 50%;
+  color: #fff;
+  font-size: 16px;
+  font-weight: 700;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 12px rgba(239, 68, 68, 0.5);
+  transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+  -webkit-tap-highlight-color: transparent;
+  backdrop-filter: blur(10px);
+}
+
+.mobile-collection-remove-btn:active {
+  transform: scale(0.85) rotate(90deg);
+  background: linear-gradient(135deg, rgba(220, 38, 38, 1), rgba(185, 28, 28, 1));
+  box-shadow: 0 2px 6px rgba(239, 68, 68, 0.7);
+}
+
+/* Card Content */
+.mobile-collection-card-content {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  cursor: pointer;
+}
+
+.mobile-collection-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.3s ease;
+}
+
+.mobile-collection-card:active .mobile-collection-image {
+  transform: scale(1.05);
+}
+
+/* Overlay */
+.mobile-collection-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to top,
+    rgba(0, 0, 0, 0.75) 0%,
+    rgba(0, 0, 0, 0.3) 50%,
+    transparent 100%
+  );
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 12px;
+  pointer-events: none;
+}
+
+.mobile-collection-game-title {
+  color: #ffffff;
+  font-size: 13px;
+  font-weight: 700;
+  line-height: 1.3;
+  margin-bottom: 4px;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.8);
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.mobile-collection-card.big .mobile-collection-game-title {
+  font-size: 15px;
+  -webkit-line-clamp: 3;
+}
+
+.mobile-collection-game-category {
+  display: inline-block;
+  padding: 4px 10px;
+  background: rgba(0, 217, 255, 0.2);
+  border: 1px solid rgba(0, 217, 255, 0.4);
+  border-radius: 12px;
+  color: #00d9ff;
+  font-size: 10px;
+  font-weight: 600;
+  text-transform: capitalize;
+  letter-spacing: 0.3px;
+  backdrop-filter: blur(10px);
+  align-self: flex-start;
+}
+
+/* Play Overlay */
+.mobile-collection-play-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(4px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  pointer-events: none;
+}
+
+.mobile-collection-card:active .mobile-collection-play-overlay {
+  opacity: 1;
+}
+
+.mobile-play-button {
+  width: 60px;
+  height: 60px;
+  background: linear-gradient(135deg, #00d9ff, #0099cc);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 8px 24px rgba(0, 217, 255, 0.5);
+  transform: scale(0.8);
+  transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.mobile-collection-card:active .mobile-play-button {
+  transform: scale(1);
+}
+
+.play-icon {
+  color: #0f172a;
+  font-size: 24px;
+  margin-left: 4px;
+}
+
+/* ===========================
+   EMPTY STATE (Enhanced)
+=========================== */
+
+.mobile-empty-collection {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 60px 20px;
+  text-align: center;
+  min-height: 50vh;
+  animation: fadeInUp 0.6s ease-out;
+}
+
+.mobile-empty-icon-wrapper {
+  position: relative;
+  margin-bottom: 24px;
+}
+
+.mobile-empty-icon-circle {
+  width: 120px;
+  height: 120px;
+  background: linear-gradient(135deg, rgba(79, 172, 254, 0.15), rgba(0, 242, 254, 0.1));
+  border: 3px solid rgba(79, 172, 254, 0.3);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  animation: float 3s ease-in-out infinite;
+  box-shadow: 0 8px 32px rgba(79, 172, 254, 0.2);
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-12px); }
+}
+
+.mobile-empty-icon-circle::before {
+  content: '';
+  position: absolute;
+  inset: -3px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, rgba(79, 172, 254, 0.5), rgba(0, 242, 254, 0.3));
+  filter: blur(12px);
+  opacity: 0.5;
+  animation: pulse 2s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 0.3; transform: scale(1); }
+  50% { opacity: 0.6; transform: scale(1.1); }
+}
+
+.mobile-empty-icon {
+  font-size: 64px;
+  position: relative;
+  z-index: 1;
+  animation: iconBounce 2s ease-in-out infinite;
+}
+
+@keyframes iconBounce {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.1); }
+}
+
+.mobile-empty-title {
+  font-size: 24px;
+  font-weight: 700;
+  color: #fff;
+  margin: 0 0 12px 0;
+  line-height: 1.3;
+}
+
+.mobile-empty-text {
+  font-size: 15px;
+  color: rgba(255, 255, 255, 0.7);
+  margin: 0 0 32px 0;
+  line-height: 1.6;
+  max-width: 320px;
+}
+
+.mobile-browse-btn {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 14px 32px;
+  background: linear-gradient(135deg, #00d9ff, #0099cc);
+  border: none;
+  border-radius: 50px;
+  color: #0f172a;
+  font-size: 16px;
+  font-weight: 700;
+  cursor: pointer;
+  box-shadow: 0 8px 24px rgba(0, 217, 255, 0.4);
+  transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+  -webkit-tap-highlight-color: transparent;
+}
+
+.mobile-browse-btn:active {
+  transform: scale(0.95);
+  box-shadow: 0 4px 12px rgba(0, 217, 255, 0.5);
+}
+
+.mobile-btn-icon {
+  font-size: 18px;
+}
+
+/* ===========================
+   RECOMMENDATIONS SECTION
+=========================== */
+
+.mobile-recommendations-section {
+  padding: 24px 0;
+  background: linear-gradient(
+    180deg,
+    transparent 0%,
+    rgba(10, 30, 43, 0.2) 100%
+  );
+  margin-top: 20px;
+  border-top: 1px solid rgba(79, 172, 254, 0.1);
+}
+
+.mobile-recommendations-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 16px 20px;
+}
+
+.mobile-section-title {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 20px;
+  font-weight: 700;
+  color: #fff;
+  margin: 0;
+}
+
+.section-iconzz {
+  font-size: 24px;
+  animation: sparkle 2s ease-in-out infinite;
+}
+
+@keyframes sparkle {
+  0%, 100% { opacity: 0.6; transform: rotate(0deg) scale(1); }
+  50% { opacity: 1; transform: rotate(180deg) scale(1.1); }
+}
+
+.mobile-show-recommendations-btn {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 16px;
+  background: rgba(79, 172, 254, 0.15);
+  border: 1px solid rgba(79, 172, 254, 0.3);
+  border-radius: 50px;
+  color: #00d9ff;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.mobile-show-recommendations-btn:active {
+  transform: scale(0.95);
+  background: rgba(79, 172, 254, 0.25);
+}
+
+.btn-arrow {
+  font-size: 10px;
+  transition: transform 0.3s ease;
+}
+
+.mobile-recommendations-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 12px;
+  padding: 0 16px;
+  animation: slideDown 0.4s ease-out;
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.mobile-recommendation-card {
+  position: relative;
+  aspect-ratio: 3 / 4;
+  border-radius: 16px;
+  overflow: hidden;
+  cursor: pointer;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+  transition: all 0.3s ease;
+  -webkit-tap-highlight-color: transparent;
+  background: #0b0f1a;
+}
+
+.mobile-recommendation-card:active {
+  transform: scale(0.95);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+}
+
+.mobile-recommendation-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.3s ease;
+}
+
+.mobile-recommendation-card:active .mobile-recommendation-image {
+  transform: scale(1.05);
+}
+
+.mobile-recommendation-overlay {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 14px 10px;
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.85), transparent);
+}
+
+.mobile-recommendation-title {
+  font-size: 13px;
+  font-weight: 700;
+  color: #fff;
+  margin: 0 0 6px 0;
+  line-height: 1.3;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-shadow: 0 2px 6px rgba(0, 0, 0, 0.8);
+}
+
+.mobile-recommendation-category {
+  display: inline-block;
+  padding: 4px 8px;
+  background: rgba(0, 217, 255, 0.2);
+  border: 1px solid rgba(0, 217, 255, 0.4);
+  border-radius: 10px;
+  color: #00d9ff;
+  font-size: 10px;
+  font-weight: 600;
+  text-transform: capitalize;
+  backdrop-filter: blur(8px);
+}
+
+.mobile-recommendation-badge {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  padding: 6px 12px;
+  background: linear-gradient(135deg, #f59e0b, #d97706);
+  border-radius: 20px;
+  color: #fff;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  box-shadow: 0 4px 12px rgba(245, 158, 11, 0.4);
+  animation: badgePulse 2s ease-in-out infinite;
+}
+
+@keyframes badgePulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+}
+
+/* ===========================
+   SCREEN READER ONLY
+=========================== */
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
+}
+
+/* ===========================
+   FOOTER SPACE
+=========================== */
+
+.mobile-footer-space {
+  height: 20px;
+  background: transparent;
+}
+
+/* ===========================
+   RESPONSIVE DESIGN
+=========================== */
+
+@media (max-width: 375px) {
+  .mobile-all-games-header-icon-box {
+    width: 56px;
+    height: 56px;
+  }
+
+  .mobile-all-games-header-icon {
+    width: 36px;
+    height: 36px;
+  }
+
+  .mobile-all-games-header-title {
+    font-size: 24px;
+  }
+
+  .mobile-all-games-header-count {
+    font-size: 13px;
+  }
+
+  .mobile-collection-grid,
+  .mobile-recommendations-grid {
+    gap: 10px;
+  }
+
+  .mobile-collection-remove-btn {
+    width: 28px;
+    height: 28px;
+    font-size: 14px;
+  }
+
+  .mobile-empty-icon-circle {
+    width: 100px;
+    height: 100px;
+  }
+
+  .mobile-empty-icon {
+    font-size: 56px;
+  }
+
+  .mobile-empty-title {
+    font-size: 20px;
+  }
+
+  .mobile-empty-text {
+    font-size: 14px;
+  }
+
+  .mobile-browse-btn {
+    padding: 12px 28px;
+    font-size: 14px;
+  }
+
+  .mobile-section-title {
+    font-size: 18px;
+  }
+}
+
+@media (max-width: 360px) {
+  .mobile-all-games-breadcrumb {
+    padding: 10px 12px;
+  }
+
+  .mobile-all-games-breadcrumb-link {
+    font-size: 13px;
+  }
+
+  .mobile-view-toggle {
+    padding: 8px 12px;
+  }
+
+  .mobile-view-text {
+    display: none;
+  }
+
+  .mobile-sort-select {
+    font-size: 12px;
+    padding: 8px 28px 8px 10px;
+  }
+}
+
+/* ===========================
+   LANDSCAPE ORIENTATION
+=========================== */
+
+@media (orientation: landscape) and (max-height: 500px) {
+  .mobile-all-games-header {
+    padding: 16px;
+  }
+
+  .mobile-all-games-header-title {
+    font-size: 22px;
+  }
+
+  .mobile-empty-collection {
+    padding: 40px 20px;
+    min-height: 40vh;
+  }
+
+  .mobile-empty-icon-circle {
+    width: 90px;
+    height: 90px;
+  }
+
+  .mobile-empty-icon {
+    font-size: 48px;
+  }
+}
+
+/* ===========================
+   LARGER SCREENS (3-4 columns)
+=========================== */
+
+@media (min-width: 480px) {
+  .mobile-collection-grid:not(.mosaic-mode) {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .mobile-recommendations-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (min-width: 640px) {
+  .mobile-collection-grid:not(.mosaic-mode) {
+    grid-template-columns: repeat(4, 1fr);
+    gap: 14px;
+  }
+
+  .mobile-recommendations-grid {
+    grid-template-columns: repeat(4, 1fr);
+    gap: 14px;
+  }
+
+  .mobile-all-games-header {
+    padding: 24px 20px;
+  }
+
+  .mobile-all-games-header-title {
+    font-size: 30px;
+  }
+
+  .mobile-all-games-header-count {
+    font-size: 15px;
+  }
+
+  .mobile-section-title {
+    font-size: 22px;
+  }
+}
+
+/* ===========================
+   ACCESSIBILITY
+=========================== */
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* Focus states for keyboard navigation */
+button:focus-visible,
+a:focus-visible {
+  outline: 3px solid #00d9ff;
+  outline-offset: 2px;
+}
+
+/* High contrast mode */
+@media (prefers-contrast: high) {
+  .mobile-collection-card,
+  .mobile-recommendation-card {
+    border: 2px solid rgba(79, 172, 254, 0.6);
+  }
+
+  .mobile-collection-remove-btn {
+    border: 3px solid rgba(255, 255, 255, 0.9);
+  }
+
+  .mobile-browse-btn {
+    border: 2px solid #0f172a;
+  }
+}

@@ -1,0 +1,504 @@
+/* react-app/src/pages/NotFound/notFound.css */
+
+.notfound-container {
+    min-height: 100vh;
+    background: linear-gradient(135deg, rgba(10, 10, 15, 1), rgba(15, 15, 25, 1));
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    position: relative;
+    overflow: hidden;
+}
+
+/* Animated starfield background */
+.notfound-stars,
+.notfound-stars2,
+.notfound-stars3 {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+}
+
+.notfound-stars {
+    background: transparent;
+    box-shadow:
+        1000px 1000px #00d9ff, 1500px 500px #00d9ff, 800px 1200px #00d9ff,
+        300px 300px #2b7ae2, 1800px 800px #2b7ae2, 400px 1400px #2b7ae2,
+        600px 200px #fff, 1200px 1600px #fff, 1600px 400px #fff;
+    animation: notfoundStars 50s linear infinite;
+}
+
+.notfound-stars:after {
+    content: " ";
+    position: absolute;
+    top: 100%;
+    width: 1px;
+    height: 1px;
+    background: transparent;
+    box-shadow:
+        1000px 1000px #00d9ff, 1500px 500px #00d9ff, 800px 1200px #00d9ff,
+        300px 300px #2b7ae2, 1800px 800px #2b7ae2, 400px 1400px #2b7ae2,
+        600px 200px #fff, 1200px 1600px #fff, 1600px 400px #fff;
+}
+
+.notfound-stars2 {
+    background: transparent;
+    box-shadow:
+        700px 700px #00d9ff, 1300px 300px #00d9ff, 500px 900px #00d9ff,
+        1700px 1100px #2b7ae2, 900px 1500px #2b7ae2;
+    animation: notfoundStars 100s linear infinite;
+    width: 2px;
+    height: 2px;
+}
+
+.notfound-stars2:after {
+    content: " ";
+    position: absolute;
+    top: 100%;
+    width: 2px;
+    height: 2px;
+    background: transparent;
+    box-shadow:
+        700px 700px #00d9ff, 1300px 300px #00d9ff, 500px 900px #00d9ff,
+        1700px 1100px #2b7ae2, 900px 1500px #2b7ae2;
+}
+
+.notfound-stars3 {
+    background: transparent;
+    box-shadow:
+        400px 400px #fff, 1100px 1100px #fff, 1400px 200px #fff;
+    animation: notfoundStars 150s linear infinite;
+    width: 3px;
+    height: 3px;
+}
+
+.notfound-stars3:after {
+    content: " ";
+    position: absolute;
+    top: 100%;
+    width: 3px;
+    height: 3px;
+    background: transparent;
+    box-shadow:
+        400px 400px #fff, 1100px 1100px #fff, 1400px 200px #fff;
+}
+
+@keyframes notfoundStars {
+    from {
+        transform: translateY(0);
+    }
+
+    to {
+        transform: translateY(-2000px);
+    }
+}
+
+.notfound-content {
+    position: relative;
+    z-index: 10;
+    text-align: center;
+    max-width: 700px;
+    width: 100%;
+    background: linear-gradient(135deg, rgba(15, 15, 25, 0.95), rgba(20, 20, 35, 0.95));
+    border: 1px solid rgba(0, 217, 255, 0.2);
+    border-radius: 20px;
+    padding: 60px 40px;
+    box-shadow:
+        0 20px 60px rgba(0, 0, 0, 0.7),
+        0 0 100px rgba(0, 217, 255, 0.15);
+    backdrop-filter: blur(10px);
+    animation: notfoundSlideUp 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+@keyframes notfoundSlideUp {
+    from {
+        opacity: 0;
+        transform: translateY(60px) scale(0.9);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+.notfound-glitch-wrapper {
+    margin-bottom: 30px;
+    min-height: 170px;
+}
+
+.notfound-glitch {
+    font-size: 80px;
+    font-weight: 900;
+    color: #00d9ff;
+    text-shadow:
+        0 0 20px rgba(0, 217, 255, 0.8),
+        0 0 40px rgba(0, 217, 255, 0.5),
+        0 0 60px rgba(0, 217, 255, 0.3);
+    margin: 0;
+    position: relative;
+    animation: notfoundPulse 2s ease-in-out infinite;
+}
+
+.notfound-glitch::before,
+.notfound-glitch::after {
+    content: attr(data-text);
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.notfound-glitch::before {
+    animation: notfoundGlitch1 0.5s infinite;
+    color: #ff006e;
+    z-index: -1;
+}
+
+.notfound-glitch::after {
+    animation: notfoundGlitch2 0.5s infinite;
+    color: #00d9ff;
+    z-index: -2;
+}
+
+@keyframes notfoundPulse {
+
+    0%,
+    100% {
+        text-shadow:
+            0 0 20px rgba(0, 217, 255, 0.8),
+            0 0 40px rgba(0, 217, 255, 0.5),
+            0 0 60px rgba(0, 217, 255, 0.3);
+    }
+
+    50% {
+        text-shadow:
+            0 0 30px rgba(0, 217, 255, 1),
+            0 0 60px rgba(0, 217, 255, 0.7),
+            0 0 90px rgba(0, 217, 255, 0.5);
+    }
+}
+
+@keyframes notfoundGlitch1 {
+    0% {
+        transform: translate(0);
+    }
+
+    20% {
+        transform: translate(-3px, 3px);
+    }
+
+    40% {
+        transform: translate(-3px, -3px);
+    }
+
+    60% {
+        transform: translate(3px, 3px);
+    }
+
+    80% {
+        transform: translate(3px, -3px);
+    }
+
+    100% {
+        transform: translate(0);
+    }
+}
+
+@keyframes notfoundGlitch2 {
+    0% {
+        transform: translate(0);
+    }
+
+    20% {
+        transform: translate(3px, -3px);
+    }
+
+    40% {
+        transform: translate(3px, 3px);
+    }
+
+    60% {
+        transform: translate(-3px, -3px);
+    }
+
+    80% {
+        transform: translate(-3px, 3px);
+    }
+
+    100% {
+        transform: translate(0);
+    }
+}
+
+.notfound-icon {
+    font-size: 80px;
+    margin: 20px 0;
+    animation: notfoundBounce 2s ease-in-out infinite;
+    filter: drop-shadow(0 0 20px rgba(0, 217, 255, 0.5));
+}
+
+@keyframes notfoundBounce {
+
+    0%,
+    100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-20px);
+    }
+}
+
+.notfound-title {
+    color: #fff;
+    font-size: 36px;
+    margin: 20px 0 10px;
+    font-weight: 700;
+    background: linear-gradient(135deg, #fff, #00d9ff);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.notfound-subtitle {
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 18px;
+    margin-bottom: 30px;
+}
+
+.notfound-message {
+    margin: 30px 0;
+    padding: 25px;
+    background: linear-gradient(135deg, rgba(0, 217, 255, 0.08), rgba(43, 122, 226, 0.08));
+    border-radius: 12px;
+    border-left: 4px solid #00d9ff;
+}
+
+.notfound-message p {
+    color: rgba(255, 255, 255, 0.8);
+    font-size: 14px;
+    line-height: 1.6;
+    margin: 8px 0;
+}
+
+.notfound-hint {
+    color: #00d9ff !important;
+    font-weight: 600;
+}
+
+.notfound-actions {
+    display: flex;
+    gap: 15px;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin: 30px 0;
+}
+
+.notfound-btn {
+    padding: 14px 30px;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.notfound-btn::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: rgba(255, 255, 255, 0.2);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.notfound-btn:hover::before {
+    opacity: 1;
+}
+
+.notfound-btn-primary {
+    background: linear-gradient(135deg, #00d9ff, #2b7ae2);
+    color: #000;
+}
+
+.notfound-btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(0, 217, 255, 0.5);
+}
+
+.notfound-btn-secondary {
+    background: rgba(0, 217, 255, 0.1);
+    color: #00d9ff;
+    border: 2px solid rgba(0, 217, 255, 0.3);
+}
+
+.notfound-btn-secondary:hover {
+    transform: translateY(-2px);
+    background: rgba(0, 217, 255, 0.2);
+    border-color: #00d9ff;
+    box-shadow: 0 8px 20px rgba(0, 217, 255, 0.3);
+}
+
+.notfound-countdown {
+    margin: 25px 0;
+    padding: 15px;
+    background: rgba(0, 217, 255, 0.05);
+    border-radius: 8px;
+    border: 1px solid rgba(0, 217, 255, 0.2);
+}
+
+.notfound-countdown p {
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 14px;
+    margin: 0;
+}
+
+.countdown-number {
+    display: inline-block;
+    color: #00d9ff;
+    font-weight: 900;
+    font-size: 18px;
+    min-width: 25px;
+    text-shadow: 0 0 10px rgba(0, 217, 255, 0.5);
+    animation: countdownPulse 1s ease-in-out infinite;
+}
+
+@keyframes countdownPulse {
+
+    0%,
+    100% {
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(1.1);
+    }
+}
+
+.notfound-links {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-top: 30px;
+    padding-top: 30px;
+    border-top: 1px solid rgba(0, 217, 255, 0.2);
+}
+
+.notfound-link {
+    color: rgba(255, 255, 255, 0.7);
+    text-decoration: none;
+    font-size: 14px;
+    padding: 8px 16px;
+    border-radius: 6px;
+    transition: all 0.3s ease;
+    border: 1px solid transparent;
+}
+
+.notfound-link:hover {
+    color: #00d9ff;
+    background: rgba(0, 217, 255, 0.1);
+    border-color: rgba(0, 217, 255, 0.3);
+    transform: translateY(-2px);
+}
+
+.notfound-footer {
+    position: absolute;
+    bottom: 20px;
+    left: 0;
+    right: 0;
+    text-align: center;
+    z-index: 10;
+}
+
+.notfound-footer p {
+    color: rgba(255, 255, 255, 0.4);
+    font-size: 12px;
+    margin: 0;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .notfound-content {
+        padding: 40px 30px;
+    }
+
+    .notfound-glitch {
+        font-size: 60px;
+    }
+
+    .notfound-icon {
+        font-size: 60px;
+    }
+
+    .notfound-title {
+        font-size: 28px;
+    }
+
+    .notfound-subtitle {
+        font-size: 16px;
+    }
+
+    .notfound-actions {
+        flex-direction: column;
+    }
+
+    .notfound-btn {
+        width: 100%;
+    }
+
+    .notfound-links {
+        flex-direction: column;
+        gap: 10px;
+    }
+}
+
+@media (max-width: 480px) {
+    .notfound-glitch-wrapper {
+
+        min-height: 90px;
+    }
+
+    .notfound-content {
+        padding: 30px 20px;
+    }
+
+    .notfound-glitch {
+        font-size: 50px;
+    }
+
+    .notfound-icon {
+        font-size: 50px;
+    }
+
+    .notfound-title {
+        font-size: 24px;
+    }
+
+    .notfound-subtitle {
+        font-size: 14px;
+    }
+
+    .notfound-message {
+        padding: 20px;
+    }
+
+    .notfound-btn {
+        padding: 12px 24px;
+        font-size: 14px;
+    }
+}
+
+

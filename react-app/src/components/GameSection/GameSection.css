@@ -1,293 +1,477 @@
+/* react-app/src/components/GameSection/GameSection.css */
+
+/* ==========================================
+   🎮 ENHANCED GAME SECTION STYLES
+   ========================================== */
+
+.game-section {
+  margin-bottom: 60px;
+  padding: 32px 40px;
+  border-radius: 24px;
+  position: relative;
+
+  /* glassmorphism background — backdrop-filter REMOVED from base (Fix 2).
+     The semi-transparent bg + border create the same glass look.
+     blur(20px) on 18+ sections was the #2 scroll killer. */
+  background: rgba(255, 255, 255, 0.04);
+  /* No backdrop-filter here — moved to :hover only below */
+  border: 1px solid rgba(255, 255, 255, 0.05);
+
+  /* Multi-layered shadow for depth */
+  box-shadow:
+    0 8px 32px rgba(0, 0, 0, 0.3),
+    inset 0 1px 0 rgba(255, 255, 255, 0.05),
+    inset 0 -1px 0 rgba(0, 0, 0, 0.1);
+
+  /* Fix 3: explicit props only — transition:all recalculated every CSS property
+     (including backdrop-filter) on hover, triggering a full compositor update.
+     translateY also removed from hover below — it causes layout recalc. */
+  transition: border-color 0.4s ease,
+              box-shadow 0.4s ease;
+
+  /* Fix 12a: contain isolates each section's layout context so hover/animation
+     inside one section can't reflow the rest of the page.
+     NOTE: do NOT add contain:paint here — it conflicts with backdrop-filter */
+  contain: layout style;
+
+  /* Fix 12b: browser skips paint, layout, and compositing for off-screen sections.
+     contain-intrinsic-size prevents layout jumps when sections are skipped. */
+  content-visibility: auto;
+  contain-intrinsic-size: 0 420px;
+}
+
+/* Fix 2: blur only on hover — compositor layer created only when user interacts,
+   zero cost during scroll. @media (hover:hover) skips it on touch devices. */
+@media (hover: hover) {
+  .game-section:hover {
+    backdrop-filter: blur(8px);
+  }
+}
+
+/* Subtle glow effect on hover */
+.game-section::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  border-radius: 24px;
+  background: linear-gradient(135deg,
+      rgba(102, 126, 234, 0.05) 0%,
+      rgba(118, 75, 162, 0.05) 50%,
+      rgba(245, 87, 108, 0.05) 100%);
+  opacity: 0;
+  transition: opacity 0.4s ease;
+  pointer-events: none;
+}
+
+.game-section:hover::before {
+  opacity: 1;
+}
+
+.game-section:hover {
+  /* Fix 3: translateY(-2px) REMOVED — it forces a layout pass repositioning
+     every sibling section. Border + shadow change gives the same depth feel. */
+  border-color: rgba(102, 126, 234, 0.15);
+  box-shadow:
+    0 12px 48px rgba(0, 0, 0, 0.4),
+    0 0 0 1px rgba(102, 126, 234, 0.1),
+    inset 0 1px 0 rgba(255, 255, 255, 0.08);
+}
+
+/* ==========================================
+   📋 SECTION HEADER
+   ========================================== */
+
+.section-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 25px;
+  padding: 0 4px;
+}
 
 
-.section-title {
-  font-size: 20px;
+.game-section:hover .section-title {
+  transform: translateX(4px);
+}
+
+/* ==========================================
+   🎯 BUTTONS & CONTROLS
+   ========================================== */
+
+.BoxButtons {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.HoriSlideBtn {
+  background: rgba(102, 126, 234, 0.1);
+  padding: 10px 20px;
+  border-radius: 50px;
+  font-size: 11px;
   font-weight: 600;
-  color: #f1f5f9;
-  margin-bottom: 16px;
-}
-
-.game-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
-  gap: 20px;
-  padding: 0 10px;
-}
-
-/* View More */
-.view-more-btn {
-  margin: 20px auto 0;
-  display: block;
-  padding: 10px 22px;
-  border-radius: 20px;
-  font-size: 14px;
-  border: 1px solid #334155;
-  background: #1e293b;
-  color: #e2e8f0;
   cursor: pointer;
-  transition: 0.2s;
+  border: 1px solid rgba(102, 126, 234, 0.2);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
 }
 
-.view-more-btn:hover {
-  background: #334155;
+.HoriSlideBtn:hover {
+  background: rgba(102, 126, 234, 0.2);
+  border-color: rgba(102, 126, 234, 0.4);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
 }
 
+.HoriSlideBtn:active {
+  transform: translateY(0);
+}
 
+/* ==========================================
+   🔘 SCROLL CONTROLS
+   ========================================== */
 
+.scroll-controls {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
 
-.game-section-title {
+.scroll-btn {
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: #fff;
   font-size: 18px;
   font-weight: 600;
-  margin-bottom: 16px;
-  color: #fff;
-  padding-left: 10px;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  backdrop-filter: blur(10px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
 }
 
-.game-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
-  gap: 20px;
-  padding: 0 10px;
+.scroll-btn:hover {
+  background: rgba(102, 126, 234, 0.2);
+  border-color: rgba(102, 126, 234, 0.4);
+  transform: scale(1.1);
+  box-shadow: 0 6px 16px rgba(102, 126, 234, 0.3);
 }
 
-/* FEATURED SLIDER */
-/* .slider-wrapper {
+.scroll-btn:active {
+  transform: scale(0.95);
+}
+
+.scroll-btn:focus-visible {
+  outline: 2px solid rgba(102, 126, 234, 0.6);
+  outline-offset: 3px;
+}
+
+/* ==========================================
+   🎠 HORIZONTAL SCROLL WRAPPER
+   ========================================== */
+
+.horizontal-scroll-wrapper {
   position: relative;
   width: 100%;
   overflow: hidden;
-  margin-top: 10px;
+  margin: 8px 0;
 }
 
-.slider-container {
+.horizontal-scroll-container {
   display: flex;
-  gap: 14px;
+  gap: 20px;
   overflow-x: auto;
   scroll-behavior: smooth;
-  padding: 10px 0;
-} */
+  padding: 12px 0 24px 0;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(102, 126, 234, 0.4) transparent;
+}
+
+.horizontal-scroll-container::-webkit-scrollbar {
+  height: 6px;
+}
+
+.horizontal-scroll-container::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.03);
+  border-radius: 10px;
+}
+
+.horizontal-scroll-container::-webkit-scrollbar-thumb {
+  background: linear-gradient(90deg, rgba(102, 126, 234, 0.4), rgba(118, 75, 162, 0.4));
+  border-radius: 10px;
+  transition: background 0.3s ease;
+}
+
+.horizontal-scroll-container::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(90deg, rgba(102, 126, 234, 0.6), rgba(118, 75, 162, 0.6));
+}
+
+.horizontal-scroll-container .game-card {
+  flex-shrink: 0;
+  min-width: 180px;
+}
+
+/* ==========================================
+   🎯 GAMES GRID
+   ========================================== */
+
+.games-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+  gap: 20px;
+  row-gap: 28px;
+  padding: 4px;
+}
+
+/* ==========================================
+   🎪 SLIDER STYLES
+   ========================================== */
 
 .slider-wrapper {
+  position: relative;
   overflow: hidden;
   width: 100%;
+  margin-top: 12px;
+  border-radius: 16px;
 }
 
 .slider-track {
   display: flex;
-  gap: 16px;
+  gap: 18px;
   width: max-content;
   will-change: transform;
-  padding: 10px 0;
-}
-
-.slider-container::-webkit-scrollbar {
-  display: none;
-}
-
-.slide-btn {
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  z-index: 5;
-  background: rgba(0, 0, 0, 0.6);
-  border: none;
-  color: white;
-  font-size: 26px;
-  width: 36px;
-  height: 36px;
-  border-radius: 50%;
-  cursor: pointer;
-}
-
-.slide-btn.left {
-  left: 5px;
-}
-
-.slide-btn.right {
-  right: 5px;
-}
-
-/* Game card inside slider */
-.slider-container .game-card {
-
-  flex-shrink: 0;
-}
-
-@media (max-width: 600px) {
-  .slider-container .game-card {
-    min-width: 160px;
-  }
-}
-
-@media (max-width: 768px) {
-  .game-grid {
-    grid-template-columns: repeat(2, 1fr);
-    /* 2 cards per row */
-    gap: 16px;
-  }
-
-
-
-  .game-card img {
-    height: 140px;
-  }
-
-  .game-card-title {
-    font-size: 13px;
-  }
-}
-
-@media (max-width: 480px) {
-  .game-grid {
-    grid-template-columns: repeat(1, 1fr);
-    /* 1 card per row */
-  }
-
-  .game-card img {
-    height: 160px;
-  }
-}
-
-.slider-wrapper {
-  position: relative;
-  overflow: hidden;
-  width: 100%;
-  margin-top: 10px;
+  padding: 12px 0 24px;
 }
 
 .slider-container {
   display: flex;
-  gap: 14px;
+  gap: 18px;
   overflow-x: auto;
   scroll-behavior: smooth;
-  padding-bottom: 10px;
+  padding: 12px 0 20px;
+  scrollbar-width: none;
 }
 
 .slider-container::-webkit-scrollbar {
   display: none;
 }
 
-
-
-.game-section {
-  margin-bottom: 40px;
-  padding-left: 40px;
-  padding-right: 40px;
-  transition: box-shadow 0.6s ease, transform 0.6s ease, background 0.6s ease;
-  border-radius: 40px;
-  box-shadow:
-    inset 0 0 40px rgba(255, 255, 255, 0.03),
-    inset 0 0 80px rgba(0, 150, 255, 0.12),
-    0 0 50px rgba(0, 0, 0, 0.7);
-}
-
-
-
+/* ==========================================
+   🎨 FEATURED SECTION SPECIAL STYLING
+   ========================================== */
 
 #featuredSection {
+  background: linear-gradient(135deg,
+      rgba(102, 126, 234, 0.05) 0%,
+      rgba(118, 75, 162, 0.05) 100%);
+  border: 1px solid rgba(102, 126, 234, 0.1);
+  padding-top: 36px;
+  padding-bottom: 20px;
+  /* Featured section is above fold — no content-visibility skip */
+  content-visibility: visible;
+}
 
-  
-  border-radius: 40px;
-  
-  padding-top: 30px;
-  padding-bottom: 15px;
-  
+#featuredSection:hover {
+  background: linear-gradient(135deg,
+      rgba(102, 126, 234, 0.08) 0%,
+      rgba(118, 75, 162, 0.08) 100%);
+  box-shadow:
+    0 12px 48px rgba(102, 126, 234, 0.2),
+    0 0 0 1px rgba(102, 126, 234, 0.15);
+}
+
+#featuredSection .slider-container,
+#featuredSection .slider-track {
+  padding: 12px 0 28px;
+}
+
+#featuredSection .game-card {
+  max-height: 140px !important;
+  min-width: 120px;
+}
+
+/* ==========================================
+   🔥 HOT & POPULAR SECTIONS
+   ========================================== */
+
+#hotGames,
+#popularSection {
+  box-shadow: none !important;
+  background: rgba(245, 87, 108, 0.03);
+  border: 1px solid rgba(245, 87, 108, 0.1);
+  /* hotGames is above fold — keep visible */
+  content-visibility: visible;
+}
+
+#hotGames:hover,
+#popularSection:hover {
+  background: rgba(245, 87, 108, 0.05);
+  border-color: rgba(245, 87, 108, 0.15);
+}
+
+#hotGames .section-title,
+#popularSection .section-title {
+  margin-bottom: 28px;
+  margin-left: 10px;
+}
+
+#hotGames .game-card,
+#popularSection .game-card {
+  position: relative !important;
+  width: 100% !important;
+  aspect-ratio: 3 / 4 !important;
+  border-radius: 12px !important;
+  max-width: none !important;
+  max-height: none !important;
+}
+
+/* ==========================================
+   🌶️ TOP PICKS SECTION
+   ========================================== */
+
+#top-picks {
+  background: linear-gradient(135deg,
+      rgba(102, 126, 234, 0.08) 0%,
+      rgba(79, 70, 229, 0.05) 50%,
+      rgba(118, 75, 162, 0.08) 100%);
+  border: 1px solid rgba(102, 126, 234, 0.15);
+  box-shadow:
+    0 12px 48px rgba(102, 126, 234, 0.15),
+    inset 0 1px 0 rgba(255, 255, 255, 0.08);
+}
+
+#top-picks:hover {
+  box-shadow:
+    0 16px 64px rgba(102, 126, 234, 0.25),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1);
+}
+
+#top-picks .section-title {
+  margin-bottom: 16px;
+  margin-left: 10px;
+  margin-top: 5px;
+}
+
+/* ==========================================
+   📂 HOME CATEGORIES
+   ========================================== */
+
+#HomeCategories {
+  box-shadow: none !important;
+  background: transparent;
+  border: none;
 }
 
 
-#featuredSection .game-card:hover {
-  box-shadow: 0 23px 32px rgb(9 40 101);
+
+.HomepageCat .mosaic-page {
+  padding-top: 0;
 }
 
-#featuredSection .slider-container {
-  padding: 10px 0px 30px 0px;
+/* ==========================================
+   🎯 "SEE ALL" CARD
+   ========================================== */
+
+.see-all-card {
+  flex-shrink: 0;
+  border-radius: 16px;
+  background: linear-gradient(135deg,
+      rgba(102, 126, 234, 0.1) 0%,
+      rgba(118, 75, 162, 0.1) 100%);
+  border: 2px solid rgba(102, 126, 234, 0.2);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  overflow: hidden;
+  backdrop-filter: blur(10px);
 }
 
-.game-card:hover .play-button {
-  background: linear-gradient(58deg, #0d3648 13%, #3753c5 100%);
+.see-all-card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(135deg,
+      rgba(102, 126, 234, 0.1) 0%,
+      rgba(118, 75, 162, 0.15) 100%);
+  opacity: 0;
+  transition: opacity 0.3s ease;
 }
 
-.game-card:hover {
-  box-shadow:0 23px 32px rgb(53 57 64) !important;
-
+.see-all-card:hover {
+  transform: translateY(-6px) scale(1.02);
+  border-color: rgba(102, 126, 234, 0.4);
+  box-shadow:
+    0 12px 32px rgba(102, 126, 234, 0.3),
+    0 0 0 1px rgba(102, 126, 234, 0.2);
 }
 
-
-
-@media (max-width: 430px) {
-  #featuredSection.game-section {
-    padding-left: 20px;
-    padding-right: 0px;
-  }
+.see-all-card:hover::before {
+  opacity: 1;
 }
 
-
-.game-section:hover {
-  transition: box-shadow 0.6s ease, transform 0.6s ease;
-  background: linear-gradient(45deg, #161616 13%, #0f3848 66%, rgba(111, 38, 41, 0));
-
-  box-shadow: inset 0 0 25px rgba(0, 150, 255, 0.25), inset 0 0 50px rgba(0, 150, 255, 0.15), 0 4px 20px rgba(0, 0, 0, 0.4);
+.see-all-card:active {
+  transform: translateY(-3px) scale(1.01);
 }
 
-
-
-.game-section:hover {
-  transform: translateY(-4px);
-  animation: gameGlow 1s ease-in-out forwards;
+.see-all-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  z-index: 1;
+  position: relative;
+  padding: 24px;
 }
 
-
-@keyframes gameGlow {
-  0% {
-    box-shadow: inset 0 0 20px rgba(0, 160, 255, 0.15);
-  }
-
-  100% {
-    box-shadow:
-      inset 0 0 40px rgba(44, 166, 236, 0.35),
-      inset 0 0 80px rgba(31, 159, 233, 0.15);
-  }
+.see-all-icon {
+  font-size: 36px;
+  color: #667eea;
+  font-weight: bold;
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-
-
-
-/* VIEW MORE BUTTON for NON-SLIDER */
-
-:root {
-  --size-default: 22px;
-  --size-sm: 16px;
-  --color-green: #58dd93;
-  --color-black: #000;
+.see-all-card:hover .see-all-icon {
+  transform: translateX(8px) scale(1.1);
 }
 
-@property --angle {
-  syntax: "<angle>";
-  initial-value: 0deg;
-  inherits: false;
+.see-all-text {
+  font-size: 16px;
+  font-weight: 700;
+  color: #e2e8f0;
+  text-align: center;
+  letter-spacing: 0.5px;
 }
 
-@property --glowColor {
-  syntax: "<color>";
-  initial-value: #58dd93;
+.see-all-count {
+  font-size: 14px;
+  color: #a5b4fc;
+  font-weight: 600;
+  padding: 6px 14px;
+  background: rgba(102, 126, 234, 0.2);
+  border-radius: 20px;
+  border: 1px solid rgba(102, 126, 234, 0.3);
 }
 
-@keyframes rotate {
-  0% {
-    --angle: 0deg;
-    --glowColor: var(--color-green);
-  }
-
-  100% {
-    --angle: 360deg;
-    --glowColor: var(--color-green);
-  }
-}
-
-* {
-  box-sizing: border-box;
-}
-
-
+/* ==========================================
+   🎪 VIEW MORE BUTTON
+   ========================================== */
 
 .container {
   display: flex;
@@ -295,42 +479,22 @@
   height: 100%;
   align-items: center;
   justify-content: center;
-  padding: 16px 16px 0px 16px;
+  padding: 24px 16px 8px;
 }
 
 .btn {
+  cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;
-  border-radius: 100px;
+  border-radius: 50px;
   border: none;
   background: none;
   position: relative;
-  padding: 1px;
+  padding: 2px;
   text-decoration: none;
-  transition: all 0.18s ease-in-out;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   transform: translate3d(0, 0, 0);
-}
-
-.btn:after,
-.btn:before {
-  content: "";
-  display: block;
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  border-radius: calc(100px + 1.5px);
-  background-size: 100% 100%;
-  background-position: 0px 0px;
-  background-image: conic-gradient(from var(--angle) at 50% 50%, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0) 33%, #0f7196 50%, rgba(0, 0, 0, 0) 66%, rgba(0, 0, 0, 0) 100%);
-  animation: rotate 2s infinite linear;
-}
-
-.btn:before {
-  animation: rotate 2s infinite linear;
-  filter: blur(20px);
 }
 
 .btn .btnInner {
@@ -338,417 +502,600 @@
   display: flex;
   flex-direction: column;
   width: 100%;
-  padding: 10px 22px;
-  border-radius: 100px;
+  padding: 12px 32px;
+  border-radius: 50px;
   color: #e2e8f0;
-  font-weight: 500;
+  font-weight: 600;
   font-size: 14px;
   z-index: 1;
-  transition: all 0.18s ease;
-  background: rgba(0, 0, 0, 0.3);
-  backdrop-filter: blur(40px);
+  transition: all 0.3s ease;
+  background: rgba(0, 0, 0, 0.4);
+  backdrop-filter: blur(20px);
   backface-visibility: hidden;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
 }
 
 .btn:hover .btnInner {
-  background: rgba(88, 221, 147, 0.1);
+  background: rgba(102, 126, 234, 0.2);
   color: #ffffff;
+  transform: translateY(-2px);
 }
 
 .btn:active {
-  transform: scale(0.95);
+  transform: scale(0.96);
 }
 
-
-/* Trending section  - STARTR */
-
-/* Add these styles to your existing GameSection.css */
-
-/* ========== TRENDING SECTION ========== */
-.trending-section {
-  /* background: linear-gradient(180deg, #0a0e1a 0%, #1a1f35 100%); */
-  padding: 4rem 0;
-}
-
-.trending-header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-
-}
-
-.trending-nav {
-  display: flex;
-  gap: 0.5rem;
-}
-
-.nav-btn {
-  width: 48px;
-  height: 48px;
-  border-radius: 50%;
-  background: rgba(255, 255, 255, 0.1);
-  border: none;
-  color: white;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  backdrop-filter: blur(10px);
-}
-
-.nav-btn:hover {
-  background: rgba(255, 255, 255, 0.2);
-  transform: scale(1.05);
-}
-
-.nav-btn:active {
-  transform: scale(0.95);
-}
-
-/* Trending Wrapper */
-.trending-wrapper {
-  position: relative;
-  padding: 2rem 0;
-}
-
-.trending-container {
-  display: flex;
-  gap: 2rem;
-  overflow-x: auto;
-  scroll-behavior: smooth;
-  padding: 0 2rem 2rem;
-  scrollbar-width: none;
-  -ms-overflow-style: none;
-}
-
-.trending-container::-webkit-scrollbar {
-  display: none;
-}
-
-/* Trending Item */
-.trending-item {
-  position: relative;
-  flex-shrink: 0;
-  min-width: 250px;
-}
-
-/* Background Number */
-.trending-number {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  font-size: 280px;
-  font-weight: 900;
-  color: rgba(255, 255, 255, 0.03);
-  line-height: 1;
-  font-family: 'Arial Black', sans-serif;
-  -webkit-text-stroke: 2px rgba(255, 255, 255, 0.08);
-  text-shadow: 0 0 30px rgba(0, 0, 0, 0.5);
-  pointer-events: none;
-  user-select: none;
-  z-index: 1;
-}
-
-/* Game Card Wrapper */
-.trending-card-wrapper {
-  position: relative;
-  z-index: 10;
-  margin-left: 2rem;
-  transition: transform 0.3s ease;
-}
-
-.trending-card-wrapper:hover {
-  transform: scale(1.05);
-}
-
-/* Rank Badge */
-.rank-badge {
-  position: absolute;
-  bottom: 1rem;
-  right: 1rem;
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
-  background: linear-gradient(135deg, #ffd700 0%, #ffed4e 100%);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-weight: bold;
-  font-size: 1.1rem;
-  color: #1a1f35;
-  box-shadow: 0 4px 12px rgba(255, 215, 0, 0.4);
-  z-index: 20;
-}
-
-/* Gradient Overlays */
-.gradient-left {
-  position: absolute;
-  left: 0;
-  top: 0;
-  bottom: 0;
-  width: 128px;
-  background: linear-gradient(90deg, #0a0e1a 0%, transparent 100%);
-  pointer-events: none;
-  z-index: 100;
-}
-
-.gradient-right {
-  position: absolute;
-  right: 0;
-  top: 0;
-  bottom: 0;
-  width: 128px;
-  background: linear-gradient(270deg, #1a1f35 0%, transparent 100%);
-  pointer-events: none;
-  z-index: 100;
-}
-
-/* Responsive Design */
-@media (max-width: 768px) {
-  .trending-number {
-    font-size: 180px;
-  }
-
-  .trending-item {
-    min-width: 200px;
-  }
-
-  .trending-card-wrapper {
-    margin-left: 1rem;
-  }
-
-  .trending-header {
-    padding: 0 1rem;
-  }
-
-  .trending-container {
-    padding: 0 1rem 2rem;
-  }
-
-  .nav-btn {
-    width: 40px;
-    height: 40px;
-  }
-}
-
-@media (max-width: 480px) {
-  .trending-number {
-    font-size: 140px;
-  }
-
-  .trending-item {
-    min-width: 160px;
-  }
-
-  .rank-badge {
-    width: 32px;
-    height: 32px;
-    font-size: 0.9rem;
-  }
-}
-
-/* Trend section  - END */
-
-
-#featuredSection .game-card {
-  max-height: 120px !important;
-}
-
+/* ==========================================
+   📱 RESPONSIVE DESIGN
+   ========================================== */
 
 @media (max-width: 768px) {
-  .slider-container .game-card {
-    min-width: 110px;
-  }
-
-  #featuredSection .game-card {
-    max-height: 110px !important;
-  }
-
-  #featuredSection.game-section {
-    padding-left: 10px;
-    padding-right: 10px;
-    border: none;
-    box-shadow: none;
-    margin-top: 0px;
+  .game-section {
+    margin-bottom: 40px;
+    padding: 24px 16px;
+    border-radius: 20px;
   }
 
   .section-title {
-    padding-left: 0px;
+    font-size: 1.5rem;
+    padding-left: 0;
   }
 
-  .game-section {
-    margin-bottom: 0px !important;
-    box-shadow: none;
+  #featuredSection.game-section {
+    padding-left: 12px;
+    padding-right: 12px;
   }
 
   .games-grid {
     grid-template-columns: repeat(3, 1fr) !important;
-    gap: 15px;
+    gap: 16px;
   }
 
-  .game-card {
-    max-height: inherit;
-    max-width: initial;
-    margin: auto;
-    width: 100%;
-
+  .slider-container .game-card {
+    min-width: 120px;
   }
 
-  #trending .game-card {
-    max-height: 125px;
-    max-width: 125px;
+  #featuredSection .game-card {
+    max-height: 120px !important;
   }
 
-  .top-picks-section .top-picks-featured .game-card {
-    max-width: none !important;
-    width: 100% !important;
+  .horizontal-scroll-container .game-card {
+    min-width: 140px;
+    max-width: 140px;
   }
 
-.trending-section{
-  padding-left: 10px !important;
-  padding-right: 10px !important;
-}
-.btn .btnInner {
-  font-size: 12px;
-}
-}
+  .scroll-btn {
+    width: 38px;
+    height: 38px;
+    font-size: 16px;
+  }
 
+  .btn .btnInner {
+    font-size: 12px;
+    padding: 10px 24px;
+  }
 
-/* Add to GameSection.css */
-#featuredSection .slider-container {
-  padding: 0px 0px 20px 0px;
-  /* Prevent layout shift on hover */
-  will-change: scroll-position;
-}
+  .see-all-icon {
+    font-size: 28px;
+  }
 
-/* Disable section hover effects on featured slider to reduce conflicts */
-#featuredSection:hover {
-  transform: none;
-  animation: none;
-}
+  .see-all-text {
+    font-size: 14px;
+  }
 
+  .see-all-count {
+    font-size: 12px;
+    padding: 4px 12px;
+  }
 
+  #HomeCategories .section-title {
+    margin-bottom: 30px;
+  }
 
-@media (max-width: 768px) {
-  .game-section:hover {
-    transition: box-shadow 0.6s ease, transform 0.6s ease;
-    background: none !important;
-
-
+  #featuredSection {
+    padding-top: 25px;
   }
 }
 
 @media (max-width: 600px) {
-  .game-section:hover {
-    transition: box-shadow 0.6s ease, transform 0.6s ease;
-    background: none !important;
-
+  .horizontal-scroll-container .game-card {
+    min-width: 120px;
+    max-width: 120px;
   }
-
 }
 
 @media (max-width: 480px) {
-  .game-section:hover {
-    transition: box-shadow 0.6s ease, transform 0.6s ease;
-    background: none !important;
+  .game-section {
+    padding: 20px 12px;
+    border-radius: 16px;
+  }
 
+  .section-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+  }
 
+  .scroll-controls {
+    align-self: flex-end;
+    display: none;
+  }
+}
+
+/* ==========================================
+   ♿ ACCESSIBILITY
+   ========================================== */
+
+.scroll-btn:focus-visible,
+.HoriSlideBtn:focus-visible,
+.btn:focus-visible,
+.see-all-card:focus-visible {
+  outline: 2px solid rgba(102, 126, 234, 0.6);
+  outline-offset: 3px;
+  border-radius: 8px;
+}
+
+@media (prefers-contrast: high) {
+  .game-section {
+    border-color: rgba(255, 255, 255, 0.3);
+  }
+
+  .scroll-btn,
+  .HoriSlideBtn {
+    border-width: 2px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+
+  .scroll-btn,
+  .see-all-card,
+  .horizontal-scroll-container,
+  .game-section {
+    transition: none;
+    animation: none;
+  }
+
+  .btn::after,
+  .btn::before {
+    animation: none;
   }
 }
 
 
-/* Shared styles for all sections */
-.game-section {
-  padding: 20px 20px;
-  margin: 0 auto;
-  margin-bottom: 40px;
+.section-emoji {
+  font-size: 35px;
+  filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.3));
+  /* Emojis keep their natural color */
 }
 
-.recent-content,
-.popular-content,
-.hot-content,
-.top100-content {
-  max-width: 1400px;
-  margin: 0 auto;
-  padding: 0 2rem;
+.section-text {
+  /* Gradient only on text */
+  background: linear-gradient(135deg, #ffffff 0%, #a5b4fc 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  letter-spacing: -0.5px;
 }
 
-.recent-header,
-.popular-header,
-.hot-header,
-.top100-header {
-  margin-bottom: 2rem;
+.Title-container-sections {
+  display: flex;
+
 }
 
 
-.games-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
-  gap: 15px;
+.Title-align {
+  align-items: center;
+  display: block;
+  margin-bottom: 0px;
+  margin-top: 2px;
+  margin-left: 20px;
 }
 
-/* Responsive Design */
-@media (max-width: 1200px) {
 
-  .recent-content,
-  .popular-content,
-  .hot-content,
-  .top100-content {
-    padding: 0 1.5rem;
+.no-padding {
+  padding: 0 !important;
+}
+
+.no-padding-x {
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+}
+
+.no-padding-y {
+  padding-top: 0 !important;
+  padding-bottom: 0 !important;
+}
+
+.no-padding-top {
+  padding-top: 0 !important;
+}
+
+.no-padding-right {
+  padding-right: 0 !important;
+}
+
+.no-padding-bottom {
+  padding-bottom: 0 !important;
+}
+
+.no-padding-left {
+  padding-left: 0 !important;
+}
+
+.no-margin {
+  margin: 0 !important;
+}
+
+.no-margin-x {
+  margin-left: 0 !important;
+  margin-right: 0 !important;
+}
+
+.no-margin-y {
+  margin-top: 0 !important;
+  margin-bottom: 0 !important;
+}
+
+.no-margin-top {
+  margin-top: 0 !important;
+}
+
+.no-margin-right {
+  margin-right: 0 !important;
+}
+
+.no-margin-bottom {
+  margin-bottom: 0 !important;
+}
+
+.no-margin-left {
+  margin-left: 0 !important;
+}
+
+
+
+#featuredSection .BoxButtons {
+  display: none;
+}
+
+
+/* ==========================================
+   🔘 SCROLL CONTROLS - PREMIUM UPGRADE
+   ========================================== */
+
+.scroll-controls {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+}
+
+.scroll-btn {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, rgba(79, 172, 254, 0.12) 0%, rgba(102, 126, 234, 0.12) 100%);
+  border: 2px solid rgba(79, 172, 254, 0.3);
+  color: #00d4ff;
+  font-size: 20px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  backdrop-filter: blur(10px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow:
+    0 4px 16px rgba(0, 0, 0, 0.3),
+    inset 0 1px 0 rgba(255, 255, 255, 0.05);
+  position: relative;
+  overflow: hidden;
+}
+
+.scroll-btn::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg,
+      transparent,
+      rgba(79, 172, 254, 0.3),
+      transparent);
+  transition: left 0.5s ease;
+}
+
+.scroll-btn:hover::before {
+  left: 100%;
+}
+
+.scroll-btn:hover {
+  background: linear-gradient(135deg, rgba(79, 172, 254, 0.25) 0%, rgba(102, 126, 234, 0.25) 100%);
+  border-color: rgba(79, 172, 254, 0.6);
+  transform: scale(1.1) translateY(-2px);
+  box-shadow:
+    0 8px 24px rgba(79, 172, 254, 0.4),
+    0 0 20px rgba(0, 212, 255, 0.3),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  color: #fff;
+}
+
+.scroll-btn:active {
+  transform: scale(0.95) translateY(0);
+  box-shadow:
+    0 2px 8px rgba(79, 172, 254, 0.3),
+    inset 0 1px 0 rgba(255, 255, 255, 0.05);
+}
+
+.scroll-btn:focus-visible {
+  outline: 2px solid rgba(79, 172, 254, 0.6);
+  outline-offset: 4px;
+  border-radius: 50%;
+}
+
+/* Arrow styling for better visibility */
+.scroll-btn span[aria-hidden="true"] {
+  font-size: 20px;
+  font-weight: 700;
+  text-shadow: 0 2px 8px rgba(0, 212, 255, 0.5);
+  transition: transform 0.3s ease;
+}
+
+.scroll-btn:hover span[aria-hidden="true"] {
+  transform: scale(1.2);
+}
+
+.scroll-btn.left:hover span[aria-hidden="true"] {
+  animation: slideLeft 0.6s ease infinite;
+}
+
+.scroll-btn.right:hover span[aria-hidden="true"] {
+  animation: slideRight 0.6s ease infinite;
+}
+
+@keyframes slideLeft {
+
+  0%,
+  100% {
+    transform: translateX(0);
   }
 
-  .games-grid {
-    grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+  50% {
+    transform: translateX(-3px);
   }
 }
+
+@keyframes slideRight {
+
+  0%,
+  100% {
+    transform: translateX(0);
+  }
+
+  50% {
+    transform: translateX(3px);
+  }
+}
+
+/* ==========================================
+   🎯 "SEE ALL" BUTTON - PREMIUM UPGRADE
+   ========================================== */
+
+.HoriSlide {
+  position: relative;
+}
+
+.HoriSlideBtn {
+  background: linear-gradient(135deg, rgba(79, 172, 254, 0.12) 0%, rgba(102, 126, 234, 0.12) 100%);
+  padding: 12px 28px;
+  border-radius: 50px;
+  font-size: 12px;
+  font-weight: 700;
+  cursor: pointer;
+  border: 2px solid rgba(79, 172, 254, 0.3);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  text-transform: capitalize;
+  letter-spacing: 1px;
+  color: #00d4ff;
+  box-shadow:
+    0 4px 16px rgba(0, 0, 0, 0.3),
+    inset 0 1px 0 rgba(255, 255, 255, 0.05);
+  position: relative;
+  overflow: hidden;
+  backdrop-filter: blur(10px);
+}
+
+.HoriSlideBtn::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg,
+      transparent,
+      rgba(79, 172, 254, 0.3),
+      transparent);
+  transition: left 0.5s ease;
+}
+
+.HoriSlideBtn:hover::before {
+  left: 100%;
+}
+
+.HoriSlideBtn:hover {
+  background: linear-gradient(135deg, rgba(79, 172, 254, 0.25) 0%, rgba(102, 126, 234, 0.25) 100%);
+  border-color: rgba(79, 172, 254, 0.6);
+  transform: translateY(-3px);
+  box-shadow:
+    0 8px 24px rgba(79, 172, 254, 0.5),
+    0 0 30px rgba(0, 212, 255, 0.3),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  color: #fff;
+}
+
+.HoriSlideBtn:active {
+  transform: translateY(-1px);
+  box-shadow:
+    0 4px 12px rgba(79, 172, 254, 0.4),
+    inset 0 1px 0 rgba(255, 255, 255, 0.05);
+}
+
+.HoriSlideBtn span {
+  position: relative;
+  z-index: 1;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+}
+
+/* ==========================================
+   📱 RESPONSIVE ADJUSTMENTS
+   ========================================== */
 
 @media (max-width: 768px) {
-  .game-section {
-    padding: 20px 10px;
+  .scroll-btn {
+    width: 40px;
+    height: 40px;
+    font-size: 18px;
   }
 
-  .recent-content,
-  .popular-content,
-  .hot-content,
-  .top100-content {
-    padding: 0 1rem;
-  }
-
-
-
-  .games-grid {
-    grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
-    gap: 15px;
+  .HoriSlideBtn {
+    padding:8px 8px;
+    font-size: 11px;
   }
 }
 
 @media (max-width: 480px) {
-  .game-section {
-    padding: 20px 10px;
+  .scroll-btn {
+    width: 36px;
+    height: 36px;
+    font-size: 16px;
   }
 
-  .recent-content,
-  .popular-content,
-  .hot-content,
-  .top100-content {
-    padding: 0 0.75rem;
+  .HoriSlideBtn {
+    padding: 8px 8px;
+    font-size: 10px;
+    letter-spacing: 0.5px;
   }
 
-  .games-grid {
-    grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
-    gap: 15px;
+  .scroll-controls {
+    gap: 8px;
+  }
+}
+
+/* ==========================================
+   ♿ ACCESSIBILITY ENHANCEMENTS
+   ========================================== */
+
+@media (prefers-reduced-motion: reduce) {
+
+  .scroll-btn,
+  .HoriSlideBtn {
+    transition: none;
+    animation: none;
+  }
+
+  .scroll-btn::before,
+  .HoriSlideBtn::before {
+    animation: none;
+  }
+
+  .scroll-btn.left:hover span[aria-hidden="true"],
+  .scroll-btn.right:hover span[aria-hidden="true"] {
+    animation: none;
+  }
+}
+
+@media (prefers-contrast: high) {
+
+  .scroll-btn,
+  .HoriSlideBtn {
+    border-width: 3px;
+    border-color: rgba(79, 172, 254, 0.8);
   }
 }
 
 
 
-#featuredSection.game-section{
-  box-shadow: none !important;
+
+.section-title .section-icon {
+  width: 38px;
+  height: 38px;
+  margin-right: 8px;
+  vertical-align: middle;
+  object-fit: contain;
+  position: relative;
+  top: -3px;
 }
 
-#featuredSection.game-section:hover{
-  box-shadow: none !important;
-  background: none !important;
+
+
+.HomepageCat .Title-align {
+  margin-top: 0px;
+}
+
+
+
+
+@media (max-width: 768px) {
+
+.section-emoji{
+  margin-bottom: 20px;
+}
+
+#hotGames .section-title, #popularSection .section-title{
+    margin-left: 10px;
+    align-items: center;
+    display: block;
+    margin-bottom: 0px;
+    margin-top: 10px;
+}
+
+#HomeCategories .section-title{
+  margin-left: 5px;
+    align-items: center;
+    display: block;
+    margin-bottom: 30px;
+    margin-top: 6px;
+}
+
+.section-title{
+  gap: 0px !important;
+}
+
+}
+
+
+
+ .section-title {
+  position: relative;
+  z-index: 1;
+  font-size: 36px;
+  font-weight: 900;
+  /* margin: 0 0 48px 0; */
+  text-align: left;
+  background: linear-gradient(135deg, #ffffff 0%, #00d4ff 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  text-shadow: 0 0 40px rgba(0, 212, 255, 0.3);
+  letter-spacing: -1px;
+  display: flex;
+  align-items: center;
+  justify-content: left;
+  gap: 0px;
+  animation: slideInDown 0.6s ease-out 0.2s both;
+}
+
+
+@media (max-width: 768px) {
+    .section-title {
+        font-size: 20px !important;
+    }
+}
+
+
+.HomepageCat#categories .container{
+  padding: 0px !important;
 }

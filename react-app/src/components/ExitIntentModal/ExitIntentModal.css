@@ -1,0 +1,394 @@
+/* react-app/src/components/ExitIntentModal/ExitIntentModal.css */
+/* Mirrors PromoPopup.css naming / animation conventions
+   All classes prefixed .eim- to avoid collisions             */
+
+/* ═══════════ OVERLAY ═══════════ */
+.eim-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(2, 8, 24, 0.85);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+  padding: 16px;
+  animation: eimOverlayIn 0.38s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+.eim-overlay--out { animation: eimOverlayOut 0.36s ease forwards; }
+
+@keyframes eimOverlayIn  { from { opacity: 0; }  to { opacity: 1; } }
+@keyframes eimOverlayOut { to   { opacity: 0; } }
+
+/* ── Ambient glow blobs (red palette) ── */
+.eim-blob {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(88px);
+  pointer-events: none;
+  opacity: 0.4;
+  animation: eimBlobDrift 9s ease-in-out infinite alternate;
+}
+.eim-blob--a {
+  width: 380px; height: 380px;
+  background: radial-gradient(circle, rgba(255, 71, 87, 0.28), transparent 68%);
+  top: 8%; left: 18%;
+}
+.eim-blob--b {
+  width: 320px; height: 320px;
+  background: radial-gradient(circle, rgba(255, 150, 50, 0.22), transparent 68%);
+  bottom: 8%; right: 18%;
+  animation-delay: -4.5s;
+}
+@keyframes eimBlobDrift {
+  from { transform: translate(0, 0) scale(1); }
+  to   { transform: translate(28px, -18px) scale(1.07); }
+}
+
+/* ═══════════ CARD ═══════════ */
+.eim-card {
+  position: relative;
+  width: 100%;
+  max-width: 420px;
+  border-radius: 22px;
+  background: linear-gradient(160deg, rgba(18, 6, 10, 0.97) 0%, rgba(8, 4, 6, 0.99) 100%);
+  border: 1px solid rgba(255, 71, 87, 0.22);
+  box-shadow:
+    0 0 0 1px rgba(255, 71, 87, 0.06),
+    0 28px 72px rgba(0, 0, 0, 0.75),
+    0 0 80px rgba(255, 71, 87, 0.06),
+    inset 0 1px 0 rgba(255, 255, 255, 0.04);
+  overflow: hidden;
+  padding: 0 0 8px;
+  animation: eimCardIn 0.44s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+.eim-card--out { animation: eimCardOut 0.36s cubic-bezier(0.4, 0, 1, 1) forwards; }
+
+@keyframes eimCardIn {
+  from { opacity: 0; transform: scale(0.88) translateY(22px); }
+  to   { opacity: 1; transform: scale(1)    translateY(0);    }
+}
+@keyframes eimCardOut {
+  to   { opacity: 0; transform: scale(0.92) translateY(14px); }
+}
+
+/* ── Top accent bar (red shimmer) ── */
+.eim-topbar {
+  height: 3px;
+  background: linear-gradient(90deg, #ff4757 0%, #ff9f1c 50%, #ff4757 100%);
+  background-size: 200% 100%;
+  animation: eimBarFlow 3s linear infinite;
+}
+@keyframes eimBarFlow { from { background-position: 200% 0; } to { background-position: -200% 0; } }
+
+/* ── Close button ── */
+.eim-close {
+  position: absolute;
+  top: 14px; right: 14px;
+  z-index: 20;
+  width: 30px; height: 30px;
+  border-radius: 50%;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: rgba(255, 255, 255, 0.05);
+  color: rgba(255, 255, 255, 0.45);
+  font-size: 11px;
+  display: flex; align-items: center; justify-content: center;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  backdrop-filter: blur(4px);
+}
+.eim-close:hover {
+  background: rgba(255, 71, 87, 0.22);
+  border-color: rgba(255, 71, 87, 0.5);
+  color: #ff4757;
+  transform: rotate(90deg) scale(1.1);
+}
+
+/* ── Corner bracket accents ── */
+.eim-corner {
+  position: absolute;
+  width: 15px; height: 15px;
+  opacity: 0.35;
+}
+.eim-corner--tl { top: 48px; left: 16px; border-top: 1.5px solid #ff4757; border-left: 1.5px solid #ff4757; }
+.eim-corner--tr { top: 48px; right: 16px; border-top: 1.5px solid #ff4757; border-right: 1.5px solid #ff4757; }
+
+/* ── Particles ── */
+.eim-particles {
+  position: absolute; inset: 0;
+  pointer-events: none; z-index: 0; overflow: hidden;
+}
+.eim-particle {
+  position: absolute;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(255, 71, 87, 0.8), transparent);
+  opacity: 0;
+  animation: eimParticleFloat linear infinite;
+}
+@keyframes eimParticleFloat {
+  0%   { opacity: 0; transform: translateY(8px) scale(0); }
+  20%  { opacity: 0.65; }
+  80%  { opacity: 0.3; }
+  100% { opacity: 0; transform: translateY(-72px) scale(1.4); }
+}
+
+/* ═══════════ HERO ═══════════ */
+.eim-hero {
+  position: relative; z-index: 1;
+  padding: 28px 26px 18px;
+  text-align: center;
+  background: linear-gradient(180deg, rgba(255, 71, 87, 0.05) 0%, transparent 100%);
+}
+
+.eim-emoji {
+  display: block;
+  font-size: 44px;
+  margin-bottom: 12px;
+  animation: eimEmojiWobble 2.4s ease-in-out infinite;
+}
+@keyframes eimEmojiWobble {
+  0%, 100% { transform: rotate(-4deg) scale(1); }
+  50%       { transform: rotate(4deg) scale(1.08); }
+}
+
+.eim-badge {
+  display: inline-flex;
+  align-items: center; gap: 7px;
+  font-size: 9px; font-weight: 800;
+  letter-spacing: 2px; text-transform: uppercase;
+  color: #ff4757;
+  background: rgba(255, 71, 87, 0.1);
+  border: 1px solid rgba(255, 71, 87, 0.3);
+  border-radius: 100px;
+  padding: 5px 14px;
+  margin-bottom: 14px;
+}
+.eim-badge-dot {
+  width: 5px; height: 5px; border-radius: 50%;
+  background: #ff4757;
+  box-shadow: 0 0 8px #ff4757;
+  animation: eimDotPulse 1.5s ease-in-out infinite;
+}
+@keyframes eimDotPulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50%       { opacity: 0.4; transform: scale(0.65); }
+}
+
+.eim-title {
+  margin: 0 0 10px;
+  font-size: 22px; font-weight: 800; line-height: 1.2;
+  font-family: 'Orbitron', 'Big Shoulders Display', sans-serif;
+  background: linear-gradient(135deg, #ffffff 30%, #ff9f9f 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  letter-spacing: -0.3px;
+}
+.eim-title-accent {
+  background: linear-gradient(135deg, #ff4757, #ff9f1c);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.eim-sub {
+  font-size: 13px;
+  color: rgba(255, 255, 255, 0.5);
+  line-height: 1.65;
+  margin: 0;
+}
+.eim-sub strong { color: rgba(255, 200, 180, 0.85); font-weight: 600; }
+
+/* ═══════════ COUNTDOWN TIMER ═══════════ */
+.eim-timer-wrap {
+  position: relative; z-index: 1;
+  margin: 0 22px 18px;
+  background: rgba(255, 71, 87, 0.07);
+  border: 1px solid rgba(255, 71, 87, 0.22);
+  border-radius: 14px;
+  padding: 14px 18px;
+  text-align: center;
+}
+.eim-timer-label {
+  font-size: 11px;
+  color: rgba(255, 255, 255, 0.42);
+  margin-bottom: 10px;
+  letter-spacing: 0.5px;
+}
+.eim-timer-digits {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+}
+.eim-digit-block {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 3px;
+  min-width: 56px;
+}
+.eim-digit {
+  display: block;
+  font-family: 'Orbitron', monospace;
+  font-size: 36px; font-weight: 700;
+  color: #ff4757;
+  text-shadow: 0 0 20px rgba(255, 71, 87, 0.55);
+  line-height: 1;
+  transition: color 0.3s ease;
+}
+.eim-digit--urgent {
+  animation: eimFlash 1s ease-in-out infinite;
+  color: #ff6b35;
+}
+@keyframes eimFlash {
+  0%, 100% { opacity: 1; text-shadow: 0 0 20px rgba(255, 71, 87, 0.55); }
+  50%       { opacity: 0.55; text-shadow: 0 0 30px rgba(255, 71, 87, 0.9); }
+}
+.eim-colon {
+  font-family: 'Orbitron', monospace;
+  font-size: 32px; font-weight: 700;
+  color: rgba(255, 71, 87, 0.5);
+  line-height: 1;
+  margin-bottom: 16px;
+  animation: eimColonBlink 1s ease-in-out infinite;
+}
+@keyframes eimColonBlink {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0.2; }
+}
+.eim-digit-lbl {
+  font-size: 8px; font-weight: 700;
+  letter-spacing: 2px; text-transform: uppercase;
+  color: rgba(255, 71, 87, 0.5);
+  font-family: 'Orbitron', monospace;
+}
+
+/* ═══════════ REWARD CHIPS ═══════════ */
+.eim-chips {
+  position: relative; z-index: 1;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+  margin: 0 22px 20px;
+}
+.eim-chip {
+  background: rgba(0, 0, 0, 0.35);
+  border: 1px solid rgba(255, 215, 0, 0.14);
+  border-radius: 14px;
+  padding: 16px 8px;
+  text-align: center;
+  transition: transform 0.2s ease, border-color 0.2s ease;
+}
+.eim-chip:hover { transform: translateY(-3px); border-color: rgba(255, 215, 0, 0.32); }
+.eim-chip--accent {
+  background: linear-gradient(180deg, rgba(255, 215, 0, 0.1), rgba(255, 150, 0, 0.05));
+  border-color: rgba(255, 215, 0, 0.28);
+}
+.eim-chip--total {
+  background: linear-gradient(180deg, rgba(0, 230, 118, 0.1), rgba(0, 180, 80, 0.05));
+  border-color: rgba(0, 230, 118, 0.28);
+}
+.eim-chip-icon { font-size: 18px; display: block; margin-bottom: 5px; }
+.eim-chip-pts {
+  display: block;
+  font-family: 'Orbitron', 'Big Shoulders Display', sans-serif;
+  font-size: 20px; font-weight: 700; line-height: 1;
+  color: #ffd700;
+  text-shadow: 0 0 14px rgba(255, 215, 0, 0.35);
+}
+.eim-chip--total .eim-chip-pts { color: #00e676; text-shadow: 0 0 14px rgba(0, 230, 118, 0.35); }
+.eim-chip-lbl {
+  display: block;
+  font-size: 9px; color: rgba(255, 255, 255, 0.38);
+  margin-top: 5px; letter-spacing: 0.3px;
+}
+
+/* ═══════════ CTAs ═══════════ */
+.eim-actions {
+  position: relative; z-index: 1;
+  padding: 0 22px 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.eim-btn-primary {
+  position: relative;
+  width: 100%; padding: 15px 24px;
+  border: none; border-radius: 13px;
+  background: linear-gradient(135deg, #cc0025 0%, #ff4757 50%, #ff6b35 100%);
+  color: #fff;
+  font-size: 14px; font-weight: 700;
+  letter-spacing: 0.2px;
+  cursor: pointer; overflow: hidden;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  box-shadow: 0 4px 24px rgba(255, 71, 87, 0.4);
+}
+.eim-btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 32px rgba(255, 71, 87, 0.6);
+}
+.eim-btn-primary:active { transform: translateY(0); }
+.eim-btn-text { position: relative; z-index: 1; }
+.eim-btn-shine {
+  position: absolute; inset: 0;
+  background: linear-gradient(
+    105deg, transparent 30%,
+    rgba(255, 255, 255, 0.22) 50%,
+    transparent 70%
+  );
+  background-size: 250% 100%;
+  animation: eimBtnSweep 2.6s ease-in-out infinite;
+  pointer-events: none;
+}
+@keyframes eimBtnSweep {
+  0%   { background-position: 200% 0; }
+  100% { background-position: -100% 0; }
+}
+
+.eim-btn-secondary {
+  width: 100%; padding: 13px 24px;
+  background: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 13px;
+  color: rgba(255, 255, 255, 0.6);
+  font-size: 13px; font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+.eim-btn-secondary:hover {
+  background: rgba(255, 255, 255, 0.06);
+  border-color: rgba(255, 255, 255, 0.25);
+  color: rgba(255, 255, 255, 0.85);
+}
+
+/* ── Skip link ── */
+.eim-skip {
+  display: block;
+  width: 100%;
+  text-align: center;
+  font-size: 11px;
+  color: rgba(255, 255, 255, 0.28);
+  background: none; border: none;
+  cursor: pointer; padding: 4px 0 10px;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+  transition: color 0.2s ease;
+  position: relative; z-index: 1;
+}
+.eim-skip:hover { color: rgba(255, 255, 255, 0.55); }
+
+/* ═══════════ RESPONSIVE ═══════════ */
+@media (max-width: 480px) {
+  .eim-card { border-radius: 18px; max-width: 100%; }
+  .eim-hero  { padding: 22px 20px 14px; }
+  .eim-title { font-size: 19px; }
+  .eim-digit { font-size: 30px; }
+  .eim-timer-wrap { margin: 0 16px 16px; padding: 12px 14px; }
+  .eim-chips  { margin: 0 16px 16px; gap: 8px; }
+  .eim-chip   { padding: 13px 6px; }
+  .eim-chip-pts { font-size: 17px; }
+  .eim-actions { padding: 0 16px 12px; }
+}

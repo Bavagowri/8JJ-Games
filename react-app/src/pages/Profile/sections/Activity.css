@@ -1,0 +1,394 @@
+/* react-app/src/pages/Profile/sections/Activity.css */
+
+/* ============================================
+   ACTIVITY SECTION STYLES
+   ============================================ */
+
+.profile-activity {
+  /* max-width: 900px; */
+  animation: slideInUp 0.6s ease-out;
+}
+
+/* Loading State */
+.activity-loading {
+  padding: 40px;
+  text-align: center;
+  color: var(--text-muted);
+}
+
+/* Toast Notification */
+.activity-toast {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  color: #fff;
+  padding: 16px 24px;
+  border-radius: 12px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+  z-index: 1000;
+  animation: slideInToast 0.3s ease;
+  font-weight: 600;
+  font-size: 14px;
+  backdrop-filter: blur(10px);
+}
+
+.toast-success {
+  background: linear-gradient(135deg, #4facfe, #00f2fe);
+}
+
+.toast-info {
+  background: linear-gradient(135deg, #667eea, #764ba2);
+}
+
+.toast-remove {
+  background: linear-gradient(135deg, #ff6b6b, #ff8e53);
+}
+
+@keyframes slideInToast {
+  from {
+    transform: translateX(400px);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+/* Tabs */
+.activity-tabs {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 24px;
+}
+
+.activity-tabs button {
+  padding: 12px 24px 9px 24px;
+  border: none;
+  border-radius: 12px;
+  background: var(--card-bg);
+  cursor: pointer;
+  font-weight: 600;
+  color: var(--text-secondary);
+  transition: var(--transition-smooth);
+  border: 1px solid var(--card-border);
+}
+
+.activity-tabs button:hover:not(.active) {
+  background: rgba(79, 172, 254, 0.1);
+  color: var(--text-primary);
+}
+
+.activity-tabs button.active {
+  background: var(--primary-gradient);
+  color: #fff;
+  box-shadow: 0 4px 16px rgba(79, 172, 254, 0.4);
+  transform: translateY(-2px);
+}
+
+/* Content */
+.activity-content {
+  margin-bottom: 24px;
+}
+
+/* Carousel Wrapper */
+.activity-carousel-wrapper {
+  position: relative;
+  overflow: hidden;
+}
+
+/* Carousel Container */
+.activity-carousel {
+  display: flex;
+  overflow-x: auto;
+  gap: 16px;
+  padding: 10px 0;
+  scroll-behavior: smooth;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.activity-carousel::-webkit-scrollbar {
+  display: none;
+}
+
+/* Game Card */
+.activity-game-card {
+  min-width: 160px;
+  background: var(--card-bg);
+  border-radius: 12px;
+  border: 1px solid var(--card-border);
+  padding: 12px;
+  transition: all 0.3s ease;
+  cursor: pointer;
+  animation: slideInLeft 0.5s ease-out backwards;
+  position: relative;
+}
+
+.activity-game-card:hover {
+  transform: translateY(-4px);
+  border-color: rgba(79, 172, 254, 0.4);
+  box-shadow: 0 4px 16px rgba(79, 172, 254, 0.2);
+}
+
+/* Game Card Image */
+.game-card-image-wrapper {
+  position: relative;
+  margin-bottom: 8px;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.game-card-image {
+  width: 100%;
+  height: 120px;
+  object-fit: cover;
+  border-radius: 8px;
+  display: block;
+}
+
+/* Game Card Info */
+.game-card-info {
+  margin-bottom: 8px;
+}
+
+.game-card-title {
+  font-weight: 600;
+  font-size: 14px;
+  margin-bottom: 4px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  color: var(--text-primary);
+}
+
+.game-card-category {
+  font-size: 11px;
+  color: var(--text-muted);
+  text-transform: capitalize;
+}
+
+/* Add to Collection Button */
+.add-to-collection-btn {
+  width: 100%;
+  padding: 8px;
+  background: rgba(255, 215, 0, 0.15);
+  border: 1px solid rgba(255, 215, 0, 0.3);
+  border-radius: 8px;
+  color: #FFD700;
+  font-weight: 600;
+  font-size: 12px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.add-to-collection-btn:not(.in-collection):hover {
+  background: rgba(255, 215, 0, 0.25);
+  transform: translateY(-2px);
+}
+
+.add-to-collection-btn.in-collection {
+  background: rgba(0, 255, 136, 0.15);
+  border: 1px solid rgba(0, 255, 136, 0.3);
+  color: #00ff88;
+  cursor: default;
+}
+
+/* Play Now Button */
+.play-now-btn {
+  width: 100%;
+  padding: 8px;
+  background: var(--primary-gradient);
+  border: none;
+  border-radius: 8px;
+  color: #fff;
+  font-weight: 600;
+  font-size: 12px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.play-now-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(79, 172, 254, 0.4);
+}
+
+/* Remove from Collection Button */
+.remove-from-collection-btn {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: rgb(177 11 2 / 90%);
+  color: #fff;
+  border: none;
+  font-size: 14px;
+  font-weight: 700;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10;
+  transition: all 0.3s ease;
+  backdrop-filter: blur(4px);
+}
+
+.remove-from-collection-btn:hover {
+  background: #ff3b30;
+  transform: scale(1.1) rotate(90deg);
+}
+
+/* Scroll Buttons */
+.activity-scroll-btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 40px;
+  height: calc(100% - 20px);
+  background: rgba(0, 0, 0, 0.7);
+  border: none;
+  cursor: pointer;
+  z-index: 10;
+  transition: background 0.3s ease;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+.activity-scroll-btn:hover {
+  background-color: rgba(0, 0, 0, 0.9);
+}
+
+.scroll-left {
+  left: 0;
+  border-radius: 8px 0 0 8px;
+  background-image: url("data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTgiIGhlaWdodD0iMzIiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PHBhdGggZD0iTTMuMjM3IDE3LjIzN3YtMi40NzRsMTQgMTRjLjY4NC42ODMuNjg0IDEuNzkgMCAyLjQ3NGExLjc0OCAxLjc0OCAwIDAxLTIuNDc0IDBsLTE0LTE0YTEuNzQ4IDEuNzQ4IDAgMDEwLTIuNDc0bDE0LTE0YTEuNzQ4IDEuNzQ4IDAgMDEyLjQ3NCAwYy42ODQuNjgzLjY4NCAxLjc5IDAgMi40NzRsLTE0IDE0eiIgZmlsbD0iI0VGRjFGMSIvPjwvc3ZnPg==");
+}
+
+.scroll-right {
+  right: 0;
+  border-radius: 0 8px 8px 0;
+  background-image: url("data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTgiIGhlaWdodD0iMzIiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PHBhdGggZD0iTTE0Ljc2MyAxNy4yMzd2LTIuNDc0bC0xNCAxNGExLjc0OCAxLjc0OCAwIDAwMCAyLjQ3NGMuNjgzLjY4NCAxLjc5LjY4NCAyLjQ3NCAwbDE0LTE0YTEuNzQ4IDEuNzQ4IDAgMDAwLTIuNDc0bC0xNC0xNEExLjc1IDEuNzUgMCAwMC43NjMgMy4yMzdsMTQgMTR6IiBmaWxsPSIjRUZGMUYxIi8+PC9zdmc+");
+}
+
+/* Empty State */
+.activity-empty-state {
+  padding: 60px 20px;
+  text-align: center;
+  color: var(--text-muted);
+  background: var(--card-bg);
+  border-radius: 16px;
+  border: 1px solid var(--card-border);
+}
+
+.empty-icon {
+  font-size: 48px;
+  margin-bottom: 16px;
+  opacity: 0.7;
+}
+
+.empty-title {
+  font-size: 18px;
+  font-weight: 600;
+  margin-bottom: 8px;
+  color: var(--text-primary);
+}
+
+.empty-text-recent,
+.empty-text-collection {
+  font-size: 14px;
+  color: var(--text-muted);
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* Activity Tip */
+.activity-tip {
+  margin-top: 24px;
+  padding: 16px;
+  background: rgba(79, 172, 254, 0.05);
+  border-radius: 12px;
+  border: 1px solid rgba(79, 172, 254, 0.15);
+  font-size: 13px;
+  color: var(--text-muted);
+  text-align: center;
+}
+
+/* Animations */
+@keyframes slideInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideInLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+/* Mobile Responsive */
+@media (max-width: 768px) {
+  .activity-game-card {
+    min-width: 140px;
+  }
+
+  .game-card-image {
+    height: 100px;
+  }
+
+  .activity-scroll-btn {
+    display: none;
+  }
+
+  .activity-tabs button {
+    padding: 10px 18px;
+    font-size: 14px;
+  }
+}
+
+@media (max-width: 480px) {
+  .activity-game-card {
+    min-width: 130px;
+  }
+
+  .game-card-image {
+    height: 90px;
+  }
+
+  .game-card-title {
+    font-size: 13px;
+  }
+
+  .activity-tip {
+    font-size: 12px;
+    padding: 12px;
+  }
+}
+
+.activity-tab-icon {
+  width: 20px;
+  height: 20px;
+  margin-right: 6px;
+  vertical-align: middle;
+  object-fit: contain;
+  position: relative;
+  top: -2px;
+}
+
+.empty-icon-img {
+  width: 32px;
+  height: 32px;
+  object-fit: contain;
+}

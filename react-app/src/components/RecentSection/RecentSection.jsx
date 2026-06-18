@@ -1,7 +1,10 @@
-import { useEffect, useState, useRef } from "react";
+
+
+// react-app/src/components/RecentSection/RecentSection.jsx
+import { useEffect, useState, useRef, useCallback } from "react";
 import GameCard from "../GameCard/GameCard";
-import { loadRecent } from "../../utils/localStorage";
 import "./RecentSection.css";
+import { getRecentGames } from "../../api/games.api";
 
 export default function RecentSection({ id, lang, translate }) {
   const [recentGames, setRecentGames] = useState([]);
@@ -11,53 +14,76 @@ export default function RecentSection({ id, lang, translate }) {
   const carouselRef = useRef(null);
 
   useEffect(() => {
-    // Load recent games from localStorage
-    const games = loadRecent();
-    // Keep only 30 games
-    const limitedGames = games.slice(0, 30);
-    setRecentGames(limitedGames);
-    setLoading(false);
+    let mounted = true;
+
+    async function fetchRecent() {
+      try {
+        setLoading(true);
+        const games = await getRecentGames(12);
+
+        if (mounted) {
+          setRecentGames((games || []).slice(0, 12));
+        }
+      } catch (err) {
+        console.error("Failed to load recent games:", err);
+        if (mounted) setRecentGames([]);
+      } finally {
+        if (mounted) setLoading(false);
+      }
+    }
+
+    fetchRecent();
+
+    return () => {
+      mounted = false;
+    };
+  }, []);
+
+  // ─── FIX: checkScroll reads scrollLeft/scrollWidth/clientWidth ───────────
+  // Reading these on a scroll event is fine — the browser has already done
+  // layout by the time scroll fires. The problem was the RESIZE listener
+  // which could fire mid-layout. Replaced with ResizeObserver.
+  const checkScroll = useCallback(() => {
+    const el = carouselRef.current;
+    if (!el) return;
+    // Batch all reads together — no writes between them = no forced reflow
+    const { scrollLeft, scrollWidth, clientWidth } = el;
+    setCanScrollLeft(scrollLeft > 0);
+    setCanScrollRight(scrollLeft < scrollWidth - clientWidth - 1);
   }, []);
 
   useEffect(() => {
-    const checkScroll = () => {
-      if (carouselRef.current) {
-        const { scrollLeft, scrollWidth, clientWidth } = carouselRef.current;
-        setCanScrollLeft(scrollLeft > 0);
-        setCanScrollRight(scrollLeft < scrollWidth - clientWidth - 1);
-      }
-    };
+    const carousel = carouselRef.current;
+    if (!carousel) return;
 
     checkScroll();
-    const carousel = carouselRef.current;
-    if (carousel) {
-      carousel.addEventListener('scroll', checkScroll);
-      window.addEventListener('resize', checkScroll);
-    }
+
+    // Scroll events are fine — layout is already settled when they fire
+    carousel.addEventListener("scroll", checkScroll, { passive: true });
+
+    // ─── FIX: ResizeObserver instead of window resize listener ───────────
+    // window resize reads layout synchronously. ResizeObserver delivers
+    // dimensions as part of the browser's layout pass — no forced reflow.
+    const ro = new ResizeObserver(checkScroll);
+    ro.observe(carousel);
 
     return () => {
-      if (carousel) {
-        carousel.removeEventListener('scroll', checkScroll);
-      }
-      window.removeEventListener('resize', checkScroll);
+      carousel.removeEventListener("scroll", checkScroll);
+      ro.disconnect();
     };
-  }, [recentGames]);
+  }, [recentGames, checkScroll]);
 
-  const scroll = (direction) => {
-    if (carouselRef.current) {
-      const scrollAmount = carouselRef.current.clientWidth * 0.8;
-      const newScrollLeft = direction === 'left'
-        ? carouselRef.current.scrollLeft - scrollAmount
-        : carouselRef.current.scrollLeft + scrollAmount;
+  const scroll = useCallback((direction) => {
+    const el = carouselRef.current;
+    if (!el) return;
+    // Read clientWidth once, then write — no interleaving
+    const amount = el.clientWidth * 0.8;
+    el.scrollBy({
+      left: direction === "left" ? -amount : amount,
+      behavior: "smooth",
+    });
+  }, []);
 
-      carouselRef.current.scrollTo({
-        left: newScrollLeft,
-        behavior: 'smooth'
-      });
-    }
-  };
-
-  // Hide the entire section if loading is complete and there are no games
   if (!loading && (!recentGames || recentGames.length === 0)) {
     return null;
   }
@@ -75,14 +101,6 @@ export default function RecentSection({ id, lang, translate }) {
                     <div className="skeleton-arrow"></div>
                   </div>
                 </li>
-                {[...Array(8)].map((_, i) => (
-                  <li key={i} className="recent-carousel-item">
-                    <div className="skeleton-card">
-                      <div className="skeleton-image"></div>
-                      <div className="skeleton-title"></div>
-                    </div>
-                  </li>
-                ))}
               </ul>
             </div>
           </div>
@@ -99,7 +117,7 @@ export default function RecentSection({ id, lang, translate }) {
             {canScrollLeft && (
               <button
                 className="carousel-arrow carousel-arrow-left"
-                onClick={() => scroll('left')}
+                onClick={() => scroll("left")}
                 aria-label="Scroll left"
               />
             )}
@@ -114,7 +132,7 @@ export default function RecentSection({ id, lang, translate }) {
                       clipRule="evenodd"
                       fill="white"
                       d="M7.25759 2.33006C7.62758 1.92004 8.25992 1.88759 8.66994 2.25758L16.9814 9.75758C18.3395 10.9831 18.3395 13.0169 16.9814 14.2424L8.66994 21.7424C8.25992 22.1124 7.62758 22.08 7.25759 21.6699C6.88759 21.2599 6.92005 20.6276 7.33007 20.2576L15.6415 12.7576C16.1195 12.3263 16.1195 11.6737 15.6415 11.2424L7.33007 3.74242C6.92005 3.37242 6.88759 2.74009 7.25759 2.33006Z"
-                    ></path>
+                    />
                   </svg>
                 </div>
               </li>
@@ -128,7 +146,7 @@ export default function RecentSection({ id, lang, translate }) {
             {canScrollRight && (
               <button
                 className="carousel-arrow carousel-arrow-right"
-                onClick={() => scroll('right')}
+                onClick={() => scroll("right")}
                 aria-label="Scroll right"
               />
             )}

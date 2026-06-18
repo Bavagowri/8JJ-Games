@@ -1,3 +1,7 @@
+/* react-app/src/components/CategoriesSection/CategoriesSection.css */
+
+
+
 .categories-section {
   padding: 40px 0;
   margin: 0 auto;
@@ -122,6 +126,9 @@
 .category-icon {
   font-size: 2rem;
   transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  height: 40px;
+  width: 40px;
+
 }
 
 .category-card:hover .category-icon {

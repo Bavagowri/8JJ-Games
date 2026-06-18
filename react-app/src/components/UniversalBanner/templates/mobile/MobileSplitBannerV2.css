@@ -1,0 +1,370 @@
+/* react-app/src/components/UniversalBanner/templates/mobile/MobileSplitBannerV2.css */
+
+
+/* ── Wrapper ── */
+.msb2-wrap {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+  border-radius: 0px;
+  background: #04080f;
+  border: 0px solid rgba(255, 255, 255, 0.06);
+  box-shadow:
+    0 4px 24px rgba(0, 0, 0, 0.55),
+    inset 0 1px 0 rgba(255, 255, 255, 0.05);
+  padding: 10px 0;
+  -webkit-tap-highlight-color: transparent;
+  touch-action: pan-y;
+  /* allow vertical scroll, capture horizontal swipe */
+}
+
+/* ══════════════════════════════════════
+   SCENE — full-bleed image
+══════════════════════════════════════ */
+.msb2-scene {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+}
+
+.msb2-img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center top;
+  display: block;
+}
+
+/* Cinematic vignette — very dark at bottom to merge with glass footer */
+.msb2-vignette {
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(to bottom,
+      rgba(4, 8, 15, 0.15) 0%,
+      rgba(4, 8, 15, 0.10) 40%,
+      rgba(4, 8, 15, 0.72) 75%,
+      rgba(4, 8, 15, 0.97) 100%),
+    radial-gradient(ellipse at center, transparent 35%, rgba(0, 0, 0, 0.5) 100%);
+}
+
+.msb2-tint {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+/* Scene transitions — Ken Burns subtle scale */
+.msb2-scene-exit {
+  opacity: 0;
+  transform: scale(1.04);
+  transition: opacity 0.32s ease, transform 0.32s ease;
+}
+
+.msb2-scene-enter {
+  opacity: 0;
+  transform: scale(0.97);
+}
+
+.msb2-scene-idle {
+  opacity: 1;
+  transform: scale(1);
+  transition: opacity 0.32s ease, transform 0.32s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/* Logo watermark */
+.sh2-logoz {
+  position: absolute;
+  top: 10px;
+  right: 20px;
+  height: 55px;
+  width: auto;
+  opacity: 0.25;
+  filter: brightness(10);
+  object-fit: contain;
+  z-index: 3;
+}
+
+
+/* ══════════════════════════════════════
+   SLIDE COUNTER — floats top-right
+══════════════════════════════════════ */
+.msb2-counter {
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  z-index: 4;
+  display: none !important;
+  align-items: baseline;
+  gap: 5px;
+  pointer-events: none;
+}
+
+.msb2-counter-cur {
+  font-family: 'Syne Mono', monospace;
+  font-size: 20px;
+  font-weight: 400;
+  color: var(--accent, #00e5ff);
+  line-height: 1;
+  opacity: 0.9;
+}
+
+.msb2-counter-sep {
+  display: block;
+  width: 14px;
+  height: 1px;
+  background: rgba(255, 255, 255, 0.25);
+  margin-bottom: 3px;
+  flex-shrink: 0;
+}
+
+.msb2-counter-tot {
+  font-family: 'Syne Mono', monospace;
+  font-size: 11px;
+  font-weight: 400;
+  color: rgba(255, 255, 255, 0.28);
+  line-height: 1;
+}
+
+/* ══════════════════════════════════════
+   BADGE — floats top-left
+══════════════════════════════════════ */
+.msb2-badge-wrap {
+  position: absolute;
+  top: 14px;
+  left: 14px;
+  z-index: 4;
+  display: flex;
+  align-items: center;
+  gap: 7px;
+}
+
+.msb2-badge-line {
+  display: inline-block;
+  width: 16px;
+  height: 2px;
+  border-radius: 1px;
+  flex-shrink: 0;
+  opacity: 0.9;
+}
+
+.msb2-badge {
+  font-family: 'Syne', sans-serif;
+  font-size: 8px;
+  font-weight: 700;
+  letter-spacing: 2.2px;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.6);
+}
+
+/* ══════════════════════════════════════
+   GLASS FOOTER STRIP
+   Anchored to bottom, frosted
+══════════════════════════════════════ */
+.msb2-footer {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 3;
+  overflow: hidden;
+}
+
+/* Frosted glass backing */
+.msb2-footer-glass {
+  position: absolute;
+  inset: 0;
+  background: rgb(4 8 18 / 23%);
+  backdrop-filter: blur(5px) saturate(1.4);
+  -webkit-backdrop-filter: blur(5px) saturate(1.4);
+}
+
+/* Top rule of the footer */
+.msb2-footer-rule {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  z-index: 1;
+}
+
+/* ── Content inside footer ── */
+.msb2-content {
+  position: relative;
+  z-index: 2;
+  padding: 14px 16px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+/* Content transitions */
+.msb2-content-exit {
+  opacity: 0;
+  transform: translateY(8px);
+  transition: opacity 0.25s ease, transform 0.25s ease;
+}
+
+.msb2-content-enter {
+  opacity: 0;
+  transform: translateY(-5px);
+}
+
+.msb2-content-idle {
+  opacity: 1;
+  transform: translateY(0);
+  transition: opacity 0.28s ease 0.06s, transform 0.28s cubic-bezier(0.22, 1, 0.36, 1) 0.06s;
+}
+
+.msb2-eyebrow {
+  font-family: 'Syne', sans-serif;
+  font-size: 9px;
+  font-weight: 600;
+  letter-spacing: 2.5px;
+  text-transform: uppercase;
+  color: var(--accent, #00e5ff);
+  margin: 0;
+  opacity: 0.9;
+}
+
+.msb2-title {
+
+  font-size: 25px;
+  font-weight: 800;
+  color: #fff;
+  margin: 0;
+  line-height: 1.15;
+  letter-spacing: -0.3px;
+  text-shadow: 0 2px 12px rgba(0, 0, 0, 0.6);
+}
+
+.msb2-sub {
+  font-family: 'Inter', sans-serif;
+  font-size: 11.5px;
+  font-weight: 300;
+  color: rgba(255, 255, 255, 0.45);
+  margin: 0;
+  line-height: 1.5;
+}
+
+/* ── Bottom row: CTA + segments ── */
+.msb2-bottom-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 6px;
+  gap: 12px;
+}
+
+/* ── CTA — underline-expand (matches desktop) ── */
+.msb2-cta {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 0;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.msb2-cta-label {
+  
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: #fff;
+  transition: color 0.2s ease;
+}
+
+.msb2-cta:active .msb2-cta-label {
+  color: var(--accent, #00e5ff);
+}
+
+.msb2-cta-icon {
+  display: flex;
+  align-items: center;
+  transition: transform 0.2s ease;
+}
+
+.msb2-cta:active .msb2-cta-icon {
+  transform: translateX(3px);
+}
+
+/* Underline — expands on tap */
+.msb2-cta-underline {
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  height: 1px;
+  width: 0;
+  transition: width 0.22s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.msb2-cta:active .msb2-cta-underline {
+  width: 100%;
+}
+
+/* ── Segmented progress bar ── */
+.msb2-segments {
+  display: flex;
+  gap: 4px;
+  align-items: center;
+  flex-shrink: 0;
+}
+
+.msb2-seg {
+  width: 28px;
+  height: 2px;
+  padding: 0;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  position: relative;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.msb2-seg-track {
+  display: block;
+  width: 100%;
+  height: 100%;
+  border-radius: 1px;
+  overflow: hidden;
+  position: relative;
+  background: rgba(255, 255, 255, 0.15);
+}
+
+.msb2-seg-fill {
+  display: block;
+  position: absolute;
+  inset: 0;
+  width: 0%;
+  border-radius: 1px;
+}
+
+.msb2-seg-static {
+  display: block;
+  position: absolute;
+  inset: 0;
+  border-radius: 1px;
+}
+
+/* ── Responsive ── */
+@media (max-width: 380px) {
+  .msb2-title {
+    font-size: 16px;
+  }
+
+  .msb2-sub {
+    display: none;
+  }
+
+  .msb2-seg {
+    width: 22px;
+  }
+}

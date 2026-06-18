@@ -1,3 +1,4 @@
+// react-app/src/components/HorizontalGameSlider/HorizontalGameSlider.jsx
 import { useRef } from "react";
 import GameCard from "../GameCard/GameCard";
 import "./HorizontalGameSlider.css";

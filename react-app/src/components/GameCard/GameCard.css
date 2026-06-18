@@ -1,20 +1,41 @@
+/* react-app/src/components/GameCard/GameCard.css - OPTIMIZED */
 .game-card {
   position: relative;
+  /*  PERFORMANCE: Use aspect-ratio instead of fixed dimensions */
   aspect-ratio: 1;
   border-radius: 16px;
-  overflow: hidden;
+  overflow: visible;
   cursor: pointer;
   box-shadow:
     0 4px 15px rgba(0, 0, 0, 0.4),
     0 0 0 1px rgba(255, 255, 255, 0.05);
-  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-  max-height: 171px;
-  max-width: 171px;
+  /* Fix 3/9: explicit properties only — no transition:all, no base will-change */
+  transition: box-shadow 0.4s cubic-bezier(0.4, 0, 0.2, 1),
+              transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  max-height: 140px;
+  max-width: 140px;
   margin: auto;
   width: 100%;
   background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
   transform-style: preserve-3d;
   perspective: 1000px;
+  /* Fix 9: will-change REMOVED from base — promotes 200+ GPU layers at all times.
+     It is set on :hover below so only the active card is promoted. */
+  /*  Prevent layout shift */
+  contain: layout style paint;
+}
+
+/* Inner container to handle overflow for image and effects */
+.game-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  border-radius: 16px;
+  overflow: hidden;
+  z-index: 0;
 }
 
 .game-card::before {
@@ -36,33 +57,28 @@
 }
 
 .game-card:hover {
-  transform: translateY(-12px) scale(1.02);
-  box-shadow:
-    0 20px 40px rgba(0, 0, 0, 0.6),
-    0 0 0 1px rgba(86, 167, 213, 0.3),
-    0 0 30px rgba(86, 167, 213, 0.2);
+  transform: translateY(-6px) scale(1.02);
   z-index: 10;
-}
-
-.game-card::after {
-  content: '';
-  position: absolute;
-  top: -50%;
-  left: -50%;
-  width: 200%;
-  height: 200%;
-  background: linear-gradient(45deg,
-      transparent 30%,
-      rgba(255, 255, 255, 0.1) 50%,
-      transparent 70%);
-  transform: rotate(45deg) translateX(-100%);
-  transition: transform 0.6s ease;
-  pointer-events: none;
-  z-index: 5;
+  /* Fix 9: promote to GPU layer only on hover — auto-demoted when hover ends */
+  will-change: transform;
 }
 
 .game-card:hover::after {
   transform: rotate(45deg) translateX(100%);
+}
+
+/* Inner container to handle overflow for image and effects */
+.game-card .game-image-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  border-radius: 16px;
+  overflow: hidden;
+  z-index: 0;
+  /*  Prevent layout shift during image load */
+  background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
 }
 
 .game-image {
@@ -70,12 +86,20 @@
   height: 100%;
   object-fit: cover;
   display: block;
-  transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1), filter 0.4s ease;
+  transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1), filter 0.4s ease, opacity 0.3s ease;
   filter: brightness(0.9) contrast(1.05);
+  /*  CRITICAL: Maintain aspect ratio */
+  aspect-ratio: 1;
+  /*  GPU acceleration */
+  transform: translateZ(0);
+}
+
+.game-image.loaded {
+  opacity: 1;
 }
 
 .game-card:hover .game-image {
-  transform: scale(1.1);
+  transform: scale(1.1) translateZ(0);
   filter: brightness(0.7) contrast(1.1);
 }
 
@@ -83,62 +107,92 @@
   position: absolute;
   left: 0;
   right: 0;
-  bottom: -5px;
-  padding: 12px 14px 14px;
-  background: linear-gradient(180deg,
-      rgba(7, 10, 14, 0) 0%,
-      rgba(7, 10, 14, 0.7) 30%,
-      rgba(7, 10, 14, 0.95) 70%,
-      rgba(7, 10, 14, 1) 100%);
+  bottom: 0;
+  padding: 5px 14px 5px;
   gap: 4px;
   z-index: 2;
-  transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-  backdrop-filter: blur(8px);
-  border-top: 1px solid rgba(255, 255, 255, 0.05);
+  /* Fix 9: explicit props only, no base will-change */
+  transition: opacity 0.5s cubic-bezier(0.34, 1.56, 0.64, 1),
+    backdrop-filter 0.5s cubic-bezier(0.34, 1.56, 0.64, 1),
+    transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+  backdrop-filter: blur(0px);
+  border-top: 1px solid rgba(86, 167, 213, 0);
+  opacity: 0;
+  transform: scale(0.95);
+  border-bottom-left-radius: 16px;
+  border-bottom-right-radius: 16px;
+  overflow: hidden;
+  background: linear-gradient(180deg,
+      rgba(7, 10, 14, 0) 0%,
+      rgba(7, 10, 14, 0.4) 30%,
+      rgba(7, 10, 14, 0.8) 100%);
+  /* Fix 9: will-change removed from base — promoted on card hover instead */
 }
 
 .game-card:hover .game-overlay {
-  transform: translateY(-5px);
-  bottom: -12px;
+  opacity: 1;
+  transform: scale(1);
+  backdrop-filter: blur(12px);
+  border-top: 1px solid rgba(86, 167, 213, 0.4);
+  box-shadow: 0 -10px 30px rgba(86, 167, 213, 0.15);
 }
 
 .game-title {
   font-weight: 700;
   font-size: 13px;
-  line-height: 1.2;
+  line-height: 1.3;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
   color: #fff;
-  margin: 0 0 2px 0;
-  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
-  letter-spacing: 0.3px;
-  transition: color 0.3s ease;
+  margin: 0 0 4px 0;
+  text-shadow:
+    0 2px 8px rgba(0, 0, 0, 0.8),
+    0 0 20px rgba(86, 167, 213, 0.3);
+  letter-spacing: 0.5px;
+  /* Fix 9: explicit transition, no base will-change */
+  transition: color 0.4s cubic-bezier(0.34, 1.56, 0.64, 1),
+              transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1),
+              opacity 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+  transform: translateY(5px);
+  opacity: 0;
 }
 
 .game-card:hover .game-title {
   color: #56a7d5;
+  transform: translateY(0);
+  opacity: 1;
+  transition-delay: 0.05s;
 }
 
 .game-category {
   font-size: 11px;
   color: #94a3b8;
-  font-weight: 500;
+  font-weight: 600;
   text-transform: uppercase;
-  letter-spacing: 0.5px;
-  transition: color 0.3s ease;
+  letter-spacing: 1px;
+  /* Fix 9: explicit transition, no base will-change */
+  transition: color 0.4s cubic-bezier(0.34, 1.56, 0.64, 1),
+              transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1),
+              opacity 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+  transform: translateY(5px);
+  opacity: 0;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
 }
 
 .game-card:hover .game-category {
   color: #cbd5e1;
+  transform: translateY(0);
+  opacity: 1;
+  transition-delay: 0.1s;
 }
 
-/* Play Now Button */
+/* Play Now Button - Smooth scale + opacity */
 .play-button {
   position: absolute;
   top: 50%;
   left: 50%;
-  transform: translate(-50%, -50%) scale(0) rotateY(90deg);
+  transform: translate(-50%, -50%) scale(0.8);
   background: linear-gradient(135deg, #56a7d5 0%, #4a8fc7 50%, #3753c5 100%);
   display: flex;
   border-radius: 50px;
@@ -147,7 +201,10 @@
   align-items: center;
   justify-content: center;
   font-size: 11px;
-  transition: all 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+  /* Fix 9: explicit props only, no base will-change */
+  transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1),
+              opacity 0.4s cubic-bezier(0.34, 1.56, 0.64, 1),
+              box-shadow 0.3s ease;
   box-shadow:
     0 8px 24px rgba(86, 167, 213, 0.4),
     0 4px 12px rgba(55, 83, 197, 0.3),
@@ -162,6 +219,7 @@
   text-transform: uppercase;
   letter-spacing: 1px;
   backdrop-filter: blur(10px);
+  pointer-events: none;
 }
 
 .play-button::before {
@@ -177,90 +235,201 @@
   transition: opacity 0.3s ease;
 }
 
+.game-card:hover .play-button {
+  transform: translate(-50%, -50%) scale(1);
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.play-button:hover {
+  transform: translate(-50%, -50%) scale(1.05);
+  box-shadow:
+    0 10px 30px rgba(86, 167, 213, 0.5),
+    0 5px 15px rgba(55, 83, 197, 0.4),
+    inset 0 1px 0 rgba(255, 255, 255, 0.4);
+}
+
 .play-button:hover::before {
   opacity: 1;
 }
 
-.game-card:hover .play-button {
-  transform: translate(-50%, -50%) scale(1) rotateY(0deg);
-  opacity: 1;
+.play-button:active {
+  transform: translate(-50%, -50%) scale(0.95);
 }
 
-.game-card:active .play-button {
-  transform: translate(-50%, -50%) scale(0.95) rotateY(0deg);
-}
-
-/* Hot Badge */
+/* Optimized Hot Badge - Performance Focused */
 .hot-badge {
   position: absolute;
-  top: 8px;
-  left: 8px;
+  top: -5px;
+  left: -5px;
   background: linear-gradient(135deg, #ff6a22 0%, #ff4500 50%, #e63900 100%);
   color: #fff;
   font-size: 11px;
   font-weight: 800;
-  padding: 5px 10px;
-  border-radius: 10px;
+  padding: 6px 12px;
+  border-radius: 12px;
   display: flex;
   align-items: center;
-  gap: 5px;
+  gap: 6px;
   z-index: 12;
   text-transform: uppercase;
   box-shadow:
-    0 4px 15px rgba(255, 106, 34, 0.5),
-    0 2px 8px rgba(255, 69, 0, 0.3),
+    0 4px 20px rgba(255, 106, 34, 0.6),
+    0 2px 10px rgba(255, 69, 0, 0.4),
     inset 0 1px 0 rgba(255, 255, 255, 0.3);
-  animation: hotPulse 2s ease-in-out infinite;
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  letter-spacing: 0.5px;
-  backdrop-filter: blur(5px);
+  animation: hotBadgePulse 3s ease-in-out infinite;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  letter-spacing: 0.8px;
+  transform-origin: center;
+  /* Fix 9: will-change removed from base — badge animates fine without it */
+  overflow: hidden;
 }
 
-@keyframes hotPulse {
+/* Simplified glow - no blur for better performance */
+.hot-badge::before {
+  content: '';
+  position: absolute;
+  top: -2px;
+  left: -2px;
+  right: -2px;
+  bottom: -2px;
+  background: linear-gradient(135deg, #ff6a22, #ff4500, #e63900);
+  border-radius: 14px;
+  z-index: -1;
+  opacity: 0;
+  animation: hotGlow 3s ease-in-out infinite;
+}
 
-  0%,
-  100% {
-    box-shadow:
-      0 4px 15px rgba(255, 106, 34, 0.5),
-      0 2px 8px rgba(255, 69, 0, 0.3),
-      inset 0 1px 0 rgba(255, 255, 255, 0.3);
+/* Lightweight shimmer */
+.hot-badge::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 50%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent 0%, rgba(255, 255, 255, 0.2) 50%, transparent 100%);
+  animation: hotShimmer 4s ease-in-out infinite;
+  border-radius: 12px;
+}
+
+/* Simplified animations */
+@keyframes hotBadgePulse {
+  0%, 100% {
+    transform: scale(1);
   }
-
   50% {
-    box-shadow:
-      0 6px 25px rgba(255, 106, 34, 0.7),
-      0 3px 12px rgba(255, 69, 0, 0.5),
-      inset 0 1px 0 rgba(255, 255, 255, 0.3);
+    transform: scale(1.05);
   }
 }
 
+@keyframes hotGlow {
+  0%, 100% {
+    opacity: 0;
+  }
+  50% {
+    opacity: 0.6;
+  }
+}
+
+@keyframes hotShimmer {
+  0% {
+    left: -50%;
+  }
+  100% {
+    left: 150%;
+  }
+}
+
+/* Simplified fire icon animation */
 .game-image-hot {
+  /*  FIXED: Explicit dimensions */
   width: 14px;
   height: 14px;
   object-fit: cover;
   display: block;
-  filter: drop-shadow(0 1px 3px rgba(0, 0, 0, 0.4));
   animation: hotIconBounce 2s ease-in-out infinite;
+  position: relative;
+  z-index: 1;
+  /*  Maintain aspect ratio */
+  aspect-ratio: 1;
 }
 
 @keyframes hotIconBounce {
-
-  0%,
-  100% {
+  0%, 100% {
     transform: translateY(0) scale(1);
   }
-
   50% {
     transform: translateY(-2px) scale(1.1);
   }
 }
 
-/* Loading State */
-.game-card-img {
+/* Simplified hover effect */
+.game-card:hover .hot-badge {
+  transform: scale(1.08);
+  transition: transform 0.3s ease;
+}
+
+.game-card:hover .hot-badge::before {
+  opacity: 0.8;
+}
+
+/* Hot badge image */
+.hot-badge img {
+  height: 14px;
+  width: 14px;
+  object-fit: contain;
+  position: relative;
+  z-index: 1;
+  /*  Maintain aspect ratio */
+  aspect-ratio: 1;
+}
+
+/* Skeleton Loading for Game Card */
+.game-card-skeleton {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 16px;
+  animation: skeleton-pulse 1.5s ease-in-out infinite;
+  z-index: 1;
+  /*  Maintain aspect ratio */
+  aspect-ratio: 1;
+}
+
+.game-card-skeleton::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
   width: 100%;
   height: 100%;
-  object-fit: cover;
-  display: block;
+  background: linear-gradient(90deg,
+      transparent,
+      rgba(255, 255, 255, 0.1),
+      transparent);
+  animation: skeleton-shimmer 2s infinite;
+}
+
+@keyframes skeleton-pulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+}
+
+@keyframes skeleton-shimmer {
+  0% {
+    left: -100%;
+  }
+  100% {
+    left: 100%;
+  }
 }
 
 /* Responsive Design */
@@ -268,6 +437,14 @@
   .game-card {
     max-height: 160px;
     max-width: 160px;
+    border-radius: 14px;
+  }
+
+  .game-card .game-image-container {
+    border-radius: 14px;
+  }
+
+  .game-card-skeleton {
     border-radius: 14px;
   }
 
@@ -281,13 +458,19 @@
 
   .hot-badge {
     font-size: 10px;
-    padding: 4px 8px;
-    border-radius: 8px;
+    padding: 5px 10px;
+    border-radius: 10px;
+    gap: 5px;
   }
 
   .game-image-hot {
     width: 12px;
     height: 12px;
+  }
+
+  .hot-badge img {
+    height: 12px !important;
+    width: 12px !important;
   }
 
   .play-button {
@@ -316,8 +499,18 @@
     border-radius: 12px;
   }
 
+  .game-card .game-image-container {
+    border-radius: 12px;
+  }
+
+  .game-card-skeleton {
+    border-radius: 12px;
+  }
+
   .game-overlay {
     padding: 10px 12px;
+    border-bottom-left-radius: 12px;
+    border-bottom-right-radius: 12px;
   }
 
   .game-title {
@@ -330,36 +523,122 @@
   }
 
   .hot-badge {
-    top: 6px;
-    left: 6px;
+    top: -4px;
+    left: -4px;
     font-size: 9px;
-    padding: 3px 6px;
+    padding: 4px 8px;
+    border-radius: 8px;
+    gap: 4px;
+    letter-spacing: 0.5px;
+  }
+
+  .game-image-hot {
+    width: 10px;
+    height: 10px;
+  }
+
+  .hot-badge img {
+    height: 10px !important;
+    width: 10px !important;
   }
 }
-
 
 #recentSection .game-overlay {
   padding: 0px 5px 1px !important;
   bottom: 0px !important;
+  opacity: 0 !important;
+  transform: translateY(0) !important;
+}
+
+#recentSection .game-card:hover .game-overlay {
+  padding: 0px 5px 1px !important;
+  bottom: 0px !important;
+  opacity: 1 !important;
+  transform: translateY(0) !important;
+}
+
+#recentSection .game-title {
+  font-size: 11px !important;
+}
+
+#recentSection .game-category {
+  font-size: 9px !important;
+}
+
+#recentSection .game-title,
+#recentSection .game-category {
+  opacity: 1 !important;
+  transform: translateY(0) !important;
 }
 
 .home-wrapper #recentSection .game-card:hover {
   transform: translateY(-5px) scale(1.02) !important;
-  box-shadow: 0 23px 32px rgb(35 50 79) !important;
 }
 
 .home-wrapper #recentSection .game-card:hover .game-overlay {
-  transform: translateY(1px);
-
+  transform: translateY(0);
+  bottom: 0px !important;
 }
 
 #top-picks .game-card .game-overlay {
-  backdrop-filter: blur(1px);
+  backdrop-filter: blur(12px);
   border-top: none;
   overflow: hidden;
+  border-bottom-left-radius: 15px;
+  border-bottom-right-radius: 15px;
 }
 
 #top-picks .game-card:hover {
   transform: translateY(0px) scale(1.01) !important;
   box-shadow: none !important;
+}
+
+#featuredSection .game-card:hover .game-overlay {
+  transform: translateY(3px);
+}
+
+#featuredSection .game-title {
+  font-size: 11px !important;
+}
+
+#featuredSection .game-category {
+  font-size: 9px !important;
+}
+
+#hotGames .game-card, 
+#popularSection .game-card {
+  position: relative !important;
+  width: 100% !important;
+  aspect-ratio: 3 / 4 !important;
+  border-radius: 8px !important;
+  max-width: none !important;
+  max-height: none !important;
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
+}
+
+/* Optional: Make visible on focus for keyboard navigation */
+.sr-only:focus {
+  position: static;
+  width: auto;
+  height: auto;
+  padding: 0.5rem;
+  margin: 0;
+  overflow: visible;
+  clip: auto;
+  white-space: normal;
+  background-color: #667eea;
+  color: white;
+  border-radius: 4px;
+  z-index: 1000;
 }

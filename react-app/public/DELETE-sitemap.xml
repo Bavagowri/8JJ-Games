@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <!-- Main Pages -->
+  <url>
+    <loc>https://8jjgames.com/</loc>
+    <changefreq>daily</changefreq>
+    <priority>1.0</priority>
+  </url>
+  <url>
+    <loc>https://8jjgames.com/all-mosaic-games</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://8jjgames.com/categories</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://8jjgames.com/my-collection</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+
+  <!-- Categories -->
+  <url><loc>https://8jjgames.com/categories/adventure</loc><changefreq>weekly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://8jjgames.com/categories/shooting</loc><changefreq>weekly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://8jjgames.com/categories/driving</loc><changefreq>weekly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://8jjgames.com/categories/christmas</loc><changefreq>weekly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://8jjgames.com/categories/princess</loc><changefreq>weekly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://8jjgames.com/categories/puzzles</loc><changefreq>weekly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://8jjgames.com/categories/card</loc><changefreq>weekly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://8jjgames.com/categories/brain</loc><changefreq>weekly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://8jjgames.com/categories/halloween</loc><changefreq>weekly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://8jjgames.com/categories/zombie</loc><changefreq>weekly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://8jjgames.com/categories/kids</loc><changefreq>weekly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://8jjgames.com/categories/basketball</loc><changefreq>weekly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://8jjgames.com/categories/football</loc><changefreq>weekly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://8jjgames.com/categories/boys</loc><changefreq>weekly</changefreq><priority>0.6</priority></url>
+</urlset>

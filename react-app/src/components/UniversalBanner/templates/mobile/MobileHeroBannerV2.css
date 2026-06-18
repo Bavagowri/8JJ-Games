@@ -1,0 +1,511 @@
+/* react-app/src/components/UniversalBanner/templates/mobile/MobileHeroBannerV2.css */
+
+
+
+/* ── Wrapper ── */
+.mhb2-wrap {
+  position: relative;
+  width: 100%;
+  height: var(--h, 260px);
+  overflow: hidden;
+  background: #050d1a;
+  touch-action: pan-y;
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
+  transition: transform 0.12s ease;
+}
+
+.mhb2-wrap.mhb2-tap {
+  transform: scale(0.985);
+}
+
+/* ── Scanlines ── */
+.mhb2-scanlines {
+  position: absolute;
+  inset: 0;
+  z-index: 10;
+  pointer-events: none;
+  background: repeating-linear-gradient(0deg,
+      transparent,
+      transparent 2px,
+      rgba(0, 0, 0, 0.08) 2px,
+      rgba(0, 0, 0, 0.08) 4px);
+}
+
+/* ── Slides ── */
+.mhb2-slide {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  overflow: hidden;
+  opacity: 0;
+  pointer-events: none;
+  transform: translateX(18px);
+  transition: opacity 0.38s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+    transform 0.38s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.mhb2-slide--in {
+  opacity: 1;
+  pointer-events: all;
+  transform: translateX(0);
+}
+
+.mhb2-slide--out {
+  opacity: 0;
+  transform: translateX(-18px);
+  pointer-events: none;
+}
+
+/* ── Background ── */
+.mhb2-bg-fallback {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+}
+
+.mhb2-bg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center top;
+  display: block;
+  z-index: 1;
+  transition: transform 0.6s ease;
+}
+
+.mhb2-slide--in .mhb2-bg {
+  transform: scale(1);
+  animation: mhb2-kenburns 6s ease forwards;
+}
+
+@keyframes mhb2-kenburns {
+  from {
+    transform: scale(1.04);
+  }
+
+  to {
+    transform: scale(1);
+  }
+}
+
+/* ── Vignettes ── */
+.mhb2-vignette-bottom {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  pointer-events: none;
+  background: linear-gradient(to top,
+      rgba(3, 7, 18, 0.97) 0%,
+      rgba(3, 7, 18, 0.65) 38%,
+      rgba(3, 7, 18, 0.18) 65%,
+      transparent 100%);
+}
+
+.mhb2-vignette-left {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  pointer-events: none;
+  background: linear-gradient(to right,
+      rgba(3, 7, 18, 0.72) 0%,
+      rgba(3, 7, 18, 0.3) 45%,
+      transparent 75%);
+}
+
+/* ── HUD Corner Brackets ── */
+.mhb2-corner {
+  position: absolute;
+  width: 16px;
+  height: 16px;
+  z-index: 8;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  pointer-events: none;
+}
+
+.mhb2-slide--in .mhb2-corner {
+  opacity: 1;
+}
+
+.mhb2-corner::before,
+.mhb2-corner::after {
+  content: "";
+  position: absolute;
+  background: var(--sa, var(--accent, #00e5ff));
+}
+
+/* top-left */
+.mhb2-corner--tl {
+  top: 10px;
+  left: 10px;
+}
+
+.mhb2-corner--tl::before {
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 2px;
+}
+
+.mhb2-corner--tl::after {
+  top: 0;
+  left: 0;
+  width: 2px;
+  height: 100%;
+}
+
+/* top-right */
+.mhb2-corner--tr {
+  top: 10px;
+  right: 10px;
+}
+
+.mhb2-corner--tr::before {
+  top: 0;
+  right: 0;
+  left: unset;
+  width: 100%;
+  height: 2px;
+}
+
+.mhb2-corner--tr::after {
+  top: 0;
+  right: 0;
+  left: unset;
+  width: 2px;
+  height: 100%;
+}
+
+/* bottom-left */
+.mhb2-corner--bl {
+  bottom: 10px;
+  left: 10px;
+}
+
+.mhb2-corner--bl::before {
+  bottom: 0;
+  top: unset;
+  left: 0;
+  width: 100%;
+  height: 2px;
+}
+
+.mhb2-corner--bl::after {
+  bottom: 0;
+  top: unset;
+  left: 0;
+  width: 2px;
+  height: 100%;
+}
+
+/* ── HUD Top Bar ── */
+.mhb2-hud-top {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 6;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 12px 0;
+  pointer-events: none;
+}
+
+/* ── Badge ── */
+.mhb2-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 4px 10px 4px 7px;
+  background: rgba(0, 0, 0, 0.55);
+  border: 1px solid rgba(var(--sa, #00e5ff), 0.35);
+  border-left: 2px solid var(--sa, var(--accent, #00e5ff));
+  backdrop-filter: blur(6px);
+  pointer-events: none;
+}
+
+.mhb2-badge-dot {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: var(--sa, var(--accent, #00e5ff));
+  box-shadow: 0 0 6px var(--sa, var(--accent, #00e5ff));
+  animation: mhb2-pulse 1.6s ease-in-out infinite;
+  flex-shrink: 0;
+}
+
+@keyframes mhb2-pulse {
+
+  0%,
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+
+  50% {
+    opacity: 0.5;
+    transform: scale(0.75);
+  }
+}
+
+.mhb2-badge-text {
+  font-family: "Rajdhani", sans-serif;
+  font-size: 8.5px;
+  font-weight: 700;
+  letter-spacing: 1.8px;
+  text-transform: uppercase;
+  color: var(--sa, var(--accent, #00e5ff));
+}
+
+/* ── Counter ── */
+.mhb2-counter {
+  display: none !important;
+  align-items: baseline;
+  gap: 2px;
+  pointer-events: none;
+}
+
+.mhb2-counter-cur {
+  font-family: "Barlow Condensed", sans-serif;
+  font-size: 22px;
+  font-weight: 900;
+  color: var(--sa, var(--accent, #00e5ff));
+  line-height: 1;
+  text-shadow: 0 0 12px var(--sa, #00e5ff);
+}
+
+.mhb2-counter-sep {
+  font-family: "Rajdhani", sans-serif;
+  font-size: 11px;
+  font-weight: 700;
+  color: rgba(255, 255, 255, 0.3);
+  margin: 0 1px;
+}
+
+.mhb2-counter-tot {
+  font-family: "Barlow Condensed", sans-serif;
+  font-size: 13px;
+  font-weight: 700;
+  color: rgba(255, 255, 255, 0.35);
+  line-height: 1;
+}
+
+/* ── Character image ── */
+.mhb2-char {
+  position: absolute;
+  bottom: 11px;
+  right: 5px;
+  width: auto;
+  max-width: 52%;
+  object-fit: contain;
+  object-position: bottom right;
+  z-index: 3;
+  pointer-events: none;
+  filter: drop-shadow(-3px 0 10px rgba(0, 0, 0, 0.7));
+  user-select: none;
+}
+
+/* ── Content ── */
+.mhb2-content {
+  position: relative;
+  z-index: 5;
+  padding: 0 14px 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  max-width: 68%;
+}
+
+/* ── Eyebrow ── */
+.mhb2-eyebrow {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  font-family: "Rajdhani", sans-serif;
+  font-size: 9.5px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--sa, var(--accent, #00e5ff));
+  margin: 0;
+}
+
+.mhb2-eyebrow-line {
+  display: block;
+  width: 18px;
+  height: 1.5px;
+  background: var(--sa, var(--accent, #00e5ff));
+  flex-shrink: 0;
+  opacity: 0.7;
+}
+
+/* ── Title ── */
+.mhb2-title {
+  font-family: "Barlow Condensed", sans-serif;
+  font-size: 22px;
+  font-weight: 900;
+  color: #fff;
+  margin: 0;
+  line-height: 1.1;
+  letter-spacing: -0.2px;
+  text-transform: uppercase;
+  text-shadow: 0 2px 12px rgba(0, 0, 0, 0.8);
+}
+
+.mhb2-title-hl {
+  display: block;
+  font-size: 18px;
+  margin-top: 10px;
+  background: linear-gradient(90deg,
+      #fff8c0 0%,
+      #ffd700 40%,
+      #ff8c00 80%,
+      #ff4500 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  filter: drop-shadow(0 0 8px rgba(255, 180, 0, 0.6));
+}
+
+/* ── Subtitle ── */
+.mhb2-sub {
+  font-family: "Rajdhani", sans-serif;
+  font-size: 11px;
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.58);
+  margin: 0;
+  line-height: 1.4;
+  letter-spacing: 0.2px;
+}
+
+/* ── CTA — Clipped HUD button ── */
+.mhb2-cta {
+  display: inline-flex;
+  align-items: stretch;
+  border: none;
+  cursor: pointer;
+  width: fit-content;
+  margin-top: 4px;
+  overflow: visible;
+  background: none;
+  padding: 0;
+  transition: filter 0.15s ease, transform 0.12s ease;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.mhb2-cta:active {
+  transform: scale(0.95);
+  filter: brightness(1.15);
+}
+
+.mhb2-cta-label {
+  display: flex;
+  align-items: center;
+  padding: 8px 14px 8px 13px;
+  font-family: "Barlow Condensed", sans-serif;
+  font-size: 12px;
+  font-weight: 900;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: #050d1a;
+  background: var(--sa, var(--accent, #00e5ff));
+  clip-path: polygon(0 0, calc(100% - 7px) 0, 100% 50%, calc(100% - 7px) 100%, 0 100%);
+  padding-right: 20px;
+  line-height: 1;
+}
+
+.mhb2-cta-arrow {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 30px;
+  background: rgba(255, 255, 255, 0.18);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-left: none;
+  clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%, 7px 50%);
+  margin-left: -1px;
+}
+
+.mhb2-cta-arrow svg {
+  width: 12px;
+  height: 12px;
+  color: #fff;
+  flex-shrink: 0;
+}
+
+/* ── Bottom accent line ── */
+.mhb2-bottom-line {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  z-index: 7;
+  background: var(--sa, var(--accent, #00e5ff));
+  box-shadow: 0 0 10px var(--sa, #00e5ff),
+    0 0 20px var(--sa, #00e5ff);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.5s ease 0.1s;
+}
+
+.mhb2-slide--in .mhb2-bottom-line {
+  transform: scaleX(1);
+}
+
+/* ── Dot nav ── */
+.mhb2-dots {
+  position: absolute;
+  bottom: 12px;
+  right: 12px;
+  z-index: 9;
+  display: flex;
+  gap: 4px;
+  align-items: center;
+}
+
+.mhb2-dot {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.25);
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  transition: all 0.28s ease;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.mhb2-dot--on {
+  width: 20px;
+  border-radius: 3px;
+  background: var(--accent, #00e5ff);
+  box-shadow: 0 0 8px var(--accent, #00e5ff);
+}
+
+/* ── Skeleton ── */
+.mhb2-skeleton {
+  width: 100%;
+  background: linear-gradient(90deg,
+      #0a0f1a 25%,
+      #141e2e 50%,
+      #0a0f1a 75%);
+  background-size: 200% 100%;
+  animation: mhb2-shimmer 1.6s infinite;
+}
+
+@keyframes mhb2-shimmer {
+  0% {
+    background-position: 200% 0;
+  }
+
+  100% {
+    background-position: -200% 0;
+  }
+}

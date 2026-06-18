@@ -1,0 +1,17 @@
+/* ============================================================
+   8JJGames – Privacy Policy
+   Theme: Amber / Gold
+   ============================================================ */
+@import './LegalBase.css';
+
+/* ── Accent overrides for this page ── */
+.pp-page .legal-hero-glow  { background: var(--brand-primary); }
+.pp-page .legal-badge       { background: rgba(245,158,11,0.12); border: 1px solid rgba(245,158,11,0.28); color: var(--brand-primary); }
+.pp-page .legal-hero h1 em  { background: var(--grad-amber); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+.pp-page .legal-intro        { border-left: 4px solid var(--brand-primary); }
+.pp-page .legal-section-num  { background: var(--grad-amber); box-shadow: 0 4px 14px rgba(245,158,11,0.30); }
+.pp-page .legal-subsection h3 { color: var(--brand-primary); }
+.pp-page .legal-info-list li:hover { border-color: rgba(245,158,11,0.35); }
+.pp-page .legal-simple-list li::before { background: var(--brand-primary); }
+.pp-page .legal-highlight { background: rgba(245,158,11,0.07); border-color: rgba(245,158,11,0.25); color: var(--brand-primary); font-weight: 600; }
+.pp-page .legal-contact a   { color: var(--brand-primary); }

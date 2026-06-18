@@ -1,0 +1,646 @@
+/* react-app/src/components/UniversalBanner/templates/PromoBannerV2.css */
+
+/* ── Root ── */
+.pb2-wrap {
+  --accent: #00e5ff;
+  --edge: rgba(255, 255, 255, 0.06);
+  position: relative;
+  width: 100%;
+  height: 360px;
+  border-radius: 20px;
+  overflow: hidden;
+  background: #040810;
+  margin: 20px 0;
+  font-family: 'Mulish', sans-serif;
+}
+
+/* ── Top progress rail ── */
+.pb2-rail {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: rgba(255, 255, 255, 0.1);
+  z-index: 20;
+  border-radius: 0;
+  display: none !important;
+}
+
+.pb2-rail-fill {
+  height: 100%;
+  background: var(--accent);
+  box-shadow: 0 0 8px var(--accent);
+  transition: width 0.1s linear;
+  border-radius: 0 2px 2px 0;
+}
+
+/* ── Counter — top right ── */
+.pb2-counter {
+  display: none !important;
+  position: absolute;
+  top: 14px;
+  right: 20px;
+  z-index: 15;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  color: rgba(255, 255, 255, 0.45);
+  letter-spacing: 1px;
+  pointer-events: none;
+}
+
+.pb2-counter-cur {
+  font-weight: 700;
+  color: var(--accent);
+  text-shadow: 0 0 8px var(--accent);
+}
+
+/* ── Media ── */
+.pb2-media {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+}
+
+.pb2-bg-img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  display: block;
+  transition: transform 0.7s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.32s ease;
+}
+
+.pb2-bg-empty {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, #0a1020, #111827);
+}
+
+/* Slide transitions on media */
+.pb2-media--exit .pb2-bg-img {
+  opacity: 0;
+  transform: scale(1.04);
+}
+
+.pb2-media--enter .pb2-bg-img {
+  opacity: 0;
+}
+
+.pb2-media--idle .pb2-bg-img {
+  opacity: 1;
+  transform: scale(1);
+}
+
+/* Ken Burns on idle */
+@keyframes pb2-kb {
+  from {
+    transform: scale(1.0);
+  }
+
+  to {
+    transform: scale(1.05);
+  }
+}
+
+.pb2-media--idle .pb2-bg-img {
+  animation: pb2-kb 9s ease-in-out forwards;
+}
+
+/* ── Overlay — strong at bottom, heavy left edge, fades right ── */
+.pb2-overlay {
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(to top, rgba(4, 8, 20, 0.98) 0%, rgba(4, 8, 20, 0.7) 35%, rgba(4, 8, 20, 0.1) 60%, transparent 100%),
+    linear-gradient(to right, rgba(4, 8, 20, 0.5) 0%, transparent 40%);
+  z-index: 2;
+}
+
+/* Radial ambient glow behind console */
+.pb2-console-glow {
+  position: absolute;
+  bottom: -40px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 520px;
+  height: 220px;
+  background: radial-gradient(ellipse, var(--accent, #00e5ff) 0%, transparent 70%);
+  opacity: 0.12;
+  z-index: 3;
+  pointer-events: none;
+  filter: blur(20px);
+  transition: opacity 0.5s;
+}
+
+.pb2-wrap:hover .pb2-console-glow {
+  opacity: 0.2;
+}
+
+/* ── Side arrows ── */
+.pb2-arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 15;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+}
+
+.pb2-arrow--left {
+  left: 18px;
+}
+
+.pb2-arrow--right {
+  right: 18px;
+}
+
+.pb2-arrow-inner {
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  background: rgba(4, 8, 20, 0.65);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  backdrop-filter: blur(8px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: rgba(255, 255, 255, 0.6);
+  transition: background 0.2s, border-color 0.2s, color 0.2s, transform 0.15s;
+}
+
+.pb2-arrow:hover .pb2-arrow-inner {
+  background: rgba(4, 8, 20, 0.9);
+  border-color: var(--accent);
+  color: var(--accent);
+  transform: scale(1.08);
+}
+
+.pb2-arrow:active .pb2-arrow-inner {
+  transform: scale(0.95);
+}
+
+/* ── Character image ── */
+.pb2-character {
+  filter: brightness(1.7) contrast(1.1) drop-shadow(0 0 6px rgb(63, 99, 172));
+  transition: filter 0.3s ease, transform 0.2s ease;
+  position: relative;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: auto;
+  top: 10px;
+  max-width: 45%;
+  object-fit: contain;
+  object-position: bottom;
+  z-index: 10;
+  pointer-events: none;
+  /* filter: drop-shadow(-12px 0 32px rgba(0, 0, 0, 0.7)); */
+  user-select: none;
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.pb2-character--exit {
+  opacity: 0;
+  transform: translateX(30px);
+}
+
+.pb2-character--enter {
+  opacity: 0;
+  transform: translateX(-20px);
+}
+
+.pb2-character--idle {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+/* ── Floating console — bottom center ── */
+.pb2-console {
+  position: absolute;
+  bottom: 45px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: min(580px, 72%);
+  z-index: 12;
+  background: rgb(4 9 24 / 17%);
+  backdrop-filter: blur(22px) saturate(1.4);
+  -webkit-backdrop-filter: blur(22px) saturate(1.4);
+  border-radius: 16px;
+  border: 0px solid rgba(255, 255, 255, 0.08);
+  padding: 20px 28px 18px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  text-align: center;
+  transition: opacity 0.3s ease, transform 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+  /* box-shadow:
+    0 -1px 0 rgba(255,255,255,0.06) inset,
+    0 16px 48px rgba(0,0,0,0.6),
+    0 0 0 1px rgba(0,0,0,0.4); */
+}
+
+/* Console slide transitions */
+.pb2-console--exit.pb2-console--dirr {
+  opacity: 0;
+  transform: translateX(calc(-50% - 40px));
+}
+
+.pb2-console--exit.pb2-console--dirl {
+  opacity: 0;
+  transform: translateX(calc(-50% + 40px));
+}
+
+.pb2-console--enter.pb2-console--dirr {
+  opacity: 0;
+  transform: translateX(calc(-50% + 40px));
+}
+
+.pb2-console--enter.pb2-console--dirl {
+  opacity: 0;
+  transform: translateX(calc(-50% - 40px));
+}
+
+.pb2-console--idle {
+  opacity: 1;
+  transform: translateX(-50%);
+}
+
+/* Scanlines texture */
+.pb2-scanlines {
+  position: absolute;
+  inset: 0;
+  background: repeating-linear-gradient(0deg, transparent 0px, transparent 3px, rgba(255, 255, 255, 0.012) 3px, rgba(255, 255, 255, 0.012) 4px);
+  border-radius: inherit;
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* Top edge accent */
+.pb2-console-edge {
+  position: absolute;
+  top: 0;
+  left: 10%;
+  right: 10%;
+  height: 2px;
+  background: linear-gradient(to right, transparent, var(--accent), transparent);
+  opacity: 0.8;
+  box-shadow: 0 0 10px var(--accent);
+  border-radius: 0 0 2px 2px;
+}
+
+/* Corner brackets — same HUD DNA, but on the console */
+.pb2-bracket {
+  display: none !important;
+  position: absolute;
+  width: 12px;
+  height: 12px;
+  pointer-events: none;
+}
+
+.pb2-bracket--tl {
+  top: -1px;
+  left: -1px;
+  border-top: 2px solid var(--accent);
+  border-left: 2px solid var(--accent);
+  border-radius: 4px 0 0 0;
+}
+
+.pb2-bracket--tr {
+  top: -1px;
+  right: -1px;
+  border-top: 2px solid var(--accent);
+  border-right: 2px solid var(--accent);
+  border-radius: 0 4px 0 0;
+}
+
+/* All console content above the scanlines */
+.pb2-badge-wrap,
+.pb2-eyebrow,
+.pb2-title,
+.pb2-subtitle,
+.pb2-cta-wrap,
+.pb2-dots {
+  position: relative;
+  z-index: 1;
+}
+
+/* ── Badge ── */
+.pb2-badge-wrap {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  justify-content: center;
+}
+
+.pb2-badge-pip {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--accent);
+  box-shadow: 0 0 8px var(--accent);
+  animation: pb2-pip-pulse 1.8s ease-in-out infinite;
+}
+
+@keyframes pb2-pip-pulse {
+
+  0%,
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+
+  50% {
+    transform: scale(1.5);
+    opacity: 0.6;
+  }
+}
+
+.pb2-badge {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 2.2px;
+  text-transform: uppercase;
+  color: var(--accent);
+  border: 1px solid var(--accent);
+  padding: 2px 10px;
+  border-radius: 3px;
+  opacity: 0.9;
+}
+
+/* ── Eyebrow ── */
+.pb2-eyebrow {
+  font-family: 'Rajdhani', sans-serif;
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.5);
+  margin: 0;
+}
+
+/* ── Title — large, centered, Rajdhani ── */
+.pb2-title {
+
+  font-size: clamp(22px, 2.8vw, 28px);
+  font-weight: 700;
+  color: #fff;
+  line-height: 1.1;
+  letter-spacing: -0.3px;
+  margin: 0;
+  text-shadow: 0 2px 20px rgba(0, 0, 0, 0.8);
+}
+
+/* ── Subtitle ── */
+.pb2-subtitle {
+  font-size: 12px;
+  color: rgba(255, 255, 255, 0.5);
+  margin: 0;
+  line-height: 1.5;
+  max-width: 400px;
+}
+
+/* ── 3D arcade press CTA ── */
+.pb2-cta-wrap {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 4px;
+}
+
+.pb2-cta {
+  position: relative;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  outline: none;
+  display: block;
+}
+
+/* The face — top surface */
+.pb2-cta-face {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 11px 30px;
+  /* background: var(--accent); */
+  background: linear-gradient(to right, transparent, var(--accent), transparent);
+  color: #000;
+
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  border-radius: 15px 15px 15px 15px;
+  position: relative;
+  z-index: 1;
+  transform: translateY(0px);
+  transition: transform 0.08s ease;
+  box-shadow: 0 0 0 1px rgb(0 0 0 / 25%) inset, 0 1px 0 rgb(255 255 255 / 30%) inset;
+}
+
+/* The edge — 3D bevel bottom */
+.pb2-cta-edge {
+  display: none;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 5px;
+  background: color-mix(in srgb, var(--accent) 30%, #000 50%);
+  border-radius: 0 0 15px 15px;
+  z-index: 0;
+  width: 80%;
+  margin: 0 auto;
+  transition: height 0.08s ease;
+}
+
+/* Press down effect */
+.pb2-cta:active .pb2-cta-face {
+  transform: translateY(4px);
+}
+
+.pb2-cta:active .pb2-cta-edge {
+  height: 1px;
+}
+
+.pb2-cta:hover .pb2-cta-face {
+  filter: brightness(1.08);
+}
+
+.pb2-cta-icon {
+  display: flex;
+  align-items: center;
+}
+
+/* Pulsing ring */
+.pb2-cta-ring {
+  position: absolute;
+  inset: -6px;
+  border: 0.5px solid var(--accent);
+  border-radius: 22px;
+  opacity: 0;
+  animation: pb2-ring-pulse 2.4s ease-out infinite;
+  pointer-events: none;
+}
+
+@keyframes pb2-ring-pulse {
+  0% {
+    opacity: 0.6;
+    transform: scale(0.96);
+  }
+
+  70% {
+    opacity: 0;
+    transform: scale(1.12);
+  }
+
+  100% {
+    opacity: 0;
+    transform: scale(1.12);
+  }
+}
+
+/* ── Dot nav — inside console ── */
+.pb2-dots {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  justify-content: center;
+  margin-top: 2px;
+  position: absolute;
+  bottom: -30px;
+}
+
+.pb2-dot {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.18);
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  transition: background 0.25s, width 0.25s, border-radius 0.25s;
+}
+
+.pb2-dot--active {
+  width: 18px;
+  border-radius: 3px;
+  background: var(--accent);
+  box-shadow: 0 0 6px var(--accent);
+}
+
+/* ── Responsive ── */
+@media (max-width: 1024px) {
+  .pb2-wrap {
+    height: 320px;
+  }
+
+  .pb2-title {
+    font-size: clamp(20px, 2.4vw, 30px);
+  }
+
+  .pb2-console {
+    width: min(500px, 76%);
+    padding: 18px 22px 16px;
+  }
+
+  .pb2-character {
+    right: 4%;
+    height: 72%;
+    max-width: 42%;
+  }
+}
+
+@media (max-width: 768px) {
+  .pb2-wrap {
+    height: 290px;
+    border-radius: 16px;
+  }
+
+  .pb2-console {
+    width: min(380px, 82%);
+    bottom: 14px;
+    padding: 14px 18px 14px;
+    gap: 6px;
+  }
+
+  .pb2-title {
+    font-size: 18px;
+  }
+
+  .pb2-subtitle {
+    display: none;
+  }
+
+  .pb2-character {
+    height: 62%;
+    max-width: 38%;
+    right: 3%;
+    bottom: 70px;
+  }
+
+  .pb2-arrow--left {
+    left: 10px;
+  }
+
+  .pb2-arrow--right {
+    right: 10px;
+  }
+
+  .pb2-arrow-inner {
+    width: 36px;
+    height: 36px;
+  }
+
+  .pb2-cta-face {
+    padding: 9px 22px;
+    font-size: 12px;
+  }
+}
+
+@media (max-width: 580px) {
+  .pb2-wrap {
+    height: 320px;
+  }
+
+  .pb2-console {
+    width: calc(100% - 28px);
+    bottom: 12px;
+  }
+
+  .pb2-character {
+    right: 0;
+    bottom: 140px;
+    height: 48%;
+    max-width: 55%;
+    opacity: 0.65;
+  }
+
+  .pb2-title {
+    font-size: 16px;
+  }
+
+  .pb2-subtitle {
+    display: none;
+  }
+
+  .pb2-arrow-inner {
+    width: 32px;
+    height: 32px;
+  }
+}
+
+
+.pb2-cta-label{
+  text-transform: capitalize;
+  font-size: 12px;
+}

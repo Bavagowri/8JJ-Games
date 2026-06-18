@@ -1,0 +1,381 @@
+/* react-app/src/components/GameOverModal/GameOverModal.css */
+
+
+/* ═══════════ OVERLAY ═══════════ */
+.gom-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(2, 8, 24, 0.85);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+  padding: 16px;
+  animation: gomOverlayIn 0.38s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+.gom-overlay--out { animation: gomOverlayOut 0.36s ease forwards; }
+
+@keyframes gomOverlayIn  { from { opacity: 0; } to { opacity: 1; } }
+@keyframes gomOverlayOut { to   { opacity: 0; } }
+
+/* ── Ambient glow blobs (gold/teal — celebratory) ── */
+.gom-blob {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(88px);
+  pointer-events: none;
+  opacity: 0.38;
+  animation: gomBlobDrift 9s ease-in-out infinite alternate;
+}
+.gom-blob--a {
+  width: 360px; height: 360px;
+  background: radial-gradient(circle, rgba(255, 215, 0, 0.26), transparent 68%);
+  top: 10%; left: 15%;
+}
+.gom-blob--b {
+  width: 320px; height: 320px;
+  background: radial-gradient(circle, rgba(0, 212, 255, 0.2), transparent 68%);
+  bottom: 10%; right: 15%;
+  animation-delay: -4.5s;
+}
+@keyframes gomBlobDrift {
+  from { transform: translate(0, 0) scale(1); }
+  to   { transform: translate(24px, -16px) scale(1.07); }
+}
+
+/* ═══════════ CARD ═══════════ */
+.gom-card {
+  position: relative;
+  width: 100%;
+  max-width: 420px;
+  border-radius: 22px;
+  background: linear-gradient(160deg, rgba(8, 22, 46, 0.97) 0%, rgba(4, 12, 28, 0.99) 100%);
+  border: 1px solid rgba(0, 212, 255, 0.2);
+  box-shadow:
+    0 0 0 1px rgba(0, 212, 255, 0.05),
+    0 28px 72px rgba(0, 0, 0, 0.75),
+    0 0 80px rgba(0, 212, 255, 0.06),
+    inset 0 1px 0 rgba(255, 255, 255, 0.04);
+  overflow: hidden;
+  padding: 0 0 8px;
+  animation: gomCardIn 0.44s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+.gom-card--out { animation: gomCardOut 0.36s cubic-bezier(0.4, 0, 1, 1) forwards; }
+
+@keyframes gomCardIn {
+  from { opacity: 0; transform: scale(0.88) translateY(22px); }
+  to   { opacity: 1; transform: scale(1)    translateY(0); }
+}
+@keyframes gomCardOut {
+  to   { opacity: 0; transform: scale(0.92) translateY(14px); }
+}
+
+/* ── Top shimmer bar (cyan → green → cyan) ── */
+.gom-topbar {
+  height: 3px;
+  background: linear-gradient(90deg, #00d4ff 0%, #00e676 50%, #00d4ff 100%);
+  background-size: 200% 100%;
+  animation: gomBarFlow 3s linear infinite;
+}
+@keyframes gomBarFlow { from { background-position: 200% 0; } to { background-position: -200% 0; } }
+
+/* ── Close ── */
+.gom-close {
+  position: absolute;
+  top: 14px; right: 14px;
+  z-index: 20;
+  width: 30px; height: 30px;
+  border-radius: 50%;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: rgba(255, 255, 255, 0.05);
+  color: rgba(255, 255, 255, 0.45);
+  font-size: 11px;
+  display: flex; align-items: center; justify-content: center;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  backdrop-filter: blur(4px);
+}
+.gom-close:hover {
+  background: rgba(255, 71, 87, 0.2);
+  border-color: rgba(255, 71, 87, 0.45);
+  color: #ff4757;
+  transform: rotate(90deg) scale(1.1);
+}
+
+/* ═══════════ HERO ═══════════ */
+.gom-hero {
+  position: relative;
+  padding: 28px 26px 20px;
+  text-align: center;
+  background: linear-gradient(180deg, rgba(0, 212, 255, 0.06) 0%, transparent 100%);
+  overflow: hidden;
+}
+
+/* bottom hero accent line */
+.gom-hero::after {
+  content: '';
+  position: absolute;
+  bottom: 0; left: 10%; right: 10%;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(0, 212, 255, 0.3), transparent);
+}
+
+/* ── Corner accents ── */
+.gom-corner {
+  position: absolute;
+  width: 15px; height: 15px;
+  opacity: 0.35;
+  z-index: 2;
+}
+.gom-corner--tl { top: 14px; left: 16px; border-top: 1.5px solid #00d4ff; border-left: 1.5px solid #00d4ff; }
+.gom-corner--tr { top: 14px; right: 16px; border-top: 1.5px solid #00d4ff; border-right: 1.5px solid #00d4ff; }
+
+/* ── Confetti dots ── */
+.gom-confetti {
+  position: absolute; inset: 0;
+  pointer-events: none; overflow: hidden; z-index: 0;
+}
+.gom-confetti-dot {
+  position: absolute;
+  width: 7px; height: 7px;
+  border-radius: 50%;
+  animation: gomDotDrift 3.2s ease-in-out infinite;
+}
+@keyframes gomDotDrift {
+  0%   { transform: translateY(0)   rotate(0deg);   opacity: 0.5; }
+  30%  { opacity: 1; }
+  70%  { opacity: 0.7; }
+  100% { transform: translateY(-16px) rotate(200deg); opacity: 0.4; }
+}
+
+/* ── Trophy emoji ── */
+.gom-trophy {
+  display: block;
+  font-size: 52px;
+  margin-bottom: 12px;
+  position: relative; z-index: 1;
+  animation: gomTrophyBounce 0.7s cubic-bezier(0.22, 1, 0.36, 1) both 0.2s;
+  filter: drop-shadow(0 0 16px rgba(255, 215, 0, 0.55));
+}
+@keyframes gomTrophyBounce {
+  from { opacity: 0; transform: scale(0.4) translateY(20px); }
+  to   { opacity: 1; transform: scale(1)   translateY(0); }
+}
+
+/* ── Badge ── */
+.gom-badge {
+  display: inline-flex;
+  align-items: center; gap: 7px;
+  font-size: 9px; font-weight: 800;
+  letter-spacing: 2px; text-transform: uppercase;
+  color: #00e676;
+  background: rgba(0, 230, 118, 0.08);
+  border: 1px solid rgba(0, 230, 118, 0.28);
+  border-radius: 100px;
+  padding: 5px 14px;
+  margin-bottom: 12px;
+  position: relative; z-index: 1;
+}
+.gom-badge-dot {
+  width: 5px; height: 5px; border-radius: 50%;
+  background: #00e676;
+  box-shadow: 0 0 8px #00e676;
+  animation: gomDotPulse 1.5s ease-in-out infinite;
+}
+@keyframes gomDotPulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50%       { opacity: 0.4; transform: scale(0.65); }
+}
+
+/* ── Title ── */
+.gom-title {
+  margin: 0 0 4px;
+  font-size: 26px; font-weight: 800; line-height: 1.1;
+  font-family: 'Orbitron', 'Big Shoulders Display', sans-serif;
+  background: linear-gradient(135deg, #ffffff 30%, #00d4ff 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  letter-spacing: -0.3px;
+  position: relative; z-index: 1;
+}
+.gom-game-name {
+  font-size: 12px;
+  color: rgba(255, 255, 255, 0.38);
+  margin: 0;
+  position: relative; z-index: 1;
+  font-style: italic;
+}
+
+/* ═══════════ BREAKDOWN ═══════════ */
+.gom-breakdown {
+  padding: 18px 24px 14px;
+  border-bottom: 1px solid rgba(0, 212, 255, 0.08);
+}
+
+.gom-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 9px 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.035);
+  opacity: 0;
+  transform: translateX(-10px);
+  transition: opacity 0.35s ease, transform 0.35s ease;
+}
+.gom-row:last-of-type { border-bottom: none; }
+.gom-row--in { opacity: 1; transform: translateX(0); }
+
+.gom-row--multiplier { background: rgba(129, 140, 248, 0.06); border-radius: 8px; padding: 9px 10px; }
+
+.gom-row-lbl {
+  display: flex;
+  align-items: center; gap: 9px;
+  font-size: 13px; color: rgba(255, 255, 255, 0.55);
+}
+.gom-row-icon { font-size: 14px; }
+.gom-row-pts {
+  font-family: 'Orbitron', monospace;
+  font-size: 14px; font-weight: 700;
+  color: #ffd700;
+  text-shadow: 0 0 10px rgba(255, 215, 0, 0.3);
+}
+.gom-row-pts--mult { color: #818cf8; text-shadow: 0 0 10px rgba(129, 140, 248, 0.4); }
+
+/* divider */
+.gom-divider {
+  height: 1px;
+  margin: 10px 0 8px;
+  background: linear-gradient(90deg, transparent, rgba(0, 212, 255, 0.25), transparent);
+}
+
+/* total row */
+.gom-total-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 4px 0;
+  opacity: 0;
+  transform: translateY(8px);
+  transition: opacity 0.4s ease 0.42s, transform 0.4s ease 0.42s;
+}
+.gom-total-row--in { opacity: 1; transform: translateY(0); }
+
+.gom-total-lbl {
+  font-size: 15px; font-weight: 700;
+  color: var(--text, #e8f4ff);
+}
+.gom-total-pts {
+  font-family: 'Orbitron', monospace;
+  font-size: 26px; font-weight: 700;
+  color: #00e676;
+  text-shadow: 0 0 18px rgba(0, 230, 118, 0.5);
+  line-height: 1;
+}
+.gom-pts-unit {
+  font-size: 13px; font-weight: 600;
+  color: rgba(0, 230, 118, 0.6);
+  vertical-align: middle;
+  margin-left: 3px;
+}
+
+/* ═══════════ ANON NUDGE STRIP ═══════════ */
+.gom-anon-strip {
+  display: flex;
+  align-items: center; gap: 10px;
+  margin: 0 22px 16px;
+  background: rgba(0, 212, 255, 0.06);
+  border: 1px solid rgba(0, 212, 255, 0.16);
+  border-radius: 12px;
+  padding: 11px 14px;
+  font-size: 12px;
+  color: rgba(255, 255, 255, 0.5);
+  line-height: 1.5;
+  opacity: 0;
+  transform: translateY(6px);
+  transition: opacity 0.4s ease 0.55s, transform 0.4s ease 0.55s;
+}
+.gom-anon-strip--in { opacity: 1; transform: translateY(0); }
+.gom-anon-icon { font-size: 16px; flex-shrink: 0; }
+.gom-anon-text strong { color: #00d4ff; font-weight: 700; }
+
+/* ═══════════ CTAs ═══════════ */
+.gom-actions {
+  padding: 0 22px 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+/* Play again — cyan gradient */
+.gom-btn-primary {
+  position: relative;
+  width: 100%; padding: 15px 24px;
+  border: none; border-radius: 13px;
+  background: linear-gradient(135deg, #00d4ff 0%, #2b7ae2 60%, #6366f1 100%);
+  color: #fff;
+  font-size: 14px; font-weight: 700;
+  letter-spacing: 0.2px;
+  cursor: pointer; overflow: hidden;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  box-shadow: 0 4px 24px rgba(0, 212, 255, 0.35);
+}
+.gom-btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 32px rgba(0, 212, 255, 0.52);
+}
+.gom-btn-primary:active { transform: translateY(0); }
+.gom-btn-primary span { position: relative; z-index: 1; }
+.gom-btn-shine {
+  position: absolute; inset: 0;
+  background: linear-gradient(
+    105deg, transparent 30%,
+    rgba(255, 255, 255, 0.22) 50%,
+    transparent 70%
+  );
+  background-size: 250% 100%;
+  animation: gomBtnSweep 2.6s ease-in-out infinite;
+  pointer-events: none;
+}
+@keyframes gomBtnSweep {
+  0%   { background-position: 200% 0; }
+  100% { background-position: -100% 0; }
+}
+
+/* Share — gold outline */
+.gom-btn-share {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 9px;
+  width: 100%; padding: 13px 24px;
+  background: rgba(255, 215, 0, 0.07);
+  border: 1px solid rgba(255, 215, 0, 0.25);
+  border-radius: 13px;
+  color: #ffd700;
+  font-size: 13px; font-weight: 700;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+.gom-btn-share:hover {
+  background: rgba(255, 215, 0, 0.14);
+  border-color: rgba(255, 215, 0, 0.5);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 16px rgba(255, 215, 0, 0.18);
+}
+.gom-btn-share:active { transform: translateY(0); }
+.gom-share-icon { font-size: 16px; }
+
+/* ═══════════ RESPONSIVE ═══════════ */
+@media (max-width: 480px) {
+  .gom-card    { border-radius: 18px; max-width: 100%; }
+  .gom-hero    { padding: 22px 18px 16px; }
+  .gom-trophy  { font-size: 44px; }
+  .gom-title   { font-size: 22px; }
+  .gom-total-pts { font-size: 22px; }
+  .gom-breakdown { padding: 14px 18px 10px; }
+  .gom-anon-strip { margin: 0 16px 14px; }
+  .gom-actions { padding: 0 16px 12px; }
+}

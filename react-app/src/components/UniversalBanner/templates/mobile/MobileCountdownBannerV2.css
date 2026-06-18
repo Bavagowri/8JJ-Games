@@ -1,0 +1,394 @@
+/* react-app/src/components/UniversalBanner/templates/mobile/MobileCountdownBannerV2.css */
+
+
+
+/* ── Wrapper ── */
+.mcd2-wrap {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+  background: #06090e;
+ 
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  box-shadow:
+    0 4px 20px rgba(0, 0, 0, 0.55),
+    inset 0 1px 0 rgba(255, 255, 255, 0.05);
+  padding: 10px 0;
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* ── Background ── */
+.mcd2-bg {
+  position: absolute;
+  inset: 0;
+  width: 100%; height: 100%;
+  object-fit: cover;
+  object-position: center top;
+  display: block;
+}
+
+.mcd2-overlay {
+  position: absolute; inset: 0; z-index: 1;
+  background: #060c18;
+}
+
+/* Noise grain */
+.mcd2-noise {
+  position: absolute; inset: 0; z-index: 2;
+  pointer-events: none;
+  opacity: 0.025;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-size: 180px;
+}
+
+/* Character — fades to left side, right-anchored */
+.mcd2-char {
+  position: absolute;
+  bottom: 0; right: -8px;
+  height: 80%;
+  width: auto;
+  object-fit: contain;
+  object-position: bottom right;
+  z-index: 3;
+  pointer-events: none; user-select: none;
+  opacity: 0.38;
+  filter: drop-shadow(-4px 0 16px rgba(0, 0, 0, 0.8));
+  /* Mask char so it doesn't bleed over content */
+  -webkit-mask-image: linear-gradient(to left, black 30%, transparent 85%);
+  mask-image: linear-gradient(to left, black 30%, transparent 85%);
+}
+
+/* ── Top + Bottom accent rules ── */
+.mcd2-top-rule {
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 2px;
+  z-index: 6;
+  background: linear-gradient(
+    90deg,
+    var(--accent, #ffd000) 0%,
+    rgba(255, 208, 0, 0.4) 50%,
+    transparent 100%
+  );
+}
+
+.mcd2-bottom-rule {
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  height: 1px;
+  z-index: 6;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(255, 255, 255, 0.06) 40%,
+    transparent 100%
+  );
+}
+
+/* ── Body ── */
+.mcd2-body {
+  position: relative; z-index: 5;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+/* ══════════════════════════════════════
+   COPY SECTION
+══════════════════════════════════════ */
+.mcd2-copy {
+  padding: 20px 16px 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  /* cap width so char bleeds on right */
+  max-width: 76%;
+}
+
+/* Badge — pure outline, no fill */
+.mcd2-badge-row {
+  margin-bottom: 2px;
+}
+
+.mcd2-badge {
+  display: inline-flex;
+  align-items: center;
+  font-family: 'Oswald', sans-serif;
+  font-size: 9px;
+  font-weight: 600;
+  letter-spacing: 2.2px;
+  text-transform: uppercase;
+  color: var(--accent, #ffd000);
+  border: 1px solid var(--accent, #ffd000);
+  padding: 2px 8px;
+  border-radius: 2px;
+}
+
+.mcd2-eyebrow {
+  font-family: 'Oswald', sans-serif;
+  font-size: 9px;
+  font-weight: 500;
+  letter-spacing: 2.5px;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.4);
+  margin: 0;
+}
+
+.mcd2-title {
+  font-family: 'Anton', sans-serif;
+  font-size: 24px;
+  font-weight: 400;
+  color: #fff;
+  margin: 0;
+  line-height: 1.5;
+  letter-spacing: 0.3px;
+  text-transform: uppercase;
+  text-shadow: 0 2px 14px rgba(0, 0, 0, 0.7);
+}
+
+.mcd2-sub {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 11.5px;
+  font-weight: 300;
+  color: rgb(255 255 255 / 58%);
+  margin: 0;
+  line-height: 1.5;
+}
+
+/* ══════════════════════════════════════
+   TIMER BAND — the signature element
+   Full-width horizontal stripe that
+   visually divides copy from CTA
+══════════════════════════════════════ */
+.mcd2-timer-band {
+  width: 100%;
+  background: rgba(255, 255, 255, 0.03);
+  border-top:    1px solid rgba(255, 255, 255, 0.07);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.07);
+  padding: 14px 16px;
+}
+
+.mcd2-band-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+/* Left: label + urgency tag */
+.mcd2-band-label-col {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  flex-shrink: 0;
+}
+
+.mcd2-band-label {
+  font-family: 'Oswald', sans-serif;
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 2.5px;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.35);
+}
+
+.mcd2-urgency-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-family: 'Oswald', sans-serif;
+  font-size: 8px;
+  font-weight: 600;
+  letter-spacing: 1.8px;
+  text-transform: uppercase;
+  color: var(--accent, #ffd000);
+}
+
+.mcd2-urgency-dot {
+  width: 4px; height: 4px;
+  border-radius: 50%;
+  background: var(--accent, #ffd000);
+  animation: mcd2-blink 0.7s ease-in-out infinite alternate;
+  flex-shrink: 0;
+}
+
+@keyframes mcd2-blink {
+  from { opacity: 1; }
+  to   { opacity: 0.25; }
+}
+
+/* Right: digit slots */
+.mcd2-digits {
+  display: flex;
+  align-items: flex-start;
+  gap: 3px;
+}
+
+.mcd2-digit-group {
+  display: flex;
+  align-items: flex-start;
+  gap: 3px;
+}
+
+/* ── Digit cell ── */
+.mcd2-unit {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+}
+
+.mcd2-box {
+  position: relative;
+  width: 52px; height: 52px;
+  border-radius: 6px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.09);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+/* Top-corner micro glow */
+.mcd2-box-shine {
+  position: absolute;
+  top: 0; left: 0;
+  width: 50%; height: 50%;
+  background: radial-gradient(
+    circle at 0 0,
+    rgba(var(--accent-rgb, 255, 208, 0), 0.10),
+    transparent 70%
+  );
+  pointer-events: none;
+}
+
+/* Mid-line divider */
+.mcd2-midline {
+  position: absolute;
+  left: 0; right: 0; top: 50%;
+  height: 1px;
+  background: rgba(255, 255, 255, 0.07);
+}
+
+/* Gold foil digit — matches desktop */
+.mcd2-digit {
+  position: relative; z-index: 1;
+  font-family: 'Anton', sans-serif;
+  font-size: 24px;
+  font-weight: 400;
+  letter-spacing: 0.5px;
+  font-variant-numeric: tabular-nums;
+  background: linear-gradient(
+    180deg,
+    #fff9d6 0%,
+    var(--accent, #ffd000) 45%,
+    #b8860b 100%
+  );
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  display: block;
+  line-height: 1;
+}
+
+/* Flip animation */
+.mcd2-digit.mcd2-flip {
+  animation: mcd2-flip-drop 0.2s ease both;
+}
+
+@keyframes mcd2-flip-drop {
+  0%   { transform: translateY(-18%); opacity: 0.5; }
+  100% { transform: translateY(0);    opacity: 1;   }
+}
+
+.mcd2-unit-lbl {
+  font-family: 'Oswald', sans-serif;
+  font-size: 7px;
+  font-weight: 500;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.28);
+}
+
+/* Colon separator */
+.mcd2-sep {
+  font-family: 'Anton', sans-serif;
+  font-size: 20px;
+  line-height: 52px;
+  color: rgba(255, 255, 255, 0.18);
+  align-self: flex-start;
+  margin-bottom: 16px; /* offset for unit label */
+  padding: 0 1px;
+}
+
+/* ══════════════════════════════════════
+   CTA ROW
+══════════════════════════════════════ */
+.mcd2-cta-row {
+  padding: 16px 16px 10px;
+}
+
+/* Ghost outline with fill-sweep — mirrors desktop pattern */
+.mcd2-cta {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  padding: 0;
+  border: 1.5px solid var(--accent, #ffd000);
+  background: transparent;
+  border-radius: 3px;
+  cursor: pointer;
+  overflow: hidden;
+  width: fit-content;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.mcd2-cta-fill {
+  position: absolute; inset: 0;
+  background: var(--accent, #ffd000);
+  transform: translateX(-101%);
+  transition: transform 0.22s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/* On mobile, fill triggers on active/tap */
+.mcd2-cta:active .mcd2-cta-fill {
+  transform: translateX(0);
+}
+
+.mcd2-cta-inner {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 11px 24px;
+  font-family: 'Oswald', sans-serif;
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--accent, #ffd000);
+  transition: color 0.22s ease;
+}
+
+.mcd2-cta:active .mcd2-cta-inner {
+  color: #060c18;
+}
+
+/* ── Urgency border pulse ── */
+.mcd2-urgency {
+  border-color: rgba(255, 60, 60, 0.2);
+  box-shadow:
+    0 4px 20px rgba(0, 0, 0, 0.55),
+    0 0 28px rgba(255, 60, 60, 0.05),
+    inset 0 1px 0 rgba(255, 255, 255, 0.05);
+}
+
+/* ── Small screen adjustment ── */
+@media (max-width: 380px) {
+  .mcd2-title   { font-size: 21px; }
+  .mcd2-box     { width: 46px; height: 46px; }
+  .mcd2-digit   { font-size: 21px; }
+  .mcd2-sep     { font-size: 17px; line-height: 46px; margin-bottom: 14px; }
+  .mcd2-copy    { max-width: 72%; }
+}

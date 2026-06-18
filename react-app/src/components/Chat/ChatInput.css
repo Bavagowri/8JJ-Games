@@ -1,0 +1,71 @@
+/* react-app/src/components/Chat/ChatInput.css */
+
+.chat-input {
+  display: flex;
+  gap: 12px;
+  padding: 16px 20px;
+  background: #16192a;
+  border-top: 1px solid #2d3250;
+}
+
+.chat-input input {
+  flex: 1;
+  padding: 12px 16px;
+  background: #2d3250;
+  border: 2px solid #3d4266;
+  border-radius: 8px;
+  color: #fff;
+  font-size: 14px;
+  font-family: inherit;
+  transition: border-color 0.2s;
+}
+
+.chat-input input:focus {
+  outline: none;
+  border-color: #4facfe;
+}
+
+.chat-input input::placeholder {
+  color: #6b7280;
+}
+
+.chat-input button {
+  padding: 12px 24px;
+  background: linear-gradient(135deg, #4facfe, #054346);
+  border: none;
+  border-radius: 8px;
+  color: #fff;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+  white-space: nowrap;
+}
+
+.chat-input button:hover:not(:disabled) {
+  transform: scale(1.05);
+  box-shadow: 0 4px 12px rgba(79, 172, 254, 0.4);
+}
+
+.chat-input button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  transform: none;
+}
+
+/* Mobile responsive */
+@media (max-width: 768px) {
+  .chat-input {
+    padding: 12px;
+  }
+
+  .chat-input input {
+    padding: 10px 14px;
+    font-size: 13px;
+  }
+
+  .chat-input button {
+    padding: 10px 20px;
+    font-size: 13px;
+  }
+}

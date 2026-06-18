@@ -1,0 +1,69 @@
+/* react-app/src/Overlayer.css */
+
+.profile-background-image {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: -2;
+
+
+
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+/* Optional overlay for additional gradient/effects */
+.gradient-overlay.Profile-Overlay.HOMEOVERLAYS {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: -1;
+    background-image:radial-gradient(circle at 20% 30%, rgb(0 46 58 / 32%) 0%, #01213057 50%), radial-gradient(circle at 80% 70%, rgba(2, 58, 75, 0.268) 0%, #09384dbd 50%), linear-gradient(rgb(22 1 1) 0%, rgb(13 44 84 / 43%) 50%, rgb(0 64 102 / 60%) 100%) !important;
+   
+   
+    /* You can add extra overlay gradients or opacity here if needed */
+    /* Example: semi-transparent black overlay */
+    
+}
+
+
+
+
+.no-padding {
+  padding: 0 !important;
+}
+
+.no-padding-x {
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+}
+
+.no-padding-y {
+  padding-top: 0 !important;
+  padding-bottom: 0 !important;
+}
+
+.no-padding-top {
+  padding-top: 0 !important;
+}
+
+.no-padding-right {
+  padding-right: 0 !important;
+}
+
+.no-padding-bottom {
+  padding-bottom: 0 !important;
+}
+
+.no-padding-left {
+  padding-left: 0 !important;
+}
+
+
+
+

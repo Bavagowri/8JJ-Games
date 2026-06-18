@@ -1,0 +1,125 @@
+/* react-app/src/components/UniversalBanner/templates/mobile/MobileRedeemBannerV2.css */
+
+.mrb2-wrap {
+  position: relative;
+  width: 100%;
+  min-height: 220px;
+  overflow: hidden;
+  background: #070d1a;
+  display: flex;
+  align-items: stretch;
+}
+
+.mrb2-bg {
+  position: absolute; inset: 0;
+  width: 100%; height: 100%;
+  object-fit: cover; object-position: center;
+  display: block;
+}
+
+.mrb2-overlay {
+  position: absolute; inset: 0;
+  background: #050d1a; z-index: 1;
+}
+
+.mrb2-glow {
+  position: absolute; inset: 0; z-index: 2;
+  pointer-events: none;
+}
+
+.mrb2-char {
+  position: absolute;
+  bottom: 0; right: 0;
+  height: 110%;
+  width: auto; max-width: 45%;
+  object-fit: contain; object-position: bottom right;
+  z-index: 2; pointer-events: none;
+  filter: drop-shadow(-4px 0 12px rgba(0,0,0,.7));
+  user-select: none;
+}
+
+.mrb2-body {
+  position: relative; z-index: 3;
+  padding: 20px 16px 22px;
+  display: flex; flex-direction: column; gap: 8px;
+  max-width: 62%;
+}
+
+.mrb2-badge {
+  display: inline-block;
+  font-size: 8px; font-weight: 800;
+  letter-spacing: 1.8px; text-transform: uppercase;
+  padding: 3px 10px; border-radius: 20px;
+  width: fit-content;
+}
+
+.mrb2-eyebrow {
+  font-size: 9px; font-weight: 700;
+  letter-spacing: 2px; text-transform: uppercase;
+  margin: 0; opacity: .9;
+}
+
+.mrb2-title {
+  font-size: 20px; font-weight: 900;
+  color: #fff; margin: 0;
+  line-height: 1.15; letter-spacing: -.2px;
+  text-shadow: 0 2px 10px rgba(0,0,0,.7);
+}
+
+.mrb2-sub {
+  font-size: 12px;
+  color: rgba(255,255,255,.6);
+  margin: 0; line-height: 1.4;
+}
+
+/* ── Promo code ── */
+.mrb2-code-wrap {
+  border: 1px dashed;
+  border-radius: 10px;
+  padding: 10px 12px;
+  background: rgba(255,255,255,.04);
+  display: flex; flex-direction: column; gap: 5px;
+}
+
+.mrb2-code-label {
+  font-size: 8px; font-weight: 700;
+  letter-spacing: 1.5px; text-transform: uppercase;
+  color: rgba(255,255,255,.4);
+}
+
+.mrb2-code-row {
+  display: flex; align-items: center; justify-content: space-between; gap: 8px;
+}
+
+.mrb2-code {
+  font-size: 18px; font-weight: 900;
+  letter-spacing: 3px; text-transform: uppercase;
+  font-variant-numeric: tabular-nums;
+}
+
+.mrb2-copy {
+  display: inline-flex; align-items: center; gap: 5px;
+  padding: 6px 12px;
+  border-radius: 18px; border: none;
+  font-size: 11px; font-weight: 800;
+  cursor: pointer; flex-shrink: 0;
+  transition: background .25s ease, transform .15s;
+}
+.mrb2-copy:active { transform: scale(.96); }
+
+/* CTA */
+.mrb2-cta {
+  display: inline-flex; align-items: center;
+  padding: 10px 20px;
+  border-radius: 22px; border: none;
+  font-size: 12px; font-weight: 800;
+  cursor: pointer; width: fit-content;
+  margin-top: 2px;
+  transition: opacity .15s;
+}
+.mrb2-cta:active { opacity: .85; }
+
+@media (max-width: 380px) {
+  .mrb2-title { font-size: 17px; }
+  .mrb2-code  { font-size: 15px; letter-spacing: 2px; }
+}

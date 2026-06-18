@@ -1,0 +1,372 @@
+/* react-app/src/components/mobile/MobileSearchOverlay/MobileSearchOverlay.css */
+
+/* ── Backdrop ─────────────────────────────────────────────────────── */
+.mso-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  background: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  animation: msoFadeIn 0.2s ease;
+}
+
+@keyframes msoFadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+/* ── Panel ────────────────────────────────────────────────────────── */
+.mso-panel {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 100dvh;
+  background: linear-gradient(180deg, #0f0f23 0%, #1a1a3e 100%);
+  display: flex;
+  flex-direction: column;
+  animation: msoSlideDown 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+@keyframes msoSlideDown {
+  from { transform: translateY(-20px); opacity: 0; }
+  to   { transform: translateY(0);     opacity: 1; }
+}
+
+/* ── Search Bar ───────────────────────────────────────────────────── */
+.mso-search-bar {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 16px;
+  padding-top: max(12px, env(safe-area-inset-top, 12px));
+  background: rgba(255, 255, 255, 0.04);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  flex-shrink: 0;
+}
+
+.mso-search-icon {
+  display: none;
+  color: rgba(255, 255, 255, 0.4);
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+}
+
+.mso-input {
+  flex: 1;
+  width: 90%;
+  background: transparent;
+  border: none;
+  outline: none;
+  color: #fff;
+  font-size: 17px;
+  font-family: inherit;
+  line-height: 1.4;
+  caret-color: #667eea;
+  min-width: 0;
+}
+
+.mso-input::placeholder {
+  color: rgba(255, 255, 255, 0.35);
+}
+
+/* Remove native search input clear button */
+.mso-input::-webkit-search-cancel-button,
+.mso-input::-webkit-search-decoration {
+  -webkit-appearance: none;
+  display: none;
+}
+
+.mso-clear-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  background: rgba(255, 255, 255, 0.1);
+  border: none;
+  border-radius: 50%;
+  color: rgba(255, 255, 255, 0.6);
+  cursor: pointer;
+  flex-shrink: 0;
+  -webkit-tap-highlight-color: transparent;
+  transition: background 0.2s;
+}
+
+.mso-clear-btn:active {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+.mso-cancel-btn {
+  text-transform: capitalize;
+  background: transparent;
+  border: none;
+  color: #667eea;
+  font-size: 16px;
+  font-family: inherit;
+  font-weight: 600;
+  cursor: pointer;
+  padding: 6px 0 6px 4px;
+  flex-shrink: 0;
+  -webkit-tap-highlight-color: transparent;
+  white-space: nowrap;
+}
+
+.mso-cancel-btn:active {
+  opacity: 0.7;
+}
+
+/* ── Body ─────────────────────────────────────────────────────────── */
+.mso-body {
+  flex: 1;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  overscroll-behavior: contain;
+  padding-bottom: env(safe-area-inset-bottom, 20px);
+}
+
+/* ── Loading ──────────────────────────────────────────────────────── */
+.mso-loading {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 60px 20px;
+  gap: 16px;
+  color: rgba(255, 255, 255, 0.5);
+  font-size: 14px;
+}
+
+.mso-spinner {
+  width: 32px;
+  height: 32px;
+  border: 3px solid rgba(102, 126, 234, 0.2);
+  border-top-color: #667eea;
+  border-radius: 50%;
+  animation: msoSpin 0.8s linear infinite;
+}
+
+@keyframes msoSpin {
+  to { transform: rotate(360deg); }
+}
+
+/* ── Empty / No results ───────────────────────────────────────────── */
+.mso-empty,
+.mso-no-results {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 60px 20px 40px;
+  text-align: center;
+}
+
+.mso-empty-icon {
+  font-size: 48px;
+  margin-bottom: 16px;
+  line-height: 1;
+}
+
+.mso-empty-title {
+  font-size: 18px;
+  font-weight: 700;
+  color: #fff;
+  margin: 0 0 8px;
+}
+
+.mso-empty-sub {
+  font-size: 14px;
+  color: rgba(255, 255, 255, 0.45);
+  margin: 0;
+}
+
+/* ── Section ──────────────────────────────────────────────────────── */
+.mso-section {
+  padding: 16px 0;
+}
+
+.mso-section-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 16px 12px;
+}
+
+.mso-section-title {
+  font-size: 13px;
+  font-weight: 700;
+  color: rgba(255, 255, 255, 0.45);
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+}
+
+.mso-clear-all {
+  background: transparent;
+  border: none;
+  color: #667eea;
+  font-size: 13px;
+  font-weight: 600;
+  font-family: inherit;
+  cursor: pointer;
+  padding: 0;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.mso-clear-all:active {
+  opacity: 0.7;
+}
+
+/* ── Recent Searches ──────────────────────────────────────────────── */
+.mso-recent-list {
+  display: flex;
+  flex-direction: column;
+}
+
+.mso-recent-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 14px 16px;
+  background: transparent;
+  border: none;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+  color: #fff;
+  font-size: 15px;
+  font-family: inherit;
+  text-align: left;
+  cursor: pointer;
+  width: 100%;
+  -webkit-tap-highlight-color: transparent;
+  transition: background 0.15s;
+}
+
+.mso-recent-item:active {
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.mso-recent-item:last-child {
+  border-bottom: none;
+}
+
+.mso-recent-icon {
+  color: rgba(255, 255, 255, 0.35);
+  flex-shrink: 0;
+}
+
+.mso-recent-item span {
+  flex: 1;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.mso-recent-remove {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  background: rgba(255, 255, 255, 0.08);
+  border: none;
+  border-radius: 50%;
+  color: rgba(255, 255, 255, 0.4);
+  cursor: pointer;
+  flex-shrink: 0;
+  padding: 0;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.mso-recent-remove:active {
+  background: rgba(255, 255, 255, 0.18);
+}
+
+/* ── Results Grid ─────────────────────────────────────────────────── */
+.mso-results-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+  padding: 0 16px;
+}
+
+@media (min-width: 420px) {
+  .mso-results-grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+/* ── Game Card ────────────────────────────────────────────────────── */
+.mso-game-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  -webkit-tap-highlight-color: transparent;
+  gap: 6px;
+  text-align: center;
+}
+
+.mso-game-card:active .mso-game-img-wrapper {
+  transform: scale(0.95);
+}
+
+.mso-game-img-wrapper {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  border-radius: 12px;
+  overflow: hidden;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  transition: transform 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.mso-game-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.mso-game-play-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.45);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transition: opacity 0.2s;
+  color: #fff;
+}
+
+.mso-game-card:active .mso-game-play-overlay {
+  opacity: 1;
+}
+
+.mso-game-title {
+  font-size: 12px;
+  font-weight: 600;
+  color: #fff;
+  margin: 0;
+  line-height: 1.3;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  width: 100%;
+}
+
+.mso-game-category {
+  font-size: 10px;
+  color: rgba(255, 255, 255, 0.4);
+  margin: 0;
+  text-transform: capitalize;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  width: 100%;
+}

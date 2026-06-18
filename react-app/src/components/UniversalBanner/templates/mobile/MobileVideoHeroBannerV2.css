@@ -1,0 +1,510 @@
+/* react-app/src/components/UniversalBanner/templates/mobile/MobileVideoHeroBannerV2.css */
+
+
+
+/* ── Wrapper ── */
+.mvhb2-wrap {
+  position: relative;
+  width: 100%;
+  height: var(--h, 280px);
+  overflow: hidden;
+  background: #040810;
+  touch-action: pan-y;
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
+  transition: transform 0.12s ease;
+  --accent: #00ff88;
+}
+
+.mvhb2-wrap--tap { transform: scale(0.988); }
+
+/* ══════════════════════════════════════
+   FULL-BLEED MEDIA
+══════════════════════════════════════ */
+.mvhb2-media {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+}
+
+.mvhb2-video,
+.mvhb2-bg-img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center top;
+  display: block;
+  animation: mvhb2-kenburns 8s ease forwards;
+}
+
+@keyframes mvhb2-kenburns {
+  from { transform: scale(1.05); }
+  to   { transform: scale(1); }
+}
+
+.mvhb2-no-media {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, #050d1a 0%, #0a1628 100%);
+}
+
+/* Light top darkening — doesn't kill the image */
+.mvhb2-ov-top {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background: linear-gradient(
+    to bottom,
+    rgba(3, 6, 16, 0.45) 0%,
+    transparent 28%
+  );
+}
+
+/* Bottom darkening — shelf sits on top of this */
+.mvhb2-ov-bottom {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background: linear-gradient(
+    to top,
+    rgba(3, 6, 16, 0.7) 0%,
+    transparent 40%
+  );
+}
+
+/* CRT scanlines */
+.mvhb2-scanlines {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  pointer-events: none;
+  background-image: repeating-linear-gradient(
+    0deg,
+    transparent,
+    transparent 2px,
+    rgba(0, 0, 0, 0.04) 2px,
+    rgba(0, 0, 0, 0.04) 4px
+  );
+}
+
+/* Accent radial glow — top center, subtle */
+.mvhb2-glow-top {
+  position: absolute;
+  top: -10%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 70%;
+  height: 50%;
+  z-index: 2;
+  pointer-events: none;
+  background: radial-gradient(
+    ellipse at center top,
+    var(--accent, #00ff88) 0%,
+    transparent 70%
+  );
+  opacity: 0.06;
+  animation: mvhb2-glow-pulse 3.5s ease-in-out infinite;
+}
+
+@keyframes mvhb2-glow-pulse {
+  0%, 100% { opacity: 0.05; }
+  50%       { opacity: 0.1; }
+}
+
+/* ── Single oscilloscope line — mid-media ── */
+.mvhb2-osc {
+  position: absolute;
+  top: 38%;
+  left: 0;
+  right: 0;
+  height: 1px;
+  z-index: 3;
+  pointer-events: none;
+  background: linear-gradient(
+    to right,
+    transparent 0%,
+    var(--accent, #00ff88) 20%,
+    var(--accent, #00ff88) 80%,
+    transparent 100%
+  );
+  opacity: 0;
+  animation: mvhb2-osc-flicker 5s ease-in-out infinite;
+}
+
+@keyframes mvhb2-osc-flicker {
+  0%, 100% { opacity: 0.02; }
+  35%       { opacity: 0.07; }
+  65%       { opacity: 0.04; }
+}
+
+/* ── Character image ── */
+.mvhb2-char {
+  position: absolute;
+  bottom: 20px;
+    right: 10px;
+  width: auto;
+  max-width: 48%;
+  object-fit: contain;
+  object-position: bottom right;
+  z-index: 10;
+  pointer-events: none;
+  user-select: none;
+  filter: drop-shadow(-3px 0 14px rgba(0, 0, 0, 0.7));
+  /* Fade left edge so it bleeds into the shelf */
+  -webkit-mask-image: linear-gradient(to left, rgba(0,0,0,1) 55%, rgba(0,0,0,0.5) 80%, rgba(0,0,0,0.1) 100%);
+  mask-image: linear-gradient(to left, rgba(0,0,0,1) 55%, rgba(0,0,0,0.5) 80%, rgba(0,0,0,0.1) 100%);
+}
+
+/* ── Slide counter ── */
+.mvhb2-counter {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  z-index: 7;
+  display: flex;
+  align-items: baseline;
+  gap: 2px;
+  pointer-events: none;
+}
+
+.mvhb2-counter-cur {
+  font-family: "Orbitron", sans-serif;
+  font-size: 22px;
+  font-weight: 900;
+  color: var(--accent, #00ff88);
+  line-height: 1;
+  text-shadow: 0 0 14px var(--accent, #00ff88);
+  opacity: 0.82;
+}
+
+.mvhb2-counter-sep {
+  font-family: "Orbitron", sans-serif;
+  font-size: 9px;
+  color: rgba(255, 255, 255, 0.22);
+  margin: 0 1px;
+  align-self: center;
+}
+
+.mvhb2-counter-tot {
+  font-family: "Orbitron", sans-serif;
+  font-size: 11px;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.2);
+  line-height: 1;
+  align-self: flex-end;
+  margin-bottom: 3px;
+}
+
+/* ══════════════════════════════════════
+   FROSTED GLASS BOTTOM SHELF
+   Mobile adaptation of the desktop
+   left-side panel. Same glass treatment,
+   same stripe, same brackets — new axis.
+══════════════════════════════════════ */
+.mvhb2-shelf {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 6;
+  display: flex;
+  flex-direction: column;
+
+  /* Frosted glass — same spec as desktop panel */
+  background: rgba(4, 8, 18, 0.75);
+  backdrop-filter: blur(18px) saturate(1.3);
+  -webkit-backdrop-filter: blur(18px) saturate(1.3);
+
+  /* Top edge fades into media */
+  -webkit-mask-image: linear-gradient(to bottom, transparent 0%, black 8%);
+  mask-image: linear-gradient(to bottom, transparent 0%, black 8%);
+
+  border-top: 1px solid rgba(255, 255, 255, 0.055);
+}
+
+/* Accent top stripe — matches desktop panel-stripe */
+.mvhb2-shelf-stripe {
+  height: 2px;
+  width: 100%;
+  background: var(--accent, #00ff88);
+  box-shadow: 0 0 10px var(--accent, #00ff88), 0 0 20px rgba(0, 255, 136, 0.25);
+  flex-shrink: 0;
+}
+
+/* ── HUD Bracket corners — top of shelf ── */
+.mvhb2-bracket {
+  position: absolute;
+  width: 14px;
+  height: 14px;
+  pointer-events: none;
+  z-index: 7;
+  display: none !important;
+  top: 10px;
+}
+
+.mvhb2-bracket::before,
+.mvhb2-bracket::after {
+  content: "";
+  position: absolute;
+  background: var(--accent, #00ff88);
+  box-shadow: 0 0 4px var(--accent, #00ff88);
+}
+
+/* Top-left */
+.mvhb2-bracket--tl { left: 10px; }
+.mvhb2-bracket--tl::before { top: 0; left: 0; width: 100%; height: 2px; }
+.mvhb2-bracket--tl::after  { top: 0; left: 0; width: 2px; height: 100%; }
+
+/* Top-right */
+.mvhb2-bracket--tr { right: 10px; }
+.mvhb2-bracket--tr::before { top: 0; right: 0; left: unset; width: 100%; height: 2px; }
+.mvhb2-bracket--tr::after  { top: 0; right: 0; left: unset; width: 2px; height: 100%; }
+
+/* ── Shelf body (content) ── */
+.mvhb2-shelf-body {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+  padding: 14px 14px 10px;
+  max-width: 66%; /* leave room for character image */
+}
+
+/* Transition states */
+.mvhb2-out {
+  opacity: 0;
+  transform: translateY(8px);
+  transition: opacity 0.32s ease, transform 0.32s ease;
+}
+.mvhb2-in {
+  opacity: 0;
+  transform: translateY(-6px);
+}
+.mvhb2-idle {
+  opacity: 1;
+  transform: none;
+  transition: opacity 0.32s ease 0.05s, transform 0.32s cubic-bezier(0.22, 1, 0.36, 1) 0.05s;
+}
+
+/* ── Badge ── */
+.mvhb2-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  width: fit-content;
+  padding: 3px 9px 3px 7px;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  border-left: 2px solid var(--accent, #00ff88);
+  background: rgba(0, 0, 0, 0.3);
+}
+
+.mvhb2-badge-pip {
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: var(--accent, #00ff88);
+  box-shadow: 0 0 5px var(--accent, #00ff88);
+  animation: mvhb2-pip 1.8s ease-in-out infinite;
+  flex-shrink: 0;
+}
+
+@keyframes mvhb2-pip {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50%       { opacity: 0.35; transform: scale(0.6); }
+}
+
+.mvhb2-badge-label {
+  font-family: "Orbitron", sans-serif;
+  font-size: 7px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--accent, #00ff88);
+}
+
+/* ── Eyebrow ── */
+.mvhb2-eyebrow {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-family: "Orbitron", sans-serif;
+  font-size: 8px;
+  font-weight: 600;
+  letter-spacing: 1.8px;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.45);
+  margin: 0;
+}
+
+.mvhb2-eyebrow-tick {
+  display: block;
+  width: 14px;
+  height: 1.5px;
+  background: var(--accent, #00ff88);
+  opacity: 0.65;
+  flex-shrink: 0;
+}
+
+/* ── Title ── */
+.mvhb2-title {
+  font-family: "Orbitron", sans-serif;
+  font-size: clamp(14px, 4.5vw, 20px);
+  font-weight: 800;
+  color: #ffffff;
+  margin: 0;
+  line-height: 1.2;
+  letter-spacing: -0.2px;
+  text-shadow: 0 2px 14px rgba(0, 0, 0, 0.8);
+}
+
+/* ── Subtitle ── */
+.mvhb2-sub {
+  font-family: "Nunito Sans", sans-serif;
+  font-size: 11px;
+  font-weight: 400;
+  color: rgba(255, 255, 255, 0.42);
+  margin: 0;
+  line-height: 1.5;
+}
+
+/* ══════════════════════════════════════
+   CTA — OUTLINE FILL-SWEEP (mobile)
+   Same mechanic as desktop but :active
+   triggers the fill instead of :hover
+══════════════════════════════════════ */
+.mvhb2-cta {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  width: fit-content;
+  border: 1.5px solid var(--accent, #00ff88);
+  border-radius: 3px;
+  background: transparent;
+  cursor: pointer;
+  overflow: hidden;
+  padding: 0;
+  margin-top: 2px;
+  outline: none;
+  transition: box-shadow 0.18s ease, transform 0.12s ease;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.mvhb2-cta:active {
+  transform: scale(0.95);
+  box-shadow: 0 0 14px var(--accent, #00ff88);
+}
+
+/* Fill layer — slides in on :active */
+.mvhb2-cta-fill {
+  position: absolute;
+  inset: 0;
+  background: var(--accent, #00ff88);
+  transform: translateX(-101%);
+  transition: transform 0.22s cubic-bezier(0.22, 1, 0.36, 1);
+  z-index: 0;
+}
+
+.mvhb2-cta:active .mvhb2-cta-fill { transform: translateX(0); }
+
+.mvhb2-cta-content {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  padding: 9px 18px;
+  transition: color 0.15s ease;
+}
+
+.mvhb2-cta-text {
+  font-family: "Orbitron", sans-serif;
+  font-size: 9.5px;
+  font-weight: 700;
+  letter-spacing: 1.8px;
+  text-transform: uppercase;
+  color: var(--accent, #00ff88);
+  transition: color 0.15s ease;
+}
+
+.mvhb2-cta:active .mvhb2-cta-text { color: #030c14; }
+
+.mvhb2-cta-icon {
+  color: var(--accent, #00ff88);
+  transition: color 0.15s ease, transform 0.15s ease;
+  flex-shrink: 0;
+}
+
+.mvhb2-cta:active .mvhb2-cta-icon { color: #030c14; transform: translateX(2px); }
+
+/* ══════════════════════════════════════
+   SHELF FOOTER — Waveform + Dots
+══════════════════════════════════════ */
+.mvhb2-shelf-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 6px 14px 12px;
+  gap: 10px;
+}
+
+/* Waveform */
+.mvhb2-waveform {
+  display: flex;
+  align-items: flex-end;
+  gap: 2px;
+  height: 16px;
+}
+
+.mvhb2-wave-seg {
+  display: block;
+  border-radius: 1px;
+  flex-shrink: 0;
+  background: rgba(255, 255, 255, 0.1);
+  transition: background 0.15s ease, box-shadow 0.15s ease;
+}
+
+.mvhb2-wave-seg--lit {
+  background: var(--accent, #00ff88);
+  box-shadow: 0 0 5px var(--accent, #00ff88);
+}
+
+/* Dots */
+.mvhb2-dots {
+  display: flex;
+  gap: 4px;
+  align-items: center;
+}
+
+.mvhb2-dot {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.18);
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  transition: all 0.22s ease;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.mvhb2-dot--on {
+  background: var(--accent, #00ff88);
+  box-shadow: 0 0 7px var(--accent, #00ff88);
+  width: 16px;
+  border-radius: 2.5px;
+}
+
+/* ── Responsive ── */
+@media (max-width: 380px) {
+  .mvhb2-title     { font-size: 13px; }
+  .mvhb2-sub       { display: none; }
+  .mvhb2-shelf-body { max-width: 70%; }
+  .mvhb2-cta-text  { font-size: 8.5px; letter-spacing: 1.4px; }
+  .mvhb2-cta-content { padding: 8px 14px; }
+}
+
+@media (max-width: 320px) {
+  .mvhb2-shelf-body { max-width: 78%; }
+  .mvhb2-char       { max-width: 38%; }
+}

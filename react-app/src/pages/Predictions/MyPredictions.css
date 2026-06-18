@@ -1,0 +1,660 @@
+/* react-app/src/pages/Predictions/MyPredictions.css */
+
+/* ══════════════════════════════════════════════════════════
+   MY PREDICTIONS PAGE
+   ══════════════════════════════════════════════════════════ */
+
+/* ── Breadcrumb — identical pattern to PredictionsHome ── */
+.my-predictions-page .predictions-breadcrumb-bar {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    margin-bottom: 35px;
+}
+
+.my-predictions-page .BackBTNcontainer {
+    flex-shrink: 0;
+}
+
+.my-predictions-page .premium-back-buttonzzz.game-back-button {
+    position: unset !important;
+    left: unset !important;
+    width: 40px !important;
+    height: 46px !important;
+    border-radius: 12px !important;
+    background: linear-gradient(135deg, rgba(14, 26, 50, 0.85), rgba(10, 20, 42, 0.9)) !important;
+    backdrop-filter: blur(16px) !important;
+    -webkit-backdrop-filter: blur(16px) !important;
+    border: 1.5px solid rgba(79, 172, 254, 0.35) !important;
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(79, 172, 254, 0.08),
+        inset 0 1px 0 rgba(255, 255, 255, 0.08) !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    transition: all 0.22s cubic-bezier(0.4, 0, 0.2, 1) !important;
+    cursor: pointer !important;
+    overflow: hidden !important;
+    margin: 0 !important;
+}
+
+.my-predictions-page .premium-back-buttonzzz.game-back-button::before {
+    content: '' !important;
+    position: absolute !important;
+    inset: 0 !important;
+    border-radius: 11px !important;
+    background: linear-gradient(135deg, rgba(79, 172, 254, 0.18), rgba(0, 242, 254, 0.08));
+    opacity: 0 !important;
+    transition: opacity 0.22s ease !important;
+    z-index: 0 !important;
+}
+
+.my-predictions-page .premium-back-buttonzzz.game-back-button::after {
+    display: none !important;
+}
+
+.my-predictions-page .premium-back-buttonzzz.game-back-button:hover {
+    border-color: rgba(79, 172, 254, 0.7) !important;
+    box-shadow: 0 0 20px rgba(79, 172, 254, 0.28), 0 4px 16px rgba(0, 0, 0, 0.45),
+        0 0 0 1px rgba(79, 172, 254, 0.25) !important;
+    transform: translateX(-3px) !important;
+}
+
+.my-predictions-page .premium-back-buttonzzz.game-back-button:hover::before {
+    opacity: 1 !important;
+}
+
+.my-predictions-page .premium-back-buttonzzz.game-back-button:active {
+    transform: translateX(-1px) scale(0.95) !important;
+    transition: all 0.1s ease !important;
+}
+
+.my-predictions-page .premium-back-buttonzzz.game-back-button .back-arrow {
+    font-size: 18px !important;
+    font-weight: 600 !important;
+    color: #7ec8f8 !important;
+    transition: color 0.22s ease, transform 0.22s ease !important;
+    display: inline-block !important;
+    position: relative !important;
+    z-index: 1 !important;
+    line-height: 1 !important;
+}
+
+.my-predictions-page .premium-back-buttonzzz.game-back-button:hover .back-arrow {
+    color: #fff !important;
+    transform: translateX(-3px) !important;
+}
+
+.my-predictions-page .breadcrumb {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 6px 14px;
+    margin-bottom: 0 !important;
+    background: rgba(255, 255, 255, 0.04) !important;
+    border: 1px solid rgba(255, 255, 255, 0.08) !important;
+    border-radius: 100px !important;
+    backdrop-filter: blur(12px);
+    font-size: 0.82rem;
+}
+
+.my-predictions-page .breadcrumb-link {
+    color: rgba(160, 200, 255, 0.75);
+    text-decoration: none;
+    font-weight: 400;
+    white-space: nowrap;
+    transition: color 0.18s ease;
+}
+
+.my-predictions-page .breadcrumb-link:hover {
+    color: #7ec8f8;
+}
+
+.my-predictions-page .breadcrumb-separator {
+    color: rgba(255, 255, 255, 0.22);
+    user-select: none;
+    font-size: 0.75rem;
+    flex-shrink: 0;
+}
+
+.my-predictions-page .breadcrumb-current {
+    color: #e0f2fe;
+    font-weight: 600;
+    white-space: nowrap;
+    background: none !important;
+    border: none !important;
+    padding: 4px !important;
+    box-shadow: none !important;
+}
+
+/* ── Loading ── */
+.mp-loading {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+    padding: 80px 0;
+    color: rgba(255, 255, 255, 0.35);
+    font-size: 14px;
+}
+
+.mp-loading-spinner {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    border: 3px solid rgba(79, 172, 254, 0.15);
+    border-top-color: var(--pred-primary);
+    animation: mp-spin 0.8s linear infinite;
+}
+
+@keyframes mp-spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+/* ── Page header ── */
+.mp-page-header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 16px;
+    margin-bottom: 24px;
+    flex-wrap: wrap;
+}
+
+.mp-page-title {
+    font-size: 26px;
+    font-weight: 900;
+    color: #fff;
+    margin: 0 0 4px;
+    letter-spacing: -0.3px;
+}
+
+.mp-page-sub {
+    font-size: 13px;
+    color: rgba(255, 255, 255, 0.4);
+    margin: 0;
+}
+
+.mp-arena-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 9px 18px;
+    border-radius: 50px;
+    background: var(--pred-primary-subtle);
+    border: 1px solid var(--pred-primary-border);
+    color: var(--pred-primary);
+    font-size: 13px;
+    font-weight: 600;
+    text-decoration: none;
+    white-space: nowrap;
+    transition: var(--pred-transition);
+    flex-shrink: 0;
+}
+
+.mp-arena-link:hover {
+    background: rgba(79, 172, 254, 0.18);
+    border-color: var(--pred-primary);
+    transform: translateY(-1px);
+}
+
+/* ── Stats grid ── */
+.mp-stats-grid {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    gap: 10px;
+    margin-bottom: 24px;
+}
+
+.mp-stat-card {
+    background: var(--pred-bg-card);
+    border: 1px solid rgba(255, 255, 255, 0.07);
+    border-radius: 16px;
+    padding: 18px 14px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    transition: var(--pred-transition);
+}
+
+.mp-stat-card:hover {
+    border-color: rgba(79, 172, 254, 0.2);
+    background: var(--pred-bg-card-hover);
+    transform: translateY(-2px);
+}
+
+.mp-stat-value {
+    font-size: 26px;
+    font-weight: 900;
+    color: var(--pred-primary);
+    line-height: 1;
+}
+
+.mp-stat-label {
+    font-size: 10px;
+    font-weight: 700;
+    color: rgba(255, 255, 255, 0.35);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.mp-stat-card--won .mp-stat-value {
+    color: var(--pred-success);
+}
+
+.mp-stat-card--lost .mp-stat-value {
+    color: var(--pred-danger);
+}
+
+.mp-stat-card--pending .mp-stat-value {
+    color: var(--pred-warning);
+}
+
+.mp-stat-card--earned .mp-stat-value {
+    color: var(--pred-success);
+}
+
+.mp-stat-card--won {
+    border-color: rgba(34, 197, 94, 0.12);
+}
+
+.mp-stat-card--lost {
+    border-color: rgba(239, 68, 68, 0.12);
+}
+
+.mp-stat-card--earned {
+    border-color: rgba(34, 197, 94, 0.12);
+}
+
+/* ── Tabs bar ── */
+.mp-tabs-bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 16px;
+    gap: 12px;
+    flex-wrap: wrap;
+}
+
+.mp-tabs {
+    display: flex;
+    gap: 0;
+    background: rgba(8, 18, 38, 0.65);
+    backdrop-filter: blur(18px);
+    border-radius: 14px;
+    border: 1px solid rgba(79, 172, 254, 0.1);
+    padding: 6px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.04);
+}
+
+.mp-tab {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    padding: 8px 20px;
+    border-radius: 10px;
+    border: 1px solid transparent;
+    background: transparent;
+    color: rgba(160, 195, 240, 0.5);
+    font-size: 13px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    white-space: nowrap;
+}
+
+.mp-tab:hover {
+    color: rgba(200, 225, 255, 0.85);
+    background: rgba(79, 172, 254, 0.07);
+}
+
+.mp-tab.active {
+    background: linear-gradient(135deg, rgba(37, 99, 235, 0.75), rgba(14, 165, 233, 0.65));
+    border-color: rgba(79, 172, 254, 0.45);
+    color: #fff;
+    font-weight: 600;
+    box-shadow: 0 0 18px rgba(14, 165, 233, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.12);
+}
+
+.mp-tab-count {
+    font-size: 10px;
+    font-weight: 800;
+    background: rgba(255, 255, 255, 0.12);
+    padding: 1px 6px;
+    border-radius: 50px;
+    line-height: 1.5;
+}
+
+.mp-tab.active .mp-tab-count {
+    background: rgba(255, 255, 255, 0.2);
+}
+
+/* ── Error ── */
+.mp-error-banner {
+    padding: 12px 18px;
+    background: rgba(239, 68, 68, 0.1);
+    border: 1px solid rgba(239, 68, 68, 0.25);
+    border-radius: 10px;
+    color: var(--pred-danger);
+    font-size: 13px;
+    margin-bottom: 16px;
+}
+
+/* ── Empty state ── */
+.mp-empty {
+    min-height: 250px;
+    text-align: center;
+    padding: 60px 40px;
+    background: var(--pred-bg-card);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    border-radius: 20px;
+}
+
+.mp-empty-icon {
+    font-size: 40px;
+    margin-bottom: 16px;
+    opacity: 0.5;
+}
+
+.mp-empty h3 {
+    font-size: 18px;
+    font-weight: 700;
+    color: #fff;
+    margin: 0 0 8px;
+}
+
+.mp-empty p {
+    font-size: 14px;
+    color: rgba(255, 255, 255, 0.4);
+    margin: 0;
+}
+
+.mp-empty-link {
+    color: var(--pred-primary);
+    text-decoration: none;
+    font-weight: 600;
+}
+
+.mp-empty-link:hover {
+    opacity: 0.8;
+}
+
+/* ── List ── */
+.mp-list {
+    min-height: 250px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.mp-row-link {
+    text-decoration: none;
+    display: block;
+}
+
+.mp-row {
+    background: var(--pred-bg-card);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    border-radius: 16px;
+    padding: 16px 20px;
+    display: grid;
+    grid-template-columns: 1fr auto auto auto auto auto;
+    align-items: center;
+    gap: 16px;
+    transition: var(--pred-transition);
+    position: relative;
+    overflow: hidden;
+}
+
+.mp-row::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 3px;
+    border-radius: 3px 0 0 3px;
+    background: rgba(255, 255, 255, 0.08);
+    transition: background 0.2s ease;
+}
+
+.mp-row--won::before {
+    background: var(--pred-success);
+}
+
+.mp-row--lost::before {
+    background: var(--pred-danger);
+}
+
+.mp-row--pending::before {
+    background: var(--pred-warning);
+}
+
+.mp-row:hover {
+    border-color: rgba(79, 172, 254, 0.25);
+    background: var(--pred-bg-card-hover);
+    transform: translateX(2px);
+}
+
+.mp-row--won:hover {
+    border-color: rgba(34, 197, 94, 0.2);
+}
+
+.mp-row--lost:hover {
+    border-color: rgba(239, 68, 68, 0.15);
+}
+
+/* Match info */
+.mp-row-teams {
+    font-size: 14px;
+    font-weight: 700;
+    color: #fff;
+    margin-bottom: 4px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.mp-row-vs {
+    font-size: 11px;
+    font-weight: 500;
+    color: rgba(255, 255, 255, 0.3);
+    margin: 0 5px;
+}
+
+.mp-row-meta {
+    display: flex;
+    gap: 10px;
+    font-size: 11px;
+    color: rgba(255, 255, 255, 0.35);
+}
+
+/* Pick */
+.mp-row-pick {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 3px;
+}
+
+.mp-pick-label {
+    font-size: 9px;
+    font-weight: 700;
+    color: rgba(255, 255, 255, 0.25);
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+}
+
+.mp-pick-value {
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--pred-primary);
+    background: var(--pred-primary-subtle);
+    border: 1px solid var(--pred-primary-border);
+    padding: 3px 10px;
+    border-radius: 8px;
+    white-space: nowrap;
+}
+
+/* Odds */
+.mp-row-odds {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 3px;
+}
+
+.mp-odds-label {
+    font-size: 9px;
+    font-weight: 700;
+    color: rgba(255, 255, 255, 0.25);
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+}
+
+.mp-odds-value {
+    font-size: 14px;
+    font-weight: 800;
+    color: rgba(255, 255, 255, 0.6);
+}
+
+/* Points */
+.mp-row-points {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 2px;
+    min-width: 80px;
+}
+
+.mp-pts-label {
+    font-size: 9px;
+    font-weight: 700;
+    color: rgba(255, 255, 255, 0.25);
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+}
+
+.mp-pts-value {
+    font-size: 14px;
+    font-weight: 800;
+}
+
+.mp-row-points--won .mp-pts-value {
+    color: var(--pred-success);
+}
+
+.mp-row-points--lost .mp-pts-value {
+    color: var(--pred-danger);
+}
+
+.mp-row-points--pending .mp-pts-value {
+    color: var(--pred-warning);
+}
+
+/* Arrow */
+.mp-row-arrow {
+    font-size: 20px;
+    color: rgba(255, 255, 255, 0.15);
+    font-weight: 300;
+    transition: color 0.2s ease, transform 0.2s ease;
+}
+
+.mp-row:hover .mp-row-arrow {
+    color: rgba(79, 172, 254, 0.5);
+    transform: translateX(3px);
+}
+
+/* ── Responsive ── */
+@media (max-width: 900px) {
+    .mp-stats-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+@media (max-width: 768px) {
+    .my-predictions-page .premium-back-buttonzzz.game-back-button {
+        width: 36px !important;
+        height: 36px !important;
+        border-radius: 10px !important;
+    }
+
+    .my-predictions-page .premium-back-buttonzzz.game-back-button .back-arrow {
+        font-size: 16px !important;
+    }
+
+    .mp-stats-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+
+    .mp-page-header {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .mp-arena-link {
+        width: 100%;
+        justify-content: center;
+    }
+
+    .mp-row {
+        grid-template-columns: 1fr auto auto;
+        grid-template-rows: auto auto;
+    }
+
+    .mp-row-match {
+        grid-column: 1;
+        grid-row: 1;
+    }
+
+    .mp-row-pick {
+        grid-column: 2;
+        grid-row: 1;
+    }
+
+    .mp-row-arrow {
+        grid-column: 3;
+        grid-row: 1;
+    }
+
+    .result-badge {
+        grid-column: 1;
+        grid-row: 2;
+    }
+
+    .mp-row-points {
+        grid-column: 2;
+        grid-row: 2;
+        align-items: flex-end;
+    }
+
+    .mp-row-odds {
+        display: none;
+    }
+}
+
+@media (max-width: 560px) {
+    .mp-stats-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .mp-tab {
+        padding: 7px 14px;
+        font-size: 12px;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .mp-loading-spinner {
+        animation: none;
+    }
+
+    .mp-tab,
+    .mp-row,
+    .mp-stat-card,
+    .mp-arena-link {
+        transition: none !important;
+    }
+}

@@ -1,0 +1,72 @@
+/* react-app/src/components/Chat/ReplyPreview.css */
+
+.reply-preview-bar {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 20px;
+  background: rgba(79, 172, 254, 0.1);
+  border-top: 1px solid rgba(79, 172, 254, 0.3);
+}
+
+.reply-indicator {
+  width: 3px;
+  height: 40px;
+  background: #4facfe;
+  border-radius: 2px;
+  flex-shrink: 0;
+}
+
+.reply-content {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.reply-label {
+  font-size: 12px;
+  font-weight: 600;
+  color: #4facfe;
+}
+
+.reply-message {
+  font-size: 13px;
+  color: #d1d5db;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.reply-cancel {
+  width: 28px;
+  height: 28px;
+  border: none;
+  background: rgba(239, 68, 68, 0.2);
+  color: #ef4444;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s;
+  flex-shrink: 0;
+}
+
+.reply-cancel:hover {
+  background: rgba(239, 68, 68, 0.3);
+  transform: scale(1.1);
+}
+
+/* Mobile */
+@media (max-width: 768px) {
+  .reply-preview-bar {
+    padding: 8px 12px;
+  }
+
+  .reply-indicator {
+    height: 32px;
+  }
+}

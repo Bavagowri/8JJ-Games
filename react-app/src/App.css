@@ -1,9 +1,13 @@
+/* react-app/src/App.css */
+
 #root {
   margin: 0 auto;
-  padding: 2rem;
-  text-align: center;
-
+  padding: 0px;
+  text-align: unset;
 }
+
+
+
 
 .logo {
   height: 6em;
@@ -19,12 +23,8 @@
 }
 
 @keyframes logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
 }
 
 @media (prefers-reduced-motion: no-preference) {
@@ -40,10 +40,61 @@
 .read-the-docs {
   color: #888;
 }
+
 .app-root {
   max-width: 1080px;
   margin: 0 auto;
   padding: 0 16px;
+  /* Smooth transition when sidebar appears/disappears */
+  padding-left: 16px;
+  transition: padding-left 0.25s ease;
+   transition: none;  
+   
+}
+
+/* ─── Sidebar content shift ──────────────────────────────────────────────────
+   When sidebar is visible on large screens, shift app-root content to the right
+   so the fixed sidebar doesn't overlap game cards or any page content.
+   The sidebar is 80px wide. We add that as padding-left to the centered container.
+   On small screens (drawer mode) we never shift — sidebar overlays instead.
+──────────────────────────────────────────────────────────────────────────── */
+body.sidebar-visible .app-root {
+  padding-left: calc(80px + 16px); /* sidebar width + original padding */
+}
+
+/* Safety net: never shift on small screens regardless of body class */
+@media (max-width: 1279px) {
+  body.sidebar-visible .app-root {
+    padding-left: 16px !important;
+  }
 }
 
 
+.no-games-message { text-align: center; }
+
+/* ─── Spacing utilities ──────────────────────────────────────────────────── */
+.no-padding        { padding: 0 !important; }
+.no-padding-x      { padding-left: 0 !important; padding-right: 0 !important; }
+.no-padding-y      { padding-top: 0 !important; padding-bottom: 0 !important; }
+.no-padding-top    { padding-top: 0 !important; }
+.no-padding-right  { padding-right: 0 !important; }
+.no-padding-bottom { padding-bottom: 0 !important; }
+.no-padding-left   { padding-left: 0 !important; }
+.no-margin         { margin: 0 !important; }
+.no-margin-x       { margin-left: 0 !important; margin-right: 0 !important; }
+.no-margin-y       { margin-top: 0 !important; margin-bottom: 0 !important; }
+.no-margin-top     { margin-top: 0 !important; }
+.no-margin-right   { margin-right: 0 !important; }
+.no-margin-bottom  { margin-bottom: 0 !important; }
+.no-margin-left    { margin-left: 0 !important; }
+
+
+
+@media (max-width: 768px) {
+  .app-root {
+    max-width: 100%;
+    padding: 0;
+    margin: 0;
+    transition: none;
+  }
+}

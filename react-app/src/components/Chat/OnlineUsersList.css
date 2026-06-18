@@ -1,0 +1,167 @@
+/* react-app/src/components/Chat/OnlineUsersList.css */
+
+.user-list {
+  background: #16192a;
+  border-left: 1px solid #2d3250;
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+  min-width: 200px;
+}
+
+.user-list-header {
+  padding: 16px;
+  border-bottom: 1px solid #2d3250;
+  background: #1a1d2e;
+}
+
+.user-list-header h3 {
+  font-size: 12px;
+  font-weight: 700;
+  color: #9ca3af;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin: 0;
+}
+
+.user-items {
+  flex: 1;
+  padding: 8px 0;
+}
+
+.user-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 12px;
+  margin: 2px 8px;
+  border-radius: 6px;
+  transition: background 0.2s;
+  cursor: pointer;
+}
+
+.user-item:hover {
+  background: rgba(79, 172, 254, 0.1);
+}
+
+.user-item.current-user {
+  background: rgba(79, 172, 254, 0.05);
+  border: 1px solid rgba(79, 172, 254, 0.3);
+}
+
+.user-avatar-wrapper {
+  position: relative;
+  flex-shrink: 0;
+}
+
+.user-avatar {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid #2d3250;
+}
+
+.user-item.current-user .user-avatar {
+  border-color: #4facfe;
+}
+
+.user-status {
+  position: absolute;
+  bottom: -2px;
+  right: -2px;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  border: 2px solid #16192a;
+}
+
+.user-status.online {
+  background: #10b981;
+}
+
+.user-status.away {
+  background: #fbbf24;
+}
+
+.user-status.busy {
+  background: #ef4444;
+}
+
+.user-status.offline {
+  background: #6b7280;
+}
+
+.user-info {
+  flex: 1;
+  min-width: 0;
+}
+
+.user-name {
+  font-size: 13px;
+  font-weight: 600;
+  color: #d1d5db;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  margin-bottom: 2px;
+}
+
+.user-item.current-user .user-name {
+  color: #4facfe;
+}
+
+.user-level {
+  font-size: 11px;
+  color: #6b7280;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.no-users {
+  padding: 40px 20px;
+  text-align: center;
+}
+
+.no-users p {
+  font-size: 13px;
+  color: #6b7280;
+  margin: 0;
+}
+
+/* Scrollbar */
+.user-list::-webkit-scrollbar {
+  width: 6px;
+}
+
+.user-list::-webkit-scrollbar-track {
+  background: #16192a;
+}
+
+.user-list::-webkit-scrollbar-thumb {
+  background: #2d3250;
+  border-radius: 3px;
+}
+
+.user-list::-webkit-scrollbar-thumb:hover {
+  background: #3d4266;
+}
+
+/* Mobile */
+@media (max-width: 768px) {
+  .user-list {
+    position: fixed;
+    right: -250px;
+    top: 0;
+    bottom: 0;
+    width: 250px;
+    z-index: 1000;
+    transition: right 0.3s;
+    box-shadow: -2px 0 8px rgba(0, 0, 0, 0.3);
+  }
+
+  .user-list.mobile-open {
+    right: 0;
+  }
+}

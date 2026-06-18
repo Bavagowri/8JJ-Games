@@ -1,3 +1,6 @@
+/* react-app/src/index.css */
+
+
 *,
 *::before,
 *::after {
@@ -8,9 +11,15 @@ body {
   margin: 0;
   font-family: 'Nunito', Arial, Helvetica, sans-serif;
   /* background: linear-gradient(45deg, #161616 13%, #1c232d 66%,  rgb(29, 40, 47)); */
-  background: rgb(4, 4, 4);
-  color: #fff;
   
+
+}
+@font-face {
+  font-family: 'Nunito';
+  src: url('/fonts/nunito-variable.woff2') format('woff2');
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
 }
 
 
@@ -18,10 +27,7 @@ button {
   font-family: inherit;
 }
 
-html {
-  scroll-padding-top: 65px;
-  scroll-behavior: smooth;
-}
+
 
 html {
   scroll-padding-top: 100px;
@@ -36,6 +42,13 @@ html {
   }
 }
 
+/* Fix 12d — respect reduced motion preference */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+}
+
 .brand-logo {
   filter: brightness(1.7) contrast(1.1) drop-shadow(0 0 6px rgb(63, 99, 172));
   transition: filter 0.3s ease, transform 0.2s ease;
@@ -45,10 +58,9 @@ html {
   filter: brightness(2) contrast(1.2) drop-shadow(0 0 10px rgba(255, 215, 100, 0.6));
   transform: scale(1.03);
 }
-
+/* 
 html {
   scroll-snap-type: y proximity;
-  /* Changed from mandatory */
   timeline-scope: --section;
 }
 
@@ -59,7 +71,8 @@ html {
 .home-wrapper,
 #searchResults,
 #top-picks,
-.all-games-page,.ScrollSnap {
+.all-games-page,
+.ScrollSnap {
   scroll-snap-align: start;
   view-timeline: --section;
 }
@@ -71,7 +84,8 @@ html {
 .home-wrapper,
 #searchResults,
 #top-picks,
-.all-games-page,.ScrollSnap {
+.all-games-page,
+.ScrollSnap {
   animation: backwards-scroll ease-in-out both;
   animation-timeline: --section;
   position: relative;
@@ -81,8 +95,106 @@ html,
 body {
   overscroll-behavior: none;
   scroll-padding-top: 130px;
+} */
+
+/* 
+@media (max-width: 768px) {
+
+ .more-title.section-title,.search-overlay {
+    animation: backwards-scroll ease-in-out both;
+    animation-timeline: --section;
+    position: relative;
+    scroll-snap-align: start;
+    view-timeline: --section;
+  }
 }
 
 
 
+@media (min-width: 768px) and (max-width: 1024px) {
+  .more-title.section-title,.search-overlay {
+    animation: backwards-scroll ease-in-out both;
+    animation-timeline: --section;
+    position: relative;
+    scroll-snap-align: start;
+    view-timeline: --section;
+  }
+} */
 
+
+
+
+html,
+body {
+  overscroll-behavior: none;
+ 
+} 
+
+
+
+
+
+.no-padding {
+  padding: 0 !important;
+}
+
+.no-padding-x {
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+}
+
+.no-padding-y {
+  padding-top: 0 !important;
+  padding-bottom: 0 !important;
+}
+
+.no-padding-top {
+  padding-top: 0 !important;
+}
+
+.no-padding-right {
+  padding-right: 0 !important;
+}
+
+.no-padding-bottom {
+  padding-bottom: 0 !important;
+}
+
+.no-padding-left {
+  padding-left: 0 !important;
+}
+
+.no-margin {
+  margin: 0 !important;
+}
+
+.no-margin-x {
+  margin-left: 0 !important;
+  margin-right: 0 !important;
+}
+
+.no-margin-y {
+  margin-top: 0 !important;
+  margin-bottom: 0 !important;
+}
+
+.no-margin-top {
+  margin-top: 0 !important;
+}
+
+.no-margin-right {
+  margin-right: 0 !important;
+}
+
+.no-margin-bottom {
+  margin-bottom: 0 !important;
+}
+
+.no-margin-left {
+  margin-left: 0 !important;
+}
+
+
+html{
+  overscroll-behavior: none;
+}

@@ -1,0 +1,1125 @@
+/* ==========react-app/src/pages/MyCollection/MyCollection.css==========================
+   COLLECTION PAGE LAYOUT
+==================================== */
+
+.collection-page {
+  min-height: 100vh;
+  color: #fff;
+  padding: 20px 16px 40px;
+}
+
+.collection-layout {
+  display: grid;
+  grid-template-columns: 1fr 280px;
+  gap: 20px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.collection-container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* ====================================
+   HEADER
+==================================== */
+
+.collection-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 30px;
+  background: rgba(21, 54, 100, 0.547);
+  padding: 20px;
+  border-radius: 8px;
+}
+
+.collection-title {
+  font-size: 28px;
+  font-weight: 700;
+  margin: 0;
+  color: #fff;
+  letter-spacing: 0.5px;
+}
+
+.collection-count {
+  font-size: 16px;
+  font-weight: 600;
+  color: #4facfe;
+  background: rgba(79, 172, 254, 0.1);
+  padding: 8px 16px;
+  border-radius: 20px;
+  border: 1px solid rgba(79, 172, 254, 0.3);
+}
+
+/* ====================================
+   GAMES GRID
+==================================== */
+
+.collection-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+  gap: 14px;
+  margin-bottom: 30px;
+}
+
+.collection-game-card {
+  position: relative;
+  border-radius: 8px;
+  overflow: hidden;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
+
+.collection-game-card:hover {
+  transform: translateY(-4px);
+}
+
+.game-card-content {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 3 / 4;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.collection-game-card .game-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.collection-game-card .game-overlay {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.9), transparent);
+  padding: 12px 8px 8px;
+  transition: background 0.3s ease;
+}
+
+.collection-game-card:hover .game-overlay {
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.95), rgba(0, 0, 0, 0.3));
+}
+
+.collection-game-card .game-title {
+  font-size: 13px;
+  font-weight: 600;
+  color: #fff;
+  margin-bottom: 4px;
+  line-height: 1.3;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.collection-game-card .game-category {
+  font-size: 11px;
+  color: #9ca3af;
+  text-transform: capitalize;
+}
+
+/* Play Now Button for Collection Cards */
+.collection-game-card .play-button {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(0.8);
+  background: linear-gradient(135deg, #56a7d5 0%, #4a8fc7 50%, #3753c5 100%);
+  display: flex;
+  border-radius: 50px;
+  font-weight: 800;
+  padding: 12px 24px;
+  align-items: center;
+  justify-content: center;
+  font-size: 11px;
+  transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+  box-shadow:
+    0 8px 24px rgba(86, 167, 213, 0.4),
+    0 4px 12px rgba(55, 83, 197, 0.3),
+    inset 0 1px 0 rgba(255, 255, 255, 0.3);
+  color: #fff;
+  white-space: nowrap;
+  max-width: 85%;
+  border: none;
+  text-decoration: none;
+  z-index: 6;
+  opacity: 0;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  backdrop-filter: blur(10px);
+  pointer-events: none;
+}
+
+.collection-game-card .play-button::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  border-radius: 50px;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.2) 0%, transparent 100%);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.collection-game-card:hover .play-button {
+  transform: translate(-50%, -50%) scale(1);
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.collection-game-card .play-button:hover {
+  transform: translate(-50%, -50%) scale(1.05);
+  box-shadow:
+    0 10px 30px rgba(86, 167, 213, 0.5),
+    0 5px 15px rgba(55, 83, 197, 0.4),
+    inset 0 1px 0 rgba(255, 255, 255, 0.4);
+}
+
+.collection-game-card .play-button:hover::before {
+  opacity: 1;
+}
+
+.collection-game-card .play-button:active {
+  transform: translate(-50%, -50%) scale(0.95);
+}
+
+/* Remove Button */
+.remove-btn {
+  position: absolute;
+  top: 4px;
+  right: 4px;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: rgb(177 11 2 / 90%);
+  color: #fff;
+  border: none;
+  font-size: 16px;
+  font-weight: 700;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 1;
+  transition: all 0.3s ease;
+  z-index: 7;
+  backdrop-filter: blur(4px);
+}
+
+.collection-game-card:hover .remove-btn {
+  opacity: 1;
+}
+
+.remove-btn:hover {
+  background: #ff3b30;
+  transform: scale(1.1) rotate(180deg);
+  transition-timing-function: cubic-bezier(0.68, -0.55, 0.27, 1.55);
+  filter: brightness(1.7) contrast(1.1) drop-shadow(0 0 6px rgb(63, 99, 172));
+}
+
+.remove-btn:active {
+  transform: scale(0.95);
+}
+
+/* ====================================
+   SIDEBAR
+==================================== */
+
+.sidebar-title {
+  font-size: 22px;
+  font-weight: 600;
+  color: #fff;
+  margin-bottom: 5px;
+  padding: 0px 10px;
+}
+
+.collection-sidebar {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  height: fit-content;
+  background: #15366448;
+  padding: 10px;
+  border-radius: 4px;
+}
+
+.collection-side-card {
+  position: relative;
+  border-radius: 8px;
+  overflow: visible;
+  cursor: pointer;
+  box-shadow:
+    0 4px 15px rgba(0, 0, 0, 0.4),
+    0 0 0 1px rgba(255, 255, 255, 0.05);
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+  transform-style: preserve-3d;
+  perspective: 1000px;
+  will-change: transform;
+}
+
+.collection-side-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(135deg, rgba(86, 167, 213, 0.1) 0%, rgba(55, 83, 197, 0.1) 100%);
+  opacity: 0;
+  transition: opacity 0.4s ease;
+  z-index: 1;
+  pointer-events: none;
+  border-radius: 8px;
+}
+
+.collection-side-card:hover::before {
+  opacity: 1;
+}
+
+.collection-side-card:hover {
+  transform: translateY(-6px) scale(1.02);
+  z-index: 10;
+}
+
+.side-card-content {
+  position: relative;
+  width: 100%;
+  height: 104px;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.collection-side-card .game-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1), filter 0.4s ease;
+  filter: brightness(0.9) contrast(1.05);
+}
+
+.collection-side-card:hover .game-image {
+  transform: scale(1.1);
+  filter: brightness(0.7) contrast(1.1);
+}
+
+.collection-side-card .play-button {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(0.8);
+  background: linear-gradient(135deg, #56a7d5 0%, #4a8fc7 50%, #3753c5 100%);
+  display: flex;
+  border-radius: 50px;
+  font-weight: 800;
+  padding: 8px 16px;
+  align-items: center;
+  justify-content: center;
+  font-size: 10px;
+  transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+  box-shadow:
+    0 8px 24px rgba(86, 167, 213, 0.4),
+    0 4px 12px rgba(55, 83, 197, 0.3),
+    inset 0 1px 0 rgba(255, 255, 255, 0.3);
+  color: #fff;
+  white-space: nowrap;
+  max-width: 85%;
+  border: none;
+  text-decoration: none;
+  z-index: 6;
+  opacity: 0;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  backdrop-filter: blur(10px);
+  pointer-events: none;
+}
+
+.collection-side-card .play-button::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  border-radius: 50px;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.2) 0%, transparent 100%);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.collection-side-card:hover .play-button {
+  transform: translate(-50%, -50%) scale(1);
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.collection-side-card .play-button:hover {
+  transform: translate(-50%, -50%) scale(1.05);
+  box-shadow:
+    0 10px 30px rgba(86, 167, 213, 0.5),
+    0 5px 15px rgba(55, 83, 197, 0.4),
+    inset 0 1px 0 rgba(255, 255, 255, 0.4);
+}
+
+.collection-side-card .play-button:hover::before {
+  opacity: 1;
+}
+
+.collection-side-card .play-button:active {
+  transform: translate(-50%, -50%) scale(0.95);
+}
+
+.collection-side-card .game-overlay {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  padding: 8px 6px 6px;
+  gap: 4px;
+  z-index: 2;
+  transition: opacity 0.5s cubic-bezier(0.34, 1.56, 0.64, 1),
+    backdrop-filter 0.5s cubic-bezier(0.34, 1.56, 0.64, 1),
+    transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+  backdrop-filter: blur(0px);
+  border-top: 1px solid rgba(86, 167, 213, 0);
+  opacity: 0;
+  transform: scale(0.95);
+  border-bottom-left-radius: 8px;
+  border-bottom-right-radius: 8px;
+  overflow: hidden;
+  background: linear-gradient(180deg,
+      rgba(7, 10, 14, 0) 0%,
+      rgba(7, 10, 14, 0.4) 30%,
+      rgba(7, 10, 14, 0.8) 100%);
+}
+
+.collection-side-card:hover .game-overlay {
+  opacity: 1;
+  transform: scale(1);
+  backdrop-filter: blur(12px);
+  border-top: 1px solid rgba(86, 167, 213, 0.4);
+  box-shadow: 0 -10px 30px rgba(86, 167, 213, 0.15);
+}
+
+.collection-side-card .game-title {
+  font-size: 11px;
+  font-weight: 700;
+  color: #fff;
+  line-height: 1.2;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  margin: 0 0 4px 0;
+  text-shadow:
+    0 2px 8px rgba(0, 0, 0, 0.8),
+    0 0 20px rgba(86, 167, 213, 0.3);
+  letter-spacing: 0.5px;
+  transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+  transform: translateY(5px);
+  opacity: 0;
+}
+
+.collection-side-card:hover .game-title {
+  color: #56a7d5;
+  transform: translateY(0);
+  opacity: 1;
+  transition-delay: 0.05s;
+}
+
+.collection-side-card .game-category {
+  font-size: 9px;
+  color: #94a3b8;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+  transform: translateY(5px);
+  opacity: 0;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+.collection-side-card:hover .game-category {
+  color: #cbd5e1;
+  transform: translateY(0);
+  opacity: 1;
+  transition-delay: 0.1s;
+}
+
+.remove-btn-side {
+  width: 24px;
+  height: 24px;
+  font-size: 14px;
+  top: 6px;
+  right: 6px;
+}
+
+/* ====================================
+   EMPTY STATE
+==================================== */
+
+.empty-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 60vh;
+  text-align: center;
+  padding: 40px 20px;
+}
+
+.empty-icon {
+  font-size: 80px;
+  margin-bottom: 20px;
+  opacity: 0.5;
+}
+
+.empty-title {
+  font-size: 28px;
+  font-weight: 700;
+  color: #fff;
+  margin-bottom: 12px;
+}
+
+.empty-text {
+  font-size: 16px;
+  color: #9ca3af;
+  margin-bottom: 30px;
+  max-width: 400px;
+}
+
+.browse-games-btn {
+  background: linear-gradient(135deg, #4facfe, #054346);
+  color: #fff;
+  border: none;
+  padding: 14px 32px;
+  border-radius: 50px;
+  font-size: 16px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(79, 172, 254, 0.3);
+}
+
+.browse-games-btn:hover {
+  transform: scale(1.05) translateY(-2px);
+  box-shadow: 0 8px 25px rgba(79, 172, 254, 0.5);
+}
+
+.browse-games-btn:active {
+  transform: scale(1.02) translateY(0);
+}
+
+/* ====================================
+   MORE GAMES SECTION
+==================================== */
+
+.more-games-section {
+  margin-top: 40px;
+}
+
+.more-section-title {
+  font-size: 22px;
+  font-weight: 600;
+  color: #fff;
+  margin-bottom: 20px;
+  padding-left: 4px;
+}
+
+/* ====================================
+   TOAST NOTIFICATION
+==================================== */
+
+.toast-notification {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  background: linear-gradient(135deg, #4facfe, #054346);
+  color: #fff;
+  padding: 16px 24px;
+  border-radius: 8px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+  z-index: 1000;
+  animation: slideIn 0.3s ease;
+}
+
+.toast-remove {
+  background: linear-gradient(135deg, #ff6b6b, #ff8e53) !important;
+}
+
+@keyframes slideIn {
+  from {
+    transform: translateX(400px);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+/* ====================================
+   SKELETON LOADING
+==================================== */
+
+.skeleton {
+  background: linear-gradient(90deg,
+      #1f2937 25%,
+      #374151 50%,
+      #1f2937 75%);
+  background-size: 200% 100%;
+  animation: skeleton-loading 1.5s ease-in-out infinite;
+  border-radius: 8px;
+}
+
+@keyframes skeleton-loading {
+  0% {
+    background-position: 200% 0;
+  }
+
+  100% {
+    background-position: -200% 0;
+  }
+}
+
+.skeleton-title {
+  width: 250px;
+  height: 36px;
+  margin-bottom: 20px;
+}
+
+.skeleton-count {
+  width: 100px;
+  height: 32px;
+  border-radius: 20px;
+}
+
+.skeleton-game-card {
+  width: 100%;
+  aspect-ratio: 3 / 4;
+  border-radius: 8px;
+}
+
+/* ====================================
+   RESPONSIVE DESIGN
+==================================== */
+
+@media (max-width: 1024px) {
+  .collection-layout {
+    grid-template-columns: 1fr 220px;
+  }
+
+  .collection-title {
+    font-size: 24px;
+  }
+}
+
+@media (max-width: 768px) {
+  .collection-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .collection-sidebar {
+    display: none;
+  }
+
+  .collection-header {
+    flex-direction: column;
+    gap: 12px;
+    text-align: center;
+  }
+
+  .collection-title {
+    font-size: 22px;
+  }
+
+  .collection-count {
+    font-size: 14px;
+  }
+
+  .collection-grid {
+    grid-template-columns: repeat(auto-fill, minmax(95px, 1fr));
+    gap: 12px;
+  }
+
+  .empty-icon {
+    font-size: 60px;
+  }
+
+  .empty-title {
+    font-size: 24px;
+  }
+
+  .empty-text {
+    font-size: 14px;
+  }
+
+  .browse-games-btn {
+    padding: 12px 28px;
+    font-size: 14px;
+  }
+}
+
+@media (max-width: 480px) {
+  .collection-page {
+    padding: 16px 12px 30px;
+  }
+
+  .collection-header {
+    padding: 16px;
+  }
+
+  .collection-title {
+    font-size: 20px;
+  }
+
+  .collection-count {
+    font-size: 13px;
+    padding: 6px 12px;
+  }
+
+  .collection-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+  }
+
+  .remove-btn {
+    width: 24px;
+    height: 24px;
+    font-size: 14px;
+    top: 6px;
+    right: 6px;
+  }
+
+  .empty-icon {
+    font-size: 50px;
+  }
+
+  .empty-title {
+    font-size: 20px;
+  }
+
+  .empty-text {
+    font-size: 13px;
+  }
+
+  .browse-games-btn {
+    padding: 10px 24px;
+    font-size: 13px;
+  }
+}
+
+
+/* ===================================
+   BREADCRUMB NAVIGATION
+   (Add to MyCollection.css and profile.css)
+=================================== */
+.breadcrumb {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 1rem 0;
+  margin-bottom: 1rem;
+  font-size: 0.875rem;
+  
+}
+
+.breadcrumb-link {
+ 
+  text-decoration: none;
+  transition: color 0.3s;
+}
+
+.breadcrumb-link:hover {
+  color: #667eea;
+  text-decoration: underline;
+}
+
+.breadcrumb-link:focus {
+  outline: 2px solid #667eea;
+  outline-offset: 2px;
+  border-radius: 2px;
+}
+
+.breadcrumb-separator {
+  color: rgba(255, 255, 255, 0.5);
+  user-select: none;
+}
+
+.breadcrumb-current {
+  color: rgba(255, 255, 255, 0.9);
+  font-weight: 600;
+}
+
+/* ===================================
+   SCREEN READER ONLY CLASS
+   (Add to both MyCollection.css and profile.css)
+=================================== */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
+}
+
+/* Optional: Make visible on focus */
+.sr-only:focus {
+  position: static;
+  width: auto;
+  height: auto;
+  padding: 0.5rem;
+  margin: 0;
+  overflow: visible;
+  clip: auto;
+  white-space: normal;
+  background-color: #667eea;
+  color: white;
+  border-radius: 4px;
+  z-index: 1000;
+}
+
+
+
+
+
+/* ============================================
+   PREMIUM BREADCRUMB NAVIGATION - GAMING THEME
+   Add this to your profile.css file to replace the existing breadcrumb styles
+   ============================================ */
+
+.breadcrumb {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 16px 24px;
+  margin-bottom: 24px;
+  font-size: 14px;
+  background: linear-gradient(135deg, 
+    rgba(79, 172, 254, 0.08) 0%, 
+    rgba(102, 126, 234, 0.08) 100%
+  );
+  border: 1px solid rgba(79, 172, 254, 0.2);
+  border-radius: 16px;
+  backdrop-filter: blur(10px);
+  position: relative;
+  overflow: hidden;
+  animation: breadcrumbSlideIn 0.6s ease-out;
+}
+
+/* Animated background glow */
+.breadcrumb::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(
+    circle at center,
+    rgba(79, 172, 254, 0.05) 0%,
+    transparent 70%
+  );
+  animation: breadcrumbRotate 15s linear infinite;
+  pointer-events: none;
+  z-index: 0;
+}
+
+@keyframes breadcrumbSlideIn {
+  from {
+    opacity: 0;
+    transform: translateX(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes breadcrumbRotate {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+/* Shimmer effect on hover */
+.breadcrumb::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.1),
+    transparent
+  );
+  transition: left 0.8s ease;
+  z-index: 0;
+}
+
+.breadcrumb:hover::after {
+  left: 100%;
+}
+
+/* Make links relative to z-index */
+.breadcrumb > * {
+  position: relative;
+  z-index: 1;
+}
+
+.breadcrumb-link {
+  color: rgba(255, 255, 255, 0.7);
+  text-decoration: none;
+  font-weight: 600;
+  padding: 6px 12px;
+  border-radius: 8px;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+/* Home icon before first link */
+.breadcrumb-link:first-of-type::before {
+  /* content: '🏠'; */
+  font-size: 16px;
+  filter: drop-shadow(0 0 4px rgba(79, 172, 254, 0.6));
+}
+
+.breadcrumb-link:hover {
+  color: #00d4ff;
+  background: rgba(79, 172, 254, 0.15);
+  transform: translateY(-2px) scale(1.05);
+  box-shadow: 
+    0 4px 12px rgba(79, 172, 254, 0.3),
+    0 0 20px rgba(79, 172, 254, 0.2);
+}
+
+.breadcrumb-link:active {
+  transform: translateY(0) scale(1);
+}
+
+.breadcrumb-link:focus {
+  outline: 2px solid rgba(79, 172, 254, 0.6);
+  outline-offset: 3px;
+  border-radius: 8px;
+  box-shadow: 0 0 0 4px rgba(79, 172, 254, 0.2);
+}
+
+/* Separator with gradient */
+.breadcrumb-separator {
+  color: rgba(79, 172, 254, 0.5);
+  user-select: none;
+  font-weight: 700;
+  font-size: 16px;
+  text-shadow: 0 0 8px rgba(79, 172, 254, 0.4);
+  animation: separatorPulse 2s ease-in-out infinite;
+}
+
+@keyframes separatorPulse {
+  0%, 100% {
+    opacity: 0.5;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.1);
+  }
+}
+
+/* Current page indicator */
+.breadcrumb-current {
+  color: #ffffff;
+  font-weight: 700;
+  padding: 6px 16px;
+  background: linear-gradient(135deg, #00d4ff 0%, #0099ff 100%);
+  border-radius: 10px;
+  box-shadow: 
+    0 4px 12px rgba(0, 153, 255, 0.4),
+    0 0 20px rgba(0, 212, 255, 0.2),
+    inset 0 1px 0 rgba(255, 255, 255, 0.3);
+  position: relative;
+  overflow: hidden;
+  animation: currentGlow 3s ease-in-out infinite;
+}
+
+@keyframes currentGlow {
+  0%, 100% {
+    box-shadow: 
+      0 4px 12px rgba(0, 153, 255, 0.4),
+      0 0 20px rgba(0, 212, 255, 0.2);
+  }
+  50% {
+    box-shadow: 
+      0 4px 16px rgba(0, 153, 255, 0.6),
+      0 0 30px rgba(0, 212, 255, 0.4);
+  }
+}
+
+/* Shine effect on current badge */
+.breadcrumb-current::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.3),
+    transparent
+  );
+  animation: breadcrumbShine 3s ease-in-out infinite;
+}
+
+@keyframes breadcrumbShine {
+  0% { left: -100%; }
+  20%, 100% { left: 100%; }
+}
+
+/* Profile icon for current page */
+.breadcrumb-current::after {
+  /* content: '👤'; */
+  margin-left: 6px;
+  font-size: 14px;
+  filter: drop-shadow(0 0 4px rgba(255, 255, 255, 0.6));
+}
+
+/* ============================================
+   MOBILE RESPONSIVE BREADCRUMB
+   ============================================ */
+
+@media (max-width: 768px) {
+  .breadcrumb {
+    padding: 12px 16px;
+    margin-bottom: 20px;
+    font-size: 13px;
+    gap: 0.5rem;
+  }
+
+  .breadcrumb-link {
+    padding: 5px 10px;
+  }
+
+  .breadcrumb-link:first-of-type::before {
+    font-size: 14px;
+  }
+
+  .breadcrumb-separator {
+    font-size: 14px;
+  }
+
+  .breadcrumb-current {
+    padding: 5px 12px;
+    font-size: 13px;
+  }
+}
+
+@media (max-width: 480px) {
+  .breadcrumb {
+    padding: 10px 12px;
+    margin-bottom: 16px;
+    font-size: 12px;
+    border-radius: 12px;
+  }
+
+  /* Compact mode - hide text, show icons only on very small screens */
+  .breadcrumb-link {
+    padding: 6px;
+  }
+
+  .breadcrumb-link:first-of-type::before {
+    margin: 0;
+  }
+
+  /* Hide separator on very small screens */
+  .breadcrumb-separator {
+    display: none;
+  }
+
+  .breadcrumb-current {
+    padding: 6px 12px;
+    font-size: 12px;
+  }
+
+  .breadcrumb-current::after {
+    font-size: 12px;
+    margin-left: 4px;
+  }
+}
+
+/* ============================================
+   ACCESSIBILITY IMPROVEMENTS
+   ============================================ */
+
+@media (prefers-reduced-motion: reduce) {
+  .breadcrumb,
+  .breadcrumb::before,
+  .breadcrumb::after,
+  .breadcrumb-link,
+  .breadcrumb-separator,
+  .breadcrumb-current,
+  .breadcrumb-current::before {
+    animation: none !important;
+    transition: none !important;
+  }
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+  .breadcrumb {
+    border: 2px solid rgba(79, 172, 254, 0.6);
+  }
+
+  .breadcrumb-link {
+    border: 1px solid rgba(255, 255, 255, 0.3);
+  }
+
+  .breadcrumb-current {
+    border: 2px solid rgba(255, 255, 255, 0.8);
+  }
+}
+
+/* ============================================
+   ALTERNATIVE DESIGN - MINIMAL GLASS EFFECT
+   (Uncomment below to use instead of the main design)
+   ============================================ */
+
+
+.breadcrumb {
+  background: rgba(15, 23, 42, 0.6);
+  border: 1px solid rgba(79, 172, 254, 0.3);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+}
+
+.breadcrumb-link {
+  background: none;
+  border: 1px solid transparent;
+}
+
+.breadcrumb-link:hover {
+  border-color: rgba(79, 172, 254, 0.5);
+  background: rgba(79, 172, 254, 0.1);
+}
+
+.breadcrumb-current {
+  background: rgba(79, 172, 254, 0.2);
+  border: 1px solid rgba(79, 172, 254, 0.4);
+}
+
+

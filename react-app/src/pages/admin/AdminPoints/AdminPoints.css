@@ -1,0 +1,524 @@
+/* react-app/src/pages/admin/AdminPoints/AdminPoints.css */
+
+/* ==================== PAGE HEADER ==================== */
+.points-page-header {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 28px;
+}
+
+.points-page-icon {
+  width: 50px;
+  height: 50px;
+  border-radius: 13px;
+  background: linear-gradient(135deg, rgba(0, 217, 255, 0.18), rgba(43, 122, 226, 0.18));
+  border: 1px solid rgba(0, 217, 255, 0.3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.points-page-text h2 {
+  margin: 0 0 4px 0;
+  font-size: 22px;
+  font-weight: 700;
+  background: linear-gradient(135deg, #00d9ff, #2b7ae2);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.points-page-text p {
+  margin: 0;
+  font-size: 13px;
+  color: rgba(255, 255, 255, 0.45);
+}
+
+/* ==================== ICON ACTION BUTTONS ==================== */
+.admin-actions {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+.icon-btn {
+  width: 34px;
+  height: 34px;
+  border-radius: 8px;
+  background: rgba(0, 217, 255, 0.05);
+  border: 1px solid rgba(0, 217, 255, 0.18);
+  color: rgba(0, 217, 255, 0.7);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.25s ease;
+}
+
+.icon-btn:hover {
+  background: rgba(0, 217, 255, 0.14);
+  border-color: #00d9ff;
+  color: #00d9ff;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 217, 255, 0.25);
+}
+
+.icon-btn.danger {
+  background: rgba(255, 71, 87, 0.05);
+  border-color: rgba(255, 71, 87, 0.18);
+  color: rgba(255, 71, 87, 0.7);
+}
+
+.icon-btn.danger:hover {
+  background: rgba(255, 71, 87, 0.14);
+  border-color: #ff4757;
+  color: #ff4757;
+  box-shadow: 0 4px 12px rgba(255, 71, 87, 0.25);
+}
+
+/* ==================== ERROR CARD ==================== */
+.error-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  padding: 48px;
+  text-align: center;
+  color: var(--admin-danger);
+}
+
+/* ==================== MODAL OVERLAY ==================== */
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.75);
+  backdrop-filter: blur(6px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+  padding: 20px;
+  animation: mpFadeIn 0.2s ease;
+}
+
+@keyframes mpFadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+/* ==================== MODAL BOX ==================== */
+.modal {
+  background: var(--admin-card-bg);
+  border: 1px solid rgba(0, 217, 255, 0.2);
+  border-radius: 18px;
+  width: 100%;
+  max-width: 460px;
+  max-height: 90vh;
+  overflow-y: auto;
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(0, 217, 255, 0.08);
+  animation: mpSlideUp 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+@keyframes mpSlideUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.modal-header {
+  padding: 24px 24px 0 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+.modal-title {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.modal-title-icon {
+  width: 36px;
+  height: 36px;
+  border-radius: 9px;
+  background: linear-gradient(135deg, rgba(0, 217, 255, 0.18), rgba(43, 122, 226, 0.18));
+  border: 1px solid rgba(0, 217, 255, 0.25);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.modal-title h3 {
+  margin: 0;
+  font-size: 18px;
+  font-weight: 700;
+  background: linear-gradient(135deg, #00d9ff, #2b7ae2);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.modal-close-btn {
+  width: 34px;
+  height: 34px;
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: rgba(255, 255, 255, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  font-size: 18px;
+  transition: all 0.2s ease;
+  line-height: 1;
+}
+
+.modal-close-btn:hover {
+  background: rgba(255, 71, 87, 0.15);
+  border-color: rgba(255, 71, 87, 0.3);
+  color: #ff4757;
+}
+
+.modal-divider {
+  height: 1px;
+  background: rgba(0, 217, 255, 0.1);
+  margin: 0 24px 20px 24px;
+}
+
+.modal-body {
+  padding: 0 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+/* ==================== FORM FIELD ==================== */
+.modal-field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.modal-field label {
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.7px;
+  color: rgba(255, 255, 255, 0.5);
+}
+
+.modal-field .admin-input {
+  background: rgba(0, 217, 255, 0.04);
+  border: 1px solid rgba(0, 217, 255, 0.18);
+  border-radius: 9px;
+  padding: 11px 14px;
+  color: #ffffff;
+  font-size: 14px;
+  outline: none;
+  transition: all 0.25s ease;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.modal-field .admin-input::placeholder {
+  color: rgba(255, 255, 255, 0.28);
+}
+
+.modal-field .admin-input:focus {
+  border-color: #00d9ff;
+  background: rgba(0, 217, 255, 0.07);
+  box-shadow: 0 0 0 3px rgba(0, 217, 255, 0.1);
+}
+
+.modal-field .admin-input:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+.modal-field-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+.modal-footer {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  padding: 20px 24px 24px 24px;
+  margin-top: 8px;
+}
+
+/* ==================== USER LIST (AdminUserPoints) ==================== */
+.user-list-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 14px;
+}
+
+.user-list-header h3 {
+  margin: 0;
+  font-size: 15px;
+  font-weight: 700;
+  color: rgba(255, 255, 255, 0.9);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.user-selected-count {
+  font-size: 12px;
+  font-weight: 700;
+  padding: 4px 12px;
+  border-radius: 20px;
+  background: rgba(0, 217, 255, 0.1);
+  border: 1px solid rgba(0, 217, 255, 0.3);
+  color: #00d9ff;
+}
+
+.user-list {
+  max-height: 380px;
+  overflow-y: auto;
+  border: 1px solid rgba(0, 217, 255, 0.12);
+  border-radius: 10px;
+  margin-bottom: 24px;
+}
+
+.user-list::-webkit-scrollbar {
+  width: 5px;
+}
+
+.user-list::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.user-list::-webkit-scrollbar-thumb {
+  background: rgba(0, 217, 255, 0.25);
+  border-radius: 4px;
+}
+
+.user-row {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 12px 16px;
+  border-bottom: 1px solid rgba(0, 217, 255, 0.07);
+  transition: background 0.2s ease;
+  cursor: pointer;
+}
+
+.user-row:last-child {
+  border-bottom: none;
+}
+
+.user-row:hover {
+  background: rgba(0, 217, 255, 0.04);
+}
+
+.user-row.selected {
+  background: rgba(0, 217, 255, 0.07);
+}
+
+/* Custom checkbox */
+.user-checkbox {
+  display: none;
+}
+
+.user-check-box {
+  width: 18px;
+  height: 18px;
+  border-radius: 5px;
+  border: 2px solid rgba(0, 217, 255, 0.35);
+  background: transparent;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  transition: all 0.2s ease;
+}
+
+.user-row.selected .user-check-box {
+  background: #00d9ff;
+  border-color: #00d9ff;
+  box-shadow: 0 0 8px rgba(0, 217, 255, 0.4);
+}
+
+.user-check-mark {
+  width: 10px;
+  height: 10px;
+  opacity: 0;
+  transition: opacity 0.15s ease;
+}
+
+.user-row.selected .user-check-mark {
+  opacity: 1;
+}
+
+.user-row-avatar {
+  width: 36px;
+  height: 36px;
+  border-radius: 9px;
+  background: linear-gradient(135deg, rgba(0, 217, 255, 0.15), rgba(43, 122, 226, 0.15));
+  border: 1px solid rgba(0, 217, 255, 0.2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  font-weight: 700;
+  color: #00d9ff;
+  flex-shrink: 0;
+  text-transform: uppercase;
+}
+
+.user-row-info {
+  flex: 1;
+  min-width: 0;
+}
+
+.user-row-name {
+  font-size: 14px;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.9);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.user-row-pts {
+  font-size: 12px;
+  color: rgba(255, 255, 255, 0.45);
+  margin-top: 2px;
+}
+
+/* Tier badge */
+.tier-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 3px 10px;
+  border-radius: 20px;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.3px;
+  flex-shrink: 0;
+}
+
+.tier-bronze {
+  background: rgba(205, 127, 50, 0.15);
+  color: #cd7f32;
+  border: 1px solid rgba(205, 127, 50, 0.35);
+}
+
+.tier-silver {
+  background: rgba(192, 192, 192, 0.12);
+  color: #c0c0c0;
+  border: 1px solid rgba(192, 192, 192, 0.3);
+}
+
+.tier-gold {
+  background: rgba(255, 215, 0, 0.12);
+  color: #ffd700;
+  border: 1px solid rgba(255, 215, 0, 0.35);
+}
+
+.tier-platinum {
+  background: rgba(0, 217, 255, 0.12);
+  color: #00d9ff;
+  border: 1px solid rgba(0, 217, 255, 0.35);
+}
+
+.tier-diamond {
+  background: rgba(43, 122, 226, 0.15);
+  color: #7eb8ff;
+  border: 1px solid rgba(43, 122, 226, 0.4);
+}
+
+/* ==================== BULK AWARD SECTION ==================== */
+.bulk-award-card {
+  background: linear-gradient(135deg, rgba(0, 217, 255, 0.04), rgba(43, 122, 226, 0.04));
+  border: 1px solid rgba(0, 217, 255, 0.15);
+  border-radius: 12px;
+  padding: 20px;
+}
+
+.bulk-award-title {
+  font-size: 13px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.7px;
+  color: rgba(255, 255, 255, 0.5);
+  margin-bottom: 14px;
+  display: flex;
+  align-items: center;
+  gap: 7px;
+}
+
+.bulk-award-grid {
+  display: grid;
+  grid-template-columns: 140px 1fr auto;
+  gap: 12px;
+  align-items: end;
+}
+
+.bulk-award-field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.bulk-award-field label {
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: rgba(255, 255, 255, 0.4);
+}
+
+.bulk-award-field .admin-input {
+  background: rgba(0, 217, 255, 0.04);
+  border: 1px solid rgba(0, 217, 255, 0.18);
+  border-radius: 9px;
+  padding: 11px 14px;
+  color: #ffffff;
+  font-size: 14px;
+  outline: none;
+  transition: all 0.25s ease;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.bulk-award-field .admin-input::placeholder {
+  color: rgba(255, 255, 255, 0.28);
+}
+
+.bulk-award-field .admin-input:focus {
+  border-color: #00d9ff;
+  background: rgba(0, 217, 255, 0.07);
+  box-shadow: 0 0 0 3px rgba(0, 217, 255, 0.1);
+}
+
+/* ==================== RESPONSIVE ==================== */
+@media (max-width: 640px) {
+  .modal-field-row {
+    grid-template-columns: 1fr;
+  }
+
+  .bulk-award-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.user-row-name-email{
+  display: flex;
+  gap: 5px;
+}
+
+.user-row-email {
+    color: #ccc;
+    font-size: 10px;
+}

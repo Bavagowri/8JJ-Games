@@ -22,3 +22,12 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+.env
+.env.production
+.env.staging
+.env.local
+
+package-lock.json
+package.json
+

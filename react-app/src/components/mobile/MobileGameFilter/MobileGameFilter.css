@@ -1,0 +1,614 @@
+/* src/components/mobile/MobileGameFilter/MobileGameFilter.css */
+
+/* ========================================
+   BACKDROP & BOTTOM SHEET CONTAINER
+   ======================================== */
+
+.mobile-filter-backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0);
+  backdrop-filter: blur(0px);
+  z-index: 998;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  pointer-events: none;
+}
+
+.mobile-filter-backdrop.active {
+  background: rgba(0, 0, 0, 0.7);
+  backdrop-filter: blur(4px);
+  pointer-events: all;
+}
+
+.mobile-filter-sheet {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  max-height: 85vh;
+  background: linear-gradient(to bottom, #0f1623 0%, #0a0e17 100%);
+  border-radius: 24px 24px 0 0;
+  box-shadow: 0 -10px 40px rgba(0, 0, 0, 0.5);
+  z-index: 999;
+  transform: translateY(100%);
+  transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.mobile-filter-sheet.open {
+  transform: translateY(0);
+}
+
+/* ========================================
+   DRAG HANDLE
+   ======================================== */
+
+.mobile-filter-handle-area {
+  padding: 12px 0 8px;
+  display: flex;
+  justify-content: center;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.mobile-filter-handle {
+  width: 40px;
+  height: 4px;
+  background: rgba(255, 255, 255, 0.3);
+  border-radius: 2px;
+  transition: all 0.2s;
+}
+
+.mobile-filter-handle-area:active .mobile-filter-handle {
+  background: rgba(255, 255, 255, 0.5);
+  transform: scaleX(1.2);
+}
+
+/* ========================================
+   HEADER SECTION
+   ======================================== */
+
+.mobile-filter-header {
+  padding: 0 20px 16px;
+  border-bottom: 1px solid rgba(79, 172, 254, 0.15);
+  background: rgba(15, 22, 35, 0.8);
+}
+
+.mobile-filter-header-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
+}
+
+.mobile-filter-title {
+  font-size: 20px;
+  font-weight: 700;
+  color: #fff;
+  margin: 0;
+  text-shadow: 0 2px 8px rgba(0, 217, 255, 0.3);
+}
+
+.mobile-filter-close {
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(255, 255, 255, 0.1);
+  border: none;
+  border-radius: 50%;
+  color: #fff;
+  font-size: 18px;
+  cursor: pointer;
+  transition: all 0.2s;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.mobile-filter-close:active {
+  background: rgba(255, 255, 255, 0.2);
+  transform: scale(0.9);
+}
+
+/* Results Count */
+.mobile-filter-results {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
+}
+
+.mobile-filter-count {
+  font-size: 13px;
+  color: #00d9ff;
+  font-weight: 600;
+}
+
+.mobile-filter-clear-all {
+  padding: 6px 12px;
+  background: rgba(239, 68, 68, 0.15);
+  border: 1px solid rgba(239, 68, 68, 0.3);
+  border-radius: 20px;
+  color: #fca5a5;
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.mobile-filter-clear-all:active {
+  background: rgba(239, 68, 68, 0.25);
+  transform: scale(0.95);
+}
+
+/* Search */
+.mobile-filter-search {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.mobile-filter-search-icon {
+  position: absolute;
+  left: 14px;
+  font-size: 16px;
+  pointer-events: none;
+}
+
+.mobile-filter-search-input {
+  width: 100%;
+  padding: 10px 40px 10px 40px;
+  background: rgba(30, 41, 59, 0.6);
+  border: 1px solid rgba(79, 172, 254, 0.2);
+  border-radius: 12px;
+  color: #fff;
+  font-size: 14px;
+  outline: none;
+  transition: all 0.2s;
+}
+
+.mobile-filter-search-input::placeholder {
+  color: rgba(255, 255, 255, 0.4);
+}
+
+.mobile-filter-search-input:focus {
+  background: rgba(30, 41, 59, 0.8);
+  border-color: #00d9ff;
+}
+
+.mobile-filter-search-clear {
+  position: absolute;
+  right: 8px;
+  width: 28px;
+  height: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(255, 255, 255, 0.1);
+  border: none;
+  border-radius: 50%;
+  color: #fff;
+  font-size: 14px;
+  cursor: pointer;
+  transition: all 0.2s;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.mobile-filter-search-clear:active {
+  background: rgba(255, 255, 255, 0.2);
+  transform: scale(0.9);
+}
+
+/* ========================================
+   TAB NAVIGATION
+   ======================================== */
+
+.mobile-filter-tabs {
+  background: rgba(10, 14, 23, 0.5);
+  border-bottom: 1px solid rgba(79, 172, 254, 0.15);
+  overflow-x: auto;
+  overflow-y: hidden;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+}
+
+.mobile-filter-tabs::-webkit-scrollbar {
+  display: none;
+}
+
+.mobile-filter-tabs-scroll {
+  display: flex;
+  padding: 12px 16px;
+  gap: 8px;
+  min-width: min-content;
+}
+
+.mobile-filter-tab {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  padding: 10px 16px;
+  background: rgba(30, 41, 59, 0.4);
+  border: 1px solid rgba(79, 172, 254, 0.15);
+  border-radius: 12px;
+  color: #cbd5e1;
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  white-space: nowrap;
+  -webkit-tap-highlight-color: transparent;
+  flex-shrink: 0;
+}
+
+.mobile-filter-tab-icon {
+  font-size: 20px;
+  filter: grayscale(100%);
+  transition: filter 0.3s;
+}
+
+.mobile-filter-tab-label {
+  font-size: 11px;
+}
+
+.mobile-filter-tab.active {
+  background: linear-gradient(135deg, rgba(0, 217, 255, 0.2), rgba(0, 153, 204, 0.15));
+  border-color: #00d9ff;
+  color: #00d9ff;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 217, 255, 0.3);
+}
+
+.mobile-filter-tab.active .mobile-filter-tab-icon {
+  filter: grayscale(0%);
+}
+
+.mobile-filter-tab:active {
+  transform: scale(0.95);
+}
+
+.mobile-filter-tab-badge {
+  position: absolute;
+  top: 4px;
+  right: 4px;
+  min-width: 18px;
+  height: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, #00d9ff, #0099cc);
+  border-radius: 9px;
+  color: #0f172a;
+  font-size: 10px;
+  font-weight: 700;
+  padding: 0 5px;
+}
+
+/* ========================================
+   CONTENT AREA
+   ======================================== */
+
+.mobile-filter-content {
+  flex: 1;
+  overflow-y: auto;
+  overflow-x: hidden;
+  -webkit-overflow-scrolling: touch;
+  padding: 20px;
+}
+
+.mobile-filter-section {
+  animation: fadeInUp 0.3s ease-out;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ========================================
+   TOGGLE SWITCHES (Special Filters)
+   ======================================== */
+
+.mobile-filter-option-group {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.mobile-filter-toggle {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 16px;
+  background: rgba(30, 41, 59, 0.4);
+  border: 1px solid rgba(79, 172, 254, 0.2);
+  border-radius: 16px;
+  cursor: pointer;
+  transition: all 0.3s;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.mobile-filter-toggle input {
+  position: absolute;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.mobile-filter-toggle-track {
+  position: relative;
+  width: 50px;
+  height: 28px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 14px;
+  transition: all 0.3s;
+  flex-shrink: 0;
+}
+
+.mobile-filter-toggle-thumb {
+  position: absolute;
+  top: 3px;
+  left: 3px;
+  width: 22px;
+  height: 22px;
+  background: #fff;
+  border-radius: 50%;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.mobile-filter-toggle input:checked ~ .mobile-filter-toggle-track {
+  background: linear-gradient(135deg, #00d9ff, #0099cc);
+}
+
+.mobile-filter-toggle input:checked ~ .mobile-filter-toggle-track .mobile-filter-toggle-thumb {
+  transform: translateX(22px);
+}
+
+.mobile-filter-toggle:active .mobile-filter-toggle-thumb {
+  transform: scale(1.1);
+}
+
+.mobile-filter-toggle input:checked ~ .mobile-filter-toggle-content {
+  transform: scale(0.98);
+}
+
+.mobile-filter-toggle-content {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex: 1;
+  transition: transform 0.2s;
+}
+
+.mobile-filter-toggle-icon {
+  font-size: 24px;
+}
+
+.mobile-filter-toggle-text {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.mobile-filter-toggle-label {
+  font-size: 15px;
+  font-weight: 600;
+  color: #fff;
+}
+
+.mobile-filter-toggle-desc {
+  font-size: 12px;
+  color: #94a3b8;
+}
+
+.mobile-filter-toggle input:checked ~ .mobile-filter-toggle-content .mobile-filter-toggle-label {
+  color: #00d9ff;
+}
+
+/* ========================================
+   CHECKBOX OPTIONS (Difficulty, Players)
+   ======================================== */
+
+.mobile-filter-option {
+  display: flex;
+  align-items: center;
+  padding: 14px 16px;
+  background: rgba(30, 41, 59, 0.3);
+  border: 1px solid rgba(79, 172, 254, 0.15);
+  border-radius: 12px;
+  cursor: pointer;
+  transition: all 0.2s;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.mobile-filter-option input {
+  position: absolute;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.mobile-filter-option-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+
+.mobile-filter-option-label {
+  font-size: 14px;
+  font-weight: 500;
+  color: #cbd5e1;
+  transition: color 0.2s;
+}
+
+.mobile-filter-option-check {
+  font-size: 16px;
+  color: #00d9ff;
+  font-weight: 700;
+}
+
+.mobile-filter-option input:checked ~ .mobile-filter-option-content {
+  background: linear-gradient(90deg, rgba(0, 217, 255, 0.1), transparent);
+  border-radius: 8px;
+  margin: -2px;
+  padding: 2px;
+}
+
+.mobile-filter-option input:checked ~ .mobile-filter-option-content .mobile-filter-option-label {
+  color: #00d9ff;
+  font-weight: 600;
+}
+
+.mobile-filter-option:active {
+  transform: scale(0.98);
+  background: rgba(30, 41, 59, 0.5);
+}
+
+/* ========================================
+   CHIP GRID (Categories, Tags, Features)
+   ======================================== */
+
+.mobile-filter-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.mobile-filter-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 10px 16px;
+  background: rgba(30, 41, 59, 0.4);
+  border: 1px solid rgba(79, 172, 254, 0.2);
+  border-radius: 20px;
+  color: #cbd5e1;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  white-space: nowrap;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.mobile-filter-chip-label {
+  transition: color 0.2s;
+}
+
+.mobile-filter-chip-label.capitalize {
+  text-transform: capitalize;
+}
+
+.mobile-filter-chip-check {
+  font-size: 14px;
+  font-weight: 700;
+  color: #0f172a;
+}
+
+.mobile-filter-chip.active {
+  background: linear-gradient(135deg, #00d9ff, #0099cc);
+  border-color: #00d9ff;
+  color: #0f172a;
+  transform: scale(1.05);
+  box-shadow: 0 4px 12px rgba(0, 217, 255, 0.3);
+}
+
+.mobile-filter-chip:active {
+  transform: scale(0.95);
+}
+
+/* ========================================
+   EMPTY STATE
+   ======================================== */
+
+.mobile-filter-empty {
+  padding: 40px 20px;
+  text-align: center;
+  color: #94a3b8;
+  font-size: 14px;
+}
+
+/* ========================================
+   FOOTER ACTIONS
+   ======================================== */
+
+.mobile-filter-footer {
+  display: flex;
+  gap: 12px;
+  padding: 16px 20px;
+  background: rgba(10, 14, 23, 0.8);
+  border-top: 1px solid rgba(79, 172, 254, 0.15);
+  box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.3);
+}
+
+.mobile-filter-btn {
+  flex: 1;
+  padding: 14px 20px;
+  border: none;
+  border-radius: 12px;
+  font-size: 15px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  -webkit-tap-highlight-color: transparent;
+}
+
+.mobile-filter-btn-secondary {
+  background: rgba(30, 41, 59, 0.6);
+  border: 1px solid rgba(79, 172, 254, 0.3);
+  color: #cbd5e1;
+}
+
+.mobile-filter-btn-secondary:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.mobile-filter-btn-secondary:active:not(:disabled) {
+  background: rgba(30, 41, 59, 0.8);
+  transform: scale(0.98);
+}
+
+.mobile-filter-btn-primary {
+  background: linear-gradient(135deg, #00d9ff, #0099cc);
+  color: #0f172a;
+  box-shadow: 0 4px 16px rgba(0, 217, 255, 0.3);
+}
+
+.mobile-filter-btn-primary:active {
+  transform: scale(0.98);
+  box-shadow: 0 2px 8px rgba(0, 217, 255, 0.4);
+}
+
+/* ========================================
+   RESPONSIVE ADJUSTMENTS
+   ======================================== */
+
+@media (max-width: 380px) {
+  .mobile-filter-title {
+    font-size: 18px;
+  }
+
+  .mobile-filter-tab {
+    padding: 8px 12px;
+  }
+
+  .mobile-filter-tab-icon {
+    font-size: 18px;
+  }
+}

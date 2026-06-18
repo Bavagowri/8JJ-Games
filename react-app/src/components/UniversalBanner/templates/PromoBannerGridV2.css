@@ -1,0 +1,596 @@
+/* react-app/src/components/UniversalBanner/templates/PromoBannerGridV2.css */
+
+
+
+
+
+.pbg2-grid {
+  display: grid;
+  width: 100%;
+  gap: var(--gap, 16px);
+}
+
+/* ══════════════════════════════════════
+   CARD BASE
+══════════════════════════════════════ */
+.pbg2-card {
+  position: relative;
+  overflow: hidden;
+  height: var(--ch, 190px);
+  border-radius: var(--radius, 14px);
+  cursor: pointer;
+  display: flex;
+  align-items: flex-end;
+  background: #050d1a;
+
+  /* Premium layered border */
+  border: 1px solid rgba(255, 255, 255, 0.055);
+  box-shadow:
+    0 4px 20px rgba(0, 0, 0, 0.45),
+    0 1px 0 rgba(255, 255, 255, 0.04) inset;
+
+  transition:
+    transform 0.28s cubic-bezier(0.22, 1, 0.36, 1),
+    box-shadow 0.28s ease,
+    border-color 0.28s ease;
+
+  -webkit-tap-highlight-color: transparent;
+  --accent: #00e5ff;
+}
+
+/* Feature card — colSpan/rowSpan applied via inline style by JS layout engine */
+.pbg2-card--feature {
+  /* Intentionally empty — spans are set dynamically */
+}
+
+/* ── n=3 staggered depth effect ── */
+/* Cards sit side by side with subtle translateY offsets
+   giving a carousel/stacked depth illusion */
+.pbg2-stagger-wrap {
+  overflow: visible !important; /* allow cards to shift down */
+}
+
+.pbg2-stagger-0 {
+  transform: translateY(10px);
+  box-shadow:
+    0 4px 20px rgba(0, 0, 0, 0.45),
+    0 1px 0 rgba(255, 255, 255, 0.04) inset !important;
+  z-index: 1;
+}
+
+.pbg2-stagger-1 {
+  transform: translateY(0px);
+  box-shadow:
+    0 12px 40px rgba(0, 0, 0, 0.65),
+    0 1px 0 rgba(255, 255, 255, 0.06) inset !important;
+  z-index: 3;
+}
+
+.pbg2-stagger-2 {
+  transform: translateY(10px);
+  box-shadow:
+    0 4px 20px rgba(0, 0, 0, 0.45),
+    0 1px 0 rgba(255, 255, 255, 0.04) inset !important;
+  z-index: 1;
+}
+
+/* Override hover lift for stagger cards so depth illusion holds */
+.pbg2-stagger-0.pbg2-card--hov { transform: translateY(6px) scale(1.012); }
+.pbg2-stagger-1.pbg2-card--hov { transform: translateY(-4px) scale(1.015); }
+.pbg2-stagger-2.pbg2-card--hov { transform: translateY(6px) scale(1.012); }
+
+.pbg2-card--hov {
+  transform: translateY(-5px) scale(1.012);
+  border-color: rgba(var(--accent-rgb, 0, 229, 255), 0.3);
+  box-shadow:
+    0 16px 48px rgba(0, 0, 0, 0.6),
+    0 0 0 1px rgba(255, 255, 255, 0.08),
+    0 0 32px rgba(0, 0, 0, 0.3);
+  z-index: 2;
+}
+
+.pbg2-card--press {
+  transform: scale(0.97) !important;
+  transition: transform 0.1s ease !important;
+}
+
+/* ── Background image ── */
+.pbg2-bg-fallback {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+}
+
+.pbg2-bg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center top;
+  display: block;
+  z-index: 1;
+  transition: transform 0.5s ease;
+}
+
+.pbg2-card--hov .pbg2-bg { transform: scale(1.04); }
+
+/* ── Overlays ── */
+/* Heavy gradient on left where content lives */
+.pbg2-ov-base {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  background: linear-gradient(
+    to top,
+    rgba(3, 7, 18, 0.97) 0%,
+    rgba(3, 7, 18, 0.75) 38%,
+    rgba(3, 7, 18, 0.2)  70%,
+    transparent 100%
+  );
+}
+
+/* Darkens left content zone so text stays readable */
+.pbg2-ov-left {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  background: linear-gradient(
+    to right,
+    rgba(3, 7, 18, 0.82) 0%,
+    rgba(3, 7, 18, 0.4)  50%,
+    transparent 75%
+  );
+}
+
+/* Extremely subtle scanlines */
+.pbg2-scanlines {
+  position: absolute;
+  inset: 0;
+  z-index: 3;
+  pointer-events: none;
+  background-image: repeating-linear-gradient(
+    0deg,
+    transparent,
+    transparent 3px,
+    rgba(0, 0, 0, 0.03) 3px,
+    rgba(0, 0, 0, 0.03) 6px
+  );
+}
+
+/* Accent radial glow — top right corner */
+.pbg2-accent-glow {
+  position: absolute;
+  top: -20%;
+  right: -10%;
+  width: 55%;
+  height: 55%;
+  z-index: 3;
+  pointer-events: none;
+  background: radial-gradient(
+    ellipse at top right,
+    var(--accent, #00e5ff) 0%,
+    transparent 65%
+  );
+  opacity: 0;
+  transition: opacity 0.35s ease;
+  filter: blur(1px);
+}
+
+.pbg2-card--hov .pbg2-accent-glow { opacity: 0.12; }
+
+/* ── Shimmer sweep — diagonal on hover ── */
+.pbg2-shimmer {
+  position: absolute;
+  top: -50%;
+  left: -80%;
+  width: 40%;
+  height: 200%;
+  z-index: 4;
+  pointer-events: none;
+  background: linear-gradient(
+    105deg,
+    transparent 0%,
+    rgba(255, 255, 255, 0.07) 50%,
+    transparent 100%
+  );
+  transform: skewX(-15deg);
+  opacity: 0;
+  transition: opacity 0.05s, left 0.55s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.pbg2-card--hov .pbg2-shimmer {
+  opacity: 1;
+  left: 130%;
+}
+
+/* ── Character image ── */
+.pbg2-char {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  width: auto;
+  max-width: 70px;
+  object-fit: contain;
+  object-position: bottom right;
+  z-index: 4;
+  pointer-events: none;
+  user-select: none;
+  filter: drop-shadow(-4px 0 12px rgba(0, 0, 0, 0.65));
+  transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.pbg2-card--hov .pbg2-char { transform: scale(1.04) translateY(-3px); }
+
+/* ── Cut-corner accent — bottom right ── */
+/* A thin triangular accent cut using clip-path + pseudo-element */
+.pbg2-cut-corner {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  width: 28px;
+  height: 28px;
+  z-index: 5;
+  pointer-events: none;
+  background: var(--accent, #00e5ff);
+  clip-path: polygon(100% 0%, 100% 100%, 0% 100%);
+  opacity: 0.5;
+  transition: opacity 0.28s ease, width 0.28s ease, height 0.28s ease;
+}
+
+.pbg2-card--hov .pbg2-cut-corner {
+  opacity: 0.9;
+  width: 36px;
+  height: 36px;
+}
+
+/* ── Left accent bar ── */
+/* Thin vertical stripe on left edge — card identity marker */
+.pbg2-left-bar {
+  position: absolute;
+  top: 16%;
+  left: 0;
+  bottom: 16%;
+  width: 2.5px;
+  z-index: 6;
+  border-radius: 0 2px 2px 0;
+  background: var(--accent, #00e5ff);
+  box-shadow: 0 0 8px var(--accent, #00e5ff);
+  opacity: 0.75;
+  transition: opacity 0.28s ease, top 0.28s ease, bottom 0.28s ease;
+}
+
+.pbg2-card--hov .pbg2-left-bar {
+  top: 8%;
+  bottom: 8%;
+  opacity: 1;
+}
+
+/* ══════════════════════════════════════
+   CONTENT
+══════════════════════════════════════ */
+.pbg2-content {
+  position: relative;
+  z-index: 7;
+  padding: 12px 14px 14px 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  width: 100%;
+  max-width: 68%;
+}
+
+/* ── Badge row ── */
+.pbg2-badge-row {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+
+/* Badge — sharp rectangle, NOT a pill */
+.pbg2-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 3px 8px 3px 6px;
+  background: rgba(0, 0, 0, 0.5);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-left: 2px solid var(--accent, #00e5ff);
+  border-radius: 2px;
+}
+
+.pbg2-badge-pip {
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: var(--accent, #00e5ff);
+  box-shadow: 0 0 5px var(--accent, #00e5ff);
+  flex-shrink: 0;
+  animation: pbg2-pip 1.9s ease-in-out infinite;
+}
+
+@keyframes pbg2-pip {
+  0%, 100% { opacity: 1;   transform: scale(1); }
+  50%       { opacity: 0.3; transform: scale(0.6); }
+}
+
+.pbg2-badge-text {
+  font-family: "Chakra Petch", sans-serif;
+  font-size: 7.5px;
+  font-weight: 600;
+  letter-spacing: 1.8px;
+  text-transform: uppercase;
+  color: var(--accent, #00e5ff);
+}
+
+/* Urgency chip — clock + time remaining */
+.pbg2-urgency {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 3px 7px;
+  background: rgba(255, 80, 80, 0.15);
+  border: 1px solid rgba(255, 80, 80, 0.3);
+  border-radius: 2px;
+  font-family: "Chakra Petch", sans-serif;
+  font-size: 7.5px;
+  font-weight: 600;
+  letter-spacing: 1px;
+  color: #ff6060;
+}
+
+/* ── Title ── */
+.pbg2-title {
+  font-family: "Outfit", sans-serif;
+  font-size: clamp(13px, 1.3vw, 17px); /* base — size modifiers override */
+  font-weight: 800;
+  color: #ffffff;
+  margin: 0;
+  line-height: 1.2;
+  letter-spacing: -0.2px;
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.8);
+}
+
+/* ── Subtitle ── */
+.pbg2-sub {
+  font-family: "Outfit", sans-serif;
+  font-size: 11px;
+  font-weight: 400;
+  color: rgba(255, 255, 255, 0.5);
+  margin: 0;
+  line-height: 1.4;
+  /* Clamp to 2 lines */
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+/* ── Footer: stat + CTA ── */
+.pbg2-footer {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 4px;
+  flex-wrap: wrap;
+}
+
+/* Stat chip — "N,NNN playing" */
+.pbg2-stat {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-family: "Chakra Petch", sans-serif;
+  font-size: 8px;
+  font-weight: 500;
+  letter-spacing: 0.5px;
+  color: rgba(255, 255, 255, 0.4);
+}
+
+.pbg2-stat-dot {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: #44ff88;
+  box-shadow: 0 0 6px #44ff88;
+  animation: pbg2-stat-blink 2.2s ease-in-out infinite;
+  flex-shrink: 0;
+}
+
+@keyframes pbg2-stat-blink {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0.3; }
+}
+
+/* ══════════════════════════════════════
+   CTA — FILL SWEEPS RIGHT→LEFT
+   (VideoHero uses left→right — opposite direction)
+   Border-only at rest, fills from right on hover
+══════════════════════════════════════ */
+.pbg2-cta {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  border: 1.5px solid var(--accent, #00e5ff);
+  border-radius: 3px;
+  background: transparent;
+  cursor: pointer;
+  overflow: hidden;
+  padding: 0;
+  outline: none;
+  transition: box-shadow 0.22s ease, transform 0.15s ease;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.pbg2-cta:hover {
+  box-shadow: 0 0 14px var(--accent, #00e5ff), 0 0 28px rgba(0, 229, 255, 0.12);
+}
+
+.pbg2-cta:active { transform: scale(0.94); }
+
+/* Fill sweeps RIGHT→LEFT (reverse of VideoHero) */
+.pbg2-cta-fill {
+  position: absolute;
+  inset: 0;
+  background: var(--accent, #00e5ff);
+  transform: translateX(101%);
+  transition: transform 0.25s cubic-bezier(0.22, 1, 0.36, 1);
+  z-index: 0;
+}
+
+.pbg2-cta:hover .pbg2-cta-fill { transform: translateX(0); }
+
+.pbg2-cta-inner {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 7px 14px;
+  transition: color 0.18s ease;
+}
+
+.pbg2-cta-text {
+  font-family: "Chakra Petch", sans-serif;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: var(--accent, #00e5ff);
+  transition: color 0.18s ease;
+}
+
+.pbg2-cta:hover .pbg2-cta-text { color: #030c14; }
+
+.pbg2-cta-arrow {
+  color: var(--accent, #00e5ff);
+  flex-shrink: 0;
+  transition: color 0.18s ease, transform 0.18s ease;
+}
+
+.pbg2-cta:hover .pbg2-cta-arrow {
+  color: #030c14;
+  transform: translateX(2px);
+}
+
+/* ══════════════════════════════════════
+   SIZE MODIFIERS
+   Three tiers assigned by JSX layout engine
+   based on each card's physical role:
+
+   pbg2-sz-hero  — full-height tall feature card
+                   Largest text, full padding, subtitle visible
+   pbg2-sz-mid   — medium cards (n=4 bottom row,
+                   n=5/6/7 right-col full rows)
+                   Medium text, subtitle visible (1 line)
+   pbg2-sz-sm    — small cards (n=6 top-row trio,
+                   n=7 top-row trio, n=4 top-row pair)
+                   Compact text, subtitle hidden, CTA tight
+
+   Default (no modifier) = base styles above.
+══════════════════════════════════════ */
+
+/* ── HERO tier ── */
+.pbg2-sz-hero .pbg2-content {
+  padding: 20px 22px 24px 24px;
+  gap: 8px;
+  max-width: 72%;
+}
+.pbg2-sz-hero .pbg2-badge-text  { font-size: 8.5px; letter-spacing: 2px; }
+.pbg2-sz-hero .pbg2-badge       { padding: 4px 10px 4px 8px; }
+.pbg2-sz-hero .pbg2-badge-pip   { width: 5px; height: 5px; }
+.pbg2-sz-hero .pbg2-title       { font-size: clamp(20px, 2.2vw, 36px); line-height: 1.15; }
+.pbg2-sz-hero .pbg2-sub         {
+  display: -webkit-box;
+  font-size: 13px;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  color: rgba(255,255,255,0.55);
+}
+.pbg2-sz-hero .pbg2-footer      { margin-top: 8px; }
+.pbg2-sz-hero .pbg2-cta-inner   { padding: 10px 20px; gap: 8px; }
+.pbg2-sz-hero .pbg2-cta-text    { font-size: 11.5px; letter-spacing: 2px; }
+.pbg2-sz-hero .pbg2-cta-arrow   { width: 13px; height: 13px; }
+.pbg2-sz-hero .pbg2-urgency     { font-size: 8.5px; padding: 4px 9px; }
+
+/* ── MID tier ── */
+.pbg2-sz-mid .pbg2-content {
+  padding: 14px 16px 16px 20px;
+  gap: 6px;
+  max-width: 70%;
+}
+.pbg2-sz-mid .pbg2-badge-text   { font-size: 7.5px; letter-spacing: 1.8px; }
+.pbg2-sz-mid .pbg2-title        { font-size: clamp(14px, 1.5vw, 15px); line-height: 1.2; }
+.pbg2-sz-mid .pbg2-sub          {
+  display: -webkit-box;
+  font-size: 11.5px;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  color: rgba(255,255,255,0.5);
+}
+.pbg2-sz-mid .pbg2-footer       { margin-top: 6px; }
+.pbg2-sz-mid .pbg2-cta-inner    { padding: 8px 16px; gap: 7px; }
+.pbg2-sz-mid .pbg2-cta-text     { font-size: 10px; letter-spacing: 1.5px; }
+.pbg2-sz-mid .pbg2-cta-arrow    { width: 11px; height: 11px; }
+
+/* ── SMALL tier ── */
+.pbg2-sz-sm .pbg2-content {
+  padding: 10px 12px 12px 16px;
+  gap: 4px;
+  max-width: 75%;
+}
+.pbg2-sz-sm .pbg2-badge         { padding: 2px 6px 2px 5px; }
+.pbg2-sz-sm .pbg2-badge-pip     { width: 3px; height: 3px; }
+.pbg2-sz-sm .pbg2-badge-text    { font-size: 6.5px; letter-spacing: 1.5px; }
+.pbg2-sz-sm .pbg2-title         { font-size: clamp(11px, 1.1vw, 14px); line-height: 1.2; letter-spacing: 0; }
+/* Subtitle hidden on small cards — not enough room */
+.pbg2-sz-sm .pbg2-sub           { display: none; }
+.pbg2-sz-sm .pbg2-footer        { margin-top: 4px; }
+.pbg2-sz-sm .pbg2-cta-inner     { padding: 6px 11px; gap: 5px; }
+.pbg2-sz-sm .pbg2-cta-text      { font-size: 8.5px; letter-spacing: 1.2px; }
+.pbg2-sz-sm .pbg2-cta-arrow     { width: 9px; height: 9px; }
+.pbg2-sz-sm .pbg2-urgency       { font-size: 6.5px; padding: 2px 6px; }
+/* Tighter cut-corner on small cards */
+.pbg2-sz-sm .pbg2-cut-corner    { width: 20px; height: 20px; }
+
+
+@media (max-width: 1100px) {
+  .pbg2-title { font-size: 15px !important; }
+}
+
+@media (max-width: 900px) {
+  /* Force 2-col layout on tablet regardless of card count */
+  .pbg2-grid {
+    grid-template-columns: 1fr 1fr !important;
+    grid-template-rows: auto !important;
+    grid-auto-rows: var(--ch, 190px) !important;
+  }
+  /* Reset all spans — each card fills one cell */
+  .pbg2-card {
+    grid-column: span 1 !important;
+    grid-row:    span 1 !important;
+  }
+  .pbg2-title { font-size: 14px !important; }
+  .pbg2-sub   { display: none; }
+}
+
+@media (max-width: 580px) {
+  /* Single column on mobile */
+  .pbg2-grid {
+    grid-template-columns: 1fr !important;
+    grid-template-rows: auto !important;
+    grid-auto-rows: 160px !important;
+    gap: 10px !important;
+  }
+  .pbg2-card {
+    grid-column: span 1 !important;
+    grid-row:    span 1 !important;
+    height: 160px !important;
+  }
+  .pbg2-content { max-width: 72%; }
+  .pbg2-title { font-size: 15px !important; }
+  .pbg2-sub   { display: block; font-size: 10px; -webkit-line-clamp: 1; }
+}

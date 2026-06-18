@@ -1,0 +1,15 @@
+/* ============================================================
+   8JJGames – Disclaimer
+   Theme: Red / Warning
+   ============================================================ */
+@import './LegalBase.css';
+
+.disc-page .legal-hero-glow   { background: var(--brand-secondary); }
+.disc-page .legal-badge        { background: rgba(239,68,68,0.12); border: 1px solid rgba(239,68,68,0.28); color: var(--brand-secondary); }
+.disc-page .legal-hero h1 em   { background: var(--grad-red); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+.disc-page .legal-intro        { border-left: 4px solid var(--brand-secondary); }
+.disc-page .legal-section-num  { background: var(--grad-red); box-shadow: 0 4px 14px rgba(239,68,68,0.30); }
+.disc-page .legal-info-list li:hover { border-color: rgba(239,68,68,0.35); }
+.disc-page .legal-simple-list li::before { background: var(--brand-secondary); }
+.disc-page .legal-highlight    { background: rgba(239,68,68,0.08); border-color: rgba(239,68,68,0.25); color: #fca5a5; font-weight: 500; }
+.disc-page .legal-contact a    { color: var(--brand-primary); }

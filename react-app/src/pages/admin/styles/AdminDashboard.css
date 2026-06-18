@@ -1,0 +1,39 @@
+/* react-app/src/pages/admin/styles/AdminDashboard.css */
+
+.Refresh-btn {
+  margin-top: 15px;
+}
+
+.admin-user-avatar {
+  display: none;
+}
+
+.admin-table td {
+  font-size: 12px;
+}
+
+.admin-card-title {
+  margin-bottom: 15px;
+}
+
+.trend-textz.TEXT {
+  font-size: 12px;
+}
+
+.admin-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.admin-user-info {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+
+.Margin-TOP-24{
+  margin-top: 24px;
+}

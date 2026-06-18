@@ -1,20 +1,29 @@
-/* MAIN FOOTER CONTAINER */
+/* ============================================================
+   8JJGames – Footer.css  (full file, legal additions included)
+   ============================================================ */
+
+/* ── Backdrop ── */
+.Footer-Backdrop {
+  background: linear-gradient(to bottom, #0c1119 0%, #0b0f17 100%);
+}
+
+/* ── MAIN CONTAINER ── */
 .footer-container {
   width: 100%;
-  background: linear-gradient(to bottom, #0c1119 0%, #0b0f17 100%);
-  background: linear-gradient(to top, rgba(6, 171, 226, 0.329),  rgba(35, 141, 176, 0.408), rgba(3, 86, 113, 0.182));
+  background: linear-gradient(to top, rgba(6, 171, 226, 0.329), rgba(35, 141, 176, 0.408), rgba(3, 86, 113, 0.182));
   border-top: 1px solid #5c6e8774;
   padding: 60px 20px 30px;
   margin-top: 60px;
   color: #cbd5e1;
 }
 
+/* ── DESKTOP WRAPPER ── */
 .FooterDesktop {
   margin-left: 8%;
   margin-right: 8%;
 }
 
-/* INNER CONTENT ALIGNMENT */
+/* ── INNER ROW ── */
 .footer-inner {
   max-width: 1300px;
   margin: auto;
@@ -24,12 +33,11 @@
   gap: 60px;
 }
 
-/* LEFT SECTION */
+/* ── LEFT — brand ── */
 .footer-left {
   max-width: 50%;
 }
 
-/* Logo + title row */
 .footer-brand-row {
   display: flex;
   align-items: center;
@@ -43,16 +51,15 @@
   margin-top: 10px;
 }
 
-/* Logo */
 .footer-logo {
   width: 90px;
   height: auto;
   opacity: 0.95;
   filter: brightness(1.7) contrast(1.1) drop-shadow(0 0 6px rgb(63, 99, 172));
   transition: filter 0.3s ease, transform 0.2s ease;
+  object-fit: contain;
 }
 
-/* Title */
 .footer-heading {
   color: white;
   font-size: 20px;
@@ -70,11 +77,18 @@
   margin-top: 5px;
 }
 
-/* BADGES */
+/* ── BADGES ── */
 .footer-badges {
   display: flex;
   gap: 12px;
   flex-wrap: wrap;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.footer-badges li {
+  list-style: none;
 }
 
 .badge {
@@ -89,7 +103,22 @@
   color: #d1d5db;
 }
 
-/* RIGHT SECTION */
+.footer-badge-icon {
+  width: 16px;
+  height: 16px;
+  margin-right: 6px;
+  vertical-align: middle;
+  object-fit: contain;
+}
+
+.footer-badge-mobile-icon {
+  width: 16px;
+  height: 16px;
+  vertical-align: middle;
+  object-fit: contain;
+}
+
+/* ── RIGHT — nav columns ── */
 .footer-right {
   display: flex;
   gap: 60px;
@@ -101,6 +130,15 @@
   margin-bottom: 12px;
 }
 
+.footer-column h4 {
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: #94a3b8;
+  margin-bottom: 16px;
+}
+
 .footer-column ul {
   list-style: none;
   margin: 0;
@@ -109,7 +147,7 @@
 
 .footer-column li {
   font-size: 14px;
-  margin-bottom: 8px;
+  margin-bottom: 10px;
   color: #9ca3af;
   cursor: pointer;
   transition: color 0.2s;
@@ -119,23 +157,124 @@
   color: white;
 }
 
-/* DIVIDER */
+/* ── Legal column accent ── */
+.footer-column-Color h4 {
+  color: #00BCD4;
+}
+
+.footer-column-Color li {
+  position: relative;
+  /* padding-left: 14px; */
+}
+
+.footer-column-Color li::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  display: none;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: rgba(245, 158, 11, 0.5);
+  transition: background 0.2s;
+}
+
+.footer-column-Color li:hover::before {
+  background: #f59e0b;
+}
+
+/* ── Footer link button reset ── */
+.footer-link {
+  all: unset;
+  cursor: pointer;
+  display: inline;
+  color: inherit;
+  font: inherit;
+  text-align: left;
+  width: 100%;
+  transition: color 0.2s ease;
+}
+
+.footer-link:hover {
+  color: #fff;
+}
+
+.footer-link:focus-visible {
+  outline: 2px solid #4a9eff;
+  outline-offset: 2px;
+  border-radius: 2px;
+}
+
+/* Legal link has amber hover */
+.footer-link-legal:hover {
+  color: #f59e0b !important;
+}
+
+/* ── DIVIDER ── */
 .footer-divider {
   width: 100%;
   height: 1px;
   background: #2a6186e3;
-  margin: 40px 0 20px;
+  border: none;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  margin: 40px 0 24px;
 }
 
-/* BOTTOM COPYRIGHT */
+/* ── BOTTOM ROW ── */
 .footer-bottom {
   max-width: 1300px;
   margin: auto;
   display: flex;
   justify-content: space-between;
-  align-items: center;
+  gap: 16px;
+}
+
+.footer-bottom>p {
   color: #9ca3af;
-  font-size: 14px;
+  font-size: 13px;
+  margin: 0;
+}
+
+/* ── Legal pills — desktop ── */
+.footer-legal-pills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  align-items: center;
+  margin-top: 20px;
+}
+
+.footer-legal-pill {
+  all: unset;
+  cursor: pointer;
+  font-size: 12px;
+  color: #64748b;
+  padding: 4px 12px;
+  border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, 0.07);
+  background: rgba(255, 255, 255, 0.03);
+  transition: color 0.2s, border-color 0.2s, background 0.2s;
+  white-space: nowrap;
+}
+
+.footer-legal-pill:hover {
+  color: #f59e0b;
+  border-color: rgba(245, 158, 11, 0.4);
+  background: rgba(245, 158, 11, 0.06);
+}
+
+.footer-legal-pill:focus-visible {
+  outline: 2px solid #f59e0b;
+  outline-offset: 2px;
+}
+
+/* ── Bottom actions row ── */
+.footer-bottom-actions {
+  display: flex;
+  align-items: center;
+  gap: 16px;
 }
 
 .back-to-top {
@@ -144,13 +283,37 @@
   color: #60a5fa;
   font-size: 14px;
   cursor: pointer;
+  transition: opacity 0.2s;
 }
 
 .back-to-top:hover {
   text-decoration: underline;
+  opacity: 0.8;
 }
 
-/* RESPONSIVE */
+.back-to-top:focus-visible {
+  outline: 2px solid #4a9eff;
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+.feedback-btn {
+  background: transparent;
+  border: 1px solid rgba(96, 165, 250, 0.4);
+  color: #60a5fa;
+  font-size: 14px;
+  padding: 6px 16px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.2s ease, border-color 0.2s ease;
+}
+
+.feedback-btn:hover {
+  background: rgba(96, 165, 250, 0.1);
+  border-color: #60a5fa;
+}
+
+/* ── Responsive desktop ── */
 @media (max-width: 900px) {
   .footer-right {
     flex-wrap: wrap;
@@ -163,21 +326,224 @@
   }
 }
 
-/* ========== MOBILE FOOTER (EXACT MATCH TO ORIGINAL) ========== */
+/* ============================================================
+   MOBILE FOOTER
+   ============================================================ */
+
+.FooterMobile {
+  padding: 20px 16px 5px;
+  background: radial-gradient(circle at top, #0f1a26, #070b12);
+  color: #fff;
+}
+
+/* Brand */
+.footer-brand-section {
+  margin-bottom: 16px;
+}
+
+/* Quick actions */
+.footer-mobile-actions {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 16px;
+}
+
+.footer-mobile-actions-list {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  width: 100%;
+}
+
+.footer-mobile-actions-list li {
+  list-style: none;
+}
+
+/* Accordions */
+.footer-mobile-accordions {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.accordion {
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 14px;
+  overflow: hidden;
+  transition: border-color 0.2s;
+}
+
+.accordion.open {
+  border-color: rgba(255, 255, 255, 0.14);
+}
+
+/* Legal accordion accent border */
+.accordion.accordion-legal {
+  border-color: rgba(245, 158, 11, 0.18);
+}
+
+.accordion.accordion-legal.open {
+  border-color: rgba(245, 158, 11, 0.35);
+  background: rgba(245, 158, 11, 0.03);
+}
+
+.FooterMobile .accordion-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 13px 18px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  background: transparent;
+  border: none;
+  color: #fff;
+  width: 100%;
+  text-align: left;
+  transition: background 0.2s;
+}
+
+.FooterMobile .accordion-header:hover {
+  background: rgba(255, 255, 255, 0.04);
+}
+
+.FooterMobile .accordion-header:focus-visible {
+  outline: 2px solid #4a9eff;
+  outline-offset: -2px;
+}
+
+.FooterMobile .accordion-header .arrow {
+  font-size: 10px;
+  transition: transform 0.25s ease;
+  flex-shrink: 0;
+}
+
+.FooterMobile .accordion.open .arrow {
+  transform: rotate(180deg);
+}
+
+.FooterMobile .faq-icon-chevron {
+  position: relative;
+  top: 3px;
+}
+
+/* Legal label inside accordion header */
+.accordion-legal-label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.accordion-legal-icon {
+  font-size: 15px;
+  line-height: 1;
+}
+
+/* Accordion body */
+.FooterMobile .accordion-body {
+  list-style: none;
+  padding: 0 18px;
+  margin: 0;
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.35s ease, padding 0.25s ease;
+}
+
+.accordion.open .accordion-body {
+  max-height: 500px;
+  padding: 8px 18px 16px;
+}
+
+.accordion-body li {
+  padding: 10px 0;
+  font-size: 14px;
+  color: #cfd8e3;
+  cursor: pointer;
+}
+
+.accordion-body li:not(:last-child) {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+/* Legal items inside accordion */
+.accordion-legal .accordion-body li {
+  color: #cbd5e1;
+  font-size: 13px;
+  padding: 9px 0;
+}
+
+.accordion-legal .accordion-body li:hover {
+  color: #f59e0b;
+}
+
+/* ── Mobile legal pills ── */
+.footer-mobile-legal-pills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 18px;
+  padding: 0 2px;
+}
+
+.footer-mobile-legal-pill {
+  all: unset;
+  cursor: pointer;
+  font-size: 11px;
+  color: #64748b;
+  padding: 5px 12px;
+  border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: rgba(255, 255, 255, 0.03);
+  transition: color 0.2s, border-color 0.2s, background 0.2s;
+  white-space: nowrap;
+}
+
+.footer-mobile-legal-pill:hover {
+  color: #f59e0b;
+  border-color: rgba(245, 158, 11, 0.4);
+  background: rgba(245, 158, 11, 0.06);
+}
+
+/* Copyright */
+.footer-mobile-bottom {
+  text-align: center;
+  font-size: 12px;
+  color: rgba(255, 255, 255, 0.45);
+  margin-top: 20px;
+  padding-bottom: 8px;
+}
+
+/* ── Visibility toggle ── */
+@media (min-width: 768px) {
+  .FooterMobile {
+    display: none !important;
+  }
+
+  .FooterDesktop {
+    display: block !important;
+  }
+}
 
 @media (max-width: 768px) {
+  .FooterMobile {
+    display: block !important;
+  }
+
+  .FooterDesktop {
+    display: none !important;
+  }
+
   .footer-container {
     width: 100%;
     padding: 5px 10px 10px;
     background: linear-gradient(to bottom, #0c1119 0%, #0b0f17 100%);
-    margin: 0px !important;
+    margin: 0 !important;
   }
 
-  .more-games-grid .game-card {
-    margin: auto;
-  }
-
-  /* Stack everything vertically */
   .footer-inner {
     flex-direction: column;
     align-items: center;
@@ -190,7 +556,6 @@
     max-width: 100%;
   }
 
-  /* Center logo + title row */
   .footer-brand-row {
     justify-content: center;
     margin-bottom: 5px;
@@ -207,13 +572,12 @@
   }
 
   .footer-heading {
-    font-size: 18px;
+    font-size: 1.25rem;
     margin-top: 10px;
     margin-bottom: 5px;
     text-align: left;
   }
 
-  /* Description text centered */
   .footer-description {
     max-width: 100%;
     line-height: 1.3;
@@ -222,7 +586,6 @@
     text-align: left;
   }
 
-  /* Badges stacked or centered */
   .footer-badges {
     justify-content: center;
     flex-wrap: nowrap;
@@ -234,7 +597,6 @@
     justify-content: center;
     font-size: 9px;
     padding: 7px 9px;
-
   }
 
   .footer-mobile-actions {
@@ -243,7 +605,6 @@
     margin-right: auto;
   }
 
-  /* Columns stacked in a single column */
   .footer-right {
     width: 100%;
     flex-direction: row;
@@ -256,23 +617,16 @@
     padding: 0;
   }
 
-  /* Divider stays centered */
   .footer-divider {
     margin: 30px auto;
     width: 90%;
   }
 
-  /* Bottom section centered */
   .footer-bottom {
     flex-direction: column;
     text-align: center;
     gap: 15px;
   }
-
-  .back-to-top {
-    margin-top: 20px;
-  }
-
 }
 
 @media (max-width: 480px) {
@@ -281,7 +635,6 @@
     padding: 5px 10px 10px;
   }
 
-  /* Stack everything vertically */
   .footer-inner {
     flex-direction: column;
     align-items: center;
@@ -294,7 +647,6 @@
     max-width: 100%;
   }
 
-  /* Center logo + title row */
   .footer-brand-row {
     justify-content: center;
     margin-bottom: 5px;
@@ -317,7 +669,6 @@
     text-align: left;
   }
 
-  /* Description text centered */
   .footer-description {
     max-width: 100%;
     line-height: 1.3;
@@ -326,16 +677,12 @@
     text-align: left;
   }
 
-  /* Badges stacked or centered */
   .footer-badges {
     justify-content: center;
     flex-wrap: nowrap;
     display: flex;
   }
 
-
-
-  /* Columns stacked in a single column */
   .footer-right {
     width: 100%;
     flex-direction: row;
@@ -348,21 +695,16 @@
     padding: 0;
   }
 
-  /* Divider stays centered */
   .footer-divider {
     margin: 30px auto;
     width: 90%;
   }
 
-  /* Bottom section centered */
   .footer-bottom {
     flex-direction: column;
     text-align: center;
     gap: 15px;
   }
-
-
-
 }
 
 @media (max-width: 380px) {
@@ -371,7 +713,6 @@
     padding: 5px 10px 10px;
   }
 
-  /* Stack everything vertically */
   .footer-inner {
     flex-direction: column;
     align-items: center;
@@ -384,7 +725,6 @@
     max-width: 100%;
   }
 
-  /* Center logo + title row */
   .footer-brand-row {
     justify-content: center;
     margin-bottom: 5px;
@@ -409,7 +749,6 @@
     text-align: left;
   }
 
-  /* Description text centered */
   .footer-description {
     max-width: 100%;
     line-height: 1.3;
@@ -418,16 +757,12 @@
     text-align: left;
   }
 
-  /* Badges stacked or centered */
   .footer-badges {
     justify-content: center;
     flex-wrap: nowrap;
     display: flex;
   }
 
-
-
-  /* Columns stacked in a single column */
   .footer-right {
     width: 100%;
     flex-direction: row;
@@ -440,13 +775,11 @@
     padding: 0;
   }
 
-  /* Divider stays centered */
   .footer-divider {
     margin: 30px auto;
     width: 90%;
   }
 
-  /* Bottom section centered */
   .footer-bottom {
     flex-direction: column;
     text-align: center;
@@ -457,349 +790,241 @@
     margin-top: 15px;
     margin-bottom: 10px;
   }
-
 }
 
+/* ── Accessibility: universal focus ── */
+button:focus-visible,
+a:focus-visible {
+  outline: 2px solid #4a9eff;
+  outline-offset: 2px;
+}
+
+/* ── Misc helpers ── */
 .VisibilityNone {
   visibility: hidden;
 }
 
-/* ========== MOBILE FOOTER ACCORDION ========== */
-
-.FooterMobile {
-  padding: 20px 16px 5px;
-  background: radial-gradient(circle at top, #0f1a26, #070b12);
-  color: #fff;
+.footer-mobile-bottom .back-to-top {
+  margin-top: 10px;
 }
 
-/* QUICK ACTION BUTTONS */
-.footer-mobile-actions {
-  display: flex;
-  gap: 10px;
-  margin-bottom: 16px;
-}
-
-.footer-mobile-actions button {
-  flex: 1;
-  background: rgba(255, 255, 255, 0.06);
-  border: 1px solid rgba(255, 255, 255, 0.12);
-  border-radius: 14px;
-  padding: 12px 10px;
-  color: #fff;
-  font-weight: 600;
-  font-size: 14px;
-  backdrop-filter: blur(6px);
-}
-
-/* ACCORDION WRAPPER */
-.footer-mobile-accordions {
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-}
-
-/* ACCORDION CARD */
-.accordion {
-  background: rgba(255, 255, 255, 0.04);
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  border-radius: 16px;
-  overflow: hidden;
-}
-
-/* HEADER */
-.FooterMobile .accordion-header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 10px 20px;
-  font-size: 13px;
-  font-weight: 600;
-  cursor: pointer;
-}
-
-/* ARROW */
-.FooterMobile .accordion-header .arrow {
-  font-size: 10px;
-  transition: transform 0.25s ease;
-}
-
-/* ROTATE ARROW WHEN OPEN */
-.FooterMobile .accordion.open .arrow {
-  transform: rotate(180deg);
-}
-
-/* BODY */
-.FooterMobile .accordion-body {
-  list-style: none;
-  padding: 0 18px;
-  margin: 0;
-
-  max-height: 0;
-  overflow: hidden;
-  transition: max-height 0.35s ease, padding 0.25s ease;
-}
-
-
-.FooterMobile .faq-icon-chevron {
-  position: relative;
-  top: 3px;
-}
-
-/* OPEN STATE */
-.accordion.open .accordion-body {
-  max-height: 500px;
-  padding: 8px 18px 16px;
-}
-
-/* ITEMS */
-.accordion-body li {
-  padding: 10px 0;
-  font-size: 15px;
-  color: #cfd8e3;
-  cursor: pointer;
-}
-
-.accordion-body li:not(:last-child) {
-  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
-}
-
-/* COPYRIGHT */
-.footer-mobile-bottom {
-  text-align: center;
-  font-size: 13px;
-  color: rgba(255, 255, 255, 0.55);
-  margin-top: 22px;
-}
-
-
-
-@media (min-width: 768px) {
-  .FooterMobile {
-    display: none !important;
-  }
-
-  .FooterDesktop {
-    display: block !important;
-  }
-
-}
-
-@media (max-width: 768px) {
-  .FooterMobile {
-    display: block !important;
-  }
-
-  .FooterDesktop {
-    display: none !important;
-  }
-
-}
-
-
-
-
-
-
-
-
-/* ==========================================================================
-   DEVICE-SPECIFIC CSS MEDIA QUERIES
-   ========================================================================== */
-
-/* ========================================
-   APPLE iPHONE DEVICES
-   ======================================== */
-
-/* iPhone SE (1st Gen) - 320x568 @ 2x */
-@media only screen and (device-width: 320px) and (device-height: 568px) and (-webkit-device-pixel-ratio: 2) {
-
-  .brand-logo {
-    height: 48px !important;
-  }
-
-  .header-actions {
-    gap: 5px !important;
-  }
-
-}
-
-/* iPhone SE (2nd & 3rd Gen) - 375x667 @ 2x */
-@media only screen and (device-width: 375px) and (device-height: 667px) and (-webkit-device-pixel-ratio: 2) {
-
-  .brand-logo {
-    height: 48px !important;
-  }
-
-  .header-actions {
-    gap: 5px !important;
-  }
-
-}
-
-/* iPhone XR - 414x896 @ 2x */
-@media only screen and (device-width: 414px) and (device-height: 896px) and (-webkit-device-pixel-ratio: 2) {
-  /* iPhone XR styles */
-}
-
-/* iPhone 12 Pro - 390x844 @ 3x */
-@media only screen and (device-width: 390px) and (device-height: 844px) and (-webkit-device-pixel-ratio: 3) {
-  /* iPhone 12 Pro styles */
-}
-
-/* iPhone 14 Pro Max - 430x932 @ 3x */
-@media only screen and (device-width: 430px) and (device-height: 932px) and (-webkit-device-pixel-ratio: 3) {
-  /* iPhone 14 Pro Max styles */
-}
-
-
-/* ========================================
-   GOOGLE PIXEL DEVICES
-   ======================================== */
-
-/* Pixel 7 - 412x915 @ 2.625x */
-@media only screen and (device-width: 412px) and (device-height: 915px) and (-webkit-device-pixel-ratio: 2.625) {
-  /* Pixel 7 styles */
-}
-
-
-/* ========================================
-   SAMSUNG GALAXY DEVICES
-   ======================================== */
-
-/* Samsung Galaxy S8+ - 360x740 @ 4x */
-@media only screen and (device-width: 360px) and (device-height: 740px) and (-webkit-device-pixel-ratio: 4) {
-  /* Galaxy S8+ styles */
-}
-
-/* Samsung Galaxy S20 Ultra - 412x915 @ 3.5x */
-@media only screen and (device-width: 412px) and (device-height: 915px) and (-webkit-device-pixel-ratio: 3.5) {
-  /* Galaxy S20 Ultra styles */
-}
-
-/* Samsung Galaxy A51 / A71 - 412x915 @ 2.625x */
-@media only screen and (device-width: 412px) and (device-height: 915px) and (-webkit-device-pixel-ratio: 2.625) {
-  /* Galaxy A51/A71 styles */
-}
-
-
-/* ========================================
-   APPLE iPAD DEVICES
-   ======================================== */
-
-/* iPad Mini (All generations) - 768x1024 @ 2x */
-@media only screen and (device-width: 768px) and (device-height: 1024px) and (-webkit-device-pixel-ratio: 2) {
-  /* iPad Mini styles */
-}
-
-/* iPad Air (1st & 2nd Gen) - 768x1024 @ 2x */
-@media only screen and (device-width: 768px) and (device-height: 1024px) and (-webkit-device-pixel-ratio: 2) {
-  /* iPad Air 1st & 2nd Gen styles */
-}
-
-/* iPad Air (4th Gen / 2020) - 820x1180 @ 2x */
-@media only screen and (device-width: 820px) and (device-height: 1180px) and (-webkit-device-pixel-ratio: 2) {
-  /* iPad Air 4th Gen styles */
-}
-
-/* iPad Pro 12.9" (3rd Gen onwards) - 1024x1366 @ 2x */
-@media only screen and (device-width: 1024px) and (device-height: 1366px) and (-webkit-device-pixel-ratio: 2) {
-  /* iPad Pro 12.9" styles */
-}
-
-
-/* ========================================
-   MICROSOFT SURFACE DEVICES
-   ======================================== */
-
-/* Surface Pro 7 - 2736x1824 (Screen Resolution)
-   Note: Actual viewport is scaled, typically 912x1368 @ 3x */
-@media only screen and (min-device-width: 912px) and (max-device-width: 912px) and (-webkit-device-pixel-ratio: 3) {
-  /* Surface Pro 7 styles */
-}
-
-/* Surface Duo (Unfolded) - Each screen: 540x720, Combined: 1350x1800
-   Single screen viewport: 540x720 @ 2.5x */
-@media only screen and (device-width: 540px) and (device-height: 720px) and (-webkit-device-pixel-ratio: 2.5) {
-  /* Surface Duo single screen styles */
-}
-
-
-/* ========================================
-   FOLDABLE DEVICES
-   ======================================== */
-
-/* Galaxy Z Fold 5 (Cover Screen) - 904x2316 folded
-   Viewport when folded: ~344x882 */
-@media only screen and (max-device-width: 344px) and (device-height: 882px) {
-  /* Galaxy Z Fold 5 cover screen styles */
-}
-
-/* Galaxy Z Fold 5 (Inner Screen Unfolded) - 1812x2176
-   Viewport when unfolded: ~748x1024 @ 2.5x */
-@media only screen and (device-width: 748px) and (device-height: 1024px) and (-webkit-device-pixel-ratio: 2.5) {
-  /* Galaxy Z Fold 5 unfolded styles */
-}
-
-/* Asus Zenbook Fold OLED (17.3" Unfolded) - 2560x1920
-   Can be used as 17.3" tablet or folded to 12.5" laptop */
-@media only screen and (min-device-width: 1280px) and (min-device-height: 960px) {
-  /* Asus Zenbook Fold OLED styles */
-}
-
-
-/* ========================================
-   SMART DISPLAYS
-   ======================================== */
-
-/* Nest Hub (7" Display) - 1024x600 */
-@media only screen and (device-width: 1024px) and (device-height: 600px) {
-  /* Nest Hub styles */
-}
-
-/* Nest Hub Max (10" Display) - 1280x800 */
-@media only screen and (device-width: 1280px) and (device-height: 800px) {
-  /* Nest Hub Max styles */
-}
-
-
-/* ========================================
-   ORIENTATION-SPECIFIC QUERIES
-   ======================================== */
-
-/* Portrait orientation example */
-@media only screen and (device-width: 390px) and (device-height: 844px) and (-webkit-device-pixel-ratio: 3) and (orientation: portrait) {
-  /* Portrait mode styles */
-}
-
-/* Landscape orientation example */
-@media only screen and (device-width: 390px) and (device-height: 844px) and (-webkit-device-pixel-ratio: 3) and (orientation: landscape) {
-  /* Landscape mode styles */
-}
-
-
-/* ========================================
-   NOTES
-   ======================================== */
-
-
-.lang-ta #recentSection .recent-label span, .lang-ml #recentSection .recent-label span {
+/* ── Lang overrides ── */
+.lang-ta #recentSection .recent-label span,
+.lang-ml #recentSection .recent-label span {
   font-size: 9px !important;
 }
 
-
 @media (max-width: 768px) {
 
-.lang-ta .click-count, .lang-ml .click-count{
-  font-size: 8px !important;
+  .lang-ta .click-count,
+  .lang-ml .click-count {
+    font-size: 8px !important;
+  }
+
+  .lang-ta .play-button,
+  .lang-ml .play-button {
+    font-size: 7px !important;
+  }
+
+  .HomepageCat .mosaic-page {
+    padding-top: 0;
+    margin: 0;
+  }
+
+  .sidebar {
+    height: calc(100vh - 60px) !important;
+  }
+
+  .category-grid {
+    grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+    gap: 10px;
+    margin: 0;
+  }
+
+  .top-picks-slide .top-picks-grid {
+    gap: 10px !important;
+  }
+
+  .play-title {
+    font-size: 16px;
+  }
+
+  .game-info-bar .value {
+    font-size: 13px;
+  }
+
+  .brand {
+    gap: 20px;
+  }
+
+  .section-header {
+    flex-direction: row;
+    align-items: center;
+    gap: unset;
+    justify-content: space-between;
+    margin-bottom: 5px;
+  }
+
+  .section-title {
+    margin-bottom: 0;
+  }
+
+  .content-anim .section-header {
+    align-items: center;
+    margin-bottom: 10px !important;
+  }
 }
 
-.lang-ta .play-button, .lang-ml .play-button{
-   font-size: 7px !important;
-}
-
-}
-
-
-.lang-ta .sidebar .label,  .lang-ml .sidebar .label{
+.lang-ta .sidebar .label,
+.lang-ml .sidebar .label {
   font-size: 10px;
 }
+
+@media (min-width: 768px) and (max-width: 1024px) {
+  .header-container {
+    padding: 0 12px;
+  }
+
+  .header .header-container {
+    padding: 0 20px;
+  }
+
+  .game-card {
+    max-height: 140px !important;
+    max-width: inherit;
+    margin: auto;
+    width: 100%;
+  }
+
+  .home-wrapper .games-grid {
+    row-gap: 20px;
+    column-gap: 20px;
+    padding-top: 8px;
+  }
+
+  .top-picks-section .top-picks-featured .game-card {
+    min-height: 310px !important;
+  }
+
+  .top-picks-grid .top-picks-grid-item {
+    max-width: none !important;
+  }
+
+  .game-frame-container {
+    height: auto !important;
+  }
+
+  .Cat-title {
+    margin-top: 0;
+  }
+
+  .mosaic-page.home-wrapper {
+    min-height: auto !important;
+  }
+
+  .HomepageCat .mosaic-page {
+    padding-top: 0;
+  }
+
+  .HomepageCat .category-grid {
+    grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)) !important;
+  }
+
+  .sidebar {
+    padding-top: 20px;
+    height: calc(100vh - 60px) !important;
+    padding-bottom: 20px !important;
+    top: 70px !important;
+  }
+
+  .top-picks-slide .top-picks-grid {
+    gap: 20px !important;
+  }
+
+  .home-wrapper .game-image {
+    object-position: center 26%;
+  }
+
+  .AllGAMESCATPAGE {
+    padding: 0 24px;
+    padding-top: 30px;
+  }
+
+  .AllGAMESCATPAGE .Cat-title {
+    margin-bottom: 20px;
+  }
+
+  .AllGAMESCATPAGE .category-grid {
+    grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+  }
+
+  .play-title {
+    font-size: 18px !important;
+  }
+
+  .game-info-bar .value {
+    font-size: 14px;
+  }
+
+  .brand {
+    gap: 30px;
+  }
+
+  .section-title {
+    margin-bottom: 0;
+  }
+
+  .section-header {
+    align-items: center;
+  }
+}
+
+@media (min-width: 1024px) and (max-width: 1366px) and (orientation: landscape) {
+  #HIDEHIDEHIDE {
+    display: none !important;
+  }
+
+  .sidebar {
+    top: 70px;
+  }
+
+  .top-picks-grid {
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 768px) and (max-width: 1024px) and (pointer: coarse) {
+  .top-picks-featured {
+    max-width: none !important;
+  }
+
+  .top-picks-featured .game-card {
+    max-height: 100% !important;
+    max-width: 100%;
+  }
+}
+
+/* ── Device-specific (kept from original) ── */
+@media only screen and (device-width: 320px) and (device-height: 568px) and (-webkit-device-pixel-ratio: 2) {
+  .brand-logo {
+    height: 48px !important;
+  }
+
+  .header-actions {
+    gap: 5px !important;
+  }
+}
+
+@media only screen and (device-width: 375px) and (device-height: 667px) and (-webkit-device-pixel-ratio: 2) {
+  .brand-logo {
+    height: 48px !important;
+  }
+
+  .header-actions {
+    gap: 5px !important;
+  }
+}
+
+
+.Left-Container-Footer {}

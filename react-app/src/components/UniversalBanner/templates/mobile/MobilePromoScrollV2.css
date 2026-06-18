@@ -1,0 +1,357 @@
+/* react-app/src/components/UniversalBanner/templates/mobile/MobilePromoScrollV2.css */
+
+
+
+/* ── Outer container ── */
+.mps2-outer {
+  width: 100%;
+  overflow: hidden;
+  box-sizing: border-box;
+}
+
+/* ── Scrollable track ── */
+.mps2-track {
+  display: flex;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+  padding-bottom: 4px;
+}
+
+.mps2-track::-webkit-scrollbar {
+  display: none;
+}
+
+/* ══════════════════════════════════════
+   CARD
+══════════════════════════════════════ */
+
+
+.mps2-outer.MobilePromoScrollV2 {
+  padding: 10px 12px;
+  background: #020709;
+}
+
+.mps2-card {
+  scroll-snap-align: start;
+  position: relative;
+  overflow: hidden;
+  background-size: cover;
+  background-position: center top;
+  background-color: #060b14;
+  cursor: pointer;
+  display: flex;
+  align-items: flex-end;
+
+  /* Glass-edge border */
+  border: 0px solid rgba(255, 255, 255, 0.07);
+
+  /* Layered depth shadow */
+  box-shadow:
+    0 2px 8px rgba(0, 0, 0, 0.55),
+    0 6px 24px rgba(0, 0, 0, 0.45),
+    inset 0 1px 0 rgba(255, 255, 255, 0.06);
+
+  /* Staggered entry */
+  animation: mps2-enter 0.4s cubic-bezier(0.22, 1, 0.36, 1) both;
+
+  /* Fast, snappy tap response */
+  transition:
+    transform 0.12s cubic-bezier(0.22, 1, 0.36, 1),
+    box-shadow 0.12s ease,
+    border-color 0.12s ease;
+
+  /* Ensure tap highlight is suppressed */
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* Stagger delays */
+.mps2-card:nth-child(1) {
+  animation-delay: 0.04s;
+}
+
+.mps2-card:nth-child(2) {
+  animation-delay: 0.10s;
+}
+
+.mps2-card:nth-child(3) {
+  animation-delay: 0.16s;
+}
+
+.mps2-card:nth-child(4) {
+  animation-delay: 0.22s;
+}
+
+.mps2-card:nth-child(5) {
+  animation-delay: 0.28s;
+}
+
+@keyframes mps2-enter {
+  from {
+    opacity: 0;
+    transform: translateY(12px) scale(0.96);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+/* Tap state — replaces hover on mobile */
+.mps2-card--tap,
+.mps2-card:active {
+  transform: scale(0.965);
+  box-shadow:
+    0 2px 6px rgba(0, 0, 0, 0.6),
+    0 0 28px rgba(0, 229, 255, 0.12),
+    inset 0 1px 0 rgba(255, 255, 255, 0.08);
+  border-color: rgba(0, 229, 255, 0.25);
+}
+
+/* ── Overlay layers ── */
+.mps2-overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background: linear-gradient(180deg,
+      rgba(2, 6, 15, 0.10) 0%,
+      rgba(2, 6, 15, 0.30) 35%,
+      rgba(2, 6, 15, 0.75) 65%,
+      rgba(2, 6, 15, 0.97) 100%);
+}
+
+/* CRT scanlines — very subtle */
+.mps2-scanlines {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  pointer-events: none;
+  background-image: repeating-linear-gradient(0deg,
+      transparent,
+      transparent 2px,
+      rgba(0, 0, 0, 0.10) 2px,
+      rgba(0, 0, 0, 0.10) 4px);
+  opacity: 0.4;
+}
+
+/* Neon border inner glow */
+.mps2-border-glow {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  border-radius: inherit;
+  pointer-events: none;
+  opacity: 0;
+  box-shadow: inset 0 0 1px var(--accent, #00e5ff);
+  transition: opacity 0.15s ease;
+}
+
+.mps2-card--tap .mps2-border-glow,
+.mps2-card:active .mps2-border-glow {
+  opacity: 1;
+}
+
+/* Corner HUD brackets */
+.mps2-corner {
+  position: absolute;
+  width: 14px;
+  height: 14px;
+  z-index: 5;
+  opacity: 0;
+  transition: opacity 0.15s ease;
+}
+
+.mps2-card--tap .mps2-corner,
+.mps2-card:active .mps2-corner {
+  opacity: 1;
+}
+
+.mps2-corner-tl {
+  top: 8px;
+  left: 8px;
+  border-top: 2px solid var(--accent, #00e5ff);
+  border-left: 2px solid var(--accent, #00e5ff);
+  border-radius: 2px 0 0 0;
+}
+
+.mps2-corner-br {
+  bottom: 8px;
+  right: 8px;
+  border-bottom: 2px solid var(--accent, #00e5ff);
+  border-right: 2px solid var(--accent, #00e5ff);
+  border-radius: 0 0 2px 0;
+}
+
+/* ── Character image ── */
+.mps2-char {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  margin-right: 10px;
+  width: auto;
+  max-width: 50%;
+  object-fit: contain;
+  object-position: bottom right;
+  z-index: 4;
+  pointer-events: none;
+  user-select: none;
+  filter: drop-shadow(-3px 0 10px rgba(0, 0, 0, 0.8));
+  transition: transform 0.15s ease;
+}
+
+.mps2-card--tap .mps2-char,
+.mps2-card:active .mps2-char {
+  transform: scale(0.97);
+}
+
+/* ── Badge ── */
+.mps2-live-badge {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  z-index: 6;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 3px 8px 3px 7px;
+  border-radius: 3px;
+  font-family: 'Rajdhani', sans-serif;
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 1.6px;
+  text-transform: uppercase;
+  color: #000;
+  clip-path: polygon(5px 0%, 100% 0%, calc(100% - 5px) 100%, 0% 100%);
+}
+
+.mps2-live-dot {
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: rgba(0, 0, 0, 0.45);
+  animation: mps2-pulse 1.4s ease-in-out infinite;
+}
+
+@keyframes mps2-pulse {
+
+  0%,
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+
+  50% {
+    opacity: 0.4;
+    transform: scale(0.65);
+  }
+}
+
+/* ── Content ── */
+.mps2-content {
+  position: relative;
+  z-index: 6;
+  padding: 10px 12px 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  max-width: 66%;
+}
+
+/* Eyebrow label */
+.mps2-eyebrow {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-family: 'Rajdhani', sans-serif;
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 1.8px;
+  text-transform: uppercase;
+  margin: 0;
+  opacity: 0.9;
+}
+
+.mps2-eyebrow-line {
+  display: inline-block;
+  width: 12px;
+  height: 2px;
+  border-radius: 1px;
+  flex-shrink: 0;
+}
+
+/* Title */
+.mps2-title {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 16px;
+  font-weight: 900;
+  color: #fff;
+  margin: 0;
+  line-height: 1.1;
+  letter-spacing: 0.2px;
+  text-transform: uppercase;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.9);
+}
+
+/* ── CTA Button ── */
+.mps2-cta {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  padding: 0;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  width: fit-content;
+  margin-top: 5px;
+  border-radius: 3px;
+  overflow: visible;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.mps2-cta-bg {
+  position: absolute;
+  inset: 0;
+  background: var(--accent, #00e5ff);
+  border-radius: 3px;
+  clip-path: polygon(6px 0%, 100% 0%, calc(100% - 6px) 100%, 0% 100%);
+  transition: transform 0.12s ease, box-shadow 0.12s ease;
+}
+
+.mps2-cta-text {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 6px 14px 6px 12px;
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 1.1px;
+  text-transform: uppercase;
+  color: #060b14;
+}
+
+.mps2-card--tap .mps2-cta-bg,
+.mps2-card:active .mps2-cta-bg {
+  transform: scaleX(0.95);
+  box-shadow: 0 0 16px rgba(0, 229, 255, 0.4);
+}
+
+/* ── Bottom accent bar ── */
+.mps2-bottom-bar {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  z-index: 6;
+  opacity: 0;
+  transition: opacity 0.15s ease;
+}
+
+.mps2-card--tap .mps2-bottom-bar,
+.mps2-card:active .mps2-bottom-bar {
+  opacity: 1;
+}

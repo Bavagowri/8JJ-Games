@@ -1,0 +1,466 @@
+/* react-app/src/components/mobile/MobilePopularSection/MobilePopularSection.css */
+.mobile-popular-section {
+  padding: 20px 0 25px;
+  background:linear-gradient(180deg, #00000000, #050814);
+  position: relative;
+  overflow: hidden;
+  padding-bottom: 35px;
+}
+
+/* Subtle background glow effect */
+.mobile-popular-section::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 30%;
+  right: 30%;
+  height: 120px;
+  background: radial-gradient(ellipse at center, rgba(25, 178, 208, 0.06), transparent);
+  pointer-events: none;
+}
+
+/* Header Container */
+.mobile-popular-section-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 20px 16px;
+  position: relative;
+  z-index: 2;
+  margin-bottom: 10px;
+}
+
+/* Section Title with Premium Gradient */
+.mobile-section-popular-title {
+  font-size: 24px;
+  font-weight: 900;
+  background: linear-gradient(135deg, #ffffff 0%, #a8d5e2 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  letter-spacing: -0.5px;
+  position: relative;
+  display: inline-block;
+}
+
+.mobile-section-popular-title::after {
+  content: '';
+  position: absolute;
+  bottom: -4px;
+  left: 0;
+  width: 150px;
+  height: 3px;
+  background: linear-gradient(90deg, #19b2d0, transparent);
+  border-radius: 2px;
+}
+
+/* View All Button (optional - if you add it) */
+.mobile-popular-view-all {
+  background: rgba(25, 178, 208, 0.1);
+  border: 1px solid rgba(25, 178, 208, 0.3);
+  color: #19b2d0;
+  padding: 7px 16px;
+  border-radius: 18px;
+  font-size: 13px;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  transition: all 0.3s ease;
+  backdrop-filter: blur(10px);
+}
+
+.mobile-popular-view-all:active {
+  transform: scale(0.95);
+  background: rgba(25, 178, 208, 0.15);
+}
+
+/* Horizontal scroll container */
+.mobile-popular-scroll {
+  display: flex;
+  gap: 14px;
+  padding: 0 20px;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  scroll-behavior: smooth;
+  position: relative;
+  z-index: 1;
+}
+
+.mobile-popular-scroll::-webkit-scrollbar {
+  display: none;
+}
+
+/* Card wrapper with enhanced sizing */
+.mobile-popular-item {
+  width: 125px;
+  flex-shrink: 0;
+  position: relative;
+  animation: fadeInScale 0.3s ease-out backwards;
+}
+
+/* Stagger animation delays */
+.mobile-popular-item:nth-child(1) { animation-delay: 0.05s; }
+.mobile-popular-item:nth-child(2) { animation-delay: 0.1s; }
+.mobile-popular-item:nth-child(3) { animation-delay: 0.15s; }
+.mobile-popular-item:nth-child(4) { animation-delay: 0.2s; }
+.mobile-popular-item:nth-child(5) { animation-delay: 0.25s; }
+.mobile-popular-item:nth-child(6) { animation-delay: 0.3s; }
+
+@keyframes fadeInScale {
+  from {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* Enhanced MobileGameCard styling */
+.mobile-popular-item .mobile-game-card {
+  border-radius: 18px;
+  box-shadow: 
+    0 4px 16px rgba(0, 0, 0, 0.3),
+    0 2px 8px rgba(0, 0, 0, 0.2),
+    0 0 0 1px rgba(255, 255, 255, 0.05);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+}
+
+.mobile-popular-item .mobile-game-card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    135deg,
+    rgba(25, 178, 208, 0.1),
+    transparent 50%,
+    rgba(6, 196, 113, 0.1)
+  );
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  z-index: 1;
+  pointer-events: none;
+  border-radius: 18px;
+}
+
+.mobile-popular-item .mobile-game-card:active {
+  transform: scale(0.95);
+  box-shadow: 
+    0 2px 8px rgba(0, 0, 0, 0.3),
+    0 1px 4px rgba(0, 0, 0, 0.2);
+}
+
+.mobile-popular-item .mobile-game-card:active::before {
+  opacity: 1;
+}
+
+/* Premium Plays Badge */
+.mobile-popular-plays {
+  position: absolute;
+  bottom: 8px;
+  left: 8px;
+  z-index: 3;
+  background: linear-gradient(135deg, #19b2d0 0%, #06c471 100%);
+  color: #fff;
+  font-size: 10px;
+  font-weight: 800;
+  padding: 5px 10px;
+  border-radius: 14px;
+  box-shadow: 
+    0 3px 12px rgba(25, 178, 208, 0.4),
+    0 2px 6px rgba(0, 0, 0, 0.3),
+    inset 0 1px 0 rgba(255, 255, 255, 0.25);
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  letter-spacing: 0.3px;
+  text-transform: uppercase;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(4px);
+  transition: all 0.3s ease;
+}
+
+.mobile-popular-plays::before {
+  content: '';
+  position: absolute;
+  inset: -2px;
+  background: linear-gradient(135deg, rgba(25, 178, 208, 0.3), transparent);
+  border-radius: 16px;
+  z-index: -1;
+  filter: blur(6px);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.mobile-popular-item:hover .mobile-popular-plays::before,
+.mobile-popular-item:active .mobile-popular-plays::before {
+  opacity: 1;
+}
+
+/* Plays count icon (optional) */
+.mobile-popular-plays-icon {
+  font-size: 12px;
+  filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.3));
+}
+
+/* Ranking badge (shows position) */
+.mobile-popular-rank {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  z-index: 3;
+  background: rgba(0, 0, 0, 0.7);
+  backdrop-filter: blur(10px);
+  color: #fbbf24;
+  font-size: 12px;
+  font-weight: 800;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 2px solid rgba(251, 191, 36, 0.3);
+  box-shadow: 
+    0 2px 8px rgba(0, 0, 0, 0.4),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1);
+}
+
+/* Top 3 special styling */
+.mobile-popular-rank.top-1 {
+  background: linear-gradient(135deg, #fbbf24, #f59e0b);
+  color: #fff;
+  border-color: rgba(255, 255, 255, 0.3);
+  box-shadow: 
+    0 3px 12px rgba(251, 191, 36, 0.5),
+    inset 0 1px 0 rgba(255, 255, 255, 0.3);
+}
+
+.mobile-popular-rank.top-2 {
+  background: linear-gradient(135deg, #d1d5db, #9ca3af);
+  color: #fff;
+  border-color: rgba(255, 255, 255, 0.3);
+}
+
+.mobile-popular-rank.top-3 {
+  background: linear-gradient(135deg, #f97316, #ea580c);
+  color: #fff;
+  border-color: rgba(255, 255, 255, 0.3);
+}
+
+/* Trending indicator (animated) */
+.mobile-popular-trending {
+  position: absolute;
+  bottom: 8px;
+  left: 8px;
+  z-index: 3;
+  background: rgba(239, 68, 68, 0.9);
+  backdrop-filter: blur(10px);
+  color: #fff;
+  font-size: 10px;
+  font-weight: 700;
+  padding: 4px 8px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  gap: 3px;
+  box-shadow: 0 2px 8px rgba(239, 68, 68, 0.4);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  animation: pulse-trending 2s ease-in-out infinite;
+  display: none;
+}
+
+@keyframes pulse-trending {
+  0%, 100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(1.05);
+    opacity: 0.9;
+  }
+}
+
+.mobile-popular-trending-icon {
+  font-size: 11px;
+  animation: bounce-arrow 1s ease-in-out infinite;
+}
+
+@keyframes bounce-arrow {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-2px);
+  }
+}
+
+/* Scroll indicator (appears when scrollable) */
+.mobile-popular-scroll-indicator {
+  position: absolute;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 40px;
+  height: 100%;
+  background: linear-gradient(
+    to left,
+    rgba(5, 8, 20, 0.9),
+    transparent
+  );
+  pointer-events: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  z-index: 2;
+}
+
+.mobile-popular-section.has-overflow .mobile-popular-scroll-indicator {
+  opacity: 1;
+  display: none;
+}
+
+.mobile-popular-scroll-indicator::after {
+  content: '→';
+  color: rgba(25, 178, 208, 0.6);
+  font-size: 20px;
+  animation: slide-arrow 1.5s ease-in-out infinite;
+}
+
+@keyframes slide-arrow {
+  0%, 100% {
+    transform: translateX(0);
+    opacity: 0.5;
+  }
+  50% {
+    transform: translateX(5px);
+    opacity: 1;
+  }
+}
+
+/* Empty state */
+.mobile-popular-empty {
+  text-align: center;
+  padding: 40px 20px;
+  color: rgba(255, 255, 255, 0.5);
+}
+
+.mobile-popular-empty-icon {
+  font-size: 48px;
+  margin-bottom: 12px;
+  opacity: 0.3;
+}
+
+.mobile-popular-empty-text {
+  font-size: 16px;
+  font-weight: 600;
+  margin-bottom: 8px;
+}
+
+.mobile-popular-empty-subtext {
+  font-size: 13px;
+  opacity: 0.7;
+}
+
+/* Skeleton loading */
+.mobile-popular-skeleton {
+  width: 125px;
+  height: 160px;
+  border-radius: 18px;
+  background: linear-gradient(
+    90deg,
+    #1a234a 25%,
+    #2a3570 37%,
+    #1a234a 63%
+  );
+  background-size: 400% 100%;
+  animation: shimmer 1.4s ease infinite;
+  box-shadow: 
+    0 4px 12px rgba(0, 0, 0, 0.3),
+    0 0 0 1px rgba(255, 255, 255, 0.05);
+  flex-shrink: 0;
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: 100% 0;
+  }
+  100% {
+    background-position: -100% 0;
+  }
+}
+
+/* Section entrance animation */
+.mobile-popular-section.loaded {
+  animation: fadeInUp 0.4s ease-out;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Responsive adjustments */
+@media (max-width: 380px) {
+  .mobile-popular-item,
+  .mobile-popular-skeleton {
+    width: 110px;
+  }
+  
+  .mobile-section-popular-title {
+    font-size: 22px;
+  }
+  
+  .mobile-popular-plays {
+    font-size: 9px;
+    padding: 4px 8px;
+  }
+}
+
+@media (min-width: 480px) {
+  .mobile-popular-item,
+  .mobile-popular-skeleton {
+    width: 135px;
+  }
+  
+  .mobile-section-popular-title {
+    font-size: 26px;
+  }
+}
+
+/* Accessibility - Focus states */
+.mobile-popular-item .mobile-game-card:focus-visible {
+  outline: 2px solid #19b2d0;
+  outline-offset: 3px;
+}
+
+/* Performance optimization */
+.mobile-popular-item .mobile-game-card,
+.mobile-popular-plays,
+.mobile-popular-rank {
+  will-change: transform;
+}
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+  .mobile-popular-item,
+  .mobile-popular-plays,
+  .mobile-popular-trending {
+    animation: none !important;
+  }
+  
+  .mobile-popular-item .mobile-game-card {
+    transition-duration: 0.01ms !important;
+  }
+}

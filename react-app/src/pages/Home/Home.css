@@ -1,139 +1,175 @@
+/* react-app/src/pages/Home/Home.css */
+
 .home-wrapper {
   margin: 0 auto;
-  /* centers horizontally */
   position: relative;
   z-index: 1;
   max-width: 1280px;
   padding: 0 24px;
   min-height: 60vh;
+  background-attachment: fixed;
 }
 
-@media (max-width: 430px) {
-  .search input {
-    min-width: 50px !important;
-    width: 85px !important;
-            font-size: 10px;
+.home-wrapper::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background:
+    radial-gradient(ellipse at 10% 20%, rgba(102, 126, 234, 0.1) 0%, transparent 40%),
+    radial-gradient(ellipse at 90% 80%, rgba(245, 87, 108, 0.1) 0%, transparent 40%);
+  pointer-events: none;
+  z-index: -1;
+  animation: backgroundPulse 15s ease-in-out infinite;
+}
+
+@keyframes backgroundPulse {
+
+  0%,
+  100% {
+    opacity: 0.6;
+  }
+
+  50% {
+    opacity: 1;
   }
 }
 
-@media (max-width: 430px) {
-  .home-wrapper {
-    padding: 0 10px;
-  }
+/* Only interactive cards get transitions, and only the properties they use */
+.card {
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
 }
 
-
-
-
-/*    Skeleton Loading ------ START   */
-
-::selection {
-  background: #ffffff16;
-  color: snow;
+.game-section {
+  transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1),
+    border-color 0.4s ease,
+    box-shadow 0.4s ease;
 }
 
-::placeholder {
-  color: #fffafa4f;
-  letter-spacing: 1px;
-}
-
+/* ─── Global resets (kept minimal, no transition here) ────────────────────── */
 *,
-*::after,
-*::before {
+*::before,
+*::after {
   padding: 0;
   margin: 0;
   outline: none;
   border: none;
   background: transparent;
   color: #fffafa;
-  font-family: 'Nunito','Nunito Fallback',Arial,"Helvetica Neue",Helvetica,sans-serif;
+  font-family: 'Nunito', 'Nunito Fallback', Arial, "Helvetica Neue", Helvetica, sans-serif;
   user-select: none;
   font-weight: 100;
   box-sizing: border-box;
   -webkit-tap-highlight-color: transparent;
-  transition: all 0.12s ease-in-out;
+  /* ── REMOVED: transition: all 0.12s ease-in-out ── */
 }
 
+/* ─── Responsive ─────────────────────────────────────────────────────────── */
+@media (max-width: 430px) {
+  .search input {
+    min-width: 50px !important;
+    width: 85px !important;
+    font-size: 10px;
+  }
 
+  .home-wrapper {
+    padding: 0 10px;
+  }
+}
+
+/* ─── Selection / placeholder ────────────────────────────────────────────── */
+::selection {
+  background: rgba(102, 126, 234, 0.3);
+  color: #fff;
+}
+
+::placeholder {
+  color: rgba(255, 250, 250, 0.3);
+  letter-spacing: 1px;
+}
+
+/* ─── Skeleton card ──────────────────────────────────────────────────────── */
 .card {
   position: relative;
   aspect-ratio: 1;
-  border-radius: 12px;
+  border-radius: 16px;
   overflow: hidden;
   cursor: pointer;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
-  transition: transform 0.25s ease, box-shadow 0.25s ease;
   max-height: 171px;
   max-width: 171px;
-  overflow: hidden;
   display: flex;
   justify-content: center;
   align-items: stretch;
   flex-flow: column;
-  background: #ffffff16;
-  box-shadow: 0 8px 32px 0 #ffffff16;
-  backdrop-filter: blur(8px);
-  border-radius: 6px;
-  border: 1px solid #ffffff04;
+  background: rgba(255, 255, 255, 0.03);
+  box-shadow:
+    0 8px 32px rgba(0, 0, 0, 0.3),
+    inset 0 0 0 1px rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.05);
   padding: 0;
   margin: 16px;
   width: 200px;
   max-width: 1280px;
+}
 
-  .image {
-    height: 200px;
+.card:hover {
+  transform: translateY(-4px);
+  box-shadow:
+    0 12px 40px rgba(0, 0, 0, 0.4),
+    inset 0 0 0 1px rgba(102, 126, 234, 0.2);
+}
 
-    img {
-      display: block;
-      width: 100%;
-      height: inherit;
-      object-fit: cover;
-    }
-  }
+.card .image {
+  height: 200px;
+}
 
-  .content {
-    padding: 16px;
+.card .image img {
+  display: block;
+  width: 100%;
+  height: inherit;
+  object-fit: cover;
+}
 
-    h1 {
-      margin-bottom: 8px;
-      font-size: 1.4rem;
-      letter-spacing: 1px;
-    }
+.card .content {
+  padding: 16px;
+}
 
-    h2 {
-      font-size: 1rem;
-      line-height: 1.4;
-    }
-  }
+.card .content h1 {
+  margin-bottom: 8px;
+  font-size: 1.4rem;
+  letter-spacing: 1px;
+}
 
-  &.loading {
+.card .content h2 {
+  font-size: 1rem;
+  line-height: 1.4;
+}
 
-    .image,
-    .content * {
-      background-color: #ededed0f;
-      background: linear-gradient(100deg,
-          #ffffff00 40%,
-          #ffffff12 50%,
-          #ffffff00 60%) #ededed0f;
-      background-size: 200% 100%;
-      background-position-x: 180%;
-      animation: 1.6s Shine ease-in-out infinite;
-    }
+.card.loading .image,
+.card.loading .content * {
+  background-color: rgba(237, 237, 237, 0.05);
+  background: linear-gradient(100deg,
+      rgba(255, 255, 255, 0) 40%,
+      rgba(102, 126, 234, 0.15) 50%,
+      rgba(255, 255, 255, 0) 60%) rgba(237, 237, 237, 0.05);
+  background-size: 200% 100%;
+  background-position-x: 180%;
+  animation: 1.8s Shine ease-in-out infinite;
+}
 
-    .content {
-      h1 {
-        min-height: 32px;
-        border-radius: 4px;
-        animation-delay: 0.05s;
-      }
+.card.loading .content h1 {
+  min-height: 32px;
+  border-radius: 8px;
+  animation-delay: 0.05s;
+}
 
-      h2 {
-        min-height: 64px;
-        border-radius: 4px;
-        animation-delay: 0.07s;
-      }
-    }
-  }
+.card.loading .content h2 {
+  min-height: 64px;
+  border-radius: 8px;
+  animation-delay: 0.07s;
 }
 
 @keyframes Shine {
@@ -145,37 +181,34 @@
 .grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(200px, 2fr));
-  gap: 20px;
+  gap: 24px;
 }
-
 
 .loading-section {
   margin-bottom: 40px;
+  background: rgba(255, 255, 255, 0.02);
+  box-shadow:
+    0 8px 32px rgba(0, 0, 0, 0.2),
+    inset 0 0 0 1px rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(12px);
+  border-radius: 24px;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  padding: 32px;
 }
 
 .skeleton-title {
-  height: 32px;
-  width: 250px;
+  height: 36px;
+  width: 280px;
   background: linear-gradient(100deg,
-      #ffffff00 40%,
-      #ffffff12 50%,
-      #ffffff00 60%) #ededed0f;
+      rgba(255, 255, 255, 0) 40%,
+      rgba(102, 126, 234, 0.2) 50%,
+      rgba(255, 255, 255, 0) 60%) rgba(237, 237, 237, 0.05);
   background-size: 200% 100%;
   background-position-x: 180%;
-  animation: 1.6s Shine ease-in-out infinite;
-  border-radius: 8px;
-  margin-bottom: 20px;
+  animation: 1.8s Shine ease-in-out infinite;
+  border-radius: 12px;
+  margin-bottom: 28px;
 }
-
-.loading-section {
-  background: #ffffff0d;
-  box-shadow: 0 8px 32px 0 #ffffff16;
-  backdrop-filter: blur(8px);
-  border-radius: 20px;
-  border: 1px solid #ffffff04;
-  padding: 20px;
-}
-
 
 @media (max-width: 750px) {
 
@@ -184,7 +217,7 @@
     margin: 0 auto;
   }
 
-  .card.loading{
+  .card.loading {
     width: 150px;
   }
 
@@ -192,29 +225,217 @@
     margin-bottom: 20px;
   }
 
-  .grid{
-        grid-template-columns: repeat(auto-fill, minmax(120px, 2fr));
+  .grid {
+    grid-template-columns: repeat(auto-fill, minmax(120px, 2fr));
   }
 }
 
-
-
-/*    Skeleton Loading ------ END   */
-
-
-
-/* Responsive Design */
 @media (max-width: 768px) {
 
-
-  html, body {
+  html,
+  body {
     overscroll-behavior: none !important;
     scroll-padding-top: 90px !important;
+  }
 }
 
-}
-
-
-.game-category{
+/* ─── Utility ────────────────────────────────────────────────────────────── */
+.game-category {
   text-transform: capitalize;
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
+}
+
+/* ─── Scroll animations ──────────────────────────────────────────────────── */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.game-section {
+  animation: fadeInUp 0.6s ease-out both;
+}
+
+.game-section:nth-child(1) {
+  animation-delay: 0.1s;
+}
+
+.game-section:nth-child(2) {
+  animation-delay: 0.2s;
+}
+
+.game-section:nth-child(3) {
+  animation-delay: 0.3s;
+}
+
+.game-section:nth-child(4) {
+  animation-delay: 0.4s;
+}
+
+.game-section:nth-child(5) {
+  animation-delay: 0.5s;
+}
+
+/* ─── Focus ──────────────────────────────────────────────────────────────── */
+*:focus-visible {
+  outline: 2px solid rgba(102, 126, 234, 0.6);
+  outline-offset: 4px;
+  border-radius: 8px;
+}
+
+/* ─── Reduced motion ─────────────────────────────────────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* ─── SEO hidden sections ────────────────────────────────────────────────── */
+.value-proposition,
+.homepage-content-seo {
+  position: absolute;
+  left: -10000px;
+  top: auto;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+}
+
+/* ─── Section icons ──────────────────────────────────────────────────────── */
+.section-icon {
+  width: 38px;
+  height: 38px;
+  margin-right: 8px;
+  vertical-align: middle;
+  object-fit: contain;
+}
+
+.inline-icon {
+  width: 24px;
+  height: 24px;
+  margin-right: 4px;
+  vertical-align: middle;
+}
+
+/* ─── Spacing utilities ──────────────────────────────────────────────────── */
+.no-padding {
+  padding: 0 !important;
+}
+
+.no-padding-x {
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+}
+
+.no-padding-y {
+  padding-top: 0 !important;
+  padding-bottom: 0 !important;
+}
+
+.no-padding-top {
+  padding-top: 0 !important;
+}
+
+.no-padding-right {
+  padding-right: 0 !important;
+}
+
+.no-padding-bottom {
+  padding-bottom: 0 !important;
+}
+
+.no-padding-left {
+  padding-left: 0 !important;
+}
+
+.no-margin {
+  margin: 0 !important;
+}
+
+.no-margin-x {
+  margin-left: 0 !important;
+  margin-right: 0 !important;
+}
+
+.no-margin-y {
+  margin-top: 0 !important;
+  margin-bottom: 0 !important;
+}
+
+.no-margin-top {
+  margin-top: 0 !important;
+}
+
+.no-margin-right {
+  margin-right: 0 !important;
+}
+
+.no-margin-bottom {
+  margin-bottom: 0 !important;
+}
+
+.no-margin-left {
+  margin-left: 0 !important;
+}
+
+
+
+
+
+
+.prediction-widgets-section {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin-bottom: 32px;
+  padding: 0 0 8px;
+  overflow: hidden;
+}
+
+.prediction-bottom-row {
+  display: flex;
+  gap: 16px;
+  align-items: flex-start;
+}
+
+.prediction-bottom-row>.banner-b {
+  flex: 3;
+  min-width: 0;
+}
+
+.prediction-widgets-col {
+  flex: 2;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  min-width: 0;
+}
+
+
+@media (max-width: 768px) {
+  .prediction-widgets-section {
+    display: none;
+  }
 }

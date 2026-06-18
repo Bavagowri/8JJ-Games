@@ -1,0 +1,53 @@
+/* ============================================================
+   8JJGames – Terms & Conditions
+   Theme: Blue / Indigo
+   ============================================================ */
+@import './LegalBase.css';
+
+.tc-page .legal-hero-glow    { background: var(--brand-blue); }
+.tc-page .legal-badge         { background: rgba(59,130,246,0.12); border: 1px solid rgba(59,130,246,0.28); color: var(--brand-blue); }
+.tc-page .legal-hero h1 em    { background: var(--grad-blue); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+.tc-page .legal-intro         { border-left: 4px solid var(--brand-blue); }
+.tc-page .legal-section-num   { background: var(--grad-blue); box-shadow: 0 4px 14px rgba(59,130,246,0.30); }
+.tc-page .legal-subsection h3  { color: var(--brand-blue); }
+.tc-page .legal-info-list li:hover { border-color: rgba(59,130,246,0.35); }
+.tc-page .legal-simple-list li::before { background: var(--brand-blue); }
+.tc-page .legal-highlight      { background: rgba(59,130,246,0.08); border-color: rgba(59,130,246,0.25); color: #93c5fd; }
+.tc-page .legal-contact a      { color: var(--brand-primary); }
+
+/* Two-column rule grid */
+.tc-rule-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+  margin: 16px 0;
+}
+
+.tc-rule-card {
+  background: rgba(255,255,255,0.025);
+  border: 1px solid rgba(255,255,255,0.07);
+  border-radius: 10px;
+  padding: 16px 18px;
+}
+
+.tc-rule-card h4 {
+  font-size: 13px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin: 0 0 8px;
+}
+
+.tc-rule-card.allowed h4 { color: var(--brand-green); }
+.tc-rule-card.denied  h4 { color: var(--brand-secondary); }
+
+.tc-rule-card p {
+  font-size: 13px;
+  color: var(--text-secondary);
+  line-height: 1.65;
+  margin: 0;
+}
+
+@media (max-width: 560px) {
+  .tc-rule-grid { grid-template-columns: 1fr; }
+}

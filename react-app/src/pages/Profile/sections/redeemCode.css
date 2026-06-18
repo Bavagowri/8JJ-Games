@@ -1,0 +1,305 @@
+/* react-app/src/pages/Profile/sections/redeemCode.css */
+
+.redeem-code-container {
+  padding: 20px;
+  max-width: 600px;
+  margin: 0 auto;
+  animation: redeemFadeIn 0.3s ease-out;
+}
+
+@keyframes redeemFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.redeem-card {
+  /* background: linear-gradient(135deg, rgba(15, 15, 25, 0.98), rgba(20, 20, 35, 0.98)); */
+  border: 1px solid rgba(0, 217, 255, 0.2);
+  border-radius: 16px;
+  padding: 40px;
+  box-shadow: 
+    0 20px 60px rgba(0, 0, 0, 0.5),
+    0 0 80px rgba(0, 217, 255, 0.1);
+  backdrop-filter: blur(10px);
+  animation: redeemSlideUp 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+@keyframes redeemSlideUp {
+  from {
+    opacity: 0;
+    transform: translateY(40px) scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.redeem-title {
+  color: #fff;
+  font-size: 28px;
+  margin-bottom: 10px;
+  text-align: center;
+  font-weight: 700;
+  background: linear-gradient(135deg, #fff, #00d9ff);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.redeem-subtitle {
+  color: rgba(255, 255, 255, 0.7);
+  text-align: center;
+  margin-bottom: 30px;
+  font-size: 14px;
+}
+
+.redeem-form {
+  margin-bottom: 25px;
+}
+
+.form-group {
+  margin-bottom: 20px;
+}
+
+.form-group label {
+  display: block;
+  color: #00d9ff;
+  font-weight: 600;
+  margin-bottom: 10px;
+  font-size: 14px;
+}
+
+.input-wrapper {
+  position: relative;
+  display: flex;
+  gap: 10px;
+}
+
+.code-input {
+  flex: 1;
+  padding: 14px;
+  background: rgba(0, 217, 255, 0.05);
+  border: 2px solid rgba(0, 217, 255, 0.3);
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: 700;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: #00d9ff;
+  font-family: 'Monaco', 'Courier New', monospace;
+  transition: all 0.3s ease;
+  box-sizing: border-box;
+}
+
+.code-input::placeholder {
+  color: rgba(255, 255, 255, 0.3);
+  letter-spacing: normal;
+  font-family: inherit;
+}
+
+.code-input:focus {
+  outline: none;
+  border-color: #00d9ff;
+  box-shadow: 
+    0 0 0 3px rgba(0, 217, 255, 0.1),
+    0 0 20px rgba(0, 217, 255, 0.3);
+  background: rgba(0, 217, 255, 0.08);
+}
+
+.code-input:disabled {
+  background-color: rgba(255, 255, 255, 0.05);
+  cursor: not-allowed;
+  opacity: 0.5;
+  border-color: rgba(0, 217, 255, 0.15);
+}
+
+.paste-helper-btn {
+  padding: 14px 16px;
+  background: rgba(0, 217, 255, 0.1);
+  border: 2px solid rgba(0, 217, 255, 0.3);
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 18px;
+  transition: all 0.3s ease;
+  height: 100%;
+  color: #00d9ff;
+}
+
+.paste-helper-btn:hover {
+  background: rgba(0, 217, 255, 0.2);
+  border-color: #00d9ff;
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(0, 217, 255, 0.3);
+}
+
+.input-hint {
+  font-size: 12px;
+  color: rgba(255, 255, 255, 0.5);
+  margin-top: 8px;
+  margin-bottom: 0;
+}
+
+.redeem-btn {
+  width: 100%;
+  padding: 14px;
+  background: linear-gradient(135deg, #00d9ff, #2b7ae2);
+  color: #000;
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.redeem-btn::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: rgba(255, 255, 255, 0.2);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.redeem-btn:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(0, 217, 255, 0.4);
+}
+
+.redeem-btn:hover:not(:disabled)::before {
+  opacity: 1;
+}
+
+.redeem-btn:active:not(:disabled) {
+  transform: translateY(0);
+}
+
+.redeem-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  background: linear-gradient(135deg, rgba(0, 217, 255, 0.3), rgba(43, 122, 226, 0.3));
+}
+
+.message {
+  padding: 16px;
+  border-radius: 8px;
+  margin-bottom: 20px;
+  font-size: 14px;
+  text-align: center;
+  animation: messageSlideIn 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+  font-weight: 500;
+  backdrop-filter: blur(10px);
+}
+
+.message-success {
+  background: linear-gradient(135deg, rgba(0, 255, 136, 0.15), rgba(0, 217, 255, 0.15));
+  color: #00ff88;
+  border: 1px solid rgba(0, 255, 136, 0.3);
+  box-shadow: 0 0 20px rgba(0, 255, 136, 0.1);
+}
+
+.message-error {
+  background: linear-gradient(135deg, rgba(255, 68, 68, 0.15), rgba(255, 100, 100, 0.15));
+  color: #ff6b6b;
+  border: 1px solid rgba(255, 68, 68, 0.3);
+  box-shadow: 0 0 20px rgba(255, 68, 68, 0.1);
+}
+
+@keyframes messageSlideIn {
+  from {
+    opacity: 0;
+    transform: translateY(-20px) scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.info-box {
+  background: linear-gradient(135deg, rgba(0, 217, 255, 0.08), rgba(43, 122, 226, 0.08));
+  padding: 20px;
+  border-radius: 8px;
+  border-left: 4px solid #00d9ff;
+  backdrop-filter: blur(5px);
+}
+
+.info-box h4 {
+  color: #00d9ff;
+  margin: 0 0 15px 0;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.info-box ul {
+  margin: 0;
+  padding-left: 20px;
+  list-style: none;
+}
+
+.info-box li {
+  color: rgba(255, 255, 255, 0.8);
+  margin-bottom: 8px;
+  font-size: 13px;
+  line-height: 1.5;
+  position: relative;
+  padding-left: 20px;
+}
+
+.info-box li:before {
+  content: '✓';
+  position: absolute;
+  left: 0;
+  color: #00d9ff;
+  font-weight: bold;
+  text-shadow: 0 0 10px rgba(0, 217, 255, 0.5);
+}
+
+@media (max-width: 600px) {
+  .redeem-code-container {
+    padding: 15px;
+  }
+
+  .redeem-card {
+    padding: 30px 20px;
+  }
+
+  .redeem-title {
+    font-size: 24px;
+  }
+
+  .input-wrapper {
+    flex-direction: column;
+  }
+
+  .paste-helper-btn {
+    width: 100%;
+    padding: 12px;
+  }
+
+  .code-input {
+    font-size: 14px;
+    letter-spacing: 2px;
+  }
+
+  .info-box {
+    padding: 16px;
+  }
+
+  .info-box h4 {
+    font-size: 13px;
+  }
+
+  .info-box li {
+    font-size: 12px;
+  }
+}

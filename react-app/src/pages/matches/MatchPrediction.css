@@ -1,0 +1,33 @@
+.match-container {
+  max-width: 800px;
+  margin: auto;
+}
+
+.match-card {
+  background: #111;
+  border-radius: 12px;
+  padding: 20px;
+  margin-bottom: 20px;
+  color: white;
+}
+
+.match-header {
+  font-size: 20px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.vs {
+  font-weight: bold;
+  color: #ffcc00;
+}
+
+.match-actions button {
+  margin-right: 10px;
+  padding: 8px 14px;
+  border-radius: 6px;
+  border: none;
+  cursor: pointer;
+  background: #ff6600;
+  color: white;
+}

@@ -1,0 +1,732 @@
+/* ══════════════════════════════════════════════════════════
+   BREADCRUMB + BACK BUTTON ROW  — REDESIGNED
+   ══════════════════════════════════════════════════════════ */
+
+.predictions-page .breadcrumb-container-back {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 0;
+  padding: 14px 0 14px;
+  border: none;
+  background: none;
+  position: relative;
+  z-index: 10;
+}
+
+.predictions-page .BackBTNcontainer {
+  flex-shrink: 0;
+}
+
+/* ── Back button — more substantial ──────────────────────── */
+.predictions-page .premium-back-buttonzzz.game-back-button {
+  position: unset !important;
+  left: unset !important;
+  width: 40px !important;
+  height: 46px !important;
+  border-radius: 12px !important;
+  background: linear-gradient(135deg, rgba(14, 26, 50, 0.85), rgba(10, 20, 42, 0.9)) !important;
+  backdrop-filter: blur(16px) !important;
+  -webkit-backdrop-filter: blur(16px) !important;
+  border: 1.5px solid rgba(79, 172, 254, 0.35) !important;
+  box-shadow:
+    0 2px 12px rgba(0, 0, 0, 0.5),
+    0 0 0 1px rgba(79, 172, 254, 0.08),
+    inset 0 1px 0 rgba(255, 255, 255, 0.08) !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  transition: all 0.22s cubic-bezier(0.4, 0, 0.2, 1) !important;
+  cursor: pointer !important;
+  overflow: hidden !important;
+  margin: 0 !important;
+}
+
+.predictions-page .premium-back-buttonzzz.game-back-button::before {
+  content: '' !important;
+  position: absolute !important;
+  inset: 0 !important;
+  border-radius: 11px !important;
+  background: linear-gradient(135deg, rgba(79, 172, 254, 0.18), rgba(0, 242, 254, 0.08));
+  opacity: 0 !important;
+  transition: opacity 0.22s ease !important;
+  z-index: 0 !important;
+}
+
+.predictions-page .premium-back-buttonzzz.game-back-button::after {
+  display: none !important;
+}
+
+.predictions-page .premium-back-buttonzzz.game-back-button:hover {
+  border-color: rgba(79, 172, 254, 0.7) !important;
+  box-shadow:
+    0 0 20px rgba(79, 172, 254, 0.28),
+    0 4px 16px rgba(0, 0, 0, 0.45),
+    0 0 0 1px rgba(79, 172, 254, 0.25) !important;
+  transform: translateX(-3px) !important;
+}
+
+.predictions-page .premium-back-buttonzzz.game-back-button:hover::before {
+  opacity: 1 !important;
+}
+
+.predictions-page .premium-back-buttonzzz.game-back-button:active {
+  transform: translateX(-1px) scale(0.95) !important;
+  transition: all 0.1s ease !important;
+}
+
+.predictions-page .premium-back-buttonzzz.game-back-button .back-arrow {
+  font-size: 18px !important;
+  font-weight: 600 !important;
+  color: #7ec8f8 !important;
+  transition: color 0.22s ease, transform 0.22s ease !important;
+  text-shadow: none !important;
+  display: inline-block !important;
+  position: relative !important;
+  z-index: 1 !important;
+  line-height: 1 !important;
+}
+
+.predictions-page .premium-back-buttonzzz.game-back-button:hover .back-arrow {
+  color: #fff !important;
+  transform: translateX(-3px) !important;
+}
+
+/* ── Breadcrumb nav — more legible ───────────────────────── */
+.predictions-page .breadcrumb {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 14px;
+  margin-bottom: 0 !important;
+  background: rgba(255, 255, 255, 0.04) !important;
+  border: 1px solid rgba(255, 255, 255, 0.08) !important;
+  border-radius: 100px !important;
+  backdrop-filter: blur(12px);
+  font-size: 0.82rem;
+  letter-spacing: 0.01em;
+}
+
+.predictions-page .breadcrumb-link {
+  color: rgba(160, 200, 255, 0.75);
+  text-decoration: none;
+  font-weight: 400;
+  transition: color 0.18s ease;
+}
+
+.predictions-page .breadcrumb-link:hover {
+  color: #7ec8f8;
+}
+
+.predictions-page .breadcrumb-separator {
+  color: rgba(255, 255, 255, 0.22);
+  user-select: none;
+  font-size: 0.75rem;
+}
+
+.predictions-page .breadcrumb-current {
+  color: #e0f2fe;
+  font-weight: 600;
+  background: none !important;
+  border: none !important;
+  padding: 0 !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+}
+
+/* ══════════════════════════════════════════════════════════
+   FILTER TABS + MY PREDICTIONS  — FULL REDESIGN
+   ══════════════════════════════════════════════════════════ */
+
+.predictions-filters {
+  display: flex;
+  align-items: center;
+  gap: 0;
+  flex-wrap: nowrap;
+  margin: 0 0 24px;
+  padding: 10px;
+  border: none !important;
+  /* Frosted pill container */
+  background: rgba(8, 18, 38, 0.65) !important;
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  border-radius: 16px !important;
+  border: 1px solid rgba(79, 172, 254, 0.12) !important;
+  box-shadow:
+    0 4px 24px rgba(0, 0, 0, 0.35),
+    inset 0 1px 0 rgba(255, 255, 255, 0.06);
+  /* stretch full row */
+  width: 100%;
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+
+.predictions-filters::-webkit-scrollbar {
+  display: none;
+}
+
+/* The four filter tabs — inside the pill container */
+.filter-tab {
+  flex-shrink: 0;
+  padding: 9px 22px;
+  border-radius: 11px;
+  border: 1px solid transparent;
+  background: transparent;
+  color: rgba(160, 195, 240, 0.55);
+  font-size: 0.84rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  white-space: nowrap;
+  letter-spacing: 0.01em;
+  position: relative;
+}
+
+.filter-tab:hover {
+  color: rgba(200, 225, 255, 0.9);
+  background: rgba(79, 172, 254, 0.08);
+}
+
+/* Active tab — glowing filled pill */
+.filter-tab.active {
+  background: linear-gradient(135deg, rgba(37, 99, 235, 0.75), rgba(14, 165, 233, 0.65));
+  border-color: rgba(79, 172, 254, 0.5);
+  color: #ffffff;
+  font-weight: 600;
+  box-shadow:
+    0 0 20px rgba(14, 165, 233, 0.35),
+    0 2px 8px rgba(0, 0, 0, 0.3),
+    inset 0 1px 0 rgba(255, 255, 255, 0.15);
+  text-shadow: 0 1px 6px rgba(79, 172, 254, 0.5);
+}
+
+/* Thin separator lines between non-active tabs */
+.filter-tab+.filter-tab:not(.active) {
+  /* subtle left border only when neither neighbour is active */
+}
+
+/* ── My Predictions — prominent CTA button ──────────────── */
+.my-predictions-link {
+  margin-left: auto;
+  flex-shrink: 0;
+
+  /* Solid glowing button — not a ghost link */
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 9px 20px;
+  border-radius: 11px;
+  background: linear-gradient(135deg, rgba(251, 191, 36, 0.18), rgba(245, 158, 11, 0.12));
+  border: 1.5px solid rgba(251, 191, 36, 0.45);
+  color: #fbbf24;
+  font-size: 0.84rem;
+  font-weight: 700;
+  text-decoration: none;
+  white-space: nowrap;
+  letter-spacing: 0.02em;
+  transition: all 0.22s ease;
+  box-shadow:
+    0 0 16px rgba(251, 191, 36, 0.1),
+    inset 0 1px 0 rgba(255, 255, 255, 0.08);
+}
+
+.my-predictions-link::after {
+  content: '→';
+  font-size: 1rem;
+  transition: transform 0.2s ease;
+  display: inline-block;
+}
+
+.my-predictions-link:hover {
+  background: linear-gradient(135deg, rgba(251, 191, 36, 0.28), rgba(245, 158, 11, 0.2));
+  border-color: rgba(251, 191, 36, 0.75);
+  color: #fde68a;
+  box-shadow:
+    0 0 28px rgba(251, 191, 36, 0.22),
+    0 4px 12px rgba(0, 0, 0, 0.3);
+  transform: translateY(-1px);
+  text-decoration: none;
+}
+
+.my-predictions-link:hover::after {
+  transform: translateX(3px);
+}
+
+/* ══════════════════════════════════════════════════════════
+   RESPONSIVE
+   ══════════════════════════════════════════════════════════ */
+
+@media (max-width: 768px) {
+  .predictions-page .breadcrumb-container-back {
+    gap: 10px;
+    padding-top: 12px;
+  }
+
+  .predictions-page .premium-back-buttonzzz.game-back-button {
+    width: 36px !important;
+    height: 36px !important;
+    border-radius: 10px !important;
+  }
+
+  .predictions-page .premium-back-buttonzzz.game-back-button .back-arrow {
+    font-size: 16px !important;
+  }
+
+  .predictions-filters {
+    border-radius: 14px !important;
+    padding: 4px;
+    gap: 0;
+  }
+
+  .filter-tab {
+    padding: 8px 14px;
+    font-size: 0.78rem;
+  }
+
+  .my-predictions-link {
+    padding: 8px 14px;
+    font-size: 0.78rem;
+  }
+}
+
+@media (max-width: 560px) {
+  .predictions-filters {
+    flex-wrap: nowrap;
+    overflow-x: auto;
+  }
+
+  .my-predictions-link {
+    /* On very small screens keep it compact */
+    padding: 8px 12px;
+    gap: 4px;
+  }
+
+  /* Hide "My Predictions" text, keep icon arrow */
+  .my-predictions-link span {
+    display: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+
+  .filter-tab,
+  .my-predictions-link,
+  .predictions-page .premium-back-buttonzzz.game-back-button {
+    transition: none !important;
+  }
+
+  .my-predictions-link:hover,
+  .filter-tab:hover {
+    transform: none !important;
+  }
+}
+
+
+.predictions-breadcrumb-bar {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 15px;
+}
+
+.prediction-hero {
+  position: relative;
+  border-radius: 20px;
+  overflow: hidden;
+  padding: 52px 48px 48px;
+  margin-top: 16px;
+  margin-bottom: 28px;
+  text-align: center;
+
+  /* layered background: darkening vignette → tinted overlay → stadium image */
+  background-image:
+    radial-gradient(ellipse at 50% 100%, rgba(0, 0, 0, 0.72) 0%, transparent 70%),
+    radial-gradient(ellipse at 50% 0%, rgba(6, 20, 50, 0.55) 0%, transparent 65%),
+    linear-gradient(180deg, rgba(4, 12, 36, 0.45) 0%, rgba(4, 12, 36, 0.65) 100%),
+    url('/images/pred-bg.jpg');
+  /* ← swap to your actual asset */
+  background-size: cover;
+  background-position: center 35%;
+  background-repeat: no-repeat;
+  isolation: isolate;
+}
+
+
+
+/* ── Featured team with avatar ───────────────────────────── */
+.featured-team {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+
+.featured-team-avatar {
+  width: 72px;
+  height: 72px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #0f2246 0%, #0c1a3a 100%);
+  border: 2px solid rgba(79, 172, 254, 0.25);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.45), 0 0 16px rgba(79, 172, 254, 0.1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 22px;
+  font-weight: 800;
+  color: #fff;
+  overflow: hidden;
+  transition: border-color 0.25s ease, box-shadow 0.25s ease;
+}
+
+.featured-prediction-card:hover .featured-team-avatar {
+  border-color: rgba(79, 172, 254, 0.5);
+  box-shadow: 0 4px 24px rgba(79, 172, 254, 0.2);
+}
+
+.featured-team-avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  padding: 6px;
+}
+
+
+/* ══════════════════════════════════════════════════════════
+   FEATURED CARD — DIAGONAL SPLIT PANEL
+   ══════════════════════════════════════════════════════════ */
+
+.featured-prediction-card {
+  position: relative;
+  border: 1px solid rgba(79, 172, 254, 0.28);
+  border-radius: 24px;
+  padding: 0 !important;
+  display: block !important;
+  grid-template-columns: unset !important;
+  margin-bottom: 32px;
+  overflow: hidden;
+  background: #071428;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.featured-prediction-card:hover {
+  border-color: rgba(79, 172, 254, 0.5);
+  box-shadow: 0 0 0 1px rgba(79, 172, 254, 0.08), 0 20px 60px rgba(0, 0, 0, 0.5);
+}
+
+/* Top glow line */
+.featured-prediction-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 10%;
+  right: 10%;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(79, 172, 254, 0.7), transparent);
+  pointer-events: none;
+  z-index: 10;
+}
+
+.featured-prediction-card::after {
+  display: none;
+}
+
+/* ── Header strip ── */
+.featured-card-header {
+  display: flex;
+  padding-bottom: 10px !important;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 20px 0;
+  position: relative;
+  z-index: 6;
+  background: rgba(7, 20, 40, 0.92);
+}
+
+.featured-card-eyebrow {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.featured-eyebrow-label {
+  font-size: 9px;
+  font-weight: 800;
+  letter-spacing: 2.5px;
+  text-transform: uppercase;
+  color: rgba(79, 172, 254, 0.65);
+}
+
+.featured-league-dot {
+  width: 3px;
+  height: 3px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.2);
+}
+
+.featured-league {
+  font-size: 11px;
+  font-weight: 700;
+  color: rgba(255, 255, 255, 0.5);
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+}
+
+/* ── Split panels ── */
+.featured-panels {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  height: 200px;
+  position: relative;
+}
+
+.featured-panel-left {
+  background-color: #142a5e;
+  background-size: 160%, cover;
+  background-position: center, center;
+  background-repeat: no-repeat;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  padding: 20px 60px 20px 28px;
+  clip-path: polygon(0 0, 88% 0, 100% 100%, 0 100%);
+  position: relative;
+}
+
+.featured-panel-right {
+  background-color: #0e2050;
+  background-size: 160%, cover;
+  background-position: center, center;
+  background-repeat: no-repeat;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  padding: 20px 28px 20px 60px;
+  clip-path: polygon(0 0, 100% 0, 100% 100%, 12% 100%);
+  position: relative;
+}
+
+/* Seam shadow between panels */
+.featured-panels::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: calc(50% - 2px);
+  width: 4px;
+  background: linear-gradient(180deg,
+      rgba(0, 0, 0, 0) 0%,
+      rgba(0, 0, 0, 0.85) 40%,
+      rgba(0, 0, 0, 0.85) 60%,
+      rgba(0, 0, 0, 0) 100%);
+  transform: skewX(-8deg);
+  pointer-events: none;
+  z-index: 2;
+}
+
+/* ── Team avatar ── */
+.featured-team-avatar {
+  width: 76px;
+  height: 76px;
+  border-radius: 50%;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 22px;
+  font-weight: 800;
+  color: #fff;
+  flex-shrink: 0;
+  border: 2.5px solid rgba(255, 255, 255, 0.55);
+  background: rgba(4, 14, 36, 0.6);
+  box-shadow:
+    0 4px 24px rgba(0, 0, 0, 0.65),
+    0 0 0 4px rgba(255, 255, 255, 0.07),
+    0 0 20px rgba(79, 172, 254, 0.15);
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+  backdrop-filter: blur(4px);
+}
+
+.featured-prediction-card:hover .featured-team-avatar {
+  border-color: rgba(255, 255, 255, 0.8);
+  box-shadow:
+    0 4px 28px rgba(0, 0, 0, 0.7),
+    0 0 0 4px rgba(79, 172, 254, 0.18),
+    0 0 28px rgba(79, 172, 254, 0.22);
+}
+
+.featured-team-avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  padding: 7px;
+  display: block;
+}
+
+/* ── Team name ── */
+.featured-team-name {
+  font-size: 16px;
+  font-weight: 900;
+  color: #fff;
+  text-align: center;
+  max-width: 170px;
+  line-height: 1.25;
+  letter-spacing: -0.2px;
+  text-shadow:
+    0 1px 3px rgba(0, 0, 0, 1),
+    0 2px 16px rgba(0, 0, 0, 0.9);
+  background: rgba(0, 0, 0, 0.45);
+  padding: 5px 14px;
+  border-radius: 50px;
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+/* ── VS circle ── */
+.featured-vs-circle {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #0c1e42, #071428);
+  border: 2px solid rgba(79, 172, 254, 0.45);
+  box-shadow:
+    0 0 0 5px rgba(79, 172, 254, 0.07),
+    0 0 0 9px rgba(7, 20, 40, 0.9),
+    0 4px 20px rgba(0, 0, 0, 0.7);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 11px;
+  font-weight: 800;
+  color: rgba(255, 255, 255, 0.55);
+  letter-spacing: 1.5px;
+  z-index: 5;
+}
+
+/* ── Footer ── */
+.featured-card-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 20px 18px;
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
+  background: rgba(7, 20, 40, 0.96);
+  position: relative;
+  z-index: 3;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.featured-info {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  flex-wrap: wrap;
+  font-size: 12px;
+  color: rgba(255, 255, 255, 0.4);
+}
+
+.featured-info-item {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.featured-info-icon {
+  font-size: 12px;
+  opacity: 0.6;
+}
+
+/* ── Predict button ── */
+.featured-predict-btn {
+  background: linear-gradient(135deg, #1d4ed8 0%, #0ea5e9 100%);
+  color: #fff;
+  border: none;
+  padding: 11px 28px;
+  border-radius: 50px;
+  font-size: 14px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.25s ease;
+  box-shadow: 0 4px 20px rgba(14, 165, 233, 0.35), inset 0 1px 0 rgba(255, 255, 255, 0.15);
+  white-space: nowrap;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  letter-spacing: 0.2px;
+  flex-shrink: 0;
+  position: relative;
+  overflow: hidden;
+}
+
+.featured-predict-btn::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.18), transparent);
+  transform: translateX(-100%);
+  transition: transform 0.5s ease;
+}
+
+.featured-predict-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 32px rgba(14, 165, 233, 0.52), inset 0 1px 0 rgba(255, 255, 255, 0.2);
+}
+
+.featured-predict-btn:hover::before {
+  transform: translateX(100%);
+}
+
+.featured-predict-btn:active {
+  transform: translateY(0) scale(0.98);
+}
+
+/* ── Responsive ── */
+@media (max-width: 560px) {
+  .featured-panels {
+    height: 165px;
+  }
+
+  .featured-panel-left {
+    padding: 16px 48px 16px 20px;
+  }
+
+  .featured-panel-right {
+    padding: 16px 20px 16px 48px;
+  }
+
+  .featured-team-avatar {
+    width: 58px;
+    height: 58px;
+    font-size: 17px;
+  }
+
+  .featured-team-name {
+    font-size: 13px;
+    max-width: 120px;
+  }
+
+  .featured-vs-circle {
+    width: 42px;
+    height: 42px;
+    font-size: 10px;
+  }
+
+  .featured-card-footer {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+  }
+
+  .featured-predict-btn {
+    width: 100%;
+    justify-content: center;
+  }
+}

@@ -1,3 +1,4 @@
+// react-app/src/data/selfHostedGames.js
 export const selfHostedGames = [
   {
     id: "warfare-area-2",
@@ -7,6 +8,7 @@ export const selfHostedGames = [
     category: "shooting",
     tagList: ["shooting", "action", "fps"],
     source: "self",
+    description: "Warfare Area 2 is an intense first-person shooter where you battle through waves of enemies. Equip powerful weapons, take cover, and eliminate all threats to survive. Fast-paced action awaits!",
   },
   {
     id: "assault-zone",
@@ -16,6 +18,7 @@ export const selfHostedGames = [
     category: "shooting",
     tagList: ["shooting", "action"],
     source: "self",
+    description: "Assault Zone puts you in the middle of an all-out warzone. Fight through enemy-controlled territory using a variety of weapons and tactics. Stay sharp and eliminate every opponent in your path!",
   },
   {
     id: "bullet-fury-2",
@@ -25,6 +28,7 @@ export const selfHostedGames = [
     category: "shooting",
     tagList: ["shooting", "fps", "action"],
     source: "self",
+    description: "Bullet Fury 2 is a high-octane FPS action game. Storm through enemy bases, unleash a hail of bullets, and prove you are the ultimate soldier. Can you make it through every level alive?",
   },
   {
     id: "park-the-police-car",
@@ -34,6 +38,7 @@ export const selfHostedGames = [
     category: "driving",
     tagList: ["driving", "parking", "cars"],
     source: "self",
+    description: "Park The Police Car is a fun parking challenge game. Navigate tight spaces, avoid obstacles, and park your police cruiser perfectly in the designated spot. Test your precision driving skills!",
   },
   {
     id: "game-the-cargo",
@@ -43,6 +48,7 @@ export const selfHostedGames = [
     category: "driving",
     tagList: ["driving", "cargo", "simulation"],
     source: "self",
+    description: "Game The Cargo is a tricky driving simulation where you must transport fragile cargo across challenging terrain. Drive carefully to keep your load balanced and deliver it safely to the destination.",
   },
   {
     id: "warfare-area-3",
@@ -52,6 +58,7 @@ export const selfHostedGames = [
     category: "shooting",
     tagList: ["shooting", "action", "fps"],
     source: "self",
+    description: "Warfare Area 3 takes the intense combat to the next level. Face tougher enemies, deadlier environments, and bigger challenges. Load up your weapons and fight your way to victory!",
   },
   {
     id: "truck-space",
@@ -61,6 +68,7 @@ export const selfHostedGames = [
     category: "driving",
     tagList: ["driving", "truck", "parking"],
     source: "self",
+    description: "Truck Space is a challenging parking game where you maneuver a large truck into tight spaces. Use your spatial awareness and precise control to park without crashing. How many levels can you complete?",
   },
   {
     id: "park-the-taxi-2",
@@ -70,6 +78,7 @@ export const selfHostedGames = [
     category: "driving",
     tagList: ["driving", "parking", "taxi"],
     source: "self",
+    description: "Park The Taxi 2 brings even more tricky parking puzzles to master. Guide your taxi through busy streets and squeeze into tight parking spots without a scratch. A must-play for driving game fans!",
   },
   {
     id: "hard-wheels-winter",
@@ -79,6 +88,7 @@ export const selfHostedGames = [
     category: "racing",
     tagList: ["racing", "cars", "winter"],
     source: "self",
+    description: "Hard Wheels Winter is a physics-based racing game set on icy, snow-covered tracks. Drive your vehicle across treacherous winter landscapes, navigate hills and obstacles, and reach the finish line in one piece!",
   },
   {
     id: "trials-ride-2",
@@ -88,6 +98,7 @@ export const selfHostedGames = [
     category: "racing",
     tagList: ["racing", "bike", "stunts"],
     source: "self",
+    description: "Trials Ride 2 is an exciting bike stunt game where you race through obstacle-filled courses. Balance your rider, pull off daring stunts, and reach the finish line without wiping out. Every track is a new challenge!",
   },
   {
     id: "tractor-trial-2",
@@ -97,6 +108,7 @@ export const selfHostedGames = [
     category: "racing",
     tagList: ["racing", "tractor", "stunts"],
     source: "self",
+    description: "Tractor Trial 2 is a unique physics-based driving game where you steer a rugged tractor through bumpy, obstacle-heavy courses. Tackle hills, ramps, and rough terrain to get your tractor to the finish!",
   },
   {
     id: "assault-time",
@@ -106,6 +118,7 @@ export const selfHostedGames = [
     category: "shooting",
     tagList: ["shooting", "action"],
     source: "self",
+    description: "Assault Time is a fast-paced shooting game where every second counts. Battle relentless waves of enemies and stay on the move to survive. Upgrade your arsenal and fight until the last bullet flies!",
   },
   {
     id: "hard-wheels-winter-2",
@@ -115,6 +128,7 @@ export const selfHostedGames = [
     category: "racing",
     tagList: ["racing", "cars", "winter"],
     source: "self",
+    description: "Hard Wheels Winter 2 returns with even more icy chaos! Conquer new winter tracks full of hills, ramps, and impossible slopes. Keep control of your vehicle and power through to the finish line!",
   },
   {
     id: "truck-space-2",
@@ -124,6 +138,7 @@ export const selfHostedGames = [
     category: "driving",
     tagList: ["driving", "truck", "parking"],
     source: "self",
+    description: "Truck Space 2 cranks up the parking difficulty with bigger trucks and tighter spots. Carefully navigate your heavy vehicle through increasingly complex environments. Precision is everything!",
   },
   {
     id: "park-the-taxi-3",
@@ -133,6 +148,7 @@ export const selfHostedGames = [
     category: "driving",
     tagList: ["driving", "parking", "taxi"],
     source: "self",
+    description: "Park The Taxi 3 takes parking challenges to the next level with trickier layouts and busier streets. Maneuver your taxi through traffic and nail the perfect park every time. Do you have the skills?",
   },
   {
     id: "the-cargo-2",
@@ -142,6 +158,7 @@ export const selfHostedGames = [
     category: "driving",
     tagList: ["driving", "cargo", "simulation"],
     source: "self",
+    description: "The Cargo 2 is a tough driving simulation game where you haul heavy loads across dangerous roads. Keep your cargo steady, avoid crashes, and deliver your goods safely across each challenging level.",
   },
   {
     id: "game-hasty-cargo",
@@ -151,5 +168,6 @@ export const selfHostedGames = [
     category: "driving",
     tagList: ["driving", "cargo", "simulation"],
     source: "self",
+    description: "Game Hasty Cargo is a race against the clock! Transport your cargo as fast as possible without losing your load. Bumpy roads, tight turns, and time pressure make every delivery a white-knuckle adventure.",
   },
 ];

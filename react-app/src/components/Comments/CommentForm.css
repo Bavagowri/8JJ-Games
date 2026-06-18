@@ -1,0 +1,433 @@
+/* react-app/src/components/Comments/CommentForm.css - PREMIUM VERSION */
+
+.comment-form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  background: linear-gradient(135deg, rgba(30, 41, 59, 0.6) 0%, rgba(51, 65, 85, 0.6) 100%);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  padding: 24px;
+  border-radius: 18px;
+  margin-bottom: 28px;
+  border: 1px solid rgba(79, 172, 254, 0.2);
+  box-shadow: 
+    0 4px 16px rgba(0, 0, 0, 0.2),
+    inset 0 1px 0 rgba(255, 255, 255, 0.05);
+  position: relative;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.comment-form::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(79, 172, 254, 0.4) 50%,
+    transparent 100%
+  );
+  border-radius: 18px 18px 0 0;
+}
+
+.comment-form:focus-within {
+  border-color: rgba(79, 172, 254, 0.4);
+  box-shadow: 
+    0 6px 24px rgba(79, 172, 254, 0.15),
+    0 0 0 1px rgba(79, 172, 254, 0.2),
+    inset 0 1px 0 rgba(255, 255, 255, 0.08);
+  transform: translateY(-2px);
+}
+
+.comment-form textarea {
+  width: 100%;
+  min-height: 120px;
+  padding: 16px;
+  background: rgba(15, 23, 42, 0.7);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border: 2px solid rgba(79, 172, 254, 0.2);
+  border-radius: 14px;
+  color: #ffffff;
+  font-size: 0.95rem;
+  font-family: inherit;
+  line-height: 1.6;
+  resize: vertical;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 
+    0 2px 8px rgba(0, 0, 0, 0.2),
+    inset 0 1px 0 rgba(255, 255, 255, 0.03);
+}
+
+.comment-form textarea::placeholder {
+  color: #64748b;
+  font-weight: 500;
+}
+
+.comment-form textarea:focus {
+  outline: none;
+  border-color: #4facfe;
+  background: rgba(15, 23, 42, 0.85);
+  box-shadow: 
+    0 0 0 3px rgba(79, 172, 254, 0.15),
+    0 4px 16px rgba(79, 172, 254, 0.2),
+    inset 0 1px 0 rgba(255, 255, 255, 0.06);
+}
+
+.comment-form textarea:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  background: rgba(15, 23, 42, 0.4);
+}
+
+/* Form Footer */
+.form-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 14px;
+}
+
+/* Character Count */
+.char-count {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: #94a3b8;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.char-count::before {
+  content: '✎';
+  font-size: 1rem;
+  opacity: 0.7;
+}
+
+.char-count.warning {
+  color: #fbbf24;
+  animation: pulse 2s ease-in-out infinite;
+}
+
+.char-count.warning::before {
+  content: '⚠';
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.7; }
+}
+
+/* Form Actions */
+.form-actions {
+  display: flex;
+  gap: 10px;
+}
+
+.form-actions button {
+  padding: 11px 24px;
+  border-radius: 12px;
+  font-size: 0.95rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  letter-spacing: 0.02em;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Submit Button */
+.form-actions button[type="submit"] {
+  background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+  border: none;
+  color: #ffffff;
+  box-shadow: 
+    0 4px 12px rgba(79, 172, 254, 0.4),
+    inset 0 1px 0 rgba(255, 255, 255, 0.2);
+  min-width: 140px;
+}
+
+.form-actions button[type="submit"]::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  transition: width 0.4s ease, height 0.4s ease;
+}
+
+.form-actions button[type="submit"]:hover:not(:disabled)::before {
+  width: 300px;
+  height: 300px;
+}
+
+.form-actions button[type="submit"]:hover:not(:disabled) {
+  transform: translateY(-3px);
+  box-shadow: 
+    0 6px 20px rgba(79, 172, 254, 0.5),
+    inset 0 1px 0 rgba(255, 255, 255, 0.3);
+}
+
+.form-actions button[type="submit"]:active:not(:disabled) {
+  transform: translateY(-1px);
+}
+
+.form-actions button[type="submit"]:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  transform: none;
+  background: linear-gradient(135deg, #64748b 0%, #475569 100%);
+  box-shadow: 
+    0 2px 6px rgba(0, 0, 0, 0.2),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1);
+}
+
+/* Cancel Button */
+.form-actions button[type="button"] {
+  background: rgba(79, 172, 254, 0.08);
+  border: 1px solid rgba(79, 172, 254, 0.25);
+  color: #94a3b8;
+  box-shadow: 
+    0 2px 6px rgba(0, 0, 0, 0.15),
+    inset 0 1px 0 rgba(255, 255, 255, 0.05);
+}
+
+.form-actions button[type="button"]:hover {
+  background: rgba(79, 172, 254, 0.15);
+  border-color: rgba(79, 172, 254, 0.4);
+  color: #4facfe;
+  transform: translateY(-2px);
+  box-shadow: 
+    0 4px 12px rgba(79, 172, 254, 0.15),
+    inset 0 1px 0 rgba(255, 255, 255, 0.08);
+}
+
+.form-actions button[type="button"]:active {
+  transform: translateY(0);
+}
+
+/* Loading State for Submit Button */
+.form-actions button[type="submit"]:disabled {
+  position: relative;
+}
+
+/* .form-actions button[type="submit"]:disabled::after {
+  content: '';
+  position: absolute;
+  right: 16px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 16px;
+  height: 16px;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  border-top-color: #ffffff;
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+} */
+
+@keyframes spin {
+  to { transform: translateY(-50%) rotate(360deg); }
+}
+
+/* Mobile Responsive */
+@media (max-width: 768px) {
+  .comment-form {
+    padding: 20px;
+    gap: 14px;
+    margin-bottom: 24px;
+  }
+
+  .comment-form textarea {
+    min-height: 100px;
+    padding: 14px;
+    font-size: 0.9rem;
+  }
+
+  .form-footer {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 12px;
+  }
+
+  .char-count {
+    font-size: 0.8rem;
+    order: 2;
+  }
+
+  .form-actions {
+    width: 100%;
+    order: 1;
+  }
+
+  .form-actions button {
+    flex: 1;
+    padding: 11px 18px;
+    font-size: 0.9rem;
+  }
+}
+
+@media (max-width: 640px) {
+  .comment-form {
+    padding: 18px;
+    border-radius: 16px;
+  }
+
+  .comment-form textarea {
+    padding: 12px;
+    font-size: 0.875rem;
+    border-radius: 12px;
+  }
+
+  .form-actions button {
+    padding: 10px 16px;
+    font-size: 0.875rem;
+    border-radius: 10px;
+  }
+
+  .form-actions button[type="submit"] {
+    min-width: 120px;
+  }
+}
+
+@media (max-width: 480px) {
+  .comment-form {
+    padding: 16px;
+  }
+
+  .comment-form textarea {
+    min-height: 90px;
+    padding: 12px;
+  }
+
+  .char-count {
+    font-size: 0.75rem;
+  }
+
+  .form-actions {
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .form-actions button {
+    width: 100%;
+    padding: 11px 16px;
+  }
+}
+
+/* Focus States for Accessibility */
+.comment-form textarea:focus-visible {
+  outline: 2px solid #4facfe;
+  outline-offset: 2px;
+}
+
+.form-actions button:focus-visible {
+  outline: 2px solid #4facfe;
+  outline-offset: 3px;
+}
+
+/* High Contrast Mode */
+@media (prefers-contrast: high) {
+  .comment-form {
+    border: 2px solid #4facfe;
+  }
+
+  .comment-form textarea {
+    border-width: 3px;
+  }
+
+  .form-actions button {
+    border-width: 2px;
+  }
+
+  .form-actions button[type="submit"] {
+    border: 2px solid #00f2fe;
+  }
+}
+
+/* Reduced Motion */
+@media (prefers-reduced-motion: reduce) {
+  .comment-form,
+  .comment-form textarea,
+  .form-actions button {
+    transition: none;
+  }
+
+  .form-actions button[type="submit"]::before {
+    display: none;
+  }
+
+  .char-count.warning {
+    animation: none;
+  }
+
+  @keyframes spin {
+    to { transform: translateY(-50%) rotate(0deg); }
+  }
+}
+
+/* Enhanced Visual Effects */
+.comment-form:hover {
+  border-color: rgba(79, 172, 254, 0.25);
+}
+
+/* Gradient animation for submit button */
+@keyframes gradientShift {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+.form-actions button[type="submit"]:not(:disabled) {
+  background-size: 200% 200%;
+  /* animation: gradientShift 3s ease infinite; */
+}
+
+/* Error Message Inline */
+.error-message-inline {
+  background: rgba(239, 68, 68, 0.1);
+  border: 1px solid rgba(239, 68, 68, 0.3);
+  border-radius: 10px;
+  padding: 12px 16px;
+  color: #fca5a5;
+  font-size: 0.9rem;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  animation: slideDown 0.3s ease-out;
+}
+
+.error-message-inline::before {
+  content: '⚠';
+  font-size: 1.1rem;
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Mobile Responsive for Error Message */
+@media (max-width: 640px) {
+  .error-message-inline {
+    font-size: 0.85rem;
+    padding: 10px 14px;
+  }
+}

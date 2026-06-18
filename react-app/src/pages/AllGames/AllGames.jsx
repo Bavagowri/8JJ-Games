@@ -18,21 +18,21 @@ export default function AllGames() {
   const [searchTerm, setSearchTerm] = useState("");
   const [page, setPage] = useState(1);
 
-  /* ✅ Load cached games ONCE */
+  /*  Load cached games ONCE */
   useEffect(() => {
-    const cached = localStorage.getItem("games");
+    const cached = typeof window !== "undefined" ? localStorage.getItem("games") : null;
     if (cached) {
       setGames(JSON.parse(cached));
     }
     setLoading(false);
   }, []);
 
-  /* ✅ Filter is derived — no state */
+  /*  Filter is derived — no state */
   const filteredGames = games.filter(game =>
     game.title.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
-  /* ✅ Paginated slice (derived, no loop) */
+  /*  Paginated slice (derived, no loop) */
   const displayedGames = filteredGames.slice(
     0,
     page * GAMES_PER_PAGE
@@ -113,7 +113,7 @@ export default function AllGames() {
         {displayedGames.map(game => (
           <GameCard
             key={game.id}
-            game={game}   // ✅ GameCard navigates by game.id
+            game={game}   //  GameCard navigates by game.id
           />
         ))}
       </div>

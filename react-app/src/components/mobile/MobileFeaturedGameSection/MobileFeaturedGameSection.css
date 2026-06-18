@@ -1,0 +1,88 @@
+/* react-app/src/components/mobile/MobileFeaturedGameSection/MobileFeaturedGameSection.css */
+.mobile-featured-sectionz {
+  padding: 15px 0;
+  background: linear-gradient(29deg, #10426a, #0d5f99e4 10%, #00000000 48%);
+
+}
+
+/* Horizontal scroll container */
+.mobile-featured-scroll {
+  display: flex;
+  gap: 14px;
+  padding: 8px 12px 4px;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+/* Hide scrollbar */
+.mobile-featured-scroll::-webkit-scrollbar {
+  display: none;
+}
+
+/* Card */
+.mobile-featured-card {
+  width: 150px;
+  height: 200px;
+  border-radius: 18px;
+  overflow: hidden;
+  position: relative;
+  background: #111;
+  flex-shrink: 0;
+  cursor: pointer;
+}
+
+/* Image */
+.mobile-featured-card img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Overlay */
+.mobile-featured-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top,
+      rgba(5, 10, 30, 0.95),
+      rgba(5, 10, 30, 0.6),
+      transparent);
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 12px;
+}
+
+/* Title */
+.mobile-featured-title {
+  font-size: 14px;
+  font-weight: 700;
+  color: #fff;
+  line-height: 1.2;
+}
+
+/* Category badge */
+.mobile-featured-category {
+  margin-top: 4px;
+  font-size: 11px;
+  text-transform: capitalize;
+  color: #8fecff;
+  background: rgba(20, 92, 120, 0.6);
+  padding: 5px 8px;
+  border-radius: 10px;
+  width: fit-content;
+}
+
+/* Reuse existing header styles */
+.mobile-section-featured-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 12px;
+  margin-bottom: 16px;
+}
+
+.mobile-section-featured-title {
+  font-size: 24px;
+  font-weight: 800;
+  color: #f1ffff;
+}

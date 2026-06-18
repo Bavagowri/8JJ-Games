@@ -1,0 +1,427 @@
+/* react-app/src/components/UniversalBanner/templates/CountdownBannerV2.css */
+
+
+
+/* ── Wrapper ── */
+.cd2-wrap {
+  position: relative;
+  width: 100%;
+  height: 260px;
+  margin: 20px 0;
+  border-radius: 16px;
+  overflow: hidden;
+  background-color: #06090e;
+
+  /* Premium edge framing */
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  box-shadow:
+    0 4px 24px rgba(0, 0, 0, 0.5),
+    0 16px 56px rgba(0, 0, 0, 0.4),
+    inset 0 1px 0 rgba(255, 255, 255, 0.05);
+}
+
+/* Background image */
+.cd2-bg {
+  position: absolute;
+  inset: 0;
+  width: 100%; height: 100%;
+  object-fit: cover;
+  object-position: center;
+  display: block;
+}
+
+/* Dark overlay */
+.cd2-overlay {
+  position: absolute; inset: 0; z-index: 1;
+  background: #060c18;
+}
+
+/* Noise texture */
+.cd2-noise {
+  position: absolute; inset: 0; z-index: 2;
+  pointer-events: none;
+  opacity: 0.028;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+  background-size: 200px;
+}
+
+/* Diagonal slash panel separator — the signature visual element */
+.cd2-slash {
+  position: absolute;
+  z-index: 3;
+  top: 0; bottom: 0;
+  /* sits at ~52% from left, slants right */
+  left: 50%;
+  width: 120px;
+  transform: translateX(-50%) skewX(-8deg);
+  pointer-events: none;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(var(--accent-rgb, 255, 208, 0), 0.025) 40%,
+    rgba(var(--accent-rgb, 255, 208, 0), 0.025) 60%,
+    transparent 100%
+  );
+  border-left:  1px solid rgba(255, 255, 255, 0.05);
+  border-right: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+/* Character art */
+.cd2-char {
+  position: absolute;
+  bottom: 0;
+  /* centred on the slash */
+  left: 48%;
+  transform: translateX(-50%);
+  height: 65%;
+  width: auto;
+  object-fit: contain;
+  object-position: bottom center;
+  z-index: 4;
+  pointer-events: none; user-select: none;
+  filter: drop-shadow(0 0 24px rgba(0, 0, 0, 0.8));
+  opacity: 0.45;
+}
+
+/* ── Body layout ── */
+.cd2-body {
+  position: relative; z-index: 5;
+  height: 100%;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
+}
+
+/* ══════════════════════════════════════
+   LEFT PANEL — Promo copy
+══════════════════════════════════════ */
+.cd2-left {
+  padding: 0 40px 0 44px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+/* Eyebrow row: rule + badge */
+.cd2-eyebrow-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 2px;
+}
+
+.cd2-rule {
+  width: 32px;
+  height: 2px;
+  background: var(--accent, #ffd000);
+  flex-shrink: 0;
+  border-radius: 1px;
+}
+
+.cd2-badge {
+  font-family: 'Oswald', sans-serif;
+  font-size: 9px;
+  font-weight: 600;
+  letter-spacing: 2.5px;
+  text-transform: uppercase;
+  color: var(--accent, #ffd000);
+  border: 1px solid var(--accent, #ffd000);
+  padding: 2px 9px;
+  border-radius: 2px;
+  /* No background fill — pure outline */
+}
+
+.cd2-eyebrow {
+  font-family: 'Oswald', sans-serif;
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.45);
+  margin: 0;
+}
+
+.cd2-title {
+  font-family: 'Anton', sans-serif;
+  font-size: 34px;
+  font-weight: 400; /* Anton has no weight variants */
+  color: #fff;
+  margin: 0;
+  line-height: 1.0;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  text-shadow: 0 2px 20px rgba(0, 0, 0, 0.7);
+}
+
+.cd2-subtitle {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 12.5px;
+  font-weight: 300;
+  color: rgba(255, 255, 255, 0.48);
+  margin: 0;
+  line-height: 1.55;
+  max-width: 320px;
+}
+
+/* ── CTA — Outlined with fill-in ── */
+.cd2-cta {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  margin-top: 4px;
+  padding: 0;
+  border: 1.5px solid var(--accent, #ffd000);
+  background: transparent;
+  border-radius: 3px;
+  cursor: pointer;
+  width: fit-content;
+  overflow: hidden;
+  transition: border-color 0.25s ease;
+}
+
+/* Fill sweeps in from left */
+.cd2-cta-fill {
+  position: absolute;
+  inset: 0;
+  background: var(--accent, #ffd000);
+  transform: translateX(-101%);
+  transition: transform 0.28s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.cd2-cta:hover .cd2-cta-fill {
+  transform: translateX(0);
+}
+
+.cd2-cta-label {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 22px;
+  font-family: 'Oswald', sans-serif;
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--accent, #ffd000);
+  transition: color 0.25s ease;
+}
+
+.cd2-cta:hover .cd2-cta-label {
+  color: #060c18;
+}
+
+.cd2-cta-icon {
+  transition: transform 0.25s ease;
+}
+.cd2-cta:hover .cd2-cta-icon {
+  transform: translateX(3px);
+}
+
+.cd2-cta:active {
+  opacity: 0.88;
+}
+
+/* ══════════════════════════════════════
+   RIGHT PANEL — Timer
+══════════════════════════════════════ */
+.cd2-right {
+  padding: 0 44px 0 40px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 10px;
+  position: relative;
+}
+
+.cd2-timer-label {
+  font-family: 'Oswald', sans-serif;
+  font-size: 9px;
+  font-weight: 500;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.35);
+  margin: 0;
+  align-self: flex-end;
+}
+
+.cd2-timer-row {
+  display: flex;
+  align-items: flex-start;
+  gap: 4px;
+}
+
+.cd2-unit {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+}
+
+/* Digit box — frameless, floating number style */
+.cd2-digit-box {
+  position: relative;
+  width: 76px; height: 76px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.07);
+  border-radius: 6px;
+  overflow: hidden;
+}
+
+/* Horizontal mid-line for flip clock feel */
+.cd2-digit-mid {
+  position: absolute;
+  left: 0; right: 0;
+  top: 50%;
+  height: 1px;
+  background: rgba(255, 255, 255, 0.07);
+  z-index: 0;
+}
+
+/* Top-left mini glow corner */
+.cd2-digit-box::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0;
+  width: 40%; height: 40%;
+  background: radial-gradient(circle at 0 0, rgba(var(--accent-rgb, 255, 208, 0), 0.12), transparent 70%);
+  pointer-events: none;
+}
+
+/* Gold foil gradient digit */
+.cd2-digit-num {
+  position: relative; z-index: 1;
+  font-family: 'Anton', sans-serif;
+  font-size: 36px;
+  font-weight: 400;
+  letter-spacing: 1px;
+  font-variant-numeric: tabular-nums;
+  /* Gold foil gradient */
+  background: linear-gradient( 180deg,#ffffff 0%,#ccc 10%,var(--accent, #02314c) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  display: block;
+}
+
+/* Flip animation */
+.cd2-digit-num.cd2-flip {
+  animation: cd2-flip-in 0.22s ease both;
+}
+
+@keyframes cd2-flip-in {
+  0%   { transform: translateY(-20%); opacity: 0.5; }
+  100% { transform: translateY(0);    opacity: 1;   }
+}
+
+/* Unit label */
+.cd2-unit-label {
+  font-family: 'Oswald', sans-serif;
+  font-size: 8px;
+  font-weight: 500;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.3);
+  margin-top: 5px;
+}
+
+/* Colon separator */
+.cd2-sep {
+  font-family: 'Anton', sans-serif;
+  font-size: 32px;
+  line-height: 76px; /* align to digit-box height */
+  color: rgba(255, 255, 255, 0.2);
+  align-self: flex-start;
+  padding: 0 2px;
+  /* push down slightly so : aligns with digit mid */
+  margin-bottom: 18px; /* accounts for unit-label below */
+}
+
+/* No-date placeholder */
+.cd2-no-date {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 12px;
+  color: rgba(255, 255, 255, 0.3);
+  font-style: italic;
+}
+
+/* ── Urgency strip ── */
+.cd2-urgency-strip {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  font-family: 'Oswald', sans-serif;
+  font-size: 9px;
+  font-weight: 600;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--accent, #ffd000);
+  opacity: 0.85;
+}
+
+.cd2-urgency-dot {
+  width: 5px; height: 5px;
+  border-radius: 50%;
+  background: var(--accent, #ffd000);
+  animation: cd2-urgency-blink 0.7s ease-in-out infinite alternate;
+  flex-shrink: 0;
+}
+
+@keyframes cd2-urgency-blink {
+  from { opacity: 1; box-shadow: 0 0 6px var(--accent, #ffd000); }
+  to   { opacity: 0.3; box-shadow: none; }
+}
+
+/* Urgency mode — subtle red tint on border */
+.cd2-urgency {
+  border-color: rgba(255, 60, 60, 0.18);
+  box-shadow:
+    0 4px 24px rgba(0, 0, 0, 0.5),
+    0 16px 56px rgba(0, 0, 0, 0.4),
+    0 0 40px rgba(255, 60, 60, 0.06),
+    inset 0 1px 0 rgba(255, 255, 255, 0.05);
+}
+
+/* ══════════════════════════════════════
+   RESPONSIVE
+══════════════════════════════════════ */
+@media (max-width: 1100px) {
+  .cd2-title      { font-size: 28px; }
+  .cd2-digit-box  { width: 66px; height: 66px; }
+  .cd2-digit-num  { font-size: 30px; }
+  .cd2-sep        { font-size: 26px; line-height: 66px; }
+  .cd2-left       { padding: 0 28px 0 36px; }
+  .cd2-right      { padding: 0 36px 0 28px; }
+}
+
+@media (max-width: 860px) {
+  .cd2-wrap       { height: auto; }
+  .cd2-body       { grid-template-columns: 1fr; padding: 32px 28px; gap: 28px; }
+  .cd2-slash      { display: none; }
+  .cd2-char       { display: none; }
+  .cd2-left       { padding: 0; }
+  .cd2-right      { padding: 0; align-items: flex-start; }
+  .cd2-title      { font-size: 30px; }
+  .cd2-timer-label { align-self: flex-start; }
+}
+
+@media (max-width: 600px) {
+  .cd2-wrap       { border-radius: 12px; }
+  .cd2-body       { padding: 24px 20px; gap: 22px; }
+  .cd2-title      { font-size: 24px; }
+  .cd2-digit-box  { width: 58px; height: 58px; }
+  .cd2-digit-num  { font-size: 26px; }
+  .cd2-sep        { font-size: 22px; line-height: 58px; }
+  .cd2-subtitle   { font-size: 12px; }
+}
+
+@media (max-width: 420px) {
+  .cd2-digit-box  { width: 52px; height: 52px; border-radius: 4px; }
+  .cd2-digit-num  { font-size: 23px; }
+  .cd2-sep        { font-size: 20px; line-height: 52px; }
+  .cd2-title      { font-size: 21px; }
+  .cd2-timer-row  { gap: 2px; }
+}

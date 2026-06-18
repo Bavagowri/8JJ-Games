@@ -1,0 +1,255 @@
+/* react-app/src/components/PointsBanner/MobilePointsBanner.css */
+
+
+.mobile-pts-banner {
+    margin: 0 16px 30px;
+    
+    border-radius: var(--radius-lg, 16px);
+    background: linear-gradient(135deg,
+            rgba(6, 26, 42, 0.92) 0%,
+            rgba(8, 50, 70, 0.88) 55%,
+            rgba(6, 26, 42, 0.92) 100%);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(0, 180, 230, 0.22);
+    box-shadow:
+        0 4px 20px rgba(0, 0, 0, 0.35),
+        0 0 0 1px rgba(0, 212, 255, 0.07);
+    overflow: hidden;
+    position: relative;
+
+    /* Slide-in animation */
+    animation: mobileBannerIn 0.4s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+/* Exit state */
+.mobile-pts-banner--exit {
+    animation: mobileBannerOut 0.32s cubic-bezier(0.55, 0, 1, 0.45) forwards;
+}
+
+/* ── Animations ── */
+@keyframes mobileBannerIn {
+    from {
+        opacity: 0;
+        transform: translateY(-14px);
+        max-height: 0;
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+        max-height: 160px;
+    }
+}
+
+@keyframes mobileBannerOut {
+    from {
+        opacity: 1;
+        transform: translateY(0);
+        max-height: 160px;
+        padding: 10px 14px 12px;
+    }
+
+    to {
+        opacity: 0;
+        transform: translateY(-14px);
+        max-height: 0;
+        padding: 0 14px;
+        border-width: 0;
+    }
+}
+
+/* Top cyan accent line */
+.mobile-pts-banner__accent {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: linear-gradient(90deg,
+            transparent 0%,
+            rgba(0, 212, 255, 0.65) 50%,
+            transparent 100%);
+}
+
+/* ── Main row ── */
+.mobile-pts-banner__body {
+    display: flex;
+    align-items: center;
+    text-align: center;
+    gap: 10px;
+    padding: 12px 14px 6px;
+}
+
+/* Coin icon */
+.mobile-pts-banner__coin {
+    font-size: 22px;
+    flex-shrink: 0;
+    filter: drop-shadow(0 0 6px rgba(255, 215, 0, 0.5));
+    animation: mobileCoinglow 2.4s ease-in-out infinite;
+}
+
+@keyframes mobileCoinglow {
+
+    0%,
+    100% {
+        filter: drop-shadow(0 0 5px rgba(255, 215, 0, 0.4));
+    }
+
+    50% {
+        filter: drop-shadow(0 0 12px rgba(255, 215, 0, 0.7));
+    }
+}
+
+/* Text block */
+.mobile-pts-banner__text {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 1px;
+    min-width: 0;
+}
+
+.mobile-pts-banner__headline {
+    font-size: 12px;
+    font-weight: 700;
+    color: #00d4ff;
+    letter-spacing: 0.2px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.mobile-pts-banner__sub {
+    font-size: 11px;
+    color: rgba(255, 255, 255, 0.5);
+}
+
+.mobile-pts-banner__sub strong {
+    color: #ffd700;
+    font-weight: 700;
+}
+
+/* Dismiss button */
+.mobile-pts-banner__dismiss {
+    flex-shrink: 0;
+    background: none;
+    border: none;
+    color: rgba(255, 255, 255, 0.4);
+    padding: 4px;
+    border-radius: 6px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: color 0.15s, background 0.15s;
+    -webkit-tap-highlight-color: transparent;
+}
+
+.mobile-pts-banner__dismiss:hover,
+.mobile-pts-banner__dismiss:active {
+    color: #fff;
+    background: rgba(255, 255, 255, 0.08);
+}
+
+/* ── CTA row ── */
+.mobile-pts-banner__ctas {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 0 14px 12px;
+    flex-wrap: nowrap;
+    justify-content: center;
+}
+
+/* Shared button base */
+.mobile-pts-banner__btn {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    border: none;
+    border-radius: 20px;
+    cursor: pointer;
+    font-size: 12px;
+    font-weight: 700;
+    padding: 7px 14px;
+    white-space: nowrap;
+    transition: transform 0.15s ease, box-shadow 0.15s ease;
+    -webkit-tap-highlight-color: transparent;
+    letter-spacing: 0.2px;
+}
+
+.mobile-pts-banner__btn:active {
+    transform: scale(0.95);
+}
+
+/* Log In — blue gradient, matching .premium-play-button palette */
+.mobile-pts-banner__btn--login {
+    background: linear-gradient(135deg, #033645, #48a9ff);
+    color: #fff;
+    box-shadow: 0 3px 10px rgba(72, 169, 255, 0.3);
+}
+
+.mobile-pts-banner__btn--login:hover {
+    box-shadow: 0 5px 16px rgba(72, 169, 255, 0.5);
+}
+
+/* Register — ghost style */
+.mobile-pts-banner__btn--register {
+    background: transparent;
+    border: 1px solid rgba(0, 212, 255, 0.35);
+    color: #00d4ff;
+}
+
+.mobile-pts-banner__btn--register:hover,
+.mobile-pts-banner__btn--register:active {
+    background: rgba(0, 212, 255, 0.08);
+    border-color: rgba(0, 212, 255, 0.6);
+}
+
+/* Gold reward pills (hidden on very small screens) */
+.mobile-pts-banner__pills {
+    display: none;
+    gap: 5px;
+    margin-left: auto;
+    flex-shrink: 0;
+}
+
+.mobile-pts-banner__pill {
+    background: rgba(255, 215, 0, 0.1);
+    border: 1px solid rgba(255, 215, 0, 0.25);
+    border-radius: 10px;
+    padding: 3px 8px;
+    font-size: 10px;
+    color: #ffd700;
+    font-weight: 600;
+    white-space: nowrap;
+}
+
+/* ── Responsive ── */
+
+/* Hide pills on narrow phones to prevent overflow */
+@media (max-width: 380px) {
+    .mobile-pts-banner__pills {
+        display: none;
+    }
+
+    .mobile-pts-banner__headline {
+        font-size: 11px;
+    }
+
+    .mobile-pts-banner__btn {
+        font-size: 11px;
+        padding: 6px 11px;
+    }
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+
+    .mobile-pts-banner,
+    .mobile-pts-banner--exit,
+    .mobile-pts-banner__coin {
+        animation: none;
+    }
+}

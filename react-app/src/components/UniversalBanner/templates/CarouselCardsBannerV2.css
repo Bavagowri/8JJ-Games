@@ -1,0 +1,535 @@
+/* react-app/src/components/UniversalBanner/templates/CarouselCardsBannerV2.css */
+
+
+
+/* ── Wrapper ── */
+.ccb2-wrap {
+  position: relative;
+  width: 100%;
+  margin: 24px 0;
+  /* subtle ambient glow behind the whole section */
+  filter: drop-shadow(0 0 60px rgba(0, 229, 255, 0.04));
+}
+
+/* ── Scrollable Track ── */
+.ccb2-track {
+  display: flex;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+  padding-bottom: 2px;
+}
+
+.ccb2-track::-webkit-scrollbar {
+  display: none;
+}
+
+/* ══════════════════════════════════════
+   CARD
+══════════════════════════════════════ */
+.ccb2-card {
+  scroll-snap-align: start;
+  position: relative;
+  overflow: hidden;
+  background-size: cover;
+  background-position: center top;
+  background-color: #060b14;
+  cursor: pointer;
+  display: flex;
+  align-items: flex-end;
+
+  /* Premium border with glass shine */
+  border: 0px solid rgba(255, 255, 255, 0.07);
+  outline: 1px solid rgba(0, 229, 255, 0.0);
+
+  /* Depth shadow stack */
+  box-shadow:
+    0 2px 8px rgba(0, 0, 0, 0.6),
+    0 8px 32px rgba(0, 0, 0, 0.5),
+    0 0 0 1px rgba(0, 229, 255, 0.0),
+    inset 0 1px 0 rgba(255, 255, 255, 0.06);
+
+  transition:
+    transform 0.3s cubic-bezier(0.22, 1, 0.36, 1),
+    box-shadow 0.3s cubic-bezier(0.22, 1, 0.36, 1),
+    outline-color 0.3s ease,
+    border-color 0.3s ease;
+}
+
+.ccb2-card:hover {
+  transform: translateY(-6px) scale(1.015);
+  box-shadow:
+    0 4px 16px rgba(0, 0, 0, 0.7),
+    0 16px 56px rgba(0, 0, 0, 0.6),
+    0 0 0 1px rgba(var(--accent-rgb, 0, 229, 255), 0.35),
+    0 0 40px rgba(var(--accent-rgb, 0, 229, 255), 0.12),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  border-color: rgba(0, 229, 255, 0.22);
+  z-index: 2;
+}
+
+.ccb2-card:active {
+  transform: translateY(-3px) scale(1.005);
+}
+
+/* ── Overlays ── */
+.ccb2-overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background:
+    linear-gradient(180deg,
+      rgba(2, 6, 15, 0.15) 0%,
+      rgba(2, 6, 15, 0.35) 35%,
+      rgba(2, 6, 15, 0.72) 65%,
+      rgba(2, 6, 15, 0.97) 100%);
+  /* also a subtle left-side vignette so text is always readable */
+}
+
+/* Scanlines — very subtle CRT/arcade feel */
+.ccb2-scanlines {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  pointer-events: none;
+  background-image: repeating-linear-gradient(0deg,
+      transparent,
+      transparent 2px,
+      rgba(0, 0, 0, 0.10) 2px,
+      rgba(0, 0, 0, 0.10) 4px);
+  opacity: 0.45;
+}
+
+/* Neon border glow ring — appears on hover */
+.ccb2-border-glow {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  border-radius: inherit;
+  pointer-events: none;
+  opacity: 0;
+  box-shadow:
+    inset 0 0 20px rgba(0, 229, 255, 0.12),
+    inset 0 0 1px rgba(0, 229, 255, 0.5);
+  transition: opacity 0.35s ease;
+}
+
+.ccb2-card:hover .ccb2-border-glow {
+  opacity: 1;
+  box-shadow:
+    inset 0 0 24px rgba(var(--accent-rgb, 0, 229, 255), 0.15),
+    inset 0 0 1px var(--accent, #00e5ff);
+}
+
+/* Corner bracket decorations */
+.ccb2-corner {
+  position: absolute;
+  width: 18px;
+  height: 18px;
+  z-index: 5;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.ccb2-card:hover .ccb2-corner {
+  opacity: 1;
+}
+
+.ccb2-corner-tl {
+  top: 10px;
+  left: 10px;
+  border-top: 2px solid var(--accent, #00e5ff);
+  border-left: 2px solid var(--accent, #00e5ff);
+  border-radius: 2px 0 0 0;
+}
+
+.ccb2-corner-br {
+  bottom: 10px;
+  right: 10px;
+  border-bottom: 2px solid var(--accent, #00e5ff);
+  border-right: 2px solid var(--accent, #00e5ff);
+  border-radius: 0 0 2px 0;
+}
+
+/* Shimmer sweep — diagonal light on hover */
+.ccb2-shimmer-sweep {
+  position: absolute;
+  inset: 0;
+  z-index: 3;
+  pointer-events: none;
+  background: linear-gradient(115deg,
+      transparent 30%,
+      rgba(255, 255, 255, 0.045) 50%,
+      transparent 70%);
+  transform: translateX(-100%);
+  transition: none;
+}
+
+.ccb2-card:hover .ccb2-shimmer-sweep {
+  transform: translateX(100%);
+  transition: transform 0.55s ease;
+}
+
+/* Character image */
+.ccb2-char {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  width: auto;
+  max-width: 100px;
+  margin-right: 10px;
+  object-fit: contain;
+  object-position: bottom right;
+  z-index: 4;
+  pointer-events: none;
+  user-select: none;
+  /* Character glow */
+  filter: drop-shadow(-6px 0 18px rgba(0, 0, 0, 0.8));
+  transform: translateX(4px);
+  transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1), filter 0.4s ease;
+}
+
+.ccb2-card:hover .ccb2-char {
+  transform: translateX(0px) scale(1.03);
+  filter: drop-shadow(-6px 0 22px rgba(0, 0, 0, 0.7)) drop-shadow(0 0 20px rgba(0, 229, 255, 0.15));
+}
+
+/* ── Live Badge (replaces flat badge) ── */
+.ccb2-live-badge {
+  position: absolute;
+  top: 14px;
+  left: 14px;
+  z-index: 6;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 4px 10px 4px 8px;
+  border-radius: 4px;
+  font-family: 'Rajdhani', sans-serif;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 1.8px;
+  text-transform: uppercase;
+  color: #000;
+  /* clip corners for a hexagonal feel */
+  clip-path: polygon(6px 0%, 100% 0%, calc(100% - 6px) 100%, 0% 100%);
+}
+
+.ccb2-live-dot {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: rgba(0, 0, 0, 0.5);
+  animation: ccb2-pulse 1.4s ease-in-out infinite;
+}
+
+@keyframes ccb2-pulse {
+
+  0%,
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+
+  50% {
+    opacity: 0.4;
+    transform: scale(0.7);
+  }
+}
+
+/* ── Content ── */
+.ccb2-content {
+  position: relative;
+  z-index: 6;
+  padding: 16px 18px 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  max-width: 68%;
+}
+
+.ccb2-eyebrow {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-family: 'Rajdhani', sans-serif;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  margin: 0;
+  opacity: 0.92;
+}
+
+.ccb2-eyebrow-line {
+  display: inline-block;
+  width: 16px;
+  height: 2px;
+  border-radius: 1px;
+  flex-shrink: 0;
+}
+
+.ccb2-title {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 22px;
+  font-weight: 900;
+  color: #fff;
+  margin: 0;
+  line-height: 1.1;
+  letter-spacing: 0.3px;
+  text-transform: uppercase;
+  text-shadow:
+    0 2px 12px rgba(0, 0, 0, 0.9),
+    0 0 30px rgba(0, 0, 0, 0.5);
+}
+
+.ccb2-sub {
+  font-family: 'Barlow', sans-serif;
+  font-size: 11.5px;
+  font-weight: 400;
+  color: rgba(255, 255, 255, 0.52);
+  margin: 0;
+  line-height: 1.5;
+  letter-spacing: 0.2px;
+}
+
+/* ── CTA Button — premium gaming style ── */
+.ccb2-cta {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  padding: 0;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  width: fit-content;
+  margin-top: 6px;
+  border-radius: 4px;
+  overflow: visible;
+}
+
+.ccb2-cta-bg {
+  position: absolute;
+  inset: 0;
+  background: var(--accent, #00e5ff);
+  border-radius: 4px;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  clip-path: polygon(8px 0%, 100% 0%, calc(100% - 8px) 100%, 0% 100%);
+}
+
+.ccb2-cta-text {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 20px 8px 16px;
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 13px;
+  font-weight: 800;
+  letter-spacing: 1.2px;
+  text-transform: uppercase;
+  color: #060b14;
+  transition: gap 0.2s ease;
+}
+
+.ccb2-cta:hover .ccb2-cta-bg {
+  box-shadow: 0 0 24px rgba(var(--accent-rgb, 0, 229, 255), 0.55);
+  transform: scaleX(1.04);
+}
+
+.ccb2-cta:hover .ccb2-cta-text {
+  gap: 9px;
+}
+
+.ccb2-cta:active .ccb2-cta-bg {
+  transform: scaleX(0.97);
+  box-shadow: none;
+}
+
+/* ── Bottom Accent Bar ── */
+.ccb2-bottom-bar {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  z-index: 6;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.ccb2-card:hover .ccb2-bottom-bar {
+  opacity: 1;
+}
+
+/* ══════════════════════════════════════
+   ARROWS
+══════════════════════════════════════ */
+.ccb2-arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 10;
+  width: 38px;
+  height: 38px;
+  border-radius: 4px;
+
+  /* Dark glass base */
+  background: rgba(6, 11, 20, 0.88);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: var(--accent, #00e5ff);
+  cursor: pointer;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  clip-path: polygon(6px 0%, 100% 0%, calc(100% - 6px) 100%, 0% 100%);
+
+  transition:
+    background 0.2s ease,
+    box-shadow 0.2s ease,
+    transform 0.2s ease;
+
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  box-shadow:
+    0 4px 16px rgba(0, 0, 0, 0.5),
+    inset 0 1px 0 rgba(255, 255, 255, 0.08);
+}
+
+.ccb2-arrow:hover {
+  background: rgba(0, 229, 255, 0.12);
+  box-shadow:
+    0 4px 20px rgba(0, 0, 0, 0.6),
+    0 0 20px rgba(0, 229, 255, 0.2),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  transform: translateY(-50%) scale(1.08);
+}
+
+.ccb2-arrow:active {
+  transform: translateY(-50%) scale(0.96);
+}
+
+.ccb2-arrow-prev {
+  left: -14px;
+}
+
+.ccb2-arrow-next {
+  right: -14px;
+}
+
+/* ══════════════════════════════════════
+   RESPONSIVE
+══════════════════════════════════════ */
+@media (max-width: 1200px) {
+  .ccb2-title {
+    font-size: 19px;
+  }
+}
+
+@media (max-width: 1024px) {
+  .ccb2-title {
+    font-size: 17px;
+  }
+
+  .ccb2-content {
+    max-width: 72%;
+    padding: 14px 16px 18px;
+  }
+
+  .ccb2-arrow-prev {
+    left: -10px;
+  }
+
+  .ccb2-arrow-next {
+    right: -10px;
+  }
+}
+
+@media (max-width: 768px) {
+  .ccb2-arrow {
+    display: none;
+  }
+
+  .ccb2-title {
+    font-size: 18px;
+  }
+
+  .ccb2-content {
+    max-width: 78%;
+    padding: 12px 14px 16px;
+  }
+
+  .ccb2-eyebrow {
+    font-size: 9px;
+  }
+
+  .ccb2-cta-text {
+    font-size: 12px;
+    padding: 7px 16px 7px 14px;
+  }
+
+  /* On mobile, prevent cards from being too wide */
+  .ccb2-card {
+    scroll-snap-align: center;
+  }
+}
+
+@media (max-width: 480px) {
+  .ccb2-title {
+    font-size: 16px;
+  }
+
+  .ccb2-sub {
+    display: none;
+  }
+
+  .ccb2-corner {
+    display: none;
+  }
+}
+
+/* ══════════════════════════════════════
+   ENTRY ANIMATION — stagger on load
+══════════════════════════════════════ */
+.ccb2-card {
+  animation: ccb2-card-enter 0.45s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.ccb2-card:nth-child(1) {
+  animation-delay: 0.05s;
+}
+
+.ccb2-card:nth-child(2) {
+  animation-delay: 0.12s;
+}
+
+.ccb2-card:nth-child(3) {
+  animation-delay: 0.19s;
+}
+
+.ccb2-card:nth-child(4) {
+  animation-delay: 0.26s;
+}
+
+.ccb2-card:nth-child(5) {
+  animation-delay: 0.33s;
+}
+
+.ccb2-card:nth-child(6) {
+  animation-delay: 0.40s;
+}
+
+@keyframes ccb2-card-enter {
+  from {
+    opacity: 0;
+    transform: translateY(16px) scale(0.97);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}

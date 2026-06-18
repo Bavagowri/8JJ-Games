@@ -1,0 +1,446 @@
+/* react-app/src/pages/Predictions/PredictionDetails.css */
+
+/* ── Breadcrumb bar — identical to PredictionsHome ── */
+.prediction-details-page .predictions-breadcrumb-bar {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.prediction-details-page .BackBTNcontainer { flex-shrink: 0; }
+
+.prediction-details-page .premium-back-buttonzzz.game-back-button {
+  position: unset !important;
+  left: unset !important;
+  width: 40px !important;
+  height: 46px !important;
+  border-radius: 12px !important;
+  background: linear-gradient(135deg, rgba(14,26,50,0.85), rgba(10,20,42,0.9)) !important;
+  backdrop-filter: blur(16px) !important;
+  -webkit-backdrop-filter: blur(16px) !important;
+  border: 1.5px solid rgba(79,172,254,0.35) !important;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.5), 0 0 0 1px rgba(79,172,254,0.08), inset 0 1px 0 rgba(255,255,255,0.08) !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  transition: all 0.22s cubic-bezier(0.4,0,0.2,1) !important;
+  cursor: pointer !important;
+  overflow: hidden !important;
+  margin: 0 !important;
+}
+
+.prediction-details-page .premium-back-buttonzzz.game-back-button::before {
+  content: '' !important;
+  position: absolute !important;
+  inset: 0 !important;
+  border-radius: 11px !important;
+  background: linear-gradient(135deg, rgba(79,172,254,0.18), rgba(0,242,254,0.08));
+  opacity: 0 !important;
+  transition: opacity 0.22s ease !important;
+  z-index: 0 !important;
+}
+
+.prediction-details-page .premium-back-buttonzzz.game-back-button::after { display: none !important; }
+
+.prediction-details-page .premium-back-buttonzzz.game-back-button:hover {
+  border-color: rgba(79,172,254,0.7) !important;
+  box-shadow: 0 0 20px rgba(79,172,254,0.28), 0 4px 16px rgba(0,0,0,0.45), 0 0 0 1px rgba(79,172,254,0.25) !important;
+  transform: translateX(-3px) !important;
+}
+
+.prediction-details-page .premium-back-buttonzzz.game-back-button:hover::before { opacity: 1 !important; }
+
+.prediction-details-page .premium-back-buttonzzz.game-back-button:active {
+  transform: translateX(-1px) scale(0.95) !important;
+  transition: all 0.1s ease !important;
+}
+
+.prediction-details-page .premium-back-buttonzzz.game-back-button .back-arrow {
+  font-size: 18px !important;
+  font-weight: 600 !important;
+  color: #7ec8f8 !important;
+  transition: color 0.22s ease, transform 0.22s ease !important;
+  display: inline-block !important;
+  position: relative !important;
+  z-index: 1 !important;
+  line-height: 1 !important;
+}
+
+.prediction-details-page .premium-back-buttonzzz.game-back-button:hover .back-arrow {
+  color: #fff !important;
+  transform: translateX(-3px) !important;
+}
+
+.prediction-details-page .breadcrumb {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 14px;
+  margin-bottom: 0 !important;
+  background: rgba(255,255,255,0.04) !important;
+  border: 1px solid rgba(255,255,255,0.08) !important;
+  border-radius: 100px !important;
+  backdrop-filter: blur(12px);
+  font-size: 0.82rem;
+  letter-spacing: 0.01em;
+  min-width: 0;
+  overflow: hidden;
+}
+
+.prediction-details-page .breadcrumb-link {
+  color: rgba(160,200,255,0.75);
+  text-decoration: none;
+  font-weight: 400;
+  white-space: nowrap;
+  transition: color 0.18s ease;
+  flex-shrink: 0;
+}
+.prediction-details-page .breadcrumb-link:hover { color: #7ec8f8; }
+
+.prediction-details-page .breadcrumb-separator {
+  color: rgba(255,255,255,0.22);
+  user-select: none;
+  font-size: 0.75rem;
+  flex-shrink: 0;
+}
+
+.prediction-details-page .breadcrumb-current {
+  color: #e0f2fe;
+  font-weight: 600;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  background: none !important;
+  border: none !important;
+  padding: 0 !important;
+}
+
+/* ── Split panel hero ── */
+.pd-hero {
+  border-radius: 20px;
+  overflow: hidden;
+  margin-bottom: 14px;
+  border: 1px solid rgba(79,172,254,0.28);
+  background: #071428;
+  transition: border-color 0.3s ease;
+}
+.pd-hero:hover { border-color: rgba(79,172,254,0.45); }
+
+.pd-hero-topline {
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(79,172,254,0.65), transparent);
+}
+
+.pd-hero-header {
+  display: flex;
+  padding-bottom: 10px !important;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 20px 0;
+  background: rgba(7,20,40,0.92);
+}
+
+.pd-hero-tournament {
+  font-size: 11px;
+  font-weight: 700;
+  color: rgba(255,255,255,0.45);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.pd-panels {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  height: 170px;
+  position: relative;
+}
+
+.pd-panel-left {
+  background-color: #142a5e;
+  background-size: 160%, cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 16px 52px 16px 24px;
+  clip-path: polygon(0 0, 88% 0, 100% 100%, 0 100%);
+}
+
+.pd-panel-right {
+  background-color: #0e2050;
+  background-size: 160%, cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 16px 24px 16px 52px;
+  clip-path: polygon(0 0, 100% 0, 100% 100%, 12% 100%);
+}
+
+.pd-panels::after {
+  content: '';
+  position: absolute;
+  top: 0; bottom: 0;
+  left: calc(50% - 2px);
+  width: 4px;
+  background: linear-gradient(180deg, rgba(0,0,0,0) 0%, rgba(0,0,0,0.85) 50%, rgba(0,0,0,0) 100%);
+  transform: skewX(-8deg);
+  pointer-events: none;
+  z-index: 2;
+}
+
+.pd-avatar {
+  width: 64px; height: 64px;
+  border-radius: 50%;
+  border: 2.5px solid rgba(255,255,255,0.5);
+  background: rgba(4,14,36,0.6);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 20px; font-weight: 800; color: #fff;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.6), 0 0 0 4px rgba(255,255,255,0.07);
+  overflow: hidden;
+  backdrop-filter: blur(4px);
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+.pd-hero:hover .pd-avatar {
+  border-color: rgba(255,255,255,0.8);
+  box-shadow: 0 4px 24px rgba(0,0,0,0.7), 0 0 0 4px rgba(79,172,254,0.18);
+}
+.pd-avatar img { width: 100%; height: 100%; object-fit: contain; padding: 6px; display: block; }
+
+.pd-team-name {
+  font-size: 14px; font-weight: 800; color: #fff;
+  text-align: center;
+  background: rgba(0,0,0,0.45);
+  padding: 4px 12px; border-radius: 50px;
+  backdrop-filter: blur(6px);
+  border: 1px solid rgba(255,255,255,0.08);
+  text-shadow: 0 1px 4px rgba(0,0,0,1);
+  max-width: 140px; line-height: 1.3;
+}
+
+.pd-vs-circle {
+  position: absolute;
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  width: 46px; height: 46px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #0c1e42, #071428);
+  border: 2px solid rgba(79,172,254,0.45);
+  box-shadow: 0 0 0 4px rgba(79,172,254,0.07), 0 0 0 8px rgba(7,20,40,0.9), 0 4px 16px rgba(0,0,0,0.7);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 10px; font-weight: 800;
+  color: rgba(255,255,255,0.55);
+  letter-spacing: 1.5px;
+  z-index: 5;
+}
+
+.pd-hero-footer {
+  display: flex;
+  align-items: center;
+  padding: 11px 20px 13px;
+  background: rgba(7,20,40,0.96);
+  border-top: 1px solid rgba(255,255,255,0.05);
+  gap: 12px; flex-wrap: wrap;
+}
+.pd-hero-meta {
+  display: flex; align-items: center; gap: 10px;
+  font-size: 12px; color: rgba(255,255,255,0.4);
+  flex-wrap: wrap;
+}
+.pd-meta-dot { color: rgba(255,255,255,0.15); }
+
+/* ── Lifecycle segmented bar ── */
+.pd-lifecycle {
+  display: flex;
+  margin-bottom: 14px;
+  border-radius: 12px;
+  overflow: hidden;
+  border: 1px solid rgba(255,255,255,0.06);
+}
+
+.pd-lc-step {
+  flex: 1;
+  display: flex; flex-direction: column;
+  align-items: center; gap: 4px;
+  padding: 10px 8px;
+  background: rgba(255,255,255,0.02);
+  font-size: 10px; font-weight: 700;
+  color: rgba(255,255,255,0.28);
+  letter-spacing: 0.5px; text-transform: uppercase;
+  border-right: 1px solid rgba(255,255,255,0.05);
+  position: relative;
+}
+.pd-lc-step:last-child { border-right: none; }
+.pd-lc-step.done { background: rgba(34,197,94,0.07); color: var(--pred-success); }
+.pd-lc-step.active { background: rgba(79,172,254,0.1); color: var(--pred-primary); }
+
+.pd-lc-dot {
+  width: 6px; height: 6px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.15);
+  margin-bottom: 2px;
+}
+.pd-lc-step.done .pd-lc-dot { background: var(--pred-success); }
+.pd-lc-step.active .pd-lc-dot { background: var(--pred-primary); box-shadow: 0 0 6px rgba(79,172,254,0.7); }
+.pd-lc-step.active::after {
+  content: ''; position: absolute;
+  bottom: 0; left: 0; right: 0; height: 2px;
+  background: var(--pred-primary);
+}
+.pd-lc-step.done::after {
+  content: ''; position: absolute;
+  bottom: 0; left: 0; right: 0; height: 2px;
+  background: var(--pred-success); opacity: 0.45;
+}
+
+/* ── Stat pills ── */
+.pd-stats-row {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+  gap: 10px;
+  margin-bottom: 18px;
+}
+
+.pd-stat-pill {
+  background: rgba(255,255,255,0.03);
+  border: 1px solid rgba(255,255,255,0.06);
+  border-radius: 12px;
+  padding: 12px 16px;
+  display: flex; flex-direction: column; gap: 4px;
+}
+.pd-stat-pill--result {
+  background: rgba(34,197,94,0.05);
+  border-color: rgba(34,197,94,0.18);
+}
+
+.pd-stat-label {
+  font-size: 10px; font-weight: 700;
+  color: rgba(255,255,255,0.3);
+  text-transform: uppercase; letter-spacing: 1px;
+}
+.pd-stat-label--result { color: rgba(34,197,94,0.55); }
+
+.pd-stat-value {
+  font-size: 15px; font-weight: 800;
+  color: var(--pred-warning);
+}
+.pd-stat-value.free { color: var(--pred-success); }
+
+/* ── Closed banner ── */
+.pd-closed-banner {
+  margin: 0 0 18px;
+  padding: 14px 20px;
+  background: rgba(239,68,68,0.08);
+  border: 1px solid rgba(239,68,68,0.25);
+  border-radius: 12px;
+  text-align: center;
+  color: var(--pred-danger);
+  font-size: 14px; font-weight: 600;
+}
+
+/* ── Override details-match-card — no longer needed ── */
+.details-match-card {
+  background: transparent !important;
+  border: none !important;
+  border-radius: 0 !important;
+  padding: 0 !important;
+  margin-bottom: 0 !important;
+}
+
+/* ── Submit button upgrade ── */
+.details-submit-btn {
+  background: linear-gradient(135deg, #1d4ed8 0%, #0ea5e9 100%) !important;
+  box-shadow: 0 4px 24px rgba(14,165,233,0.3), inset 0 1px 0 rgba(255,255,255,0.15) !important;
+}
+.details-submit-btn:hover:not(:disabled) {
+  box-shadow: 0 10px 32px rgba(14,165,233,0.5), inset 0 1px 0 rgba(255,255,255,0.2) !important;
+}
+
+/* ── Responsive ── */
+@media (max-width: 768px) {
+  .prediction-details-page .premium-back-buttonzzz.game-back-button {
+    width: 36px !important; height: 36px !important; border-radius: 10px !important;
+  }
+  .prediction-details-page .premium-back-buttonzzz.game-back-button .back-arrow {
+    font-size: 16px !important;
+  }
+  .prediction-details-page .breadcrumb { font-size: 0.76rem; padding: 5px 10px; }
+}
+
+@media (max-width: 560px) {
+  .pd-panels { height: 150px; }
+  .pd-panel-left  { padding: 14px 44px 14px 18px; }
+  .pd-panel-right { padding: 14px 18px 14px 44px; }
+  .pd-avatar { width: 52px; height: 52px; font-size: 16px; }
+  .pd-team-name { font-size: 12px; max-width: 110px; }
+  .pd-vs-circle { width: 38px; height: 38px; font-size: 9px; }
+  .pd-hero-footer { flex-direction: column; gap: 6px; }
+  .pd-stats-row { grid-template-columns: 1fr 1fr; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .prediction-details-page .premium-back-buttonzzz.game-back-button,
+  .pd-hero { transition: none !important; }
+}
+
+
+/* Fix 1 — breadcrumb current item: remove the pill/badge look */
+.prediction-details-page .breadcrumb-current {
+  color: #e0f2fe;
+  font-weight: 600;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  /* Remove any inherited pill styling */
+  background: none !important;
+  border: none !important;
+  padding: 0 !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+}
+
+/* Fix 2 — wrap all post-hero content in a solid card so it doesn't bleed into the game background */
+.pd-lifecycle,
+.pd-stats-row,
+.pd-closed-banner,
+.details-options-section,
+.details-submit-area {
+  position: relative;
+  z-index: 1;
+}
+
+/* Wrap content below the hero in a solid dark card */
+.pd-content-card {
+  background: var(--pred-bg-card);
+  border: 1px solid var(--pred-primary-border);
+  border-radius: 20px;
+  padding: 24px;
+  margin-top: 0;
+}
+
+/* Fix 3 — seam shadow less aggressive */
+.pd-panels::after {
+  background: linear-gradient(180deg,
+    rgba(0,0,0,0) 0%,
+    rgba(0,0,0,0.55) 50%,     /* was 0.85 */
+    rgba(0,0,0,0) 100%);
+}
+
+/* Fix 4 — stat pills need opaque background */
+.pd-stat-pill {
+  background: rgba(10, 22, 44, 0.95);    /* was 0.03 — nearly invisible */
+  border: 1px solid rgba(255,255,255,0.08);
+  backdrop-filter: blur(8px);
+}
+
+.pd-stat-pill--result {
+  background: rgba(10, 30, 20, 0.95);
+  border-color: rgba(34,197,94,0.2);
+}

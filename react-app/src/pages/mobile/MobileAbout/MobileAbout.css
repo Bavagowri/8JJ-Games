@@ -1,0 +1,442 @@
+/* ========================================
+   MOBILE ABOUT PAGE
+   ======================================== */
+
+.mobile-about-wrapper {
+  /* background: linear-gradient(to bottom, #0a1e2b 0%, #051219 100%); */
+  min-height: 100vh;
+  padding-top: 75px;
+  padding-bottom: 80px;
+}
+
+.mobile-about-page {
+  padding-bottom: 20px;
+}
+
+/* ========================================
+   HERO SECTION
+   ======================================== */
+
+.mobile-about-hero {
+  position: relative;
+  padding: 40px 16px;
+  text-align: center;
+  overflow: hidden;
+}
+
+.mobile-about-hero-bg {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    135deg,
+    rgba(29, 105, 140, 0.2) 0%,
+    rgba(13, 77, 92, 0.15) 100%
+  );
+}
+
+.mobile-about-hero-gradient {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(
+    circle at center,
+    rgba(29, 105, 140, 0.3) 0%,
+    transparent 70%
+  );
+}
+
+.mobile-about-hero-content {
+  position: relative;
+  z-index: 1;
+}
+
+.mobile-about-logo-wrapper {
+  margin-bottom: 20px;
+  animation: float 3s ease-in-out infinite;
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+
+.mobile-about-logo {
+  width: 100px;
+  height: auto;
+  filter: brightness(1.7) contrast(1.1) drop-shadow(0 0 12px rgba(29, 105, 140, 0.6));
+}
+
+.mobile-about-hero-title {
+  font-size: 32px;
+  font-weight: 700;
+  color: #fff;
+  margin: 0 0 12px 0;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+}
+
+.mobile-about-hero-subtitle {
+  font-size: 16px;
+  color: rgba(255, 255, 255, 0.7);
+  margin: 0;
+  line-height: 1.5;
+}
+
+/* ========================================
+   STATS SECTION
+   ======================================== */
+
+.mobile-about-stats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+  padding: 0 16px 32px;
+}
+
+.mobile-about-stat-card {
+  background: rgb(29 105 140 / 37%);
+  border: 1px solid rgba(29, 105, 140, 0.3);
+  border-radius: 16px;
+  padding: 20px 12px;
+  text-align: center;
+  transition: all 0.3s ease;
+}
+
+.mobile-about-stat-card:active {
+  transform: scale(0.98);
+  background: rgba(29, 105, 140, 0.15);
+}
+
+.mobile-about-stat-icon {
+  height: 30px;
+  width: 30px;
+  margin-bottom: 8px;
+}
+
+.mobile-about-stat-number {
+  font-size: 24px;
+  font-weight: 700;
+  color: rgb(222, 231, 99);
+  margin-bottom: 2px;
+}
+
+.mobile-about-stat-label {
+  font-size: 12px;
+  color: rgba(255, 255, 255, 0.912);
+  font-weight: 600;
+}
+
+/* ========================================
+   SECTION STYLES
+   ======================================== */
+
+.mobile-about-section {
+  padding: 32px 16px;
+}
+
+.mobile-about-section-header {
+  text-align: center;
+  margin-bottom: 24px;
+}
+
+.mobile-about-section-title {
+  font-size: 24px;
+  font-weight: 700;
+  color: #fff;
+  margin: 0 0 12px 0;
+}
+
+.mobile-about-title-underline {
+  width: 60px;
+  height: 3px;
+  background: linear-gradient(90deg, rgba(29, 105, 140, 1) 0%, rgba(29, 105, 140, 0.5) 100%);
+  margin: 0 auto;
+  border-radius: 2px;
+}
+
+.mobile-about-section-content {
+  max-width: 100%;
+}
+
+.mobile-about-text {
+  font-size: 15px;
+  line-height: 1.7;
+  color: rgba(255, 255, 255, 0.75);
+  margin-bottom: 16px;
+  text-align: left;
+}
+
+.mobile-about-text:last-child {
+  margin-bottom: 0;
+}
+
+/* ========================================
+   MISSION GRID
+   ======================================== */
+
+.mobile-about-mission-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 16px;
+}
+
+.mobile-about-mission-card {
+  background: rgb(29 105 140 / 37%);
+  border: 1px solid rgba(29, 105, 140, 0.2);
+  border-radius: 16px;
+  padding: 24px 20px;
+  text-align: center;
+  transition: all 0.2s ease;
+}
+
+.mobile-about-mission-card:active {
+  transform: scale(0.98);
+  background: rgba(29, 105, 140, 0.1);
+  border-color: rgba(29, 105, 140, 0.4);
+}
+
+.mobile-about-mission-icon {
+  font-size: 40px;
+  margin-bottom: 12px;
+}
+
+.mobile-about-mission-title {
+  font-size: 18px;
+  font-weight: 700;
+  color: #fff;
+  margin: 0 0 8px 0;
+}
+
+.mobile-about-mission-text {
+  font-size: 14px;
+  line-height: 1.6;
+  color: rgba(255, 255, 255, 0.7);
+  margin: 0;
+}
+
+/* ========================================
+   FEATURES LIST
+   ======================================== */
+
+.mobile-about-features {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.mobile-about-feature-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+  background: rgb(29 105 140 / 37%);
+  border: 1px solid rgba(29, 105, 140, 0.15);
+  border-radius: 12px;
+  padding: 16px;
+  margin-bottom: 5px;
+  transition: all 0.2s ease;
+}
+
+.mobile-about-feature-item:active {
+  background: rgba(29, 105, 140, 0.08);
+  border-color: rgba(29, 105, 140, 0.3);
+  transform: translateX(4px);
+}
+
+.mobile-about-feature-icon {
+  font-size: 28px;
+  flex-shrink: 0;
+}
+
+.mobile-about-feature-content h3 {
+  font-size: 16px;
+  font-weight: 600;
+  color: #fff;
+  margin: 0 0 4px 0;
+}
+
+.mobile-about-feature-content p {
+  font-size: 13px;
+  line-height: 1.5;
+  color: rgba(255, 255, 255, 0.6);
+  margin: 0;
+}
+
+/* ========================================
+   CTA SECTION
+   ======================================== */
+
+.mobile-about-cta {
+  padding: 32px 16px;
+}
+
+.mobile-about-cta-content {
+  background: linear-gradient(
+    135deg,
+    rgba(29, 134, 140, 0.416) 0%,
+    rgba(12, 108, 145, 0.666) 100%
+  );
+  border: 1px solid rgba(29, 105, 140, 0.3);
+  border-radius: 20px;
+  padding: 32px 24px;
+  text-align: center;
+}
+
+.mobile-about-cta-title {
+  font-size: 26px;
+  font-weight: 700;
+  color: #fff;
+  margin: 0 0 12px 0;
+}
+
+.mobile-about-cta-text {
+  font-size: 15px;
+  line-height: 1.6;
+  color: rgba(255, 255, 255, 0.75);
+  margin: 0 0 24px 0;
+}
+
+.mobile-about-cta-buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.mobile-about-cta-btn {
+  padding: 14px 24px;
+  font-size: 15px;
+  font-weight: 600;
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  width: 100%;
+}
+
+.mobile-about-cta-btn.primary {
+  background: rgba(27, 128, 148, 0.9);
+  border: 2px solid rgb(41, 103, 134);
+  color: #fff;
+  box-shadow: 0 4px 12px rgba(29, 105, 140, 0.3);
+}
+
+.mobile-about-cta-btn.primary:active {
+  transform: scale(0.98);
+  background: rgba(29, 105, 140, 1);
+}
+
+.mobile-about-cta-btn.secondary {
+  background: rgba(255, 255, 255, 0.08);
+  border: 2px solid rgba(255, 255, 255, 0.2);
+  color: #fff;
+}
+
+.mobile-about-cta-btn.secondary:active {
+  transform: scale(0.98);
+  background: rgba(255, 255, 255, 0.12);
+  border-color: rgba(255, 255, 255, 0.3);
+}
+
+/* ========================================
+   SOCIAL LINKS
+   ======================================== */
+
+.mobile-about-social {
+  padding: 32px 12px;
+  text-align: center;
+
+}
+
+.mobile-about-social-title {
+  font-size: 20px;
+  font-weight: 700;
+  color: #fff;
+  margin: 0 0 20px 0;
+}
+
+.mobile-about-social-links {
+  display: flex;
+  flex-direction: row;
+  gap: 12px;
+}
+
+.mobile-about-social-link {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background: rgb(29 105 140 / 37%);
+  border: 1px solid rgba(29, 105, 140, 0.367);
+  border-radius: 12px;
+  padding: 14px 20px;
+  color: #fff;
+  text-decoration: none;
+  font-size: 15px;
+  font-weight: 600;
+  transition: all 0.2s ease;
+}
+
+.mobile-about-social-link:active {
+  transform: scale(0.98);
+  background: rgba(29, 105, 140, 0.15);
+  border-color: rgba(29, 105, 140, 0.4);
+}
+
+.mobile-about-social-icon {
+  font-size: 24px;
+  height: 30px;
+  width: 30px;
+}
+
+/* ========================================
+   FOOTER SPACE
+   ======================================== */
+
+.mobile-footer-space {
+  height: 20px;
+}
+
+/* ========================================
+   RESPONSIVE
+   ======================================== */
+
+@media (max-width: 360px) {
+  .mobile-about-hero-title {
+    font-size: 28px;
+  }
+
+  .mobile-about-stats {
+    gap: 8px;
+  }
+
+  .mobile-about-stat-card {
+    padding: 16px 8px;
+  }
+
+  .mobile-about-stat-number {
+    font-size: 20px;
+  }
+
+  .mobile-about-section-title {
+    font-size: 22px;
+  }
+}
+
+.mobile-about-stat-icon,
+.mobile-about-feature-icon,
+.mobile-about-mission-icon-svg,
+.mobile-about-social-link svg {
+  width: 28px;
+  height: 28px;
+  color: #4facfe;
+}
+
+.mobile-about-mission-icon-svg {
+  width: 32px;
+  height: 32px;
+}
+
+.mobile-about-social-link svg {
+  transition: transform 0.2s ease, color 0.2s ease;
+}
+
+.mobile-about-social-link:active svg {
+  transform: scale(0.9);
+  color: #00f2fe;
+}

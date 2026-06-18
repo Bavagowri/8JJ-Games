@@ -1,0 +1,232 @@
+/* src/pages/mobile/MobileProfile/sections/MobileSecurity.css */
+
+.mobile-security-wrapper {
+  min-height: 100vh;
+  background: linear-gradient(to bottom, #0c1119 0%, #0b0f17 100%);
+  padding-top: 75px;
+  padding-bottom: 70px;
+}
+
+/* Alert */
+.mobile-alert {
+  margin: 16px;
+  padding: 12px 16px;
+  border-radius: 12px;
+  font-size: 14px;
+  font-weight: 600;
+  animation: slideDown 0.3s ease;
+}
+
+.alert-error {
+  background: rgba(255, 71, 87, 0.2);
+  border: 1px solid rgba(255, 71, 87, 0.5);
+  color: #ff4757;
+}
+
+.alert-success {
+  background: rgba(46, 213, 115, 0.2);
+  border: 1px solid rgba(46, 213, 115, 0.5);
+  color: #2ed573;
+}
+
+/* Security Card */
+.mobile-security-card {
+  margin: 16px;
+  padding: 20px;
+  background: linear-gradient(135deg, rgba(30, 41, 59, 0.8), rgba(15, 23, 42, 0.9));
+  border: 1px solid rgba(79, 172, 254, 0.2);
+  border-radius: 16px;
+}
+
+.mobile-security-card.danger {
+  border-color: rgba(255, 65, 108, 0.3);
+}
+
+.card-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 16px;
+}
+
+.header-icon {
+  width: 24px;
+  height: 24px;
+  object-fit: contain;
+}
+
+.card-header h3 {
+  font-size: 16px;
+  font-weight: 700;
+  color: #fff;
+  margin: 0;
+}
+
+.card-text {
+  font-size: 14px;
+  color: #cbd5e1;
+  line-height: 1.6;
+  margin: 0 0 16px 0;
+}
+
+/* Info Box */
+.info-box {
+  padding: 16px;
+  background: rgba(79, 172, 254, 0.1);
+  border: 1px solid rgba(79, 172, 254, 0.2);
+  border-radius: 12px;
+  color: #cbd5e1;
+  font-size: 14px;
+}
+
+.info-box p {
+  margin: 0;
+}
+
+/* Password Form */
+.password-form {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.form-group input {
+  width: 100%;
+  padding: 14px 16px;
+  background: rgba(15, 23, 42, 0.5);
+  border: 1px solid rgba(79, 172, 254, 0.2);
+  border-radius: 12px;
+  color: #fff;
+  font-size: 15px;
+}
+
+.form-group input:focus {
+  outline: none;
+  border-color: rgba(79, 172, 254, 0.5);
+}
+
+.form-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 8px;
+}
+
+/* Action Buttons */
+.mobile-action-btn {
+  width: 100%;
+  padding: 14px 16px;
+  border: none;
+  border-radius: 12px;
+  font-size: 15px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.mobile-action-btn.primary {
+  background: linear-gradient(135deg, #00d9ff, #0099cc);
+  color: #fff;
+}
+
+.mobile-action-btn.secondary {
+  background: rgba(79, 172, 254, 0.2);
+  border: 1px solid rgba(79, 172, 254, 0.3);
+  color: #00d9ff;
+}
+
+.mobile-action-btn.warning {
+  background: rgba(255, 165, 0, 0.2);
+  border: 1px solid rgba(255, 165, 0, 0.4);
+  color: #ff9800;
+}
+
+.mobile-action-btn.danger {
+  background: rgba(255, 65, 108, 0.2);
+  border: 1px solid rgba(255, 65, 108, 0.4);
+  color: #ff416c;
+}
+
+.mobile-action-btn:active:not(:disabled) {
+  transform: scale(0.98);
+}
+
+.mobile-action-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* Confirm Box */
+.confirm-box {
+  padding: 16px;
+  border-radius: 12px;
+  margin-top: 12px;
+}
+
+.confirm-box.warning {
+  background: rgba(255, 165, 0, 0.1);
+  border: 1px solid rgba(255, 165, 0, 0.3);
+}
+
+.confirm-box.danger {
+  background: rgba(255, 65, 108, 0.1);
+  border: 1px solid rgba(255, 65, 108, 0.3);
+}
+
+.confirm-text {
+  font-size: 14px;
+  font-weight: 700;
+  color: #ff416c;
+  margin: 0 0 12px 0;
+}
+
+.confirm-instruction {
+  font-size: 13px;
+  color: #cbd5e1;
+  margin: 0 0 12px 0;
+}
+
+.confirm-input {
+  width: 100%;
+  padding: 14px 16px;
+  background: rgba(255, 65, 108, 0.05);
+  border: 2px solid rgba(255, 65, 108, 0.3);
+  border-radius: 12px;
+  color: #fff;
+  font-size: 15px;
+  margin-bottom: 12px;
+}
+
+.confirm-input:focus {
+  outline: none;
+  border-color: rgba(255, 65, 108, 0.5);
+}
+
+.confirm-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.mobile-footer-space {
+  height: 20px;
+}
+
+
+.mobile-action-btn.info{
+  background: rgba(79, 172, 254, 0.2);
+  border: 1px solid rgba(79, 172, 254, 0.3);
+  color: #00d9ff;
+}

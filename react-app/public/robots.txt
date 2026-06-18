@@ -1,0 +1,15 @@
+User-agent: *
+Allow: /
+
+Disallow: /profile
+Disallow: /my-collection
+Disallow: /admin
+Disallow: /admin/
+Disallow: /login
+Disallow: /register
+Disallow: /forgot-password
+Disallow: /reset-password
+Disallow: /email-verified
+
+# Sitemap index 
+Sitemap: https://8jjgames.com/sitemap.xml

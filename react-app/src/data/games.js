@@ -5,7 +5,7 @@
 // image: relative path to your image in public/images or src/assets
 // type: can help you group (popular, hot, cricket, etc.)
 // externalUrl: for external games like Temple Run / Candy Crush
-
+// react-app/src/data/games.js
 export const featuredGames = [
   {
     id: "templerun",

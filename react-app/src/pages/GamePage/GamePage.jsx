@@ -13,7 +13,7 @@ export default function GamePage() {
   const [game, setGame] = useState(null);
   const [playing, setPlaying] = useState(false);
 
-  const isLocal = window.location.hostname === "localhost";
+  const isLocal = typeof window !== "undefined" && window.location.hostname === "localhost";
 
   const [pageLoading, setPageLoading] = useState(false);
   const navigate = useNavigate();

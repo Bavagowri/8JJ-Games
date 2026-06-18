@@ -1,9 +1,27 @@
+// react-app/src/components/ShareModal/ShareModal.jsx
 import "./ShareModal.css";
 import { translate } from "../../data/translations";
 import { useLanguage } from "../../context/LanguageContext";
+import { shareAPI } from "../../api/share.api";
+import toast from "react-hot-toast";
 
 export default function ShareModal({ open, onClose }) {
   const { lang } = useLanguage();
+
+  const handlePlatformShare = async (platform) => {
+    try {
+      const result = await shareAPI.share({
+        share_type: "platform",
+        platform // pass platform name
+      });
+
+      if (result.awarded) {
+        toast.success(`+${result.points} points earned 🎉`);
+      }
+    } catch (err) {
+      console.error("Platform share error:", err);
+    }
+  };
   
   if (!open) return null;
 
@@ -13,7 +31,7 @@ export default function ShareModal({ open, onClose }) {
   return (
     <>
       {/* OVERLAY */}
-      <div className="share-overlay" onClick={onClose} />
+      <div className="share-overlay HeaderShare" onClick={onClose} />
 
       {/* MODAL */}
       <div className="share-modal">
@@ -31,6 +49,7 @@ export default function ShareModal({ open, onClose }) {
             target="_blank"
             rel="noreferrer"
             className="share-btn fb"
+            onClick={() => handlePlatformShare("facebook")}
           >
             <img src="/images/social-share/fb.png" alt="fb" className="share-icon fb" />
             {translate("facebook", lang)}
@@ -41,6 +60,7 @@ export default function ShareModal({ open, onClose }) {
             target="_blank"
             rel="noreferrer"
             className="share-btn wa"
+            onClick={() => handlePlatformShare("whatsapp")}
           >
             <img src="/images/social-share/whatsapp.png" alt="whatsapp" className="share-icon whatsapp" />
             {translate("whatsapp", lang)}
@@ -51,6 +71,7 @@ export default function ShareModal({ open, onClose }) {
             target="_blank"
             rel="noreferrer"
             className="share-btn ig"
+            onClick={() => handlePlatformShare("instagram")}
           >
             <img src="/images/social-share/insta.png" alt="insta" className="share-icon insta" />
             {translate("instagram", lang)}
@@ -61,6 +82,7 @@ export default function ShareModal({ open, onClose }) {
             target="_blank"
             rel="noreferrer"
             className="share-btn tg"
+            onClick={() => handlePlatformShare("telegram")}
           >
             <img src="/images/social-share/telegram.png" alt="telegram" className="share-icon telegram" />
             {translate("telegram", lang)}

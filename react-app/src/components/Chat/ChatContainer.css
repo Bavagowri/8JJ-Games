@@ -1,0 +1,262 @@
+/* react-app/src/components/Chat/ChatContainer.css */
+
+.chat-container {
+  display: grid;
+  grid-template-columns: 240px 1fr 200px;
+  gap: 0;
+  height: calc(100vh - 80px);
+  max-height: 800px;
+  background: #1a1d2e;
+  border-radius: 12px;
+  overflow: hidden;
+  margin: 20px auto;
+  max-width: 1400px;
+}
+
+.chat-login-required {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 400px;
+  background: linear-gradient(135deg, rgba(79, 172, 254, 0.1), rgba(5, 67, 70, 0.1));
+  border: 1px solid rgba(79, 172, 254, 0.3);
+  border-radius: 12px;
+  margin: 40px auto;
+  max-width: 600px;
+}
+
+.chat-login-required p {
+  font-size: 18px;
+  color: #d1d5db;
+  margin-bottom: 20px;
+}
+
+.chat-login-required button {
+  background: linear-gradient(135deg, #4facfe, #054346);
+  color: #fff;
+  border: none;
+  padding: 12px 32px;
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: transform 0.2s;
+}
+
+.chat-login-required button:hover {
+  transform: scale(1.05);
+}
+
+/* Channel list (left sidebar) */
+.channel-list {
+  background: #16192a;
+  border-right: 1px solid #2d3250;
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+}
+
+.channel-list-header {
+  padding: 16px;
+  border-bottom: 1px solid #2d3250;
+}
+
+.channel-list-header h3 {
+  font-size: 14px;
+  font-weight: 600;
+  color: #9ca3af;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin: 0;
+}
+
+.channel-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 16px;
+  cursor: pointer;
+  transition: all 0.2s;
+  border-left: 3px solid transparent;
+}
+
+.channel-item:hover {
+  background: #1a1d2e;
+}
+
+/* .channel-item.active {
+  background: #2d3250;
+  border-left-color: #4facfe;
+} */
+
+.channel-icon {
+  font-size: 18px;
+}
+
+.channel-name {
+  font-size: 14px;
+  font-weight: 500;
+  color: #d1d5db;
+}
+
+/* Main chat area */
+.chat-main {
+  display: flex;
+  flex-direction: column;
+  background: #1a1d2e;
+}
+
+.chat-header {
+  padding: 16px 20px;
+  border-bottom: 1px solid #2d3250;
+  background: #16192a;
+}
+
+.chat-header h2 {
+  font-size: 18px;
+  font-weight: 600;
+  color: #fff;
+  margin: 0 0 4px 0;
+}
+
+.chat-header p {
+  font-size: 13px;
+  color: #9ca3af;
+  margin: 0;
+}
+
+.connection-status {
+  display: inline-block;
+  margin-left: 12px;
+  padding: 4px 12px;
+  background: rgba(251, 191, 36, 0.2);
+  border: 1px solid #fbbf24;
+  border-radius: 12px;
+  font-size: 11px;
+  color: #fbbf24;
+  font-weight: 600;
+}
+
+/* User list (right sidebar) */
+.user-list {
+  background: #16192a;
+  border-left: 1px solid #2d3250;
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+}
+
+.user-list-header {
+  padding: 16px;
+  border-bottom: 1px solid #2d3250;
+}
+
+.user-list-header h3 {
+  font-size: 14px;
+  font-weight: 600;
+  color: #9ca3af;
+  text-transform: uppercase;
+  margin: 0;
+}
+
+.user-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 16px;
+  transition: background 0.2s;
+}
+
+.user-item:hover {
+  background: #1a1d2e;
+}
+
+.user-avatar-wrapper {
+  position: relative;
+}
+
+.user-avatar {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.user-status {
+  position: absolute;
+  bottom: -2px;
+  right: -2px;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  border: 2px solid #16192a;
+}
+
+.user-status.online {
+  background: #10b981;
+}
+
+.user-status.away {
+  background: #fbbf24;
+}
+
+.user-status.busy {
+  background: #ef4444;
+}
+
+.user-info {
+  flex: 1;
+  min-width: 0;
+}
+
+.user-name {
+  font-size: 13px;
+  font-weight: 500;
+  color: #d1d5db;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.user-level {
+  font-size: 11px;
+  color: #9ca3af;
+}
+
+/* Mobile responsive */
+@media (max-width: 1024px) {
+  .chat-container {
+    grid-template-columns: 200px 1fr 180px;
+  }
+}
+
+@media (max-width: 768px) {
+  .chat-container {
+    grid-template-columns: 1fr;
+    height: calc(100vh - 60px);
+  }
+
+  .channel-list,
+  .user-list {
+    display: none;
+  }
+
+  /* Add mobile toggle buttons for sidebars */
+  .mobile-sidebar-toggle {
+    display: block;
+    position: fixed;
+    bottom: 80px;
+    right: 20px;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #4facfe, #054346);
+    border: none;
+    color: #fff;
+    font-size: 20px;
+    cursor: pointer;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    z-index: 100;
+  }
+}

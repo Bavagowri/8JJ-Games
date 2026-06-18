@@ -1,0 +1,486 @@
+/* react-app/src/components/UniversalBanner/templates/SplitHeroBannerV2.css */
+
+
+
+/* ── Wrapper ── */
+.sh2-wrap {
+  position: relative;
+  width: 100%;
+  height: 320px;
+  margin: 20px 0;
+  border-radius: 18px;
+  overflow: hidden;
+  background: #04080f;
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  box-shadow:
+    0 8px 40px rgba(0, 0, 0, 0.55),
+    0 24px 80px rgba(0, 0, 0, 0.35),
+    inset 0 1px 0 rgba(255, 255, 255, 0.05);
+}
+
+/* ══════════════════════════════════════
+   SCENE — full-bleed background
+══════════════════════════════════════ */
+.sh2-scene {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  transition: opacity 0.42s ease, transform 0.42s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.sh2-bg-img {
+  
+
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  z-index: 0;
+  transform: translateZ(0);
+  will-change: transform;
+}
+
+/* Cinematic vignette — darkens edges */
+.sh2-vignette {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse at center, transparent 30%, rgba(0, 0, 0, 0.72) 100%),
+    linear-gradient(to right, rgba(4, 8, 15, 0.92) 0%, rgba(4, 8, 15, 0.30) 45%, rgba(4, 8, 15, 0.05) 100%);
+}
+
+.sh2-color-wash {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+/* Scene transitions */
+.sh2-scene-exit {
+  opacity: 0;
+  transform: scale(1.03);
+  transition: opacity 0.42s ease, transform 0.42s ease;
+}
+
+.sh2-scene-enter {
+  opacity: 0;
+  transform: scale(0.98);
+}
+
+.sh2-scene-idle {
+  opacity: 1;
+  transform: scale(1);
+  transition: opacity 0.42s ease, transform 0.42s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/* ══════════════════════════════════════
+   GLASS LEFT PANEL
+══════════════════════════════════════ */
+.sh2-glass-panel {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  overflow: hidden;
+}
+
+/* Frosted glass inner — uses pseudo to enable backdrop-filter without affecting children */
+.sh2-glass-inner {
+  position: absolute;
+  inset: 0;
+  background: rgba(4, 8, 18, 0.62);
+  backdrop-filter: blur(18px) saturate(1.3);
+  -webkit-backdrop-filter: blur(18px) saturate(1.3);
+  /* Right-edge feather */
+  -webkit-mask-image: linear-gradient(to right, black 70%, transparent 100%);
+  mask-image: linear-gradient(to right, black 70%, transparent 100%);
+}
+
+/* Vertical accent rail — slim left edge */
+.sh2-rail {
+  position: absolute;
+  left: 0;
+  top: 12%;
+  bottom: 12%;
+  width: 3px;
+  border-radius: 0 2px 2px 0;
+  z-index: 1;
+  opacity: 0.9;
+}
+
+/* ── Slide counter — typographic ── */
+.sh2-counter {
+  position: absolute;
+  top: 20px;
+  right: 24px;
+  z-index: 3;
+  display: None !important;
+  align-items: baseline;
+  gap: 6px;
+  pointer-events: none;
+}
+
+.sh2-counter-cur {
+  font-family: 'Syne Mono', monospace;
+  font-size: 28px;
+  font-weight: 400;
+  line-height: 1;
+  opacity: 0.9;
+}
+
+.sh2-counter-sep {
+  display: block;
+  width: 20px;
+  height: 1px;
+  background: rgba(255, 255, 255, 0.25);
+  margin-bottom: 4px;
+  flex-shrink: 0;
+}
+
+.sh2-counter-tot {
+  font-family: 'Syne Mono', monospace;
+  font-size: 14px;
+  font-weight: 400;
+  color: rgba(255, 255, 255, 0.3);
+  line-height: 1;
+}
+
+/* ── Content ── */
+.sh2-content {
+  position: relative;
+  z-index: 3;
+  padding: 0 36px 0 44px;
+  display: flex;
+  flex-direction: column;
+  gap: 9px;
+  max-width: 100%;
+}
+
+/* Content transitions */
+.sh2-content-exit {
+  opacity: 0;
+  transform: translateX(-12px);
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.sh2-content-enter {
+  opacity: 0;
+  transform: translateX(8px);
+}
+
+.sh2-content-idle {
+  opacity: 1;
+  transform: translateX(0);
+  transition: opacity 0.35s ease 0.08s, transform 0.35s cubic-bezier(0.22, 1, 0.36, 1) 0.08s;
+}
+
+/* Badge — tag with leading line */
+.sh2-badge-wrap {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.sh2-badge-line {
+  display: inline-block;
+  width: 20px;
+  height: 2px;
+  border-radius: 1px;
+  flex-shrink: 0;
+  opacity: 0.9;
+}
+
+.sh2-badge {
+  font-family: 'Syne', sans-serif;
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 2.5px;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.55);
+}
+
+.sh2-eyebrow {
+  font-family: 'Syne', sans-serif;
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 2.5px;
+  text-transform: uppercase;
+  color: var(--accent, #00e5ff);
+  margin: 0;
+  opacity: 0.9;
+}
+
+.sh2-title {
+  /* font-family: 'Syne', sans-serif; */
+  font-size: 35px;
+  font-weight: 800;
+  color: #fff;
+  margin: 0;
+  line-height: 1.1;
+  letter-spacing: -0.5px;
+  text-shadow: 0 2px 20px rgba(0, 0, 0, 0.6);
+}
+
+.sh2-subtitle {
+  font-family: 'Inter', sans-serif;
+  font-size: 13px;
+  font-weight: 300;
+  color: rgba(255, 255, 255, 0.5);
+  margin: 0;
+  line-height: 1.6;
+  max-width: 360px;
+}
+
+/* ── CTA — Underline expand style ── */
+.sh2-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 0;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  width: fit-content;
+  margin-top: 4px;
+  position: relative;
+}
+
+.sh2-cta-text {
+  
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: #fff;
+  transition: color 0.25s ease;
+}
+
+.sh2-cta:hover .sh2-cta-text {
+  color: var(--accent, #00e5ff);
+}
+
+.sh2-cta-arrow {
+  display: flex;
+  align-items: center;
+  transition: transform 0.25s ease;
+}
+
+.sh2-cta:hover .sh2-cta-arrow {
+  transform: translateX(4px);
+}
+
+/* Underline that expands on hover */
+.sh2-cta-underline {
+  position: absolute;
+  bottom: -3px;
+  left: 0;
+  height: 1px;
+  width: 0;
+  transition: width 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.sh2-cta:hover .sh2-cta-underline {
+  width: 100%;
+}
+
+.sh2-cta:active {
+  opacity: 0.8;
+}
+
+/* Logo watermark */
+.sh2-logo {
+  position: absolute;
+  top: 20px;
+  right: 32px;
+  height: 55px;
+  width: auto;
+  opacity: 0.25;
+  filter: brightness(10);
+  object-fit: contain;
+  z-index: 3;
+}
+
+/* ══════════════════════════════════════
+   BOTTOM CONTROLS
+══════════════════════════════════════ */
+.sh2-controls {
+  position: absolute;
+  bottom: 18px;
+  left: 44px;
+  right: 20px;
+  z-index: 4;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+/* Segmented progress indicators */
+.sh2-segments {
+  display: flex;
+  gap: 5px;
+  align-items: center;
+  flex: 1;
+}
+
+.sh2-segment {
+  flex: 1;
+  height: 2px;
+  padding: 0;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  position: relative;
+  max-width: 60px;
+}
+
+.sh2-seg-track {
+  display: block;
+  width: 100%;
+  height: 100%;
+  border-radius: 1px;
+  overflow: hidden;
+  position: relative;
+  background: rgba(255, 255, 255, 0.15);
+}
+
+.sh2-seg-fill {
+  display: block;
+  position: absolute;
+  inset: 0;
+  width: 0%;
+  /* animated via JS */
+  border-radius: 1px;
+}
+
+.sh2-seg-static {
+  display: block;
+  position: absolute;
+  inset: 0;
+  border-radius: 1px;
+}
+
+.sh2-segment:hover .sh2-seg-track {
+  background: rgba(255, 255, 255, 0.28);
+}
+
+/* Arrow controls */
+.sh2-arrows {
+  display: flex;
+  gap: 6px;
+  flex-shrink: 0;
+}
+
+.sh2-arrow {
+  width: 32px;
+  height: 32px;
+  border-radius: 3px;
+  background: rgba(255, 255, 255, 0.07);
+  border: 1px solid rgba(255, 255, 255, 0.10);
+  color: rgba(255, 255, 255, 0.7);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  backdrop-filter: blur(8px);
+  transition: background 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+}
+
+.sh2-arrow:hover {
+  background: rgba(255, 255, 255, 0.12);
+  color: #fff;
+  border-color: rgba(255, 255, 255, 0.20);
+}
+
+.sh2-arrow:active {
+  background: rgba(255, 255, 255, 0.05);
+}
+
+/* ── Responsive ── */
+@media (max-width: 1100px) {
+  .sh2-title {
+    font-size: 25px;
+  }
+
+  .sh2-content {
+    padding: 0 28px 0 36px;
+  }
+
+  .sh2-counter {
+    right: 18px;
+  }
+
+  .sh2-counter-cur {
+    font-size: 22px;
+  }
+}
+
+@media (max-width: 860px) {
+  .sh2-wrap {
+    height: auto;
+    min-height: 280px;
+  }
+
+  .sh2-glass-panel {
+    /* stretch full width on narrower screens */
+    width: 100% !important;
+    top: 0;
+    bottom: 0;
+  }
+
+  .sh2-glass-inner {
+    -webkit-mask-image: none;
+    mask-image: none;
+    background: rgba(4, 8, 18, 0.72);
+  }
+
+  .sh2-scene {
+    position: absolute;
+  }
+
+  .sh2-title {
+    font-size: 22px;
+  }
+
+  .sh2-content {
+    padding: 0 20px 0 30px;
+  }
+
+  .sh2-controls {
+    left: 30px;
+  }
+
+  .sh2-logo {
+    left: 30px;
+  }
+}
+
+@media (max-width: 600px) {
+  .sh2-wrap {
+    height: 300px;
+    border-radius: 12px;
+  }
+
+  .sh2-title {
+    font-size: 19px;
+  }
+
+  .sh2-counter-cur {
+    font-size: 18px;
+  }
+
+  .sh2-subtitle {
+    display: none;
+  }
+
+  .sh2-content {
+    gap: 7px;
+  }
+}

@@ -1,0 +1,79 @@
+/* src/pages/Leaderboard/styles/leaderboard-tabs.css */
+
+.leaderboard-tabs {
+  display: flex;
+  gap: 8px;
+  padding: 16px;
+  background: linear-gradient(180deg, rgba(26, 31, 46, 0.95) 0%, rgb(20 29 38 / 98%) 100%);
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+  border-radius: 20px;
+  margin-bottom: 25px;
+  border-top-left-radius: 0px;
+  border-top-right-radius: 0px;
+}
+
+.leaderboard-tabs::-webkit-scrollbar {
+  display: none;
+}
+
+.tab-button {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 24px;
+  background: rgba(22, 22, 26, 0.95);
+  border: 2px solid transparent;
+  border-radius: 24px;
+  color: #a0aec0;
+  font-size: 0.95rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  white-space: nowrap;
+  flex-shrink: 0;
+  text-transform: capitalize;
+}
+
+.tab-button:hover {
+  background: rgba(79, 172, 254, 0.1);
+  color: #FFFFFF;
+  transform: translateY(-2px);
+}
+
+.tab-button.active {
+  background: linear-gradient(135deg, #00d4ff 0%, #0099ff 100%);
+  border-color: transparent;
+  color: #FFFFFF;
+  box-shadow: 0 4px 16px rgba(79, 172, 254, 0.4);
+}
+
+.tab-button.active:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(79, 172, 254, 0.5);
+}
+
+.tab-button svg {
+  flex-shrink: 0;
+}
+
+/* Responsive */
+@media (max-width: 480px) {
+  .leaderboard-tabs {
+    padding: 12px;
+    gap: 6px;
+  }
+
+  .tab-button {
+    padding: 10px 20px;
+    font-size: 0.9rem;
+  }
+}
+
+/* Touch feedback for mobile */
+@media (hover: none) {
+  .tab-button:active {
+    transform: scale(0.96);
+  }
+}

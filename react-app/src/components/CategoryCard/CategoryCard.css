@@ -1,3 +1,4 @@
+/* react-app/src/components/CategoryCard/CategoryCard.css */
 .category-card {
   position: relative;
   height: 180px;
@@ -189,19 +190,20 @@
 .overlay-adventure .category-overlay {
   background: linear-gradient(
     to top,
-    rgba(0, 150, 120, 0.95) 0%,
-    rgba(0, 150, 120, 0.55) 40%,
-    rgba(50, 200, 160, 0.25) 70%,
+    rgba(0, 110, 230, 0.98) 0%,
+    rgba(0, 110, 230, 0.6) 40%,
+    rgba(80, 180, 255, 0.3) 70%,
     transparent 100%
   );
 }
 
 .category-card.overlay-puzzles:hover .category-overlay,
 .category-card.overlay-brain:hover .category-overlay,
-.category-card.overlay-adventure:hover .category-overlay {
+.category-card.overlay-adventure:hover .category-overlay,
+.category-card.overlay-adventure .category-overlay {
   background: linear-gradient(
     to top,
-    rgba(0, 170, 140, 0.98) 0%,
+    rgba(3, 102, 84, 0.98) 0%,
     rgba(0, 170, 140, 0.65) 40%,
     rgba(80, 220, 180, 0.35) 70%,
     transparent 100%

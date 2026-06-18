@@ -1,0 +1,653 @@
+/* ============================================
+   BRANDED PRELOADER STYLES - 8JJ GAMES
+   ============================================ */
+/* react-app/src/components/BrandedPreloader/BrandedPreloader.css */
+/* Main Preloader Container */
+.preloader {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: linear-gradient(135deg, #0f2027 0%, #203a43 50%, #2c5364 100%);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+  opacity: 1;
+  transition: opacity 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+  overflow: hidden;
+}
+
+.preloader.fade-out {
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* ============================================
+   ANIMATED BACKGROUND
+   ============================================ */
+
+.preloader-bg {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+.preloader .gradient-orb {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(80px);
+  opacity: 0.4;
+  animation: floatii 8s ease-in-out infinite;
+}
+
+.preloader .orb-1 {
+  width: 500px;
+  height: 500px;
+  background: radial-gradient(circle, #59caff, transparent);
+  top: -250px;
+  left: -250px;
+  animation-delay: 0s;
+}
+
+.preloader .orb-2 {
+  width: 400px;
+  height: 400px;
+  background: radial-gradient(circle, #4488cf, transparent);
+  bottom: -200px;
+  right: -200px;
+  animation-delay: 2s;
+}
+
+.preloader .orb-3 {
+  width: 300px;
+  height: 300px;
+  background: radial-gradient(circle, #93dafb, transparent);
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  animation-delay: 4s;
+}
+
+@keyframes floatii {
+
+  0%,
+  100% {
+    transform: translate(0, 0) scale(1);
+  }
+
+  33% {
+    transform: translate(30px, -30px) scale(1.1);
+  }
+
+  66% {
+    transform: translate(-30px, 30px) scale(0.9);
+  }
+}
+
+/* ============================================
+   FLOATING GAME ICONS (LUCIDE)
+   ============================================ */
+
+.preloader .floating-icons {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+
+.preloader .icon-particle {
+  position: absolute;
+  opacity: 0.7;
+  animation: floatParticle 15s ease-in-out infinite;
+  filter: drop-shadow(0 0 20px rgba(102, 126, 234, 0.8));
+}
+
+.preloader .lucide-icon {
+  color: #ffffff;
+  animation: iconGlow 3s ease-in-out infinite;
+}
+
+@keyframes iconGlow {
+  0%, 100% {
+    filter: drop-shadow(0 0 10px rgba(102, 234, 255, 0.6));
+    transform: scale(1);
+  }
+  50% {
+    filter: drop-shadow(0 0 25px rgba(102, 234, 255, 1));
+    transform: scale(1.15);
+  }
+}
+
+.preloader .icon-1 {
+  top: 10%;
+  left: 15%;
+  animation-delay: 0s;
+}
+
+.preloader .icon-1 .lucide-icon {
+  animation-delay: 0s;
+  color: #667eea;
+}
+
+.preloader .icon-2 {
+  top: 70%;
+  left: 10%;
+  animation-delay: 2s;
+}
+
+.preloader .icon-2 .lucide-icon {
+  animation-delay: 0.5s;
+  color: #64b5f6;
+}
+
+.preloader .icon-3 {
+  top: 15%;
+  right: 20%;
+  animation-delay: 4s;
+}
+
+.preloader .icon-3 .lucide-icon {
+  animation-delay: 1s;
+  color: #ffd700;
+}
+
+.preloader .icon-4 {
+  bottom: 15%;
+  right: 15%;
+  animation-delay: 1s;
+}
+
+.preloader .icon-4 .lucide-icon {
+  animation-delay: 1.5s;
+  color: #ff6b9d;
+}
+
+.preloader .icon-5 {
+  top: 50%;
+  left: 5%;
+  animation-delay: 3s;
+}
+
+.preloader .icon-5 .lucide-icon {
+  animation-delay: 2s;
+  color: #ffa726;
+}
+
+.preloader .icon-6 {
+  top: 40%;
+  right: 10%;
+  animation-delay: 5s;
+}
+
+.preloader .icon-6 .lucide-icon {
+  animation-delay: 2.5s;
+  color: #ab47bc;
+}
+
+@keyframes floatParticle {
+
+  0%,
+  100% {
+    transform: translateY(0) rotate(0deg);
+  }
+
+  50% {
+    transform: translateY(-30px) rotate(180deg);
+  }
+}
+
+/* ============================================
+   MAIN CONTENT
+   ============================================ */
+
+.preloader .preloader-content {
+  position: relative;
+  z-index: 10;
+  text-align: center;
+  animation: slideIn 0.8s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateY(50px) scale(0.9);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+/* ============================================
+   LOGO SECTION
+   ============================================ */
+
+.preloader .logo-container {
+  position: relative;
+  margin-bottom: 35px;
+}
+
+.preloader .logo-glow {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 250px;
+  height: 250px;
+  background: radial-gradient(circle, rgba(102, 126, 234, 0.4), transparent 70%);
+  animation: pulseii 3s ease-in-out infinite;
+}
+
+@keyframes pulseii {
+
+  0%,
+  100% {
+    transform: translate(-50%, -50%) scale(1);
+    opacity: 0.5;
+  }
+
+  50% {
+    transform: translate(-50%, -50%) scale(1.2);
+    opacity: 0.8;
+  }
+}
+
+.preloader .logo-wrapper {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+}
+
+.preloader .logo-icon {
+  width: 120px;
+  height: 120px;
+  animation: rotate 4s linear infinite;
+}
+
+@keyframes rotate {
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.preloader .checkmark {
+  animation: drawCheck 2s ease-in-out infinite;
+}
+
+@keyframes drawCheck {
+
+  0%,
+  100% {
+    stroke-dasharray: 0, 100;
+  }
+
+  50% {
+    stroke-dasharray: 100, 100;
+  }
+}
+
+.preloader .brand-text {
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.preloader .brand-number {
+  font-size: 72px;
+  font-weight: 900;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  letter-spacing: 8px;
+  animation: shimmer 3s ease-in-out infinite;
+  text-shadow: 0 0 40px rgba(102, 126, 234, 0.5);
+}
+
+.preloader .brand-label {
+  font-size: 24px;
+  font-weight: 700;
+  color: white;
+  letter-spacing: 12px;
+  opacity: 0.9;
+}
+
+@keyframes shimmer {
+
+  0%,
+  100% {
+    filter: brightness(1) hue-rotate(0deg);
+  }
+
+  50% {
+    filter: brightness(1.2) hue-rotate(10deg);
+  }
+}
+
+/* ============================================
+   LOADING SECTION
+   ============================================ */
+
+.preloader .loading-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+}
+
+.preloader .progress-container {
+  width: 300px;
+  position: relative;
+}
+
+.preloader .progress-bar {
+  width: 100%;
+  height: 8px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 20px;
+  overflow: hidden;
+  backdrop-filter: blur(10px);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+}
+
+.preloader .progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #667eea, #345688, #0d7ddb);
+  background-size: 200% 100%;
+  border-radius: 20px;
+  position: relative;
+  transition: width 0.3s ease-out;
+  animation: gradientMove 2s ease infinite;
+}
+
+@keyframes gradientMove {
+  0% {
+    background-position: 0% 0%;
+  }
+
+  100% {
+    background-position: 200% 0%;
+  }
+}
+
+.preloader .progress-glow {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 30px;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgb(66 234 243 / 80%));
+  animation: glowMove 1.5s ease-in-out infinite;
+}
+
+@keyframes glowMove {
+
+  0%,
+  100% {
+    opacity: 0;
+  }
+
+  50% {
+    opacity: 1;
+  }
+}
+
+.preloader .progress-text {
+  position: absolute;
+  top: -30px;
+  right: 0;
+  color: white;
+  font-size: 14px;
+  font-weight: 700;
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+}
+
+.preloader .loading-dots {
+  display: flex;
+  gap: 8px;
+}
+
+.preloader .dot {
+  width: 8px;
+  height: 8px;
+  background: white;
+  border-radius: 50%;
+  animation: bounce 1.4s ease-in-out infinite;
+}
+
+.preloader .dot:nth-child(1) {
+  animation-delay: 0s;
+}
+
+.preloader .dot:nth-child(2) {
+  animation-delay: 0.2s;
+}
+
+.preloader .dot:nth-child(3) {
+  animation-delay: 0.4s;
+}
+
+@keyframes bounce {
+
+  0%,
+  80%,
+  100% {
+    transform: scale(0.8);
+    opacity: 0.5;
+  }
+
+  40% {
+    transform: scale(1.2);
+    opacity: 1;
+  }
+}
+
+.preloader .loading-message {
+  color: white;
+  font-size: 16px;
+  font-weight: 600;
+  margin: 0;
+  opacity: 0.9;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+
+/* ============================================
+   FEATURE PILLS (WITH LUCIDE ICONS)
+   ============================================ */
+
+.preloader .feature-pills {
+  display: flex;
+  gap: 15px;
+  margin-top: 40px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.preloader .pill {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 20px;
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  border-radius: 30px;
+  border: 1px solid rgb(104 225 255 / 21%);
+  color: white;
+  font-size: 14px;
+  font-weight: 600;
+  animation: pillFloat 3s ease-in-out infinite;
+  transition: all 0.3s ease;
+}
+
+.preloader .pill:hover {
+  background: rgba(255, 255, 255, 0.15);
+  border-color: rgb(104 225 255 / 40%);
+  transform: translateY(-5px);
+}
+
+.preloader .pill:nth-child(1) {
+  animation-delay: 0s;
+}
+
+.preloader .pill:nth-child(2) {
+  animation-delay: 0.5s;
+}
+
+.preloader .pill:nth-child(3) {
+  animation-delay: 1s;
+}
+
+@keyframes pillFloat {
+
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+.preloader .pill-icon-lucide {
+  color: #66eaff;
+  filter: drop-shadow(0 0 8px rgba(102, 234, 255, 0.8));
+  animation: pillIconPulse 2s ease-in-out infinite;
+}
+
+@keyframes pillIconPulse {
+  0%, 100% {
+    transform: scale(1);
+    filter: drop-shadow(0 0 8px rgba(102, 234, 255, 0.8));
+  }
+  50% {
+    transform: scale(1.1);
+    filter: drop-shadow(0 0 15px rgba(102, 234, 255, 1));
+  }
+}
+
+/* ============================================
+   MOBILE RESPONSIVE
+   ============================================ */
+
+@media (max-width: 768px) {
+  .preloader .brand-number {
+    font-size: 56px;
+    letter-spacing: 6px;
+  }
+
+  .preloader .brand-label {
+    font-size: 20px;
+    letter-spacing: 8px;
+  }
+
+  .preloader .logo-icon {
+    width: 100px;
+    height: 100px;
+  }
+
+  .preloader .progress-container {
+    width: 250px;
+  }
+
+  .preloader .feature-pills {
+    padding: 0 20px;
+  }
+
+  .preloader .pill {
+    font-size: 12px;
+    padding: 8px 16px;
+  }
+
+  .preloader .lucide-icon {
+    width: 32px;
+    height: 32px;
+  }
+
+  .preloader .pill-icon-lucide {
+    width: 16px;
+    height: 16px;
+  }
+}
+
+@media (max-width: 430px) {
+  .preloader .brand-number {
+    font-size: 48px;
+    letter-spacing: 4px;
+  }
+
+  .preloader .brand-label {
+    font-size: 18px;
+    letter-spacing: 6px;
+  }
+
+  .preloader .logo-icon {
+    width: 80px;
+    height: 80px;
+  }
+
+  .preloader .progress-container {
+    width: 200px;
+  }
+
+  .preloader .loading-message {
+    font-size: 14px;
+  }
+
+  .preloader .lucide-icon {
+    width: 28px;
+    height: 28px;
+  }
+}
+
+/* ============================================
+   SPECIAL EFFECTS & PERFORMANCE OPTIMIZATIONS
+   ============================================ */
+
+/* Enable GPU acceleration for smooth animations */
+.preloader,
+.preloader .gradient-orb,
+.preloader .icon-particle,
+.preloader .logo-icon,
+.preloader .progress-fill,
+.preloader .lucide-icon {
+  will-change: transform;
+}
+
+/* Smooth font rendering */
+.preloader .brand-number,
+.preloader .brand-label,
+.preloader .loading-message {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Brand Image Styles */
+.brand-image {
+  max-width: 100px;
+  height: auto;
+  animation: brandPulse 3s ease-in-out infinite;
+}
+
+@keyframes brandPulse {
+  0%, 100% {
+    filter: brightness(1.7) contrast(1.1) drop-shadow(0 0 6px rgb(63, 99, 172));
+    transform: scale(1);
+  }
+  50% {
+    filter: brightness(2) contrast(1.2) drop-shadow(0 0 10px rgba(255, 215, 100, .6));
+    transform: scale(1.09);
+  }
+}

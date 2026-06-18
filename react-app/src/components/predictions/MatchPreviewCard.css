@@ -1,0 +1,504 @@
+/* =========================
+   CARD BASE (GLASS STYLE)
+========================= */
+.mpc {
+  /* width: 280px; */
+  border-radius: 20px;
+  overflow: hidden;
+  position: relative;
+  color: #eaf6ff;
+  font-family: system-ui, sans-serif;
+  flex-shrink: 0;
+
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+
+  background: linear-gradient(135deg,
+      rgba(120, 180, 255, 0.18),
+      rgba(80, 140, 255, 0.08));
+
+  border: 1px solid rgba(180, 220, 255, 0.25);
+  box-shadow: 0 10px 30px rgba(0, 60, 150, 0.25);
+
+  transition: all 0.3s ease;
+}
+
+.mpc:hover {
+  transform: translateY(-6px) scale(1.02);
+  box-shadow: 0 20px 40px rgba(0, 80, 200, 0.35);
+}
+
+/* =========================
+   GHOST LAYERS
+========================= */
+.mpc-ghost,
+.mpc-ghost2 {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 90%;
+  height: 100%;
+  border-radius: 18px;
+  pointer-events: none;
+}
+
+.mpc-ghost {
+  top: -10px;
+  background: rgba(140, 200, 255, 0.08);
+  border: 1px solid rgba(180, 220, 255, 0.2);
+}
+
+.mpc-ghost2 {
+  top: -20px;
+  width: 82%;
+  background: rgba(140, 200, 255, 0.04);
+  border: 1px solid rgba(180, 220, 255, 0.12);
+}
+
+/* =========================
+   BACKGROUND + OVERLAY
+========================= */
+.mpc-stadium-bg {
+  position: absolute;
+  inset: 0;
+  background: url('https://images.unsplash.com/photo-1431324155629-1a6deb1dec8d?w=600&q=60') center/cover no-repeat;
+  filter: saturate(1.1) brightness(0.9);
+}
+
+.mpc-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgb(8 40 103 / 65%), rgb(2 19 47 / 45%));
+}
+
+/* =========================
+   INNER CONTENT
+========================= */
+.mpc-inner {
+  position: relative;
+  z-index: 2;
+  padding: 16px;
+}
+
+/* =========================
+   DATE PILL
+========================= */
+.mpc-date-pill {
+  background: rgba(180, 220, 255, 0.15);
+  border: 1px solid rgba(180, 220, 255, 0.35);
+  border-radius: 20px;
+  padding: 4px 14px;
+  font-size: 11px;
+  font-weight: 600;
+  display: inline-block;
+  margin-bottom: 14px;
+  backdrop-filter: blur(6px);
+}
+
+/* =========================
+   TEAMS
+========================= */
+.mpc-teams {
+  display: flex;
+  min-height: 102px;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  margin-bottom: 14px;
+}
+
+.mpc-team {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  flex: 1;
+}
+
+/* =========================
+   TEAM FLAG
+========================= */
+.mpc-flag {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: rgba(180, 220, 255, 0.12);
+  border: 2px solid rgba(200, 230, 255, 0.3);
+  backdrop-filter: blur(6px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.mpc-flag img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  border-radius: 50%;
+}
+
+/* =========================
+   TEAM TEXT
+========================= */
+.mpc-tname {
+  font-size: 12px;
+  font-weight: 600;
+  text-align: center;
+}
+
+.mpc-tsub {
+  font-size: 10px;
+  color: rgba(255, 255, 255, 0.5);
+  text-align: center;
+}
+
+/* =========================
+   SCORE AREA
+========================= */
+.mpc-score-wrap {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  flex-shrink: 0;
+}
+
+.mpc-hex {
+  width: 64px;
+  height: 56px;
+  background: rgba(180, 220, 255, 0.12);
+  border: 1.5px solid rgba(200, 230, 255, 0.35);
+  backdrop-filter: blur(8px);
+
+  clip-path: polygon(50% 0%, 100% 25%, 100% 75%,
+      50% 100%, 0% 75%, 0% 25%);
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.mpc-score {
+  font-size: 16px;
+  font-weight: 700;
+  letter-spacing: 1px;
+}
+
+.mpc-vs {
+  font-size: 15px;
+  font-weight: 700;
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.mpc-time {
+  font-size: 11px;
+  color: rgba(255, 255, 255, 0.55);
+}
+
+/* =========================
+   LIVE PILL
+========================= */
+.mpc-live-pill {
+  background: linear-gradient(135deg, #4fc3f7, #29b6f6);
+  color: #003b5c;
+  border-radius: 20px;
+  padding: 3px 12px;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  box-shadow: 0 0 12px rgba(79, 195, 247, 0.6);
+}
+
+.mpc-live-dot {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: #e0f7ff;
+  box-shadow: 0 0 6px #4fc3f7;
+  animation: mpc-blink 1s infinite;
+}
+
+@keyframes mpc-blink {
+
+  0%,
+  100% {
+    opacity: 1;
+  }
+
+  50% {
+    opacity: 0.2;
+  }
+}
+
+/* =========================
+   FOOTER
+========================= */
+.mpc-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-top: 1px solid rgba(180, 220, 255, 0.15);
+  padding-top: 10px;
+}
+
+.mpc-tournament {
+  font-size: 10px;
+  color: rgba(220, 240, 255, 0.6);
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.mpc-manage {
+  font-size: 11px;
+  color: rgba(200, 230, 255, 0.8);
+  font-weight: 500;
+}
+
+.mpc {
+  padding: 2px;
+  /* creates breathing space */
+}
+
+.mpc-inner {
+  padding: 18px 16px;
+  /* slightly more vertical space */
+}
+
+.mpc--live {
+  border: 1px solid rgba(79, 195, 247, 0.6);
+  box-shadow:
+    0 0 0 1px rgba(79, 195, 247, 0.2),
+    0 0 20px rgba(79, 195, 247, 0.25),
+    0 10px 30px rgba(0, 80, 200, 0.35);
+}
+
+.predictions-container {
+  backdrop-filter: blur(6px);
+  background: rgba(5, 15, 40, 0.55);
+  border-radius: 20px;
+}
+
+.filter-tab {
+  padding: 8px 18px;
+  border-radius: 20px;
+  font-size: 13px;
+  color: rgba(200, 220, 255, 0.6);
+  transition: all 0.25s ease;
+}
+
+.filter-tab.active {
+  background: linear-gradient(135deg, #4fc3f7, #2196f3);
+  color: #fff;
+  box-shadow: 0 4px 14px rgba(33, 150, 243, 0.4);
+}
+
+.filter-tab:hover {
+  color: #fff;
+}
+
+.predictions-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 22px;
+  padding: 10px 6px;
+}
+
+
+.mpc-score {
+  font-size: 18px;
+  font-weight: 800;
+  color: #ffffff;
+}
+
+.mpc-vs {
+  font-size: 14px;
+  opacity: 0.6;
+}
+
+.mpc-date-pill {
+  font-size: 10px;
+  letter-spacing: 0.04em;
+  background: rgba(255, 255, 255, 0.12);
+}
+
+.mpc:hover {
+  transform: translateY(-6px) scale(1.02);
+  transition: all 0.25s ease;
+}
+
+.mpc--live::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 4px;
+  width: 100%;
+  background: linear-gradient(90deg, #4fc3f7, #00e5ff);
+}
+
+.predictions-section {
+  margin-top: 12px;
+}
+
+@keyframes live-pulse {
+  0% {
+    transform: scale(1);
+    opacity: 0.9;
+  }
+
+  70% {
+    transform: scale(2.5);
+    opacity: 0;
+  }
+
+  100% {
+    transform: scale(2.5);
+    opacity: 0;
+  }
+}
+
+.mpc-live-pill {
+  background: rgba(239, 68, 68, 0.15);
+  border: 1px solid rgba(239, 68, 68, 0.4);
+  color: #ff4d4f;
+  border-radius: 20px;
+  padding: 4px 12px;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  backdrop-filter: blur(6px);
+}
+
+.mpc-live-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #ff3b3b;
+  position: relative;
+}
+
+/* outer pulse ring */
+.mpc-live-dot::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  background: rgba(255, 59, 59, 0.6);
+  animation: live-pulse 1.5s infinite ease-out;
+}
+
+@keyframes live-pulse {
+  0% {
+    transform: scale(1);
+    opacity: 0.9;
+  }
+
+  70% {
+    transform: scale(2.5);
+    opacity: 0;
+  }
+
+  100% {
+    transform: scale(2.5);
+    opacity: 0;
+  }
+}
+
+.mpc--live {
+  box-shadow:
+    0 0 0 1px rgba(239, 68, 68, 0.25),
+    0 0 18px rgba(239, 68, 68, 0.25),
+    0 8px 25px rgba(0, 0, 0, 0.4);
+}
+
+.predictions-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  /* 🔥 force 3 cards */
+  gap: 24px;
+  padding: 10px 6px;
+}
+
+@media (max-width: 1024px) {
+  .predictions-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 600px) {
+  .predictions-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.mpc-teams--row {
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.mpc-team {
+  flex: 1;
+}
+
+.mpc-score-wrap {
+  min-width: 70px;
+}
+
+.mpc-winner {
+  transform: scale(1.05);
+  border: 1px solid rgba(255, 215, 0, 0.6);
+}
+
+.mpc-result-pill {
+  margin-top: 6px;
+  padding: 4px 10px;
+  font-size: 12px;
+  border-radius: 12px;
+  background: rgba(255, 215, 0, 0.15);
+  color: #ffd700;
+  text-align: center;
+}
+
+/* SCORE BOX */
+.mpc-score-box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+}
+
+/* SCORE LINE */
+.mpc-score-line {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-weight: 600;
+  font-size: 14px;
+}
+
+/* TEAM SCORES */
+.mpc-score-a,
+.mpc-score-b {
+  color: #ffffff;
+}
+
+/* VS TEXT */
+.mpc-score-vs {
+  opacity: 0.7;
+  font-size: 12px;
+}
+
+/* WINNER */
+.mpc-winner {
+  font-size: 12px;
+  color: #00e676;
+  font-weight: 600;
+}

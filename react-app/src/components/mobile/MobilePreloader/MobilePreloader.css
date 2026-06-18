@@ -1,0 +1,668 @@
+/* ============================================
+   MOBILE PRELOADER - 8JJ GAMES
+   ============================================ */
+
+.mobile-preloader {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  /* background: linear-gradient(135deg, #0a1628 0%, #0f1a2e 50%, #1a2942 100%); */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+  opacity: 1;
+  transition: opacity 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+  overflow: hidden;
+}
+
+.mobile-preloader.fade-out {
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* ============================================
+   ANIMATED BACKGROUND ORBS
+   ============================================ */
+
+.mobile-preloader-bg {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+.mobile-gradient-orb {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(60px);
+  opacity: 0.5;
+  animation: mobileFloatOrb 6s ease-in-out infinite;
+}
+
+.mobile-orb-1 {
+  width: 300px;
+  height: 300px;
+  background: radial-gradient(circle, #00d9ff, transparent);
+  top: -150px;
+  left: -150px;
+  animation-delay: 0s;
+}
+
+.mobile-orb-2 {
+  width: 250px;
+  height: 250px;
+  background: radial-gradient(circle, #4facfe, transparent);
+  bottom: -125px;
+  right: -125px;
+  animation-delay: 1.5s;
+}
+
+.mobile-orb-3 {
+  width: 200px;
+  height: 200px;
+  background: radial-gradient(circle, #00f2fe, transparent);
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  animation-delay: 3s;
+}
+
+@keyframes mobileFloatOrb {
+  0%, 100% {
+    transform: translate(0, 0) scale(1);
+  }
+  33% {
+    transform: translate(20px, -20px) scale(1.1);
+  }
+  66% {
+    transform: translate(-20px, 20px) scale(0.9);
+  }
+}
+
+/* ============================================
+   FLOATING GAME ICONS
+   ============================================ */
+
+.mobile-floating-icons {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+
+.mobile-icon-particle {
+  position: absolute;
+  opacity: 0.6;
+  animation: mobileFloatIcon 12s ease-in-out infinite;
+  filter: drop-shadow(0 0 15px rgba(102, 234, 255, 0.6));
+}
+
+.mobile-lucide-icon {
+  color: #ffffff;
+  animation: mobileIconPulse 2.5s ease-in-out infinite;
+}
+
+@keyframes mobileIconPulse {
+  0%, 100% {
+    filter: drop-shadow(0 0 8px rgba(0, 217, 255, 0.5));
+    transform: scale(1);
+  }
+  50% {
+    filter: drop-shadow(0 0 20px rgba(0, 217, 255, 1));
+    transform: scale(1.15);
+  }
+}
+
+.mobile-icon-1 {
+  top: 12%;
+  left: 10%;
+  animation-delay: 0s;
+}
+
+.mobile-icon-1 .mobile-lucide-icon {
+  color: #00d9ff;
+  animation-delay: 0s;
+}
+
+.mobile-icon-2 {
+  top: 65%;
+  left: 8%;
+  animation-delay: 1.5s;
+}
+
+.mobile-icon-2 .mobile-lucide-icon {
+  color: #ffd700;
+  animation-delay: 0.4s;
+}
+
+.mobile-icon-3 {
+  top: 18%;
+  right: 12%;
+  animation-delay: 3s;
+}
+
+.mobile-icon-3 .mobile-lucide-icon {
+  color: #ff6b9d;
+  animation-delay: 0.8s;
+}
+
+.mobile-icon-4 {
+  bottom: 18%;
+  right: 10%;
+  animation-delay: 0.8s;
+}
+
+.mobile-icon-4 .mobile-lucide-icon {
+  color: #ffa726;
+  animation-delay: 1.2s;
+}
+
+.mobile-icon-5 {
+  top: 45%;
+  left: 5%;
+  animation-delay: 2.2s;
+}
+
+.mobile-icon-5 .mobile-lucide-icon {
+  color: #ab47bc;
+  animation-delay: 1.6s;
+}
+
+.mobile-icon-6 {
+  top: 38%;
+  right: 8%;
+  animation-delay: 4s;
+}
+
+.mobile-icon-6 .mobile-lucide-icon {
+  color: #4facfe;
+  animation-delay: 2s;
+}
+
+@keyframes mobileFloatIcon {
+  0%, 100% {
+    transform: translateY(0) rotate(0deg);
+  }
+  50% {
+    transform: translateY(-25px) rotate(180deg);
+  }
+}
+
+/* ============================================
+   MAIN CONTENT
+   ============================================ */
+
+.mobile-preloader-content {
+  position: relative;
+  z-index: 10;
+  text-align: center;
+  animation: mobileSlideUp 0.7s cubic-bezier(0.34, 1.56, 0.64, 1);
+  padding: 0 20px;
+}
+
+@keyframes mobileSlideUp {
+  from {
+    opacity: 0;
+    transform: translateY(40px) scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+/* ============================================
+   LOGO SECTION
+   ============================================ */
+
+.mobile-logo-container {
+  position: relative;
+  margin-bottom: 40px;
+}
+
+.mobile-logo-glow {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 200px;
+  height: 200px;
+  background: radial-gradient(circle, rgba(0, 217, 255, 0.3), transparent 70%);
+  animation: mobilePulseGlow 2.5s ease-in-out infinite;
+}
+
+@keyframes mobilePulseGlow {
+  0%, 100% {
+    transform: translate(-50%, -50%) scale(1);
+    opacity: 0.4;
+  }
+  50% {
+    transform: translate(-50%, -50%) scale(1.3);
+    opacity: 0.7;
+  }
+}
+
+.mobile-logo-wrapper {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Animated Ring */
+.mobile-logo-ring {
+  position: absolute;
+  width: 140px;
+  height: 140px;
+  animation: mobileRotateRing 3s linear infinite;
+}
+
+@keyframes mobileRotateRing {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.mobile-ring-svg {
+  width: 100%;
+  height: 100%;
+}
+
+.mobile-ring-circle {
+  animation: mobileDashRing 2s ease-in-out infinite;
+}
+
+@keyframes mobileDashRing {
+  0% {
+    stroke-dashoffset: 345;
+  }
+  50% {
+    stroke-dashoffset: 0;
+  }
+  100% {
+    stroke-dashoffset: -345;
+  }
+}
+
+/* Brand Logo */
+.mobile-brand-logo {
+  position: relative;
+  z-index: 2;
+  animation: mobileBrandFloat 3s ease-in-out infinite;
+}
+
+@keyframes mobileBrandFloat {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+.mobile-brand-image {
+  width: 90px;
+  height: auto;
+  animation: mobileBrandPulse 2.5s ease-in-out infinite;
+  filter: brightness(1.8) contrast(1.15) drop-shadow(0 0 12px rgba(0, 217, 255, 0.7));
+}
+
+@keyframes mobileBrandPulse {
+  0%, 100% {
+    filter: brightness(1.8) contrast(1.15) drop-shadow(0 0 12px rgba(0, 217, 255, 0.7));
+    transform: scale(1);
+  }
+  50% {
+    filter: brightness(2.1) contrast(1.25) drop-shadow(0 0 20px rgba(0, 217, 255, 0.9));
+    transform: scale(1.08);
+  }
+}
+
+/* ============================================
+   LOADING SECTION
+   ============================================ */
+
+.mobile-loading-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 18px;
+}
+
+.mobile-progress-containerz {
+  width: 280px;
+  position: relative;
+}
+
+.mobile-progress-track {
+  width: 100%;
+  height: 6px;
+  background: rgba(255, 255, 255, 0.08);
+  border-radius: 20px;
+  overflow: hidden;
+  backdrop-filter: blur(10px);
+  box-shadow: 
+    0 4px 15px rgba(0, 0, 0, 0.3),
+    inset 0 1px 0 rgba(255, 255, 255, 0.05);
+}
+
+.mobile-progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #00d9ff, #4facfe, #00f2fe);
+  background-size: 200% 100%;
+  border-radius: 20px;
+  position: relative;
+  transition: width 0.25s ease-out;
+  animation: mobileGradientShift 2s ease infinite;
+  box-shadow: 0 0 15px rgba(0, 217, 255, 0.6);
+}
+
+@keyframes mobileGradientShift {
+  0% {
+    background-position: 0% 0%;
+  }
+  100% {
+    background-position: 200% 0%;
+  }
+}
+
+.mobile-progress-shine {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 40px;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.6));
+  animation: mobileShine 1.5s ease-in-out infinite;
+}
+
+@keyframes mobileShine {
+  0%, 100% {
+    opacity: 0;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+.mobile-progress-percentage {
+  position: absolute;
+  top: -28px;
+  right: 0;
+  color: #00d9ff;
+  font-size: 15px;
+  font-weight: 800;
+  text-shadow: 0 2px 10px rgba(0, 217, 255, 0.6);
+  animation: mobilePercentPulse 0.5s ease-in-out infinite;
+}
+
+@keyframes mobilePercentPulse {
+  0%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.1);
+  }
+}
+
+/* Loading Dots */
+.mobile-loading-dots {
+  display: flex;
+  gap: 6px;
+}
+
+.mobile-dot {
+  width: 7px;
+  height: 7px;
+  background: linear-gradient(135deg, #00d9ff, #4facfe);
+  border-radius: 50%;
+  box-shadow: 0 0 10px rgba(0, 217, 255, 0.6);
+  animation: mobileBounce 1.2s ease-in-out infinite;
+}
+
+.mobile-dot:nth-child(1) {
+  animation-delay: 0s;
+}
+
+.mobile-dot:nth-child(2) {
+  animation-delay: 0.15s;
+}
+
+.mobile-dot:nth-child(3) {
+  animation-delay: 0.3s;
+}
+
+@keyframes mobileBounce {
+  0%, 80%, 100% {
+    transform: scale(0.7);
+    opacity: 0.5;
+  }
+  40% {
+    transform: scale(1.2);
+    opacity: 1;
+  }
+}
+
+.mobile-loading-message {
+  color: #ffffff;
+  font-size: 15px;
+  font-weight: 600;
+  margin: 0;
+  opacity: 0.95;
+  letter-spacing: 0.5px;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
+  animation: mobileTextPulse 2s ease-in-out infinite;
+}
+
+@keyframes mobileTextPulse {
+  0%, 100% {
+    opacity: 0.95;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+/* ============================================
+   FEATURE PILLS
+   ============================================ */
+
+.mobile-feature-pills {
+  display: flex;
+  gap: 10px;
+  margin-top: 35px;
+  flex-wrap: wrap;
+  justify-content: center;
+  padding: 0 10px;
+}
+
+.mobile-pill {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 16px;
+  /* background: rgba(255, 255, 255, 0.08); */
+   background: linear-gradient(135deg, #0a1628 0%, #0f1a2e 50%, #1a2942 100%);
+  backdrop-filter: blur(15px);
+  border-radius: 25px;
+  border: 1px solid rgba(0, 217, 255, 0.2);
+  color: #ffffff;
+  font-size: 12px;
+  font-weight: 600;
+  animation: mobilePillFloat 2.5s ease-in-out infinite;
+  box-shadow: 
+    0 4px 12px rgba(0, 0, 0, 0.2),
+    inset 0 1px 0 rgba(255, 255, 255, 0.05);
+}
+
+.mobile-pill:nth-child(1) {
+  animation-delay: 0s;
+}
+
+.mobile-pill:nth-child(2) {
+  animation-delay: 0.4s;
+}
+
+.mobile-pill:nth-child(3) {
+  animation-delay: 0.8s;
+}
+
+@keyframes mobilePillFloat {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-8px);
+  }
+}
+
+.mobile-pill-icon {
+  color: #00d9ff;
+  filter: drop-shadow(0 0 6px rgba(0, 217, 255, 0.6));
+  animation: mobilePillIconSpin 2s linear infinite;
+}
+
+@keyframes mobilePillIconSpin {
+  0%, 100% {
+    transform: rotate(0deg) scale(1);
+  }
+  50% {
+    transform: rotate(180deg) scale(1.1);
+  }
+}
+
+/* ============================================
+   PARTICLE EFFECTS
+   ============================================ */
+
+.mobile-particles {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.mobile-particle {
+  position: absolute;
+  width: 4px;
+  height: 4px;
+  background: radial-gradient(circle, rgba(0, 217, 255, 0.8), transparent);
+  border-radius: 50%;
+  animation: mobileParticleFly 8s linear infinite;
+}
+
+@keyframes mobileParticleFly {
+  0% {
+    transform: translateY(100vh) translateX(0) scale(0);
+    opacity: 0;
+  }
+  10% {
+    opacity: 1;
+  }
+  90% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(-100vh) translateX(calc(var(--x-offset, 0) * 1px)) scale(1);
+    opacity: 0;
+  }
+}
+
+.mobile-particle-1 { left: 10%; animation-delay: 0s; --x-offset: 20; }
+.mobile-particle-2 { left: 20%; animation-delay: 0.5s; --x-offset: -15; }
+.mobile-particle-3 { left: 30%; animation-delay: 1s; --x-offset: 25; }
+.mobile-particle-4 { left: 40%; animation-delay: 1.5s; --x-offset: -20; }
+.mobile-particle-5 { left: 50%; animation-delay: 2s; --x-offset: 30; }
+.mobile-particle-6 { left: 60%; animation-delay: 2.5s; --x-offset: -25; }
+.mobile-particle-7 { left: 70%; animation-delay: 3s; --x-offset: 15; }
+.mobile-particle-8 { left: 80%; animation-delay: 3.5s; --x-offset: -30; }
+.mobile-particle-9 { left: 90%; animation-delay: 4s; --x-offset: 20; }
+.mobile-particle-10 { left: 15%; animation-delay: 4.5s; --x-offset: -15; }
+.mobile-particle-11 { left: 25%; animation-delay: 5s; --x-offset: 25; }
+.mobile-particle-12 { left: 35%; animation-delay: 5.5s; --x-offset: -20; }
+.mobile-particle-13 { left: 55%; animation-delay: 6s; --x-offset: 30; }
+.mobile-particle-14 { left: 65%; animation-delay: 6.5s; --x-offset: -25; }
+.mobile-particle-15 { left: 75%; animation-delay: 7s; --x-offset: 15; }
+
+/* ============================================
+   RESPONSIVE - SMALL PHONES
+   ============================================ */
+
+@media (max-width: 380px) {
+  .mobile-logo-ring {
+    width: 120px;
+    height: 120px;
+  }
+
+  .mobile-brand-image {
+    width: 75px;
+  }
+
+  .mobile-progress-containerz {
+    width: 240px;
+  }
+
+  .mobile-feature-pills {
+    margin-top: 28px;
+  }
+
+  .mobile-pill {
+    font-size: 11px;
+    padding: 7px 14px;
+    gap: 5px;
+  }
+
+  .mobile-pill-icon {
+    width: 14px;
+    height: 14px;
+  }
+
+  .mobile-lucide-icon {
+    width: 28px;
+    height: 28px;
+  }
+
+  .mobile-loading-message {
+    font-size: 14px;
+  }
+}
+
+/* ============================================
+   PERFORMANCE OPTIMIZATIONS
+   ============================================ */
+
+.mobile-preloader,
+.mobile-gradient-orb,
+.mobile-icon-particle,
+.mobile-logo-ring,
+.mobile-progress-fill,
+.mobile-lucide-icon {
+  will-change: transform;
+}
+
+.mobile-brand-image,
+.mobile-loading-message {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* ============================================
+   ACCESSIBILITY
+   ============================================ */
+
+@media (prefers-reduced-motion: reduce) {
+  .mobile-preloader *,
+  .mobile-preloader *::before,
+  .mobile-preloader *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}

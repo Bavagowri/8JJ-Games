@@ -1,0 +1,385 @@
+/* src/pages/Leaderboard/styles/rank-badge.css */
+/* ENHANCED WITH CREATIVE ANIMATIONS & VISUAL EFFECTS */
+
+.rank-badge-Leader {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  padding: 5px 14px;
+  border-radius: 20px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+  position: relative;
+  overflow: hidden;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  border: 1.5px solid transparent;
+}
+
+.rank-badge-Leader .badge-text {
+  position: relative;
+  z-index: 2;
+  font-weight: 800;
+}
+
+.rank-badge-Leader::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.4),
+    transparent
+  );
+  transition: left 0.6s ease;
+}
+
+.rank-badge-Leader:hover::before {
+  left: 100%;
+}
+
+.rank-badge-Leader:hover {
+  transform: translateY(-2px) scale(1.05);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+}
+
+/* Tier specific styles with enhanced gradients */
+.rank-badge-Leader.rookie {
+  background: linear-gradient(135deg, #8B7FFF 0%, #6B5FDF 100%);
+  color: #ffffff;
+  box-shadow: 
+    0 3px 12px rgba(139, 127, 255, 0.35),
+    inset 0 1px 0 rgba(255, 255, 255, 0.2);
+  border-color: rgba(139, 127, 255, 0.3);
+}
+
+.rank-badge-Leader.rookie:hover {
+  box-shadow: 
+    0 6px 20px rgba(139, 127, 255, 0.5),
+    inset 0 1px 0 rgba(255, 255, 255, 0.3);
+}
+
+.rank-badge-Leader.pro {
+  background: linear-gradient(135deg, #FF8A3D 0%, #FF6B1D 100%);
+  color: #ffffff;
+  box-shadow: 
+    0 3px 12px rgba(255, 138, 61, 0.35),
+    inset 0 1px 0 rgba(255, 255, 255, 0.2);
+  border-color: rgba(255, 138, 61, 0.3);
+}
+
+.rank-badge-Leader.pro:hover {
+  box-shadow: 
+    0 6px 20px rgba(255, 138, 61, 0.5),
+    inset 0 1px 0 rgba(255, 255, 255, 0.3);
+}
+
+.rank-badge-Leader.master {
+  background: linear-gradient(135deg, #4A9EFF 0%, #2A7EDF 100%);
+  color: #ffffff;
+  box-shadow: 
+    0 3px 12px rgba(74, 158, 255, 0.35),
+    inset 0 1px 0 rgba(255, 255, 255, 0.2);
+  border-color: rgba(74, 158, 255, 0.3);
+}
+
+.rank-badge-Leader.master:hover {
+  box-shadow: 
+    0 6px 20px rgba(74, 158, 255, 0.5),
+    inset 0 1px 0 rgba(255, 255, 255, 0.3);
+}
+
+.rank-badge-Leader.champion {
+  background: linear-gradient(135deg, #FFD700 0%, #FFA500 100%);
+  color: #1A1F2E;
+  box-shadow: 
+    0 4px 16px rgba(255, 215, 0, 0.5),
+    inset 0 1px 0 rgba(255, 255, 255, 0.4);
+  animation: championGlow 3s ease-in-out infinite;
+  border-color: rgba(255, 215, 0, 0.5);
+  font-weight: 900;
+}
+
+.rank-badge-Leader.champion:hover {
+  box-shadow: 
+    0 8px 28px rgba(255, 215, 0, 0.7),
+    inset 0 1px 0 rgba(255, 255, 255, 0.5);
+}
+
+/* Large badge variant with icon wrapper */
+.rank-badge-large {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  padding: 24px 20px;
+  border-radius: 20px;
+  min-width: 120px;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  cursor: pointer;
+}
+
+.rank-badge-large:hover {
+  transform: translateY(-6px) scale(1.03);
+}
+
+.badge-icon-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 80px;
+  height: 80px;
+}
+
+.icon-glow {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  filter: blur(20px);
+  opacity: 0.6;
+  animation: iconGlowPulse 3s ease-in-out infinite;
+}
+
+@keyframes iconGlowPulse {
+  0%, 100% {
+    opacity: 0.6;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.9;
+    transform: scale(1.15);
+  }
+}
+
+.badge-icon {
+  position: relative;
+  z-index: 2;
+  filter: drop-shadow(0 4px 12px rgba(0, 0, 0, 0.3));
+  animation: iconFloat 4s ease-in-out infinite;
+}
+
+@keyframes iconFloat {
+  0%, 100% {
+    transform: translateY(0) rotate(0deg);
+  }
+  33% {
+    transform: translateY(-6px) rotate(-3deg);
+  }
+  66% {
+    transform: translateY(6px) rotate(3deg);
+  }
+}
+
+/* Sparkle decorations for champion */
+.sparkle {
+  position: absolute;
+  z-index: 1;
+  filter: drop-shadow(0 0 6px currentColor);
+}
+
+.sparkle-1 {
+  top: 10%;
+  right: 15%;
+  animation: sparkleFloat 3s ease-in-out infinite;
+}
+
+.sparkle-2 {
+  bottom: 15%;
+  left: 10%;
+  animation: sparkleFloat 3s ease-in-out infinite 1s;
+}
+
+.sparkle-3 {
+  top: 20%;
+  left: 20%;
+  animation: sparkleFloat 3s ease-in-out infinite 2s;
+}
+
+@keyframes sparkleFloat {
+  0%, 100% {
+    opacity: 0.4;
+    transform: translateY(0) scale(1);
+  }
+  50% {
+    opacity: 1;
+    transform: translateY(-10px) scale(1.2);
+  }
+}
+
+.badge-name {
+  font-size: 1.1rem;
+  font-weight: 800;
+  margin: 0;
+  color: inherit;
+  letter-spacing: 0.5px;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+}
+
+.badge-percentage {
+  font-size: 0.8rem;
+  font-weight: 600;
+  opacity: 0.9;
+  margin: 0;
+  letter-spacing: 0.3px;
+}
+
+/* Mini badge variant with icon */
+.rank-badge-mini {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  padding: 0;
+  border-radius: 50%;
+  font-size: 1.2rem;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 
+    0 2px 8px rgba(0, 0, 0, 0.2),
+    inset 0 1px 0 rgba(255, 255, 255, 0.2);
+}
+
+.rank-badge-mini:hover {
+  transform: scale(1.15) rotate(5deg);
+}
+
+.rank-badge-mini svg {
+  filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.3));
+}
+
+/* Rank position badges with icons */
+.rank-position-badge {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  border-radius: 14px;
+  font-weight: 800;
+  font-size: 1.15rem;
+  position: relative;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.rank-position-badge:hover {
+  transform: scale(1.1) rotate(-3deg);
+}
+
+.rank-position-badge.gold {
+  background: linear-gradient(135deg, #FFD700 0%, #FFA500 100%);
+  color: #1A1F2E;
+  box-shadow: 
+    0 4px 16px rgba(255, 215, 0, 0.5),
+    inset 0 1px 0 rgba(255, 255, 255, 0.3);
+  animation: goldPulse 3s ease-in-out infinite;
+}
+
+@keyframes goldPulse {
+  0%, 100% {
+    box-shadow: 
+      0 4px 16px rgba(255, 215, 0, 0.5),
+      inset 0 1px 0 rgba(255, 255, 255, 0.3);
+  }
+  50% {
+    box-shadow: 
+      0 6px 24px rgba(255, 215, 0, 0.7),
+      inset 0 1px 0 rgba(255, 255, 255, 0.4);
+  }
+}
+
+.rank-position-badge.silver {
+  background: linear-gradient(135deg, #C0C0C0 0%, #A8A8A8 100%);
+  color: #1A1F2E;
+  box-shadow: 
+    0 4px 16px rgba(192, 192, 192, 0.5),
+    inset 0 1px 0 rgba(255, 255, 255, 0.3);
+}
+
+.rank-position-badge.bronze {
+  background: linear-gradient(135deg, #CD7F32 0%, #B5682A 100%);
+  color: #ffffff;
+  box-shadow: 
+    0 4px 16px rgba(205, 127, 50, 0.5),
+    inset 0 1px 0 rgba(255, 255, 255, 0.3);
+}
+
+.rank-position-badge.default {
+  background: rgba(79, 172, 254, 0.12);
+  color: #4facfe;
+  border: 2px solid rgba(79, 172, 254, 0.25);
+}
+
+/* Animated border for champion tier */
+@keyframes championGlow {
+  0%, 100% {
+    box-shadow: 
+      0 0 25px rgba(255, 215, 0, 0.5),
+      inset 0 1px 0 rgba(255, 255, 255, 0.4);
+  }
+  50% {
+    box-shadow: 
+      0 0 40px rgba(255, 215, 0, 0.8), 
+      0 0 60px rgba(255, 165, 0, 0.6),
+      inset 0 1px 0 rgba(255, 255, 255, 0.5);
+  }
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .rank-badge-Leader {
+    padding: 4px 12px;
+    font-size: 0.7rem;
+    gap: 5px;
+  }
+
+  .rank-badge-large {
+    padding: 20px 16px;
+    min-width: 100px;
+    gap: 10px;
+  }
+
+  .badge-icon-wrapper {
+    width: 70px;
+    height: 70px;
+  }
+
+  .badge-icon {
+    width: 36px;
+    height: 36px;
+  }
+
+  .badge-name {
+    font-size: 1rem;
+  }
+
+  .rank-position-badge {
+    width: 40px;
+    height: 40px;
+    font-size: 1rem;
+  }
+
+  .rank-badge-mini {
+    width: 32px;
+    height: 32px;
+  }
+}
+
+@media (max-width: 480px) {
+  .rank-badge-large {
+    padding: 16px 12px;
+    min-width: 90px;
+  }
+
+  .badge-icon-wrapper {
+    width: 60px;
+    height: 60px;
+  }
+}

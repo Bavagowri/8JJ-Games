@@ -1,0 +1,409 @@
+/* react-app/src/components/Widgets/BannerA.css */
+
+/* ─── Spinning border @property ──────────────────────────────────────────── */
+@property --ba {
+  syntax: '<angle>';
+  initial-value: 0deg;
+  inherits: false;
+}
+@keyframes bna-border-spin { to { --ba: 360deg; } }
+
+@keyframes bna-progress {
+  from { width: 0%; }
+  to   { width: 100%; }
+}
+@keyframes bna-slide-in {
+  from { opacity: 0; transform: translateY(12px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes bna-fade-scale {
+  from { opacity: 0; transform: scale(1.03); }
+  to   { opacity: 1; transform: scale(1); }
+}
+
+/* ─── Shell — holds the spinning border ──────────────────────────────────── */
+/*
+  .bna-shell sits OUTSIDE .banner-a (which has overflow:hidden for image fades).
+  The conic border lives on .bna-shell::before via the mask-punch technique.
+*/
+.bna-shell {
+  position: relative;
+  border-radius: calc(var(--c-radius) + 2px);
+  padding: 2px;
+  isolation: isolate;
+  margin-bottom: 40px;
+}
+
+.bna-shell::before {
+  content: '';
+  position: absolute;
+  inset: -1px;
+  border-radius: calc(var(--c-radius) + 3px);
+  padding: 2px;
+  background: conic-gradient(
+    from var(--ba, 0deg),
+    transparent    0%,
+    transparent   20%,
+    #1d4ed8       36%,
+    #38bdf8       44%,
+    #e0f2fe       50%,
+    #38bdf8       56%,
+    #1d4ed8       64%,
+    transparent   80%,
+    transparent  100%
+  );
+  -webkit-mask:
+    linear-gradient(#fff 0 0) content-box,
+    linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  animation: bna-border-spin 6s linear infinite;
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* Banner inside shell — remove old hard border, keep flush */
+.bna-shell .banner-a {
+  border: none;
+  margin-bottom: 0;
+  border-radius: var(--c-radius);
+}
+
+/* ─── Carousel wrapper ────────────────────────────────────────────────────── */
+.bna-carousel {
+  position: relative;
+}
+
+.bna-track-wrap {
+  overflow: hidden;
+  border-radius: var(--c-radius);
+  position: relative;
+  z-index: 1;
+}
+.bna-track {
+  display: flex;
+  transition: transform 0.52s cubic-bezier(0.22, 1, 0.36, 1);
+  will-change: transform;
+}
+.bna-slide {
+  flex: 0 0 100%;
+  min-width: 0;
+}
+
+/* ─── Arrow buttons ───────────────────────────────────────────────────────── */
+.bna-arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-60%);
+  z-index: 20;
+  width: 40px; height: 40px;
+  border-radius: 50%;
+  border: 1px solid rgba(79, 172, 254, 0.28);
+  background: rgba(6, 14, 26, 0.72);
+  backdrop-filter: blur(8px);
+  color: var(--c-primary);
+  font-size: 22px; line-height: 1;
+  cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+  transition: all 0.22s var(--c-ease);
+  opacity: 0;
+  pointer-events: none;
+}
+.bna-carousel:hover .bna-arrow {
+  opacity: 1;
+  pointer-events: auto;
+}
+.bna-arrow:hover {
+  background: rgba(79, 172, 254, 0.18);
+  border-color: var(--c-primary);
+  transform: translateY(-60%) scale(1.1);
+}
+.bna-arrow--prev { left: 14px; }
+.bna-arrow--next { right: 14px; }
+
+/* ─── Banner-A root ───────────────────────────────────────────────────────── */
+.banner-a {
+  position: relative;
+  border-radius: var(--c-radius);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  min-height: 440px;
+  background: #060e1a;
+  box-shadow:
+    0 8px 48px rgba(0, 0, 0, 0.55),
+    inset 0 1px 0 rgba(255, 255, 255, 0.04);
+}
+
+.banner-a::before {
+  content: '';
+  position: absolute; inset: 0;
+  background-image:
+    linear-gradient(rgba(79, 172, 254, 0.025) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(79, 172, 254, 0.025) 1px, transparent 1px);
+  background-size: 44px 44px;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.banner-a-glow {
+  position: absolute; inset: 0;
+  background:
+    radial-gradient(ellipse 55% 80% at 22% 60%, rgba(255, 120, 40, 0.10) 0%, transparent 70%),
+    radial-gradient(ellipse 40% 60% at 75% 80%, rgba(79, 172, 254, 0.10) 0%, transparent 65%),
+    radial-gradient(ellipse 60% 50% at 50% 100%, rgba(20, 8, 40, 0.6) 0%, transparent 80%);
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* ─── Athlete image panel ─────────────────────────────────────────────────── */
+.banner-a-athlete {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  height: 260px;
+  overflow: visible;
+  flex-shrink: 0;
+}
+
+.banner-a-athlete-img {
+  width: 100%; height: 100%;
+  object-fit: cover;
+  object-position: top center;
+  display: block;
+  mask-image:
+    linear-gradient(to bottom, rgba(0,0,0,1) 40%, rgba(0,0,0,0) 100%),
+    linear-gradient(to right,  rgba(0,0,0,1) 55%, rgba(0,0,0,0) 100%);
+  mask-composite: intersect;
+  -webkit-mask-image:
+    linear-gradient(to bottom, rgba(0,0,0,1) 40%, rgba(0,0,0,0) 100%),
+    linear-gradient(to right,  rgba(0,0,0,1) 55%, rgba(0,0,0,0) 100%);
+  -webkit-mask-composite: source-in;
+}
+
+.banner-a-athlete-placeholder {
+  width: 100%; height: 100%;
+  background: linear-gradient(160deg, #0e2248 0%, #091628 60%, #060e1a 100%);
+  display: flex; align-items: flex-end; justify-content: center;
+}
+.banner-a-athlete-silhouette {
+  font-size: 140px; line-height: 1;
+  opacity: 0.18; filter: blur(1px);
+  user-select: none; margin-bottom: -16px;
+}
+
+.banner-a-athlete::after {
+  content: '';
+  position: absolute;
+  bottom: -2px; left: 0; right: 0;
+  height: 70%;
+  background: linear-gradient(
+    to bottom,
+    transparent 0%,
+    rgba(10, 16, 32, 0.55) 45%,
+    rgba(6, 14, 26, 0.88) 72%,
+    #060e1a 100%
+  );
+  z-index: 3;
+  pointer-events: none;
+}
+
+/* LIVE badge */
+.banner-a-live-badge {
+  position: absolute;
+  top: 14px; left: 14px;
+  z-index: 10;
+  display: inline-flex; align-items: center; gap: 6px;
+  background: rgba(239, 68, 68, 0.14);
+  border: 1px solid rgba(239, 68, 68, 0.45);
+  color: #ef4444;
+  font-size: 10px; font-weight: 800;
+  letter-spacing: 2.5px; text-transform: uppercase;
+  padding: 5px 12px; border-radius: 50px;
+  backdrop-filter: blur(8px);
+}
+.banner-a-live-dot {
+  width: 6px; height: 6px;
+  background: #ef4444; border-radius: 50%;
+  animation: c-blink 1.2s ease-in-out infinite;
+}
+
+.banner-a-sport-pip {
+  position: absolute;
+  top: 14px; right: 14px;
+  z-index: 10;
+  width: 38px; height: 38px; border-radius: 10px;
+  background: rgba(0, 0, 0, 0.38);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(8px);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 20px;
+}
+
+/* ─── Content panel ───────────────────────────────────────────────────────── */
+.banner-a-content {
+  position: relative; z-index: 5;
+  padding: 0 20px 26px;
+  flex: 1;
+  display: flex; flex-direction: column;
+  justify-content: flex-end; gap: 0;
+}
+
+.banner-a-eyebrow {
+  font-size: 10px; font-weight: 800;
+  letter-spacing: 3px; text-transform: uppercase;
+  color: var(--c-primary); margin-bottom: 8px; opacity: 0.9;
+}
+
+.banner-a-headline {
+  font-family: 'Barlow Condensed', 'Oswald', 'Impact', sans-serif;
+  font-size: 38px; font-weight: 800;
+  line-height: 1.0; color: var(--c-text);
+  letter-spacing: -0.5px; margin-bottom: 8px;
+}
+.banner-a-headline em {
+  font-style: normal;
+  background: linear-gradient(135deg, #4facfe 0%, #7dd3fc 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.banner-a-sub {
+  font-size: 13px; color: var(--c-text-sub);
+  line-height: 1.55; margin-bottom: 20px;
+}
+
+.banner-a-match-row {
+  display: flex; align-items: center;
+  gap: 8px; margin-bottom: 18px; flex-wrap: wrap;
+}
+.banner-a-teams {
+  display: flex; align-items: center;
+  gap: 7px; flex: 1; min-width: 0;
+}
+.banner-a-team-name {
+  font-size: 13px; font-weight: 800; color: var(--c-text);
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+}
+.banner-a-vs {
+  font-size: 10px; font-weight: 700; color: var(--c-text-muted);
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 5px; padding: 2px 6px; flex-shrink: 0;
+}
+.banner-a-timer {
+  font-size: 11px; font-weight: 800;
+  color: var(--c-gold); background: var(--c-gold-sub);
+  border: 1px solid var(--c-gold-bdr);
+  border-radius: 7px; padding: 4px 9px;
+  white-space: nowrap; flex-shrink: 0;
+  font-variant-numeric: tabular-nums;
+}
+.banner-a-timer.urgent {
+  color: var(--c-danger);
+  background: rgba(239, 68, 68, 0.07);
+  border-color: rgba(239, 68, 68, 0.25);
+  animation: c-urgent 1.5s ease-in-out infinite;
+}
+.banner-a-stake {
+  display: inline-flex; align-items: center; gap: 4px;
+  font-size: 11px; font-weight: 700;
+  color: var(--c-gold); background: var(--c-gold-sub);
+  border: 1px solid var(--c-gold-bdr);
+  border-radius: 6px; padding: 4px 8px;
+}
+
+.banner-a-cta { display: flex; gap: 10px; align-items: center; }
+
+.banner-a-btn-primary {
+  flex: 1;
+  background: var(--c-grad-btn); color: #fff; border: none;
+  padding: 13px 20px; border-radius: 50px;
+  font-family: 'Barlow', sans-serif;
+  font-size: 13px; font-weight: 800;
+  cursor: pointer; transition: all 0.25s var(--c-ease);
+  box-shadow: 0 4px 20px rgba(79, 172, 254, 0.28);
+  display: flex; align-items: center; justify-content: center;
+  gap: 7px; letter-spacing: 0.3px;
+}
+.banner-a-btn-primary:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 10px 30px rgba(79, 172, 254, 0.48);
+}
+.banner-a-btn-ghost {
+  background: transparent; color: var(--c-text-sub);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  padding: 13px 18px; border-radius: 50px;
+  font-family: 'Barlow', sans-serif;
+  font-size: 13px; font-weight: 600;
+  cursor: pointer; transition: all 0.2s ease; white-space: nowrap;
+}
+.banner-a-btn-ghost:hover {
+  border-color: rgba(255, 255, 255, 0.28);
+  color: var(--c-text);
+}
+
+/* Active slide animations */
+.banner-a--active .banner-a-content {
+  animation: bna-slide-in 0.45s var(--c-ease) both;
+}
+.banner-a--active .banner-a-athlete-img {
+  animation: bna-fade-scale 0.55s var(--c-ease) both;
+}
+
+/* ─── Desktop layout ──────────────────────────────────────────────────────── */
+@media (min-width: 768px) {
+  .banner-a {
+    flex-direction: row;
+    min-height: 320px;
+    align-items: stretch;
+  }
+  .banner-a-athlete {
+    width: 44%; height: auto;
+    overflow: hidden; flex-shrink: 0;
+  }
+  .banner-a-athlete-img {
+    width: 100%; height: 100%;
+    object-fit: cover; object-position: center top;
+    mask-image:
+      linear-gradient(to bottom, rgb(0 0 0) 65%, rgb(0 0 0 / 4%) 100%),
+      linear-gradient(to right,  rgb(0 0 0 / 95%) 45%, rgb(0 0 0) 90%);
+    mask-composite: intersect;
+    -webkit-mask-image:
+      linear-gradient(to bottom, rgb(0 0 0) 65%, rgb(0 0 0 / 4%) 100%),
+      linear-gradient(to right,  rgb(0 0 0 / 95%) 45%, rgb(0 0 0) 90%);
+    -webkit-mask-composite: source-in;
+  }
+  .banner-a-athlete::after {
+    top: 0; bottom: 0;
+    left: auto; right: -2px;
+    width: 55%; height: 100%;
+    background: linear-gradient(
+      to right,
+      transparent 0%,
+      rgba(8, 14, 28, 0.5) 45%,
+      rgba(6, 14, 26, 0.90) 72%,
+      #060e1a 100%
+    );
+  }
+  .banner-a-content {
+    padding: 36px 36px 36px 12px;
+    justify-content: center;
+  }
+  .banner-a-headline { font-size: 48px; }
+}
+
+@media (min-width: 1200px) {
+  .banner-a { min-height: 360px; }
+  .banner-a-headline { font-size: 56px; }
+  .banner-a-athlete { width: 45%; }
+  .banner-a-content { padding: 40px 48px 40px 16px; }
+}
+
+@media (max-width: 480px) {
+  .bna-arrow { display: none; }
+}
+
+/* margin now on .bna-shell, not .banner-a */
+.BannerA { margin-bottom: 40px; }

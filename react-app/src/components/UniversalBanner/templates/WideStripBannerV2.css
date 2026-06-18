@@ -1,0 +1,417 @@
+/* react-app/src/components/UniversalBanner/templates/WideStripBannerV2.css */
+
+
+
+
+/* ── Strip wrapper ── */
+.ws2-strip {
+  position: relative;
+  width: 100%;
+  height: 46px;
+  margin: 10px 0;
+  border-radius: 15px;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+  gap: 0;
+  background: var(--strip-bg, #07090f);
+
+  /* Sharp casino-floor border treatment */
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
+  border-bottom: 2px solid var(--accent, #ffd700);
+
+  /* Bottom glow */
+  box-shadow:
+    0 4px 24px rgba(0, 0, 0, 0.5),
+    0 2px 0 var(--accent, #ffd700),
+    inset 0 1px 0 rgba(255, 255, 255, 0.04);
+}
+
+/* ── Racing light sweep ── */
+/* A bright beam that races left-to-right every 4s */
+.ws2-race-light {
+  position: absolute;
+  top: 0;
+  left: -20%;
+  width: 14%;
+  height: 100%;
+  z-index: 1;
+  pointer-events: none;
+  background: linear-gradient(90deg,
+      transparent 0%,
+      rgba(255, 255, 255, 0.04) 30%,
+      rgba(255, 255, 255, 0.09) 50%,
+      rgba(255, 255, 255, 0.04) 70%,
+      transparent 100%);
+  animation: ws2-race 4.5s ease-in-out infinite;
+}
+
+@keyframes ws2-race {
+  0% {
+    left: -20%;
+    opacity: 0;
+  }
+
+  5% {
+    opacity: 1;
+  }
+
+  95% {
+    opacity: 1;
+  }
+
+  100% {
+    left: 110%;
+    opacity: 0;
+  }
+}
+
+/* ── LIVE signal block ── */
+.ws2-signal {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 0 12px 0 14px;
+  flex-shrink: 0;
+  position: relative;
+  z-index: 2;
+}
+
+/* Equaliser bars */
+.ws2-bars {
+  display: flex;
+  align-items: flex-end;
+  gap: 2px;
+  height: 16px;
+}
+
+.ws2-bar {
+  display: block;
+  width: 3px;
+  border-radius: 1px;
+  background: var(--accent, #ffd700);
+  box-shadow: 0 0 6px var(--accent, #ffd700);
+  animation: ws2-eq var(--dur, 0.6s) ease-in-out infinite alternate;
+  animation-delay: var(--d, 0s);
+}
+
+/* Each bar has random height via nth-child heights */
+.ws2-bar:nth-child(1) {
+  --dur: 0.55s;
+  height: 8px;
+}
+
+.ws2-bar:nth-child(2) {
+  --dur: 0.72s;
+  height: 14px;
+}
+
+.ws2-bar:nth-child(3) {
+  --dur: 0.48s;
+  height: 10px;
+}
+
+.ws2-bar:nth-child(4) {
+  --dur: 0.65s;
+  height: 6px;
+}
+
+@keyframes ws2-eq {
+  0% {
+    transform: scaleY(0.3);
+    opacity: 0.6;
+  }
+
+  100% {
+    transform: scaleY(1);
+    opacity: 1;
+  }
+}
+
+/* LIVE label */
+.ws2-live-label {
+  font-family: "Share Tech Mono", monospace;
+  font-size: 10px;
+  font-weight: 400;
+  letter-spacing: 2px;
+  color: var(--accent, #ffd700);
+  text-shadow: 0 0 8px var(--accent, #ffd700);
+  text-transform: uppercase;
+}
+
+/* ── Vertical rule ── */
+.ws2-rule {
+  width: 1px;
+  height: 60%;
+  background: rgba(255, 255, 255, 0.1);
+  flex-shrink: 0;
+  margin: 0 2px;
+  position: relative;
+  z-index: 2;
+}
+
+/* ── Star icon ── */
+.ws2-icon {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  padding: 0 8px 0 10px;
+  color: var(--accent, #ffd700);
+  opacity: 0.75;
+  position: relative;
+  z-index: 2;
+}
+
+/* ── Marquee ── */
+.ws2-marquee-wrap {
+  flex: 1;
+  overflow: hidden;
+  position: relative;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  z-index: 2;
+  /* Edge fade */
+  -webkit-mask-image: linear-gradient(to right, transparent 0%, black 4%, black 92%, transparent 100%);
+  mask-image: linear-gradient(to right, transparent 0%, black 4%, black 92%, transparent 100%);
+}
+
+.ws2-marquee {
+  display: flex;
+  align-items: center;
+  white-space: nowrap;
+  animation: ws2-scroll linear infinite;
+  will-change: transform;
+}
+
+@keyframes ws2-scroll {
+  0% {
+    transform: translateX(0);
+  }
+
+  100% {
+    transform: translateX(-33.333%);
+  }
+}
+
+.ws2-marquee-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  padding: 0 24px;
+}
+
+/* Diamond separator instead of dot */
+.ws2-separator {
+  font-size: 7px;
+  color: var(--accent, #ffd700);
+  opacity: 0.55;
+  flex-shrink: 0;
+  line-height: 1;
+}
+
+.ws2-marquee-text {
+  font-family: "Exo 2", sans-serif;
+  font-size: 12.5px;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.82);
+  letter-spacing: 0.3px;
+}
+
+/* Highlight badge text portions */
+.ws2-marquee-text strong {
+  color: var(--accent, #ffd700);
+  font-weight: 800;
+}
+
+/* Static text fallback */
+.ws2-static-text {
+  flex: 1;
+  font-family: "Exo 2", sans-serif;
+  font-size: 12.5px;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.8);
+  padding: 0 16px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  position: relative;
+  z-index: 2;
+}
+
+/* ── CTA — diagonal notch cut (NOT parallelogram, NOT pill) ── */
+/* Uses clip-path with a single top-right notch cut — unique shape */
+.ws2-cta {
+  position: relative;
+  flex-shrink: 0;
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 0 20px 0 18px;
+  height: 100%;
+  border: none;
+  cursor: pointer;
+  overflow: hidden;
+  z-index: 2;
+
+  /* Diagonal notch on top-right corner */
+  clip-path: polygon(12px 0%, 100% 0%, 100% 100%, 0% 100%, 0% 0%);
+
+  /* Accent fill */
+  background: var(--accent, #ffd700);
+
+  font-family: "Exo 2", sans-serif;
+  font-size: 12px;
+  font-weight: 900;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  /* Dark text on bright accent — strong contrast */
+  color: #050810;
+
+  transition: filter 0.15s ease;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.ws2-cta:hover {
+  filter: brightness(1.1);
+}
+
+.ws2-cta--pressed {
+  filter: brightness(0.88) !important;
+  transform: scaleX(0.98);
+}
+
+/* Shimmer on loop */
+.ws2-cta-shimmer {
+  position: absolute;
+  top: 0;
+  left: -80%;
+  width: 60%;
+  height: 100%;
+  pointer-events: none;
+  background: linear-gradient(105deg,
+      transparent 0%,
+      rgba(255, 255, 255, 0.35) 50%,
+      transparent 100%);
+  animation: ws2-cta-shine 3s ease-in-out infinite;
+}
+
+@keyframes ws2-cta-shine {
+  0% {
+    left: -80%;
+    opacity: 0;
+  }
+
+  10% {
+    opacity: 1;
+  }
+
+  90% {
+    opacity: 1;
+  }
+
+  100% {
+    left: 130%;
+    opacity: 0;
+  }
+}
+
+.ws2-cta-text {
+  position: relative;
+  z-index: 1;
+}
+
+.ws2-cta-arrow {
+  position: relative;
+  z-index: 1;
+  flex-shrink: 0;
+  transition: transform 0.15s ease;
+}
+
+.ws2-cta:hover .ws2-cta-arrow {
+  transform: translateX(2px);
+}
+
+/* ── Responsive ── */
+@media (max-width: 860px) {
+  .ws2-strip {
+    height: 44px;
+  }
+
+  .ws2-marquee-text {
+    font-size: 12px;
+  }
+
+  .ws2-cta {
+    padding: 0 16px 0 14px;
+    font-size: 11px;
+  }
+}
+
+@media (max-width: 600px) {
+  .ws2-strip {
+    height: 42px;
+    margin: 6px 0;
+  }
+
+  .ws2-live-label {
+    display: none;
+  }
+
+  .ws2-signal {
+    padding: 0 8px 0 10px;
+    gap: 4px;
+  }
+
+  .ws2-icon {
+    display: none;
+  }
+
+  .ws2-marquee-text {
+    font-size: 11.5px;
+  }
+
+  .ws2-cta {
+    padding: 0 14px 0 12px;
+    font-size: 11px;
+    letter-spacing: 0.5px;
+  }
+}
+
+@media (max-width: 400px) {
+  .ws2-bars {
+    display: none;
+  }
+
+  .ws2-signal {
+    padding: 0 6px 0 8px;
+  }
+
+  .ws2-live-label {
+    display: block;
+    font-size: 9px;
+  }
+
+  .ws2-marquee-text {
+    font-size: 11px;
+  }
+}
+
+
+
+
+.mobile-banner-hero .ws2-strip.WideStripBannerV2 {
+  margin: 0px 0 !important;
+  padding: 10px 0 !important;
+  
+}
+
+@media (max-width: 860px) {
+
+  .mobile-banner-hero .ws2-strip.WideStripBannerV2 {
+    margin: 0px 0 !important;
+    padding: 0px 0 !important;
+    border-radius: 0px !important;
+  }
+
+}

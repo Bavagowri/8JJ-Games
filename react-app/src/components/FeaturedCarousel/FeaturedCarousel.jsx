@@ -1,3 +1,6 @@
+
+
+// react-app/src/components/FeaturedCarousel/FeaturedCarousel.jsx
 import "./FeaturedCarousel.css";
 import { useLanguage } from "../../context/LanguageContext";
 import { translate } from "../../data/translations";
@@ -18,39 +21,52 @@ function openFeatured(game) {
 export default function FeaturedCarousel() {
   const { lang } = useLanguage();
   const trackRef = useRef(null);
+  const halfWidthRef = useRef(0);
+  const xRef = useRef(0);
+  const rafIdRef = useRef(null);
 
   useEffect(() => {
     const track = trackRef.current;
     if (!track) return;
 
-    let x = 0;
-    let rafId;
-    const speed = 0.35; // 👈 smooth speed
+    // ─── FIX: measure ONCE with ResizeObserver, not inside the loop ──────
+    // The original code read track.scrollWidth / 2 inside requestAnimationFrame
+    // every frame — that's a layout read after a style write = forced reflow.
+    // ResizeObserver fires after layout is already committed, so reading
+    // scrollWidth here costs nothing extra.
+    const ro = new ResizeObserver(() => {
+      halfWidthRef.current = track.scrollWidth / 2;
+    });
+    ro.observe(track);
 
+    // ─── Animation loop — pure math + one style write, zero reads ─────────
     const loop = () => {
-      x -= speed;
-
-      // when half scrolled → reset seamlessly
-      if (Math.abs(x) >= track.scrollWidth / 2) {
-        x = 0;
+      xRef.current -= 0.35;
+      if (halfWidthRef.current > 0 && Math.abs(xRef.current) >= halfWidthRef.current) {
+        xRef.current = 0;
       }
-
-      track.style.transform = `translateX(${x}px)`;
-      rafId = requestAnimationFrame(loop);
+      track.style.transform = `translateX(${xRef.current}px)`;
+      rafIdRef.current = requestAnimationFrame(loop);
     };
 
-    rafId = requestAnimationFrame(loop);
-    return () => cancelAnimationFrame(rafId);
+    rafIdRef.current = requestAnimationFrame(loop);
+
+    return () => {
+      cancelAnimationFrame(rafIdRef.current);
+      ro.disconnect();
+    };
   }, []);
 
   return (
     <section className="section" id="collectionsSection">
-      <h2 className="section-header">
-        <span className="section-icon">⭐</span>
-        <span className="section-title">
-          {translate("featured", lang)}
-        </span>
-      </h2>
+      <div className="Title-container-sections">
+        <span className="section-emoji" aria-hidden="true">⭐</span>
+        <h2>
+          <span className="section-title Title-align">
+            {translate("featured", lang)}
+          </span>
+        </h2>
+      </div>
 
       <div className="featured-strip">
         <div className="featured-track" ref={trackRef}>

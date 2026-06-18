@@ -1,0 +1,580 @@
+/* =====================================================
+   leaderboard-card.css - ENHANCED V2
+   Ultra-visible YOU badge, alternating rows, score hierarchy
+   ===================================================== */
+
+.rank-card {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 16px;
+  background: rgba(22, 22, 26, 0.95);
+  border: 1px solid rgba(79, 172, 254, 0.12);
+  border-radius: 16px;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  overflow: hidden;
+  cursor: pointer;
+}
+
+/* ===== ALTERNATING ROW BACKGROUNDS ===== */
+.rank-card.alternate {
+  background: rgba(15, 23, 42, 0.95);
+  border-color: rgba(79, 172, 254, 0.08);
+}
+
+/* ===== CURRENT USER - ULTRA VISIBLE ===== */
+.rank-card.current-user {
+  background: linear-gradient(
+    135deg, 
+    rgba(0, 212, 255, 0.25) 0%, 
+    rgba(0, 153, 255, 0.35) 100%
+  );
+  border: 2px solid rgba(0, 212, 255, 0.8);
+  box-shadow: 
+    0 0 30px rgba(0, 212, 255, 0.4),
+    0 4px 20px rgba(79, 172, 254, 0.3),
+    inset 0 1px 1px rgba(255, 255, 255, 0.2);
+  animation: currentUserPulse 3s ease-in-out infinite;
+  position: relative;
+  z-index: 10;
+}
+
+/* Pulsing glow effect for current user */
+@keyframes currentUserPulse {
+  0%, 100% {
+    box-shadow: 
+      0 0 30px rgba(0, 212, 255, 0.4),
+      0 4px 20px rgba(79, 172, 254, 0.3),
+      inset 0 1px 1px rgba(255, 255, 255, 0.2);
+  }
+  50% {
+    box-shadow: 
+      0 0 45px rgba(0, 212, 255, 0.6),
+      0 6px 28px rgba(79, 172, 254, 0.5),
+      inset 0 1px 1px rgba(255, 255, 255, 0.3);
+  }
+}
+
+/* Current user glow background */
+.current-user-glow {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: radial-gradient(
+    ellipse at center,
+    rgba(0, 212, 255, 0.15) 0%,
+    transparent 70%
+  );
+  pointer-events: none;
+  animation: glowPulse 2s ease-in-out infinite;
+}
+
+@keyframes glowPulse {
+  0%, 100% {
+    opacity: 0.6;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+/* ===== CARD SHINE EFFECT ===== */
+.card-shine {
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(79, 172, 254, 0.15),
+    transparent
+  );
+  transition: left 0.6s ease;
+  pointer-events: none;
+}
+
+.rank-card:hover .card-shine {
+  left: 100%;
+}
+
+/* ===== HOVER EFFECTS ===== */
+.rank-card:hover {
+  background: rgba(22, 22, 26, 1);
+  border-color: rgba(79, 172, 254, 0.3);
+  transform: translateX(6px) translateY(-2px);
+  box-shadow: 
+    -4px 4px 16px rgba(79, 172, 254, 0.2),
+    0 2px 8px rgba(0, 0, 0, 0.3);
+}
+
+.rank-card.alternate:hover {
+  background: rgba(15, 23, 42, 1);
+}
+
+.rank-card.current-user:hover {
+  transform: translateX(6px) translateY(-2px) scale(1.01);
+  box-shadow: 
+    0 0 50px rgba(0, 212, 255, 0.6),
+    0 8px 32px rgba(79, 172, 254, 0.5),
+    inset 0 1px 1px rgba(255, 255, 255, 0.3);
+}
+
+/* ===== LEFT SECTION ===== */
+.rank-card-left {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex: 1;
+  min-width: 0;
+}
+
+.rank-number-container {
+  flex-shrink: 0;
+}
+
+.rank-card-left .rank-number {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 42px;
+  height: 42px;
+  background: rgba(79, 172, 254, 0.08);
+  border-radius: 12px;
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: #94a3b8;
+  flex-shrink: 0;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  border: 1px solid rgba(79, 172, 254, 0.1);
+}
+
+.rank-card:hover .rank-number {
+  background: rgba(79, 172, 254, 0.15);
+  color: #cbd5e1;
+  transform: scale(1.05);
+  border-color: rgba(79, 172, 254, 0.25);
+}
+
+.rank-card.current-user .rank-number {
+  background: rgba(0, 212, 255, 0.2);
+  color: #00d4ff;
+  border-color: rgba(0, 212, 255, 0.4);
+  font-weight: 800;
+}
+
+/* ===== AVATAR ===== */
+.rank-avatar-container {
+  flex-shrink: 0;
+  position: relative;
+}
+
+.rank-avatar {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid rgba(79, 172, 254, 0.2);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  z-index: 2;
+}
+
+.leaderboard-avatar-ring {
+  position: absolute;
+  top: -2px;
+  left: -2px;
+  right: -2px;
+  bottom: -2px;
+  border-radius: 50%;
+  border: 2px solid transparent;
+  /* background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%) border-box; */
+  -webkit-mask: linear-gradient(#fff 0 0) padding-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  z-index: 1;
+}
+
+.rank-card:hover .leaderboard-avatar-ring {
+  opacity: 1;
+}
+
+.rank-card.current-user .rank-avatar {
+  border-color: rgba(0, 212, 255, 0.6);
+}
+
+.rank-card.current-user .leaderboard-avatar-ring {
+  opacity: 1;
+  background: linear-gradient(135deg, #00d4ff 0%, #0099ff 100%) border-box;
+  animation: avatarRingPulse 2s ease-in-out infinite;
+}
+
+@keyframes avatarRingPulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.6;
+  }
+}
+
+.rank-card:hover .rank-avatar {
+  border-color: transparent;
+  transform: scale(1.08);
+}
+
+/* ===== USER INFO ===== */
+.rank-user-info {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  min-width: 0;
+  flex: 1;
+}
+
+.username-container {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.rank-username {
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: #cbd5e1;
+  margin: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  transition: color 0.3s ease;
+}
+
+.rank-card:hover .rank-username {
+  color: #FFFFFF;
+}
+
+.rank-card.current-user .rank-username {
+  color: #FFFFFF;
+  font-weight: 700;
+}
+
+/* ===== ULTRA-VISIBLE YOU BADGE ===== */
+.you-badge-ultra {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 4px 12px;
+  background: linear-gradient(135deg, #00d4ff 0%, #0099ff 100%);
+  border-radius: 12px;
+  font-size: 0.7rem;
+  font-weight: 900;
+  color: #FFFFFF;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  box-shadow: 
+    0 0 20px rgba(0, 212, 255, 0.6),
+    0 4px 12px rgba(0, 212, 255, 0.4),
+    inset 0 1px 2px rgba(255, 255, 255, 0.4);
+  position: relative;
+  overflow: hidden;
+  animation: badgePulse 2s ease-in-out infinite;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+@keyframes badgePulse {
+  0%, 100% {
+    box-shadow: 
+      0 0 20px rgba(0, 212, 255, 0.6),
+      0 4px 12px rgba(0, 212, 255, 0.4),
+      inset 0 1px 2px rgba(255, 255, 255, 0.4);
+  }
+  50% {
+    box-shadow: 
+      0 0 30px rgba(0, 212, 255, 0.8),
+      0 6px 16px rgba(0, 212, 255, 0.6),
+      inset 0 1px 2px rgba(255, 255, 255, 0.5);
+  }
+}
+
+.you-badge-text {
+  position: relative;
+  z-index: 2;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+}
+
+/* Shine sweep animation */
+.you-badge-shine {
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.6),
+    transparent
+  );
+  animation: badgeShine 3s infinite;
+}
+
+@keyframes badgeShine {
+  0% {
+    left: -100%;
+  }
+  20%, 100% {
+    left: 100%;
+  }
+}
+
+/* Glow ring around badge */
+.you-badge-glow-ring {
+  position: absolute;
+  top: -2px;
+  left: -2px;
+  right: -2px;
+  bottom: -2px;
+  border-radius: 12px;
+  background: linear-gradient(135deg, #00d4ff 0%, #0099ff 100%);
+  filter: blur(8px);
+  opacity: 0.6;
+  z-index: 0;
+  animation: glowRingPulse 2s ease-in-out infinite;
+}
+
+@keyframes glowRingPulse {
+  0%, 100% {
+    opacity: 0.6;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.9;
+    transform: scale(1.1);
+  }
+}
+
+/* ===== RIGHT SECTION ===== */
+.rank-card-right {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  flex-shrink: 0;
+}
+
+.rank-tier {
+  display: flex;
+  align-items: center;
+  transition: transform 0.3s ease;
+}
+
+.rank-card:hover .rank-tier {
+  transform: scale(1.1);
+}
+
+.rank-score-container {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 4px;
+  min-width: 80px;
+}
+
+/* ===== SCORE VISUAL HIERARCHY ===== */
+/* Scores are dimmed by default, bright only for current user */
+.rank-score {
+  font-size: 1rem;
+  font-weight: 700;
+  color: #64748b; /* Dimmed by default */
+  margin: 0;
+  transition: all 0.3s ease;
+}
+
+.rank-card:hover .rank-score {
+  color: #94a3b8; /* Slightly brighter on hover */
+  transform: scale(1.03);
+}
+
+/* Current user score is BRIGHT */
+.rank-score.highlighted {
+  color: #FFFFFF !important;
+  font-size: 1.15rem;
+  font-weight: 800;
+  text-shadow: 
+    0 0 15px rgba(0, 212, 255, 0.5),
+    0 2px 8px rgba(255, 255, 255, 0.3);
+  background: linear-gradient(135deg, #FFFFFF 0%, #00d4ff 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.rank-card.current-user:hover .rank-score.highlighted {
+  transform: scale(1.08);
+}
+
+/* ===== RANK CHANGE INDICATORS ===== */
+.rank-change {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 0.7rem;
+  font-weight: 800;
+  padding: 3px 8px;
+  border-radius: 10px;
+  animation: fadeInUp 0.5s ease;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.rank-change.up {
+  background: rgba(16, 185, 129, 0.15);
+  border: 1px solid rgba(16, 185, 129, 0.4);
+  color: #10B981;
+}
+
+.rank-change.down {
+  background: rgba(239, 68, 68, 0.15);
+  border: 1px solid rgba(239, 68, 68, 0.4);
+  color: #EF4444;
+}
+
+.rank-change.same {
+  background: rgba(107, 114, 128, 0.15);
+  border: 1px solid rgba(107, 114, 128, 0.3);
+  color: #6B7280;
+}
+
+.rank-change-up,
+.rank-change-down,
+.rank-change-same {
+  flex-shrink: 0;
+}
+
+.rank-change-value {
+  color: inherit;
+  font-weight: 900;
+  letter-spacing: 0.3px;
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 480px) {
+  .rank-card {
+    padding: 12px 14px;
+  }
+
+  .rank-card-left {
+    gap: 10px;
+  }
+
+  .rank-number {
+    min-width: 38px;
+    height: 38px;
+    font-size: 0.95rem;
+  }
+
+  .rank-avatar {
+    width: 40px;
+    height: 40px;
+  }
+
+  .rank-username {
+    font-size: 0.9rem;
+  }
+
+  .rank-card-right {
+    gap: 12px;
+  }
+
+  .rank-score {
+    font-size: 0.95rem;
+  }
+
+  .rank-score.highlighted {
+    font-size: 1.05rem;
+  }
+
+  .you-badge-ultra {
+    font-size: 0.65rem;
+    padding: 3px 10px;
+  }
+
+  .rank-change {
+    font-size: 0.65rem;
+    padding: 2px 6px;
+  }
+}
+
+@media (max-width: 380px) {
+  .rank-card-right {
+    gap: 8px;
+  }
+
+  .rank-tier {
+    display: none;
+  }
+
+  .rank-username {
+    font-size: 0.85rem;
+  }
+
+  .rank-score {
+    font-size: 0.9rem;
+  }
+
+  .rank-score.highlighted {
+    font-size: 1rem;
+  }
+
+  .rank-score-container {
+    min-width: 70px;
+  }
+}
+
+/* ===== SMOOTH TRANSITIONS ===== */
+.rank-card,
+.rank-number,
+.rank-avatar,
+.rank-username,
+.rank-score {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+
+/* Custom Tier Badge for Rank Cards */
+.rank-tier-badge-custom {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 12px;
+  font-weight: 700;
+  margin-top: 4px;
+  transition: all 0.3s ease;
+}
+
+.rank-tier-badge-custom svg {
+  filter: drop-shadow(0 1px 2px currentColor);
+}
+
+.rank-card:hover .rank-tier-badge-custom {
+  transform: translateX(2px);
+}
+
+.current-user .rank-tier-badge-custom {
+  font-weight: 800;
+}

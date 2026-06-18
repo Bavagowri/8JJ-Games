@@ -1,5 +1,20 @@
+/* react-app/src/pages/MosaicGamePage/MosaicGamePage.css */
+
+.mosaic-page-with-filter {
+  display: flex;
+  gap: 24px;
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 35px 20px 0;
+}
+
+.mosaic-main-content {
+  flex: 1;
+  min-width: 0;
+}
+
 .mosaic-page {
-  max-width: 1280px;
+  max-width: 1400px;
   margin: 0 auto;
   padding-top: 35px;
 }
@@ -10,22 +25,8 @@
   grid-auto-rows: 120px;
   gap: 14px;
   grid-auto-flow: dense;
+  margin-bottom: 40px;
 }
-
-/* Responsive */
-@media (max-width: 1200px) {
-  .mosaic-grid {
-    grid-template-columns: repeat(4, 1fr);
-  }
-}
-
-@media (max-width: 768px) {
-  .mosaic-grid {
-    grid-template-columns: repeat(2, 1fr);
-    grid-auto-rows: 110px;
-  }
-}
-
 
 .page-title {
   font-size: 32px;
@@ -34,14 +35,165 @@
   text-align: center;
 }
 
-.mosaic-grid {
-  display: grid;
-  grid-template-columns: repeat(6, 1fr);
-  grid-auto-rows: 120px;
-  gap: 14px;
-  grid-auto-flow: dense;
+/* Search and Controls */
+.search-controls-bar {
+  margin-bottom: 32px;
 }
 
+.search-controls-bar {
+  display: flex;
+  flex-direction: row;
+  position: relative;
+  justify-content: center;
+  gap: 16px;
+}
+
+.mosaic-search {
+  position: relative;
+  max-width: 640px;
+  /* margin: 0 auto 16px; */
+}
+
+.mosaic-search-input {
+  width: 100%;
+  padding: 14px 40px 14px 20px;
+  border-radius: 15px;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  background:rgb(7 7 7 / 67%);
+  color: #fff;
+  font-size: 15px;
+  outline: none;
+  transition: all 0.2s;
+}
+
+.mosaic-search-input::placeholder {
+  color: #9ca3af;
+}
+
+.mosaic-search-input:focus {
+  border-color: #60a5fa;
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.mosaic-search-icon-btn {
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  font-size: 16px;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 8px;
+  transition: all 0.2s;
+}
+
+.mosaic-search-icon-btn:hover {
+  color: #60a5fa;
+}
+
+/* Controls Row */
+.controls-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+  max-width: 640px;
+  /* margin: 0 auto; */
+}
+
+.sort-control {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex: 1;
+}
+
+.sort-label {
+  font-size: 14px;
+  color: rgba(255, 255, 255, 0.7);
+  white-space: nowrap;
+}
+
+.sort-select {
+  height: 51px;
+  flex: 1;
+  padding: 10px 16px;
+  background:rgb(7 7 7 / 67%);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 15px;
+  color: #fff;
+  font-size: 14px;
+  outline: none;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.sort-select:hover,
+.sort-select:focus {
+  background: rgba(255, 255, 255, 0.08);
+  border-color: #60a5fa;
+}
+
+.sort-select option {
+  background: #1a1a1a;
+  color: #fff;
+}
+
+.mobile-filter-btn {
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  display: none;
+  padding: 10px 20px;
+  background:rgb(7 7 7 / 67%);
+  
+  border-radius: 15px;
+  color: #fff;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: all 0.2s;
+}
+
+.mobile-filter-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(96, 165, 250, 0.3);
+}
+
+/* No Results */
+.no-results {
+  text-align: center;
+  margin: 60px 0;
+  padding: 40px 20px;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 16px;
+}
+
+.no-results h2 {
+  color: #fff;
+  font-size: 24px;
+  margin-bottom: 12px;
+}
+
+.no-results p {
+  color: #9ca3af;
+  font-size: 15px;
+  margin-bottom: 24px;
+}
+
+.clearSearchBTN {
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 20px;
+  background: linear-gradient(90deg, #56a7d5 0%, #3753c5 100%);
+}
+
+/* View More */
 .view-more-wrapper {
   display: flex;
   justify-content: center;
@@ -58,48 +210,139 @@
   font-weight: 700;
   cursor: pointer;
   margin-bottom: 25px;
+  transition: all 0.2s;
 }
 
 .view-more-btn:hover {
-  background: #1d4ed8;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(96, 165, 250, 0.3);
 }
 
-.mosaic-search {
-  max-width: 640px;
-  margin: 16px auto 32px;
+/* Categories Section */
+.mosaic-category {
+  text-transform: capitalize;
 }
 
-.mosaic-search-input {
-  width: 100%;
-  padding: 14px 20px;
-  border-radius: 999px;
-  border: 1px solid rgba(255, 255, 255, 0.15);
-  background: rgba(255, 255, 255, 0.06);
-  color: #fff;
-  font-size: 15px;
-  outline: none;
+.Cat-title {
+  font-weight: 800;
+  margin-bottom: 24px;
+  margin-top: 20px;
+  text-align: left;
 }
 
-.mosaic-search-input::placeholder {
-  color: #9ca3af;
+/* ScrollSnap */
+.ScrollSnap {
+  scroll-snap-align: start;
+  view-timeline: --section;
+  animation: backwards-scroll ease-in-out both;
+  animation-timeline: --section;
+  position: relative;
 }
 
-.mosaic-search-input:focus {
-  border-color: #60a5fa;
-  background: rgba(255, 255, 255, 0.08);
+/* Screen reader only */
+.sr-only,
+.page-description {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
 }
 
-.no-results {
-  text-align: center;
-  margin: 40px 0;
-  color: #9ca3af;
-  font-size: 15px;
+.game-header-allgames {
+  position: relative;
+  margin-bottom: 20px;
 }
 
-/* Responsive */
-@media (max-width: 1024px) {
+/* Responsive Styles */
+@media (max-width: 1400px) {
+  .mosaic-grid {
+    grid-template-columns: repeat(5, 1fr);
+  }
+}
+
+@media (max-width: 1200px) {
   .mosaic-grid {
     grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+@media (max-width: 1024px) {
+  .mosaic-page-with-filter {
+    flex-direction: column;
+    padding: 35px 15px 0;
+  }
+
+  .mobile-filter-btn {
+    display: block;
+  }
+
+  .mosaic-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .controls-row {
+    flex-direction: row;
+    align-items: stretch;
+  }
+
+  .sort-control {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex: 1;
+  }
+
+  .mobile-filter-btn {
+
+    position: relative;
+    top: 1px;
+    right: 1px;
+  }
+}
+
+@media (max-width: 768px) {
+  .mosaic-page-with-filter {
+    padding: 35px 10px 0;
+  }
+
+  .mosaic-grid {
+    grid-template-columns: repeat(2, 1fr);
+    grid-auto-rows: 110px;
+    gap: 10px;
+  }
+
+  .page-title {
+    font-size: 24px;
+    margin-bottom: 16px;
+  }
+
+  .Cat-title {
+    font-weight: 800;
+    margin-bottom: 10px;
+    margin-top: 30px;
+    text-align: center;
+  }
+
+  .search-controls-bar {
+    margin-bottom: 30px;
+    position: relative;
+  }
+
+  .search-controls-bar {
+    display: flex;
+    flex-direction: row;
+    position: relative;
+    justify-content: space-between;
+    gap: 16px;
+  }
+
+   .mosaic-main-content .page-title{
+    margin-bottom: 30px;
   }
 }
 
@@ -108,88 +351,82 @@
     margin-left: 10px;
     margin-right: 10px;
   }
-
-  .mosaic-grid {
-    grid-template-columns: repeat(2, 1fr);
-    grid-auto-rows: 110px;
-  }
-}
-
-
-
-.mosaic-category {
-  text-transform: capitalize;
-}
-
-@media (max-width: 786px) {
-  .Cat-title {
-    font-weight: 800;
-    margin-bottom: 10px;
-    margin-top: 30px;
-    text-align: center;
-  }
 }
 
 @media (min-width: 786px) {
-  .Cat-title {
-    font-weight: 800;
-    margin-bottom: 24px;
-    margin-top: 20px;
-    text-align: left;
+  .mosaic-page.home-wrapper {
+    margin-top: 30px;
+  }
+
+ 
+}
+
+
+
+.see-all-content.Allgames {
+  padding: 0px;
+}
+
+.Allgames .see-all-icon {
+  color: #333333;
+}
+
+
+/* View More Games arrow */
+.see-all-icon {
+  display: inline-flex;
+  align-items: center;
+  transition: transform 0.3s ease;
+}
+
+
+.Allgames:hover .see-all-icon {
+  color: #ffffff;
+}
+
+/* Hover trigger */
+.btn-primary:hover .see-all-icon {
+  animation: arrowBounceRight 0.6s ease-in-out infinite;
+
+}
+
+/* Keyframes */
+@keyframes arrowBounceRight {
+
+  0%,
+  100% {
+    transform: translateX(0);
+  }
+
+  50% {
+    transform: translateX(6px);
   }
 }
 
 
-.ScrollSnap {
-  scroll-snap-align: start;
-  view-timeline: --section;
-}
 
-.ScrollSnap {
-  animation: backwards-scroll ease-in-out both;
-  animation-timeline: --section;
-  position: relative;
-}
+/* ========================================
+   2. SCREEN READER ONLY CONTENT
+   ======================================== */
 
-.mosaic-search {
-  position: relative;
-  max-width: 640px;
-  margin: 16px auto 32px;
-}
-
-.mosaic-search-input {
-  width: 100%;
-  padding: 14px 40px 14px 20px; /* extra space for icon */
-  border-radius: 999px;
-  border: 1px solid rgba(255, 255, 255, 0.15);
-  background: rgba(255, 255, 255, 0.06);
-  color: #fff;
-  font-size: 15px;
-  outline: none;
-}
-
-.mosaic-search-input::placeholder {
-  color: #9ca3af;
-}
-
-.mosaic-search-input:focus {
-  border-color: #60a5fa;
-  background: rgba(255, 255, 255, 0.08);
-}
-
-/* SEARCH ICON BUTTON */
-.mosaic-search-icon-btn {
+.sr-only {
   position: absolute;
-  right: 12px;
-  top: 50%;
-  transform: translateY(-50%);
-  border: none;
-  background: transparent;
-  cursor: pointer;
-  font-size: 16px;
-  color: #fff;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  width: 1px;
+  height: 1px;
   padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.sr-only-focusable:active,
+.sr-only-focusable:focus {
+  position: static;
+  width: auto;
+  height: auto;
+  overflow: visible;
+  clip: auto;
+  white-space: normal;
 }

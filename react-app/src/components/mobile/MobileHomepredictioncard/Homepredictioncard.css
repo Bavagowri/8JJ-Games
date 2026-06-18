@@ -1,0 +1,299 @@
+/* react-app/src/components/mobile/MobileHomepredictioncard/Homepredictioncard.css */
+
+@keyframes hpcFadeUp { from { opacity:0; transform:translateY(14px); } to { opacity:1; transform:none; } }
+@keyframes hpcLive   { 0%,100%{opacity:1} 50%{opacity:0.3} }
+@keyframes barGrow   { from { width: 0 !important; } }
+
+/* ─── Spinning border — transform:rotate works on ALL mobile browsers ───── */
+@keyframes hpc-border-spin     { to { transform: rotate(360deg);  } }
+@keyframes hpc-border-spin-rev { to { transform: rotate(-360deg); } }
+
+/* ════════════════════════════════════════════════════════════
+   SECTION WRAPPER
+   ════════════════════════════════════════════════════════════ */
+.hpc-section {
+  padding: 30px 10px 20px;
+  font-family: 'DM Sans', sans-serif;
+  background: #010101;
+}
+
+/* ── Header ─────────────────────────────────────────────── */
+.hpc-header {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0 16px 14px;
+}
+.hpc-header-left { display: flex; align-items: center; gap: 12px; }
+.hpc-header-accent {
+  width: 4px; height: 38px; border-radius: 4px;
+  background: linear-gradient(180deg, #00f2fe, #0072ff);
+  box-shadow: 0 0 12px rgba(0,198,255,0.65), 0 0 24px rgba(0,114,255,0.2);
+  flex-shrink: 0;
+}
+.hpc-header-eyebrow {
+  font-size: 9px; font-weight: 600; letter-spacing: 2px;
+  text-transform: uppercase; color: #00c6ff; opacity: 0.75; margin-bottom: 2px;
+}
+.hpc-header-title {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 20px; font-weight: 800; text-transform: uppercase;
+  color: #f0f9ff; letter-spacing: 0.3px; line-height: 1;
+}
+.hpc-view-all {
+  display: flex; align-items: center; gap: 5px;
+  font-size: 12px; font-weight: 600; color: rgba(255,255,255,0.4);
+  text-decoration: none; padding: 6px 12px; border-radius: 20px;
+  border: 1px solid rgba(255,255,255,0.09);
+  transition: color 0.2s, border-color 0.2s;
+}
+.hpc-view-all:hover { color: #00c6ff; border-color: rgba(0,198,255,0.3); }
+.hpc-arrow { transition: transform 0.2s; }
+.hpc-view-all:hover .hpc-arrow { transform: translateX(3px); }
+
+/* ── Horizontal scroll container ────────────────────────── */
+.hpc-scroll {
+  display: flex; gap: 14px;
+  padding: 4px 16px 12px;
+  overflow-x: auto; scroll-snap-type: x mandatory;
+  scrollbar-width: none;
+  -webkit-overflow-scrolling: touch;
+}
+.hpc-scroll::-webkit-scrollbar { display: none; }
+
+/* ════════════════════════════════════════════════════════════
+   CARD SHELL — overflow:hidden + rotating oversized conic pseudo
+   Works on iOS Safari, Android Chrome, all mobile browsers.
+   No @property needed.
+   ════════════════════════════════════════════════════════════ */
+.hpc-card {
+  flex-shrink: 0;
+  width: 270px;
+  border-radius: 22px;
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;                     /* clips the spinning pseudo */
+  text-decoration: none;
+  scroll-snap-align: start;
+  display: block;
+  animation: hpcFadeUp 0.4s ease-out both;
+  transition: transform 0.25s cubic-bezier(0.22,1,0.36,1),
+              box-shadow 0.25s ease;
+  /* 2px border gap filled by the spinning pseudo below */
+  padding: 2px;
+  background: transparent;
+}
+.hpc-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 16px 40px rgba(0,0,0,0.45), 0 0 30px rgba(0,198,255,0.15);
+}
+.hpc-card:active { transform: scale(0.97); }
+
+/* Spinning conic layer — oversized square that rotates freely */
+.hpc-card::before {
+  content: '';
+  position: absolute;
+  /* Make it a square big enough to cover the card at any rotation */
+  width: 200%;
+  height: 200%;
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%) rotate(0deg);
+  /* Default: blue/cyan sweep */
+  background: conic-gradient(
+    transparent 0deg,
+    transparent 72deg,
+    rgba(0,198,255,0.5)  144deg,
+    rgba(224,242,254,0.95) 180deg,
+    rgba(0,198,255,0.5)  216deg,
+    transparent 288deg,
+    transparent 360deg
+  );
+  animation: hpc-border-spin 4s linear infinite;
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* LIVE variant — red, faster */
+.hpc-card.hpc-live::before {
+  background: conic-gradient(
+    transparent  0deg,  transparent 72deg,
+    #ef4444     136deg, #fca5a5    180deg, #ef4444    224deg,
+    transparent 288deg, transparent 360deg
+  );
+  animation-duration: 2s;
+}
+
+/* Featured — gold, reverse */
+.hpc-card.hpc-featured::before {
+  background: conic-gradient(
+    transparent  0deg,  transparent 72deg,
+    #92400e     136deg, #fbbf24    165deg, #fef3c7   180deg,
+    #fbbf24     195deg, #92400e    224deg,
+    transparent 288deg, transparent 360deg
+  );
+  animation: hpc-border-spin-rev 3s linear infinite;
+}
+
+/* Dark inner fill — sits on top of the conic, below card content */
+.hpc-card::after {
+  content: '';
+  position: absolute;
+  inset: 2px;                           /* matches the padding — exposes 2px border */
+  border-radius: 20px;
+  background: linear-gradient(155deg, #061a30 0%, #040e1a 40%, #071e38 100%);
+  z-index: 1;
+  pointer-events: none;
+}
+
+/* All direct children sit above both pseudo-elements */
+.hpc-card > * { position: relative; z-index: 2; }
+
+/* ── Top row ─────────────────────────────────────────────── */
+.hpc-top {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 15px 16px 0;
+}
+.hpc-tourney {
+  display: flex; align-items: center; gap: 5px;
+  font-size: 9px; font-weight: 700; letter-spacing: 0.8px;
+  text-transform: uppercase; color: #00c6ff;
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 130px;
+}
+.hpc-tourney-dot {
+  width: 5px; height: 5px; border-radius: 50%;
+  background: #00c6ff; flex-shrink: 0;
+}
+.hpc-pill {
+  font-size: 9px; font-weight: 700; letter-spacing: 0.5px;
+  padding: 2px 7px; border-radius: 5px; flex-shrink: 0;
+}
+.hpc-pill-live   { color: #ef4444; background: rgba(239,68,68,0.1);  border: 1px solid rgba(239,68,68,0.25);  animation: hpcLive 1.4s ease-in-out infinite; }
+.hpc-pill-open   { color: #34d399; background: rgba(52,211,153,0.1); border: 1px solid rgba(52,211,153,0.22); }
+.hpc-pill-locked { color: #fbbf24; background: rgba(251,191,36,0.08);border: 1px solid rgba(251,191,36,0.18); }
+.hpc-pill-done   { color: rgba(255,255,255,0.28); background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.08); }
+
+/* ── Match row ───────────────────────────────────────────── */
+.hpc-match-row {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 16px 14px 12px;
+  gap: 8px;
+}
+.hpc-team {
+  flex: 1; display: flex; flex-direction: column; align-items: center; gap: 9px;
+  min-width: 0;
+}
+.hpc-team-name {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 14px; font-weight: 700; color: #e8f4ff;
+  text-align: center; line-height: 1.1;
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 90px;
+}
+.hpc-logo {
+  border-radius: 50%;
+  background: linear-gradient(135deg, #0d2a4a, #1d4ed8);
+  display: flex; align-items: center; justify-content: center;
+  font-family: 'Barlow Condensed', sans-serif; font-weight: 800; color: #fff;
+  flex-shrink: 0; overflow: hidden;
+  border: 2px solid rgba(0,198,255,0.25);
+  box-shadow: 0 0 10px rgba(0,114,255,0.25), inset 0 0 6px rgba(0,0,0,0.4);
+}
+.hpc-logo img { width: 100%; height: 100%; object-fit: contain; border-radius: 50%; }
+
+/* Centre */
+.hpc-centre {
+  display: flex; flex-direction: column; align-items: center; gap: 6px;
+  flex-shrink: 0;
+}
+.hpc-vs-wrap { display: flex; flex-direction: column; align-items: center; gap: 3px; }
+.hpc-vs-line { width: 1px; height: 14px; background: linear-gradient(180deg, transparent, rgba(0,198,255,0.3), transparent); }
+.hpc-vs {
+  font-family: 'Barlow Condensed', sans-serif; font-size: 12px; font-weight: 700;
+  color: rgba(255,255,255,0.16); letter-spacing: 2px;
+}
+.hpc-vs-live { display: flex; flex-direction: column; align-items: center; gap: 5px; }
+.hpc-score {
+  font-family: 'Barlow Condensed', sans-serif; font-size: 20px; font-weight: 800;
+  color: #fff; letter-spacing: 2px;
+}
+.hpc-live-dot-anim {
+  width: 7px; height: 7px; border-radius: 50%;
+  background: #ef4444; box-shadow: 0 0 8px #ef4444;
+  animation: hpcLive 1.2s infinite;
+}
+.hpc-result { text-align: center; }
+.hpc-result-label { font-size: 8px; font-weight: 600; letter-spacing: 1px; text-transform: uppercase; color: rgba(255,255,255,0.28); }
+.hpc-result-name  { font-family: 'Barlow Condensed', sans-serif; font-size: 13px; font-weight: 800; color: #fbbf24; max-width: 60px; line-height: 1.1; }
+.hpc-date {
+  font-size: 9px; color: rgba(255,255,255,0.25);
+  white-space: nowrap; text-align: center;
+}
+
+/* ── Probability bars ────────────────────────────────────── */
+.hpc-bars { padding: 0 16px 12px; }
+.hpc-bar-row {
+  display: flex; align-items: center; gap: 5px;
+  margin-bottom: 5px;
+}
+.hpc-bar-pct {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 12px; font-weight: 700; color: #00c6ff;
+  min-width: 30px;
+}
+.hpc-bar-pct-right { text-align: right; color: rgba(255,255,255,0.35); }
+.hpc-bar-track {
+  flex: 1; height: 6px; border-radius: 4px;
+  background: rgba(255,255,255,0.06); overflow: hidden;
+}
+.hpc-bar-fill { height: 100%; border-radius: 3px; animation: barGrow 0.8s ease-out; }
+.hpc-bar-a {
+  background: linear-gradient(90deg, #0072ff, #00c6ff);
+  box-shadow: 0 0 6px rgba(0,198,255,0.5);
+}
+.hpc-bar-b { background: linear-gradient(90deg, #334155, #475569); float: right; }
+.hpc-bar-labels {
+  display: flex; justify-content: space-between;
+  font-size: 9px; color: rgba(255,255,255,0.22); font-weight: 500;
+}
+.hpc-bar-labels span:last-child { color: #fbbf24; font-weight: 600; }
+
+/* ── CTA strip ───────────────────────────────────────────── */
+.hpc-cta { padding: 0 14px 16px; }
+.hpc-cta-text {
+  display: block; text-align: center;
+  padding: 11px 14px; border-radius: 13px;
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 12px; font-weight: 800; letter-spacing: 2px;
+  color: #fff;
+  background: linear-gradient(100deg, #005ce6 0%, #0099ff 45%, #00d4ff 100%);
+  box-shadow: 0 4px 20px rgba(0,153,255,0.55), 0 1px 0 rgba(255,255,255,0.12) inset;
+  transition: filter 0.2s, transform 0.15s;
+  position: relative; overflow: hidden;
+}
+.hpc-cta-text::after {
+  content: '';
+  position: absolute; inset: 0;
+  background: linear-gradient(90deg, transparent 0%, rgba(255,255,255,0.15) 50%, transparent 100%);
+  transform: translateX(-100%);
+  transition: transform 0.5s ease;
+}
+.hpc-card:hover .hpc-cta-text::after { transform: translateX(100%); }
+.hpc-card:active .hpc-cta-text { transform: scale(0.98); filter: brightness(0.95); }
+.hpc-cta-text.hpc-cta-ghost {
+  background: rgba(255,255,255,0.05);
+  color: rgba(255,255,255,0.35);
+  box-shadow: none;
+  border: 1px solid rgba(255,255,255,0.08);
+}
+.hpc-cta-text.hpc-cta-ghost::after { display: none; }
+
+/* ── Loading / empty ─────────────────────────────────────── */
+.hpc-loading { display: flex; justify-content: center; padding: 32px 0; }
+.hpc-spinner {
+  width: 28px; height: 28px; border-radius: 50%;
+  border: 2px solid rgba(0,198,255,0.15);
+  border-top-color: #00c6ff;
+  animation: hpcSpin 0.7s linear infinite;
+}
+@keyframes hpcSpin { to { transform: rotate(360deg); } }
+.hpc-empty {
+  text-align: center; padding: 32px 16px;
+  font-size: 13px; color: rgba(255,255,255,0.2);
+}

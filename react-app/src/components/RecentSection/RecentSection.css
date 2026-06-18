@@ -1,5 +1,5 @@
 /* RecentSection.css */
-
+/* react-app/src/components/RecentSection/RecentSection.css */
 #recentSection {
     margin-bottom: 25px;
     position: relative;
@@ -75,7 +75,7 @@
     line-height: 100%;
     cursor: pointer;
     white-space: normal;
-   
+
     border-radius: 8px;
     display: flex;
     align-items: center;
@@ -235,6 +235,12 @@
     animation-delay: 0.1s;
 }
 
+
+#recentSection .game-card {
+    max-width: 80px;
+    min-width: 70px;
+}
+
 /* Mobile Adjustments */
 @media (max-width: 768px) {
     #recentSection .recent-header {
@@ -254,9 +260,10 @@
     #recentSection .recent-label {
         font-size: 12px;
         width: 90px;
-            box-shadow: inset 0 0 5px rgba(255, 255, 255, 0.03), inset 0 0 5px rgba(0, 150, 255, 0.12), 0 0 10px rgb(0 0 0 / 22%);
+        box-shadow: inset 0 0 5px rgba(255, 255, 255, 0.03), inset 0 0 5px rgba(0, 150, 255, 0.12), 0 0 10px rgb(0 0 0 / 22%);
     }
-    #recentSection{
+
+    #recentSection {
         margin-bottom: 0px;
     }
 
@@ -276,14 +283,51 @@
     #recentSection .skeleton-title {
         width: 50px;
     }
+
+    #recentSection .game-card {
+        max-width: 80px;
+        min-width: 50px;
+    }
 }
 
 
-#recentSection .game-card {
-    max-width: 80px;
-}
+
 
 
 #recentSection .game-card:hover .play-button {
     display: none;
+}
+
+@media (min-width: 768px) {
+    #recentSection .skeleton-card {
+        width: 50px;
+        height: 50px;
+    }
+
+    #recentSection .skeleton-image {
+        width: 50px;
+        height: 50px;
+    }
+
+    #recentSection .skeleton-title {
+        width: 40px;
+        height: 8px;
+    }
+}
+
+@media (min-width: 768px) and (max-width: 1024px) {
+    #recentSection .skeleton-card {
+        width: 50px;
+        height: 50px;
+    }
+
+    #recentSection .skeleton-image {
+        width: 50px;
+        height: 50px;
+    }
+
+    #recentSection .skeleton-title {
+        width: 40px;
+        height: 8px;
+    }
 }

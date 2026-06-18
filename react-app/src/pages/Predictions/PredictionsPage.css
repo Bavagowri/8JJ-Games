@@ -1,0 +1,61 @@
+/* react-app/src/pages/Predictions/PredictionsPage.css */
+.predictions-page {
+  padding: 20px;
+}
+
+.predictions-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15px;
+}
+
+.prediction-card {
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  padding: 15px;
+  width: 250px;
+}
+
+.card-header {
+  font-weight: bold;
+  display: flex;
+  justify-content: space-between;
+}
+
+.vs {
+  margin: 0 5px;
+}
+
+.prediction-options {
+  margin-top: 10px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.prediction-option {
+  padding: 8px 12px;
+  border: none;
+  border-radius: 5px;
+  background-color: #007bff;
+  color: white;
+  cursor: pointer;
+}
+
+.predicted-info {
+  margin-top: 10px;
+  font-weight: bold;
+  color: green;
+}
+
+.prediction-countdown {
+  margin-top: 5px;
+  font-size: 0.9em;
+  color: #555;
+}
+
+.featured-prediction {
+  padding: 15px;
+  background-color: #ffeeba;
+  border-radius: 10px;
+  margin-bottom: 20px;
+}

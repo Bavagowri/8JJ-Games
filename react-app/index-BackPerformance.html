@@ -1,0 +1,168 @@
+<!-- react-app/index.html -02/03/2026->
+<!doctype html>
+<html lang="en">
+<head>
+  <!-- CHARSET & VIEWPORT -->
+  <meta charset="UTF-8" />
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  
+  <!-- ===================================
+       CRITICAL PERFORMANCE OPTIMIZATIONS
+  =================================== -->
+  
+  <!-- PRECONNECT to external domains (saves DNS + TLS handshake time) -->
+  <link rel="preconnect" href="https://www.googletagmanager.com" crossorigin>
+  <link rel="preconnect" href="https://accounts.google.com" crossorigin>
+  <link rel="dns-prefetch" href="https://appleid.cdn-apple.com">
+
+  
+  <link rel="preconnect" href="https://assets.8jjgames.com" crossorigin>
+  <link rel="dns-prefetch" href="https://assets.8jjgames.com">
+  
+  <!-- PRELOAD LCP IMAGE - Critical for fast LCP -->
+  <link rel="preload" as="image" href="https://assets.8jjgames.com/8jj_background/8jj-games-bg.webp" fetchpriority="high" crossorigin>
+  
+  <!-- PRELOAD CRITICAL FONTS - Self-hosted for performance -->
+  <link rel="preload" as="font" type="font/woff2" href="/fonts/nunito-variable.woff2" crossorigin>
+  
+  
+  <!-- FAVICON -->
+  <link rel="icon" type="image/png" href="/8JJ_games.png" />
+  <link rel="apple-touch-icon" href="/8JJ_games.png" />
+
+  <!-- SELF-HOSTED FONTS (instead of Google Fonts) -->
+  <style>
+    /* Inline to prevent render blocking */
+    @font-face {
+      font-family: 'Nunito';
+      font-style: normal;
+      font-weight: 400 800;
+      font-display: swap;
+      src: url('/fonts/nunito-variable.woff2') format('woff2');
+    }
+    
+    /* Prevent layout shift during font load */
+    body {
+      font-family: 'Nunito', system-ui, -apple-system, sans-serif;
+    }
+  </style>
+
+  <!-- ===================================
+       IMMEDIATE TITLE SET (PREVENTS FLASH)
+  =================================== -->
+  <script>
+    // Set title immediately before React loads
+    document.title = '8JJ Games - Free Online Games';
+  </script>
+
+
+  <script>
+    // Delay GTM until after page is interactive (saves ~190ms TBT)
+    window.addEventListener('load', function() {
+      setTimeout(function() {
+        var s = document.createElement('script');
+        s.async = true;
+        s.src = 'https://www.googletagmanager.com/gtag/js?id=G-CJKGMQP0L0';
+        document.head.appendChild(s);
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){ dataLayer.push(arguments); }
+        gtag('js', new Date());
+        gtag('config', 'G-CJKGMQP0L0', { anonymize_ip: true });
+      }, 2000); // 2s after load — user is interactive, GA still fires
+    });
+  </script>
+
+  <!-- APPLE SIGNUP - DEFERRED -->
+  <script
+    src="https://appleid.cdn-apple.com/appleauth/static/jsapi/appleid/1/en_US/appleid.auth.js"
+    defer
+  ></script>
+
+  <!-- STRUCTURED DATA -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "name": "8JJ Games",
+    "alternateName": "8JJ - Free Online Games",
+    "url": "https://8jjgames.com",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://8jjgames.com/8JJ_games.png",
+      "width": 250,
+      "height": 250
+    },
+    "description": "Play thousands of free online games. Action, puzzle, racing, sports, and more. No downloads required.",
+    "sameAs": [
+      "https://twitter.com/8jjgames",
+      "https://facebook.com/8jjgames"
+    ]
+  }
+  </script>
+
+  <!-- ===================================
+       PRIMARY SEO (DEFAULT VALUES)
+       These get overridden by SEO component
+  =================================== -->
+  <title>8JJ Games - Free Online Games</title>
+  <meta name="title" content="8JJ Games - Free Online Games" />
+  <meta name="description" content="Play thousands of free online games on 8JJ Games. No downloads, instant play. Action, puzzle, racing, sports games and more!" />
+  <meta name="keywords" content="free online games, play games online, browser games, 8jj games, online gaming" />
+  <meta name="author" content="8JJ Games" />
+
+  <!-- OPEN GRAPH -->
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="8JJ Games - Free Online Games" />
+  <meta property="og:title" content="8JJ Games - Free Online Games" />
+  <meta property="og:description" content="Play thousands of free online games instantly. No downloads required!" />
+  <meta property="og:url" content="https://8jjgames.com" />
+  <meta property="og:image" content="https://8jjgames.com/images/og-default.jpg" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:locale" content="en_US" />
+
+  <!-- TWITTER -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:site" content="@8jjgames" />
+  <meta name="twitter:creator" content="@8jjgames" />
+  <meta name="twitter:title" content="8JJ Games - Free Online Games" />
+  <meta name="twitter:description" content="Play thousands of free online games instantly. No downloads required!" />
+  <meta name="twitter:image" content="https://8jjgames.com/images/og-default.jpg" />
+
+  <!-- CANONICAL -->
+  <link rel="canonical" href="https://8jjgames.com" />
+
+  <!-- ROBOTS -->
+  <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
+  <meta name="googlebot" content="index, follow" />
+
+  <!-- THEME -->
+  <meta name="theme-color" content="#667eea" />
+  
+  <!-- MOBILE WEB APP -->
+  <meta name="mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <meta name="apple-mobile-web-app-title" content="8JJ Games" />
+  
+  <!-- LANGUAGE -->
+  <meta name="language" content="English" />
+  
+  <!-- REVISIT -->
+  <meta name="revisit-after" content="7 days" />
+</head>
+
+<body>
+  <noscript>
+    <div style="padding:2rem;text-align:center;font-family:Nunito,sans-serif">
+      <h1>JavaScript Required</h1>
+      <p>JavaScript is required to play games on 8JJ Games. Please enable JavaScript in your browser settings.</p>
+    </div>
+  </noscript>
+
+  <div id="root"></div>
+  <script type="module" src="/src/main.jsx"></script>
+</body>
+</html>

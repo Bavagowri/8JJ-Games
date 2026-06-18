@@ -1,0 +1,574 @@
+/* ============================================
+   About.css - 8JJ Games About Page
+   ============================================ */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* ============================================
+   MAIN WRAPPER WITH FLIPPING GRID
+   ============================================ */
+.AboutMainWrapper {
+    position: relative;
+    width: 100%;
+    min-height: 100vh;
+    background: #0a0a0a;
+    overflow-x: hidden;
+}
+
+/* Flipping Grid Background */
+.AboutMainWrapper .flipping-grid {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, 70px);
+    grid-template-rows: repeat(auto-fill, 70px);
+    gap: 0;
+    z-index: 0;
+}
+
+.AboutMainWrapper .flipping-grid::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(to bottom,
+            rgba(0, 0, 0, 0.95) 0%,
+            rgba(0, 0, 0, 0.85) 20%,
+            rgba(0, 0, 0, 0.8) 50%,
+            rgba(0, 0, 0, 0.85) 80%,
+            rgba(0, 0, 0, 0.95) 100%);
+    backdrop-filter: blur(4px);
+    pointer-events: none;
+    z-index: 1;
+}
+
+.flip-box {
+    position: relative;
+    width: 70px;
+    height: 70px;
+    perspective: 1000px;
+}
+
+.flip-box-inner {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    transition: transform 0.6s;
+    transform-style: preserve-3d;
+    will-change: transform;
+}
+
+.flip-box.flipped .flip-box-inner {
+    transform: rotateY(180deg);
+}
+
+.flip-box-front,
+.flip-box-back {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    backface-visibility: hidden;
+    transform: translateZ(0);
+}
+
+.flip-box-back {
+    transform: rotateY(180deg);
+}
+
+/* ============================================
+   MAIN CONTAINER
+   ============================================ */
+.about-container {
+    position: relative;
+    z-index: 2;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 40px 24px;
+}
+
+/* ============================================
+   HERO SECTION
+   ============================================ */
+.about-hero {
+    text-align: center;
+    padding: 5px 20px 5px;
+    animation: fadeInUp 0.8s ease-out;
+}
+
+.about-hero-content {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.logo-section {
+    margin-bottom: 30px;
+}
+
+.about-logo {
+    /* width: 120px;
+    height: auto;
+    animation: glowPulse 2.5s ease-in-out infinite;
+    filter: drop-shadow(0 0 20px rgba(0, 217, 255, 0.5)); */
+    filter: brightness(1.7) contrast(1.1) drop-shadow(0 0 6px rgb(63, 99, 172));
+}
+
+.about-hero-title {
+    font-size: 48px;
+    font-weight: 800;
+    color: white;
+    margin-bottom: 20px;
+    line-height: 1.2;
+    text-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+}
+
+.highlight-text {
+    background: linear-gradient(135deg, #00d9ff 0%, #0099cc 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.about-hero-subtitle {
+    font-size: 20px;
+    color: rgba(255, 255, 255, 0.7);
+    line-height: 1.6;
+}
+
+/* ============================================
+   SECTION STYLES
+   ============================================ */
+.AboutMainWrapper .about-section {
+    padding: 60px 0;
+    animation: fadeInUp 0.8s ease-out;
+}
+
+.AboutMainWrapper .section-content {
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.AboutMainWrapper .section-header {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.AboutMainWrapper.section-title {
+    font-size: 28px;
+    font-weight: 700;
+    color: white;
+    margin-bottom: 15px;
+}
+
+.AboutMainWrapper .title-underline {
+    width: 80px;
+    height: 4px;
+    background: linear-gradient(90deg, #00d9ff 0%, #0099cc 100%);
+    margin: 0 auto;
+    border-radius: 2px;
+}
+
+.AboutMainWrapper .section-text {
+    font-size: 17px;
+    color: rgba(255, 255, 255, 0.8);
+    line-height: 1.8;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+/* ============================================
+   STATS SECTION
+   ============================================ */
+.AboutMainWrapper .stats-section {
+    padding: 10px 0;
+    animation: fadeInUp 0.8s ease-out 0.2s both;
+}
+
+.AboutMainWrapper .stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 30px;
+    max-width: 1100px;
+    margin: 0 auto;
+}
+
+.AboutMainWrapper .stat-card {
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 20px;
+    padding: 40px 30px;
+    text-align: center;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.AboutMainWrapper .stat-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, #00d9ff 0%, #0099cc 100%);
+    transform: scaleX(0);
+    transition: transform 0.3s ease;
+}
+
+.AboutMainWrapper .stat-card:hover {
+    transform: translateY(-10px);
+    border-color: rgba(0, 217, 255, 0.3);
+    box-shadow: 0 10px 40px rgba(0, 217, 255, 0.2);
+}
+
+.AboutMainWrapper .stat-card:hover::before {
+    transform: scaleX(1);
+}
+
+.AboutMainWrapper .stat-icon {
+    font-size: 48px;
+    margin-bottom: 15px;
+}
+
+.AboutMainWrapper .stat-number {
+    font-size: 42px;
+    font-weight: 800;
+    background: linear-gradient(135deg, #00d9ff 0%, #0099cc 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin-bottom: 10px;
+}
+
+.AboutMainWrapper .stat-label {
+    font-size: 16px;
+    color: rgba(255, 255, 255, 0.7);
+    font-weight: 500;
+}
+
+/* ============================================
+   MISSION SECTION
+   ============================================ */
+.AboutMainWrapper .mission-section {
+    animation: fadeInUp 0.8s ease-out 0.3s both;
+}
+
+.AboutMainWrapper .mission-grid {   
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 30px;
+    margin-top: 50px;
+}
+
+.AboutMainWrapper .mission-card {
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 16px;
+    padding: 35px 28px;
+    transition: all 0.3s ease;
+}
+
+.AboutMainWrapper .mission-card:hover {
+    transform: translateY(-5px);
+    border-color: rgba(0, 217, 255, 0.3);
+    background: rgba(255, 255, 255, 0.08);
+}
+
+.AboutMainWrapper .mission-icon {
+    font-size: 42px;
+    margin-bottom: 20px;
+}
+
+.AboutMainWrapper .mission-title {
+    font-size: 22px;
+    font-weight: 700;
+    color: white;
+    margin-bottom: 12px;
+}
+
+.AboutMainWrapper .mission-text {
+    font-size: 15px;
+    color: rgba(255, 255, 255, 0.7);
+    line-height: 1.7;
+}
+
+/* ============================================
+   VALUES SECTION
+   ============================================ */
+.AboutMainWrapper .values-section {
+    animation: fadeInUp 0.8s ease-out 0.4s both;
+}
+
+.AboutMainWrapper .values-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 30px;
+    margin-top: 50px;
+}
+
+.AboutMainWrapper .value-item {
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 12px;
+    padding: 30px 25px;
+    transition: all 0.3s ease;
+}
+
+.AboutMainWrapper .value-item:hover {
+    background: rgba(255, 255, 255, 0.06);
+    border-color: rgba(0, 217, 255, 0.2);
+    transform: translateX(5px);
+}
+
+.AboutMainWrapper .value-icon {
+    font-size: 36px;
+    margin-bottom: 15px;
+}
+
+.AboutMainWrapper .value-item h3 {
+    font-size: 18px;
+    font-weight: 600;
+    color: white;
+    margin-bottom: 10px;
+}
+
+.AboutMainWrapper .value-item p {
+    font-size: 14px;
+    color: rgba(255, 255, 255, 0.6);
+    line-height: 1.6;
+}
+
+/* ============================================
+   CTA SECTION
+   ============================================ */
+.AboutMainWrapper .cta-section {
+    padding: 80px 0;
+    text-align: center;
+    animation: fadeInUp 0.8s ease-out 0.5s both;
+}
+
+.AboutMainWrapper .cta-content {
+    max-width: 700px;
+    margin: 0 auto;
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(15px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 24px;
+    padding: 60px 40px;
+}
+
+.AboutMainWrapper .cta-title {
+    font-size: 38px;
+    font-weight: 700;
+    color: white;
+    margin-bottom: 20px;
+}
+
+.AboutMainWrapper .cta-text {
+    font-size: 18px;
+    color: rgba(255, 255, 255, 0.7);
+    margin-bottom: 35px;
+    line-height: 1.6;
+}
+
+.AboutMainWrapper .cta-buttons {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.AboutMainWrapper .cta-button {
+    padding: 16px 40px;
+    font-size: 16px;
+    font-weight: 600;
+    border: none;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-family: inherit;
+}
+
+.AboutMainWrapper .cta-button.primary {
+    background: linear-gradient(135deg, #00d9ff 0%, #0099cc 100%);
+    color: white;
+    box-shadow: 0 4px 20px rgba(0, 217, 255, 0.3);
+}
+
+.AboutMainWrapper .cta-button.primary:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 30px rgba(0, 217, 255, 0.5);
+}
+
+.AboutMainWrapper .cta-button.secondary {
+    background: rgba(255, 255, 255, 0.1);
+    color: white;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.AboutMainWrapper .cta-button.secondary:hover {
+    background: rgba(255, 255, 255, 0.15);
+    border-color: rgba(255, 255, 255, 0.3);
+    transform: translateY(-3px);
+}
+
+/* ============================================
+   ANIMATIONS
+   ============================================ */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        /* transform: translateY(30px); */
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes glowPulse {
+    0% {
+        filter: brightness(1.5) drop-shadow(0 0 15px rgba(0, 217, 255, 0.4));
+    }
+
+    50% {
+        filter: brightness(1.8) drop-shadow(0 0 25px rgba(0, 217, 255, 0.6));
+    }
+
+    100% {
+        filter: brightness(1.5) drop-shadow(0 0 15px rgba(0, 217, 255, 0.4));
+    }
+}
+
+/* ============================================
+   RESPONSIVE DESIGN
+   ============================================ */
+@media (max-width: 768px) {
+    .about-hero {
+        padding: 5px 20px 5px;
+    }
+
+    .about-logo {
+        width: 90px;
+    }
+
+    .about-hero-title {
+        font-size: 32px;
+    }
+
+    .about-hero-subtitle {
+        font-size: 16px;
+    }
+
+    
+
+    .stats-grid {
+        grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+        gap: 20px;
+    }
+
+    .stat-card {
+        padding: 30px 20px;
+    }
+
+    .stat-number {
+        font-size: 32px;
+    }
+
+    .mission-grid,
+    .values-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+
+    .cta-content {
+        padding: 40px 25px;
+    }
+
+    .cta-title {
+        font-size: 28px;
+    }
+
+    .cta-text {
+        font-size: 16px;
+    }
+
+    .cta-buttons {
+        flex-direction: column;
+        gap: 15px;
+    }
+
+    .cta-button {
+        width: 100%;
+    }
+}
+
+@media (max-width: 480px) {
+    .about-container {
+        padding: 20px 16px;
+    }
+
+    .about-hero-title {
+        font-size: 26px;
+    }
+
+    .section-text {
+        font-size: 15px;
+    }
+
+    .stat-icon {
+        font-size: 36px;
+    }
+}
+
+.footer-container {
+    z-index: 10;
+    display: block;
+    position: relative;
+}
+
+
+@media (max-width: 768px) {
+    .section-title {
+        font-size: 22px;
+    }
+}
+
+
+
+/* ========================================
+   2. SCREEN READER ONLY CONTENT
+   ======================================== */
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.sr-only-focusable:active,
+.sr-only-focusable:focus {
+  position: static;
+  width: auto;
+  height: auto;
+  overflow: visible;
+  clip: auto;
+  white-space: normal;
+}

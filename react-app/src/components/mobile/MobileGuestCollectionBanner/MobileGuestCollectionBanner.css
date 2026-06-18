@@ -1,0 +1,406 @@
+/* react-app/src/components/mobile/MobileGuestCollectionBanner/MobileGuestCollectionBanner.css */
+
+
+.mgcb-root {
+  position: relative;
+  border-radius: 20px;
+  overflow: hidden;
+  background: linear-gradient(160deg, #060e1c 0%, #081e34 55%, #060c18 100%);
+  border: 1px solid rgba(0, 212, 255, 0.2);
+  box-shadow:
+    0 20px 60px rgba(0, 0, 0, 0.55),
+    inset 0 1px 0 rgba(255, 255, 255, 0.04);
+  margin: 16px 16px 24px;
+  isolation: isolate;
+}
+
+/* Top shimmer line */
+.mgcb-root::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0; height: 1px;
+  background: linear-gradient(90deg,
+    transparent 0%,
+    #00d4ff 35%,
+    #0800ff 65%,
+    transparent 100%
+  );
+  opacity: 0.8;
+}
+
+/* ── Orbs ── */
+.mgcb-orb {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(60px);
+  pointer-events: none;
+  z-index: 0;
+}
+.mgcb-orb--cyan {
+  width: 260px; height: 260px;
+  background: radial-gradient(circle, rgba(0, 212, 255, 0.13) 0%, transparent 70%);
+  top: -100px; left: -60px;
+  animation: mgcbOrbDrift 9s ease-in-out infinite;
+}
+.mgcb-orb--gold {
+  width: 200px; height: 200px;
+  background: radial-gradient(circle, rgba(255, 215, 0, 0.1) 0%, transparent 70%);
+  bottom: -60px; right: -40px;
+  animation: mgcbOrbDrift 12s ease-in-out infinite reverse;
+}
+@keyframes mgcbOrbDrift {
+  0%, 100% { transform: translate(0, 0); }
+  50%       { transform: translate(12px, -10px); }
+}
+
+/* ── Grid texture ── */
+.mgcb-grid {
+  position: absolute; inset: 0;
+  background-image: repeating-linear-gradient(
+    -45deg,
+    transparent, transparent 24px,
+    rgba(0, 180, 230, 0.016) 24px, rgba(0, 180, 230, 0.016) 25px
+  );
+  pointer-events: none; z-index: 0;
+}
+
+/* ── Spinning conic border ── */
+.mgcb-border-spin {
+  position: absolute; inset: -2px;
+  border-radius: 22px;
+  background: conic-gradient(
+    from 0deg,
+    transparent 0%,
+    rgba(0, 212, 255, 0.55) 8%,
+    transparent 18%,
+    transparent 50%,
+    rgba(0, 115, 255, 0.45) 58%,
+    transparent 68%,
+    transparent 100%
+  );
+  animation: mgcbSpin 7s linear infinite;
+  z-index: 0;
+  mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  mask-composite: exclude;
+  padding: 2px;
+  pointer-events: none;
+}
+@keyframes mgcbSpin {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
+}
+
+/* ════════════════════════════════
+   INNER LAYOUT — stacked single col
+════════════════════════════════ */
+.mgcb-inner {
+  position: relative; z-index: 1;
+  padding: 24px 20px 28px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 0;
+}
+
+/* ── TOP ROW ── */
+.mgcb-top {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 18px;
+}
+
+/* Icon */
+.mgcb-icon-wrap {
+  position: relative;
+  width: 64px; height: 64px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.mgcb-icon {
+  font-size: 36px;
+  position: relative; z-index: 1;
+  animation: mgcbIconFloat 3s ease-in-out infinite;
+  filter: drop-shadow(0 0 16px rgba(255, 215, 0, 0.5));
+}
+@keyframes mgcbIconFloat {
+  0%, 100% { transform: translateY(0) scale(1); }
+  50%       { transform: translateY(-6px) scale(1.08); }
+}
+.mgcb-icon-ring {
+  position: absolute; inset: -4px;
+  border-radius: 50%;
+  border: 2px solid rgba(255, 215, 0, 0.3);
+  animation: mgcbRingPulse 2s ease-in-out infinite;
+}
+@keyframes mgcbRingPulse {
+  0%, 100% { transform: scale(1); opacity: 0.5; }
+  50%       { transform: scale(1.15); opacity: 0.1; }
+}
+
+/* Badge */
+.mgcb-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  background: rgba(255, 215, 0, 0.08);
+  border: 1px solid rgba(255, 215, 0, 0.3);
+  border-radius: 20px;
+  padding: 5px 14px;
+  font-size: 10px;
+  font-weight: 800;
+  color: #ffd700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  animation: mgcbBadgePulse 2.5s ease-in-out infinite;
+}
+.mgcb-badge-dot {
+  width: 6px; height: 6px;
+  border-radius: 50%;
+  background: #ffd700;
+  animation: mgcbDotBlink 1.5s ease-in-out infinite;
+}
+@keyframes mgcbBadgePulse {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(255, 215, 0, 0.2); }
+  50%       { box-shadow: 0 0 0 7px rgba(255, 215, 0, 0); }
+}
+@keyframes mgcbDotBlink {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0.3; }
+}
+
+/* ── TITLE ── */
+.mgcb-title {
+  font-family: 'Orbitron', 'Exo 2', monospace;
+  font-size: 26px;
+  font-weight: 900;
+  color: #fff;
+  line-height: 1.2;
+  letter-spacing: -0.3px;
+  margin-bottom: 10px;
+}
+.mgcb-title-accent {
+  background: linear-gradient(90deg, #00d4ff 0%, #1174c2 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  filter: drop-shadow(0 0 16px rgba(0, 212, 255, 0.35));
+}
+
+/* ── DESC ── */
+.mgcb-desc {
+  font-size: 14px;
+  color: rgba(232, 244, 255, 0.55);
+  line-height: 1.55;
+  margin-bottom: 22px;
+  max-width: 320px;
+}
+
+/* ── EARN CHIPS ── */
+.mgcb-earn-row {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px;
+  width: 100%;
+  margin-bottom: 16px;
+}
+.mgcb-earn-chip {
+  background: rgba(0, 0, 0, 0.28);
+  border: 1px solid rgba(0, 212, 255, 0.12);
+  border-radius: 12px;
+  padding: 12px 6px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 3px;
+  transition: all 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
+  animation: mgcbChipIn 0.5s ease-out both;
+}
+.mgcb-earn-chip:active {
+  transform: scale(0.94);
+  border-color: rgba(0, 212, 255, 0.4);
+}
+@keyframes mgcbChipIn {
+  from { opacity: 0; transform: translateY(6px) scale(0.95); }
+  to   { opacity: 1; transform: translateY(0) scale(1); }
+}
+.mgcb-earn-icon { font-size: 18px; }
+.mgcb-earn-pts {
+  font-family: 'Orbitron', monospace;
+  font-size: 13px;
+  font-weight: 900;
+  color: #0b94ff;
+  text-shadow: 0 0 8px rgba(0, 208, 255, 0.4);
+}
+.mgcb-earn-lbl {
+  font-size: 9px;
+  color: #5a7a99;
+  font-weight: 600;
+  letter-spacing: 0.3px;
+}
+
+/* ── PREDICTION STRIP ── */
+.mgcb-pred-strip {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  background: linear-gradient(135deg, rgba(168, 85, 247, 0.1), rgba(0, 212, 255, 0.06));
+  border: 1px solid rgba(168, 85, 247, 0.22);
+  border-radius: 14px;
+  padding: 14px 16px;
+  margin-bottom: 20px;
+  text-align: left;
+  gap: 12px;
+}
+.mgcb-pred-left {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.mgcb-pred-icon { font-size: 24px; flex-shrink: 0; }
+.mgcb-pred-title {
+  font-size: 13px;
+  font-weight: 800;
+  color: #e8f4ff;
+}
+.mgcb-pred-sub {
+  font-size: 11px;
+  color: #5a7a99;
+  margin-top: 2px;
+}
+.mgcb-pred-pts-group {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  flex-shrink: 0;
+}
+.mgcb-pred-pts {
+  font-family: 'Orbitron', monospace;
+  font-size: 16px;
+  font-weight: 900;
+  color: #00e676;
+  text-shadow: 0 0 10px rgba(0, 230, 118, 0.4);
+  line-height: 1;
+}
+.mgcb-pred-pts-label {
+  font-size: 10px;
+  color: #5a7a99;
+  font-weight: 700;
+}
+
+/* ── CTA BUTTONS ── */
+.mgcb-ctas {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: 100%;
+  margin-bottom: 18px;
+}
+.mgcb-btn-primary {
+  width: 100%;
+  padding: 16px;
+  background: linear-gradient(135deg, #0099cc, #00d4ff);
+  border: none;
+  border-radius: 14px;
+  color: #001a24;
+  font-size: 15px;
+  font-weight: 800;
+  cursor: pointer;
+  box-shadow: 0 6px 24px rgba(0, 212, 255, 0.4);
+  transition: all 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
+  letter-spacing: 0.3px;
+  -webkit-tap-highlight-color: transparent;
+}
+.mgcb-btn-primary:active {
+  transform: scale(0.97);
+  box-shadow: 0 3px 12px rgba(0, 212, 255, 0.3);
+}
+
+.mgcb-btn-ghost {
+  width: 100%;
+  padding: 14px;
+  background: transparent;
+  border: 1px solid rgba(0, 212, 255, 0.28);
+  border-radius: 14px;
+  color: #00d4ff;
+  font-size: 14px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.2s;
+  -webkit-tap-highlight-color: transparent;
+}
+.mgcb-btn-ghost:active {
+  background: rgba(0, 212, 255, 0.08);
+  transform: scale(0.98);
+}
+
+/* ── SOCIAL PROOF ── */
+.mgcb-social-proof {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.mgcb-avatars {
+  display: flex;
+}
+.mgcb-avatar {
+  width: 26px; height: 26px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #0099cc, #00d4ff);
+  border: 2px solid #060e1c;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 10px;
+  font-weight: 800;
+  color: #001a24;
+  margin-left: -7px;
+}
+.mgcb-avatar:first-child { margin-left: 0; }
+.mgcb-proof-text {
+  font-size: 12px;
+  color: #5a7a99;
+}
+.mgcb-proof-text strong {
+  color: #00e676;
+  font-weight: 800;
+}
+
+/* ════════════════════════════════
+   REDUCED MOTION
+════════════════════════════════ */
+@media (prefers-reduced-motion: reduce) {
+  .mgcb-orb,
+  .mgcb-border-spin,
+  .mgcb-icon,
+  .mgcb-icon-ring,
+  .mgcb-badge,
+  .mgcb-badge-dot,
+  .mgcb-earn-chip {
+    animation: none !important;
+  }
+}
+
+/* ════════════════════════════════
+   LARGER MOBILE / TABLET
+════════════════════════════════ */
+@media (min-width: 480px) {
+  .mgcb-earn-row {
+    grid-template-columns: repeat(6, 1fr);
+  }
+  .mgcb-earn-chip { padding: 10px 4px; }
+  .mgcb-earn-pts  { font-size: 11px; }
+  .mgcb-earn-lbl  { font-size: 8px; }
+  .mgcb-ctas {
+    flex-direction: row;
+  }
+}
+
+@media (min-width: 640px) {
+  .mgcb-inner { padding: 32px 28px; }
+  .mgcb-title { font-size: 30px; }
+}

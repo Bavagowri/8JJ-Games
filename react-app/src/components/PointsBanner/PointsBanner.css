@@ -1,0 +1,289 @@
+/* react-app/src/components/PointsBanner/PointsBanner.css */
+
+
+
+.points-banner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    border-radius: 20px;
+    background: linear-gradient(135deg, rgba(6, 26, 42, 0.97) 0%, rgb(8 56 78 / 80%) 60%, rgba(6, 26, 42, 0.97) 100%);
+    border-top: 1px solid rgb(0 220 230 / 15%);
+    border-bottom: 2px solid rgba(0, 138, 230, 0.28);
+    padding: 10px 20px;
+    padding-left: 30px;
+    position: relative;
+    overflow: hidden;
+    animation: pointsBannerSlideIn 0.45s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+/* Grid-line overlay */
+.points-banner::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: repeating-linear-gradient(90deg,
+            transparent,
+            transparent 48px,
+            rgba(0, 230, 118, 0.025) 48px,
+            rgba(0, 230, 118, 0.025) 49px);
+    pointer-events: none;
+}
+
+/* ── Slide-in animation ── */
+@keyframes pointsBannerSlideIn {
+    from {
+        opacity: 0;
+        transform: translateY(-100%);
+        max-height: 0;
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+        max-height: 200px;
+    }
+}
+
+/* ── Slide-out / exit animation ── */
+.points-banner--exit {
+    animation: pointsBannerSlideOut 0.35s cubic-bezier(0.55, 0, 1, 0.45) forwards;
+}
+
+@keyframes pointsBannerSlideOut {
+    from {
+        opacity: 1;
+        transform: translateY(0);
+        max-height: 200px;
+    }
+
+    to {
+        opacity: 0;
+        transform: translateY(-100%);
+        max-height: 0;
+        padding-top: 0;
+        padding-bottom: 0;
+        border-width: 0;
+    }
+}
+
+
+
+.points-banner__left {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex: 1;
+    min-width: 0;
+    /* allow text truncation on small screens */
+}
+
+/* Animated gold coin */
+.points-banner__coin {
+    width: 38px;
+    height: 38px;
+    flex-shrink: 0;
+
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+
+}
+
+
+.points-banner__text {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    min-width: 0;
+    margin-left: 15px;
+}
+
+.points-banner__headline {
+    font-size: 13px;
+    font-weight: 700;
+    color: #00b0e6;
+    letter-spacing: 0.3px;
+    white-space: nowrap;
+}
+
+.points-banner__sub {
+    font-size: 12px;
+    color: #7a9ab5;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.points-banner__sub strong {
+    color: #ffd701;
+    font-weight: 600;
+}
+
+
+.points-banner__right {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-shrink: 0;
+}
+
+/* Point badges */
+.points-banner__badges {
+    display: flex;
+    gap: 6px;
+}
+
+.points-banner__badge {
+    background: rgba(255, 215, 0, 0.1);
+    border: 1px solid rgba(255, 215, 0, 0.25);
+    border-radius: 10px;
+    padding: 3px 9px;
+    font-size: 11px;
+    color: #ffd700;
+    font-weight: 600;
+    white-space: nowrap;
+    letter-spacing: 0.2px;
+}
+
+/* Shared button base */
+.points-banner__btn {
+    border: none;
+    border-radius: 16px;
+    cursor: pointer;
+    font-size: 12px;
+    font-weight: 700;
+    padding: 7px 16px;
+    transition: transform 0.15s ease, box-shadow 0.15s ease, background 0.2s ease;
+    white-space: nowrap;
+    letter-spacing: 0.3px;
+}
+
+.points-banner__btn:hover {
+    transform: translateY(-1px);
+}
+
+.points-banner__btn:active {
+    transform: translateY(0);
+}
+
+/* Log In — green CTA (primary) */
+.points-banner__btn--login {
+    background: linear-gradient(135deg, #2196F3, #00BCD4);
+    color: #001a0a;
+    box-shadow: 0 3px 10px rgb(0 186 230 / 30%);
+}
+
+.points-banner__btn--login:hover {
+    box-shadow: 0 6px 18px rgba(125, 208, 233, 0.457);
+    background: linear-gradient(135deg, #00b5f2, #009cd0);
+}
+
+/* Register — ghost style (secondary) */
+.points-banner__btn--register {
+    background: transparent;
+    border: 1px solid rgba(0, 107, 230, 0.38);
+    color: #2196F3;
+}
+
+.points-banner__btn--register:hover {
+    background: rgba(0, 230, 118, 0.08);
+    border-color: rgba(219, 222, 220, 0.6);
+    box-shadow: 0 4px 12px rgba(0, 230, 118, 0.15);
+}
+
+/* Dismiss ✕ button */
+.points-banner__dismiss {
+    background: none;
+    border: none;
+    color: #7a9ab5;
+    font-size: 18px;
+    line-height: 1;
+    padding: 4px 6px;
+    cursor: pointer;
+    border-radius: 6px;
+    transition: color 0.15s ease, background 0.15s ease;
+    margin-left: 2px;
+}
+
+.points-banner__dismiss:hover {
+    color: #e8f4ff;
+    background: rgba(255, 255, 255, 0.06);
+}
+
+
+
+/* Tablet — hide badges to save space */
+@media (max-width: 1024px) {
+    .points-banner__badges {
+        display: none;
+    }
+
+    .points-banner {
+        padding: 10px 16px;
+    }
+}
+
+/* Mobile — stack layout, abbreviate sub-text */
+@media (max-width: 768px) {
+    .points-banner {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+        padding: 12px 14px;
+    }
+
+    .points-banner__left {
+        width: 100%;
+    }
+
+    .points-banner__sub {
+        white-space: normal;
+        overflow: visible;
+        text-overflow: unset;
+    }
+
+    .points-banner__right {
+        width: 100%;
+        justify-content: flex-end;
+    }
+
+    .points-banner__dismiss {
+        margin-left: auto;
+    }
+}
+
+/* Small mobile */
+@media (max-width: 480px) {
+    .points-banner__headline {
+        font-size: 12px;
+    }
+
+    .points-banner__sub {
+        font-size: 11px;
+    }
+
+    .points-banner__btn {
+        font-size: 11px;
+        padding: 6px 12px;
+    }
+
+    .points-banner__coin {
+        width: 32px;
+        height: 32px;
+        font-size: 17px;
+    }
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+
+    .points-banner,
+    .points-banner--exit,
+    .points-banner__coin {
+        animation: none;
+    }
+}

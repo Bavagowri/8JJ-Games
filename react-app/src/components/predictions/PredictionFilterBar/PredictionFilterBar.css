@@ -1,0 +1,505 @@
+/* ═══════════════════════════════════════════════════════════════════
+   PredictionFilterBar.css
+   Secondary filter row: search · tournament · not-predicted toggle
+   Shared base + .pfb-desktop / .pfb-mobile overrides
+   ═══════════════════════════════════════════════════════════════════ */
+
+/* ── Root wrapper ──────────────────────────────────────────────────── */
+.pfb-root {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  animation: pfbSlideIn 0.22s cubic-bezier(0.4, 0, 0.2, 1) both;
+  width: 100%;
+}
+
+@keyframes pfbSlideIn {
+  from { opacity: 0; transform: translateY(-8px); }
+  to   { opacity: 1; transform: none; }
+}
+
+/* ── DESKTOP layout ────────────────────────────────────────────────── */
+.pfb-desktop {
+  padding: 12px 16px;
+  background: rgba(6, 16, 34, 0.72);
+  border: 1px solid rgba(79, 172, 254, 0.14);
+  border-radius: 16px;
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  box-shadow:
+    0 4px 24px rgba(0, 0, 0, 0.3),
+    inset 0 1px 0 rgba(255, 255, 255, 0.05);
+  margin-bottom: 20px;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+/* ── MOBILE layout ─────────────────────────────────────────────────── */
+.pfb-mobile {
+  flex-direction: column;
+  align-items: stretch;
+  gap: 10px;
+  margin-bottom: 18px;
+  padding: 0;
+  background: none;
+  border: none;
+}
+
+/* On mobile: search goes full-width; row2 = tournament + toggle side-by-side */
+.pfb-mobile .pfb-search-wrap  { width: 100%; }
+.pfb-mobile .pfb-select-wrap  { flex: 1; min-width: 0; }
+.pfb-mobile .pfb-toggle        { flex-shrink: 0; }
+
+/* wrap tournament + toggle into a single row on mobile */
+.pfb-mobile .pfb-select-wrap,
+.pfb-mobile .pfb-toggle {
+  /* these two sit in a flex row — achieved via the wrapper in JSX (no extra wrapper needed;
+     CSS flex wrapping on the parent handles it) */
+}
+
+/* ─── Override: on mobile make select+toggle share one row ─── */
+@media (max-width: 768px) {
+  .pfb-mobile {
+    /* inner items: search spans full row, rest wrap to next row side-by-side */
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+  .pfb-mobile .pfb-search-wrap { flex: 0 0 100%; }
+  .pfb-mobile .pfb-select-wrap { flex: 1 1 auto; min-width: 0; }
+  .pfb-mobile .pfb-toggle       { flex: 0 0 auto; }
+}
+
+
+/* ════════════════════════════════════════════════════════════════════
+   SEARCH INPUT
+   ════════════════════════════════════════════════════════════════════ */
+
+.pfb-search-wrap {
+  position: relative;
+  display: flex;
+  align-items: center;
+  flex: 1 1 180px;
+  min-width: 0;
+}
+
+.pfb-search-icon {
+  position: absolute;
+  left: 12px;
+  font-size: 13px;
+  pointer-events: none;
+  opacity: 0.5;
+  z-index: 1;
+  line-height: 1;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.pfb-search {
+  width: 100%;
+  height: 38px;
+  padding: 0 34px 0 36px;
+  border-radius: 11px;
+  border: 1px solid rgba(79, 172, 254, 0.18);
+  background: rgba(255, 255, 255, 0.04);
+  color: #e0f2fe;
+  font-size: 13px;
+  font-weight: 500;
+  font-family: inherit;
+  outline: none;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+  -webkit-appearance: none;
+  appearance: none;
+}
+
+/* Mobile search — slightly taller for touch targets */
+.pfb-mobile .pfb-search {
+  height: 44px;
+  border-radius: 13px;
+  font-size: 14px;
+  background: rgba(2, 48, 71, 0.65);
+  border: 1px solid rgba(56, 189, 248, 0.22);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+
+.pfb-search::placeholder {
+  color: rgba(190, 220, 255, 0.3);
+  font-weight: 400;
+}
+
+.pfb-search:focus {
+  border-color: rgba(79, 172, 254, 0.55);
+  background: rgba(79, 172, 254, 0.06);
+  box-shadow: 0 0 0 3px rgba(79, 172, 254, 0.1), 0 2px 12px rgba(0, 0, 0, 0.2);
+}
+
+/* remove default search input chrome */
+.pfb-search::-webkit-search-cancel-button,
+.pfb-search::-webkit-search-decoration { -webkit-appearance: none; }
+
+.pfb-search-clear {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  border: none;
+  background: rgba(255, 255, 255, 0.1);
+  color: rgba(200, 225, 255, 0.6);
+  font-size: 14px;
+  line-height: 1;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.15s ease, color 0.15s ease;
+  -webkit-tap-highlight-color: transparent;
+  padding: 0;
+}
+
+.pfb-search-clear:hover {
+  background: rgba(239, 68, 68, 0.25);
+  color: #fca5a5;
+}
+
+
+/* ════════════════════════════════════════════════════════════════════
+   TOURNAMENT SELECT
+   ════════════════════════════════════════════════════════════════════ */
+
+.pfb-select-wrap {
+  position: relative;
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+}
+
+.pfb-select-icon {
+  position: absolute;
+  left: 11px;
+  font-size: 12px;
+  pointer-events: none;
+  opacity: 0.5;
+  z-index: 1;
+  top: 50%;
+  transform: translateY(-50%);
+  line-height: 1;
+}
+
+.pfb-select {
+  height: 38px;
+  padding: 0 32px 0 32px;
+  border-radius: 11px;
+  border: 1px solid rgba(79, 172, 254, 0.18);
+  background: rgba(255, 255, 255, 0.04);
+  color: rgba(200, 230, 255, 0.75);
+  font-size: 12.5px;
+  font-weight: 600;
+  font-family: inherit;
+  outline: none;
+  cursor: pointer;
+  -webkit-appearance: none;
+  appearance: none;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+  white-space: nowrap;
+  max-width: 180px;
+}
+
+/* Mobile select */
+.pfb-mobile .pfb-select {
+  height: 44px;
+  border-radius: 13px;
+  font-size: 13px;
+  background: rgba(2, 48, 71, 0.65);
+  border: 1px solid rgba(56, 189, 248, 0.22);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  max-width: none;
+  width: 100%;
+}
+
+.pfb-select option {
+  background: #071428;
+  color: #e0f2fe;
+}
+
+.pfb-select:focus {
+  border-color: rgba(79, 172, 254, 0.55);
+  box-shadow: 0 0 0 3px rgba(79, 172, 254, 0.1);
+}
+
+.pfb-select-chevron {
+  position: absolute;
+  right: 10px;
+  font-size: 11px;
+  color: rgba(160, 200, 255, 0.45);
+  pointer-events: none;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 1;
+}
+
+
+/* ════════════════════════════════════════════════════════════════════
+   NOT PREDICTED YET TOGGLE
+   ════════════════════════════════════════════════════════════════════ */
+
+.pfb-toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  height: 38px;
+  padding: 0 14px;
+  border-radius: 11px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: rgba(255, 255, 255, 0.04);
+  color: rgba(160, 200, 255, 0.5);
+  font-size: 12.5px;
+  font-weight: 600;
+  font-family: inherit;
+  cursor: pointer;
+  flex-shrink: 0;
+  white-space: nowrap;
+  transition: all 0.2s ease;
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* Mobile toggle */
+.pfb-mobile .pfb-toggle {
+  height: 44px;
+  border-radius: 13px;
+  font-size: 13px;
+  background: rgba(2, 48, 71, 0.65);
+  border: 1px solid rgba(56, 189, 248, 0.15);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  padding: 0 16px;
+}
+
+.pfb-toggle:hover {
+  border-color: rgba(79, 172, 254, 0.3);
+  color: rgba(200, 230, 255, 0.8);
+  background: rgba(79, 172, 254, 0.07);
+}
+
+/* Active (ON) state */
+.pfb-toggle-active {
+  background: linear-gradient(135deg, rgba(14, 165, 233, 0.2), rgba(79, 172, 254, 0.12)) !important;
+  border-color: rgba(79, 172, 254, 0.5) !important;
+  color: #38bdf8 !important;
+  box-shadow: 0 0 18px rgba(56, 189, 248, 0.18), inset 0 1px 0 rgba(255, 255, 255, 0.07);
+}
+
+/* Locked (not logged in) */
+.pfb-toggle-locked {
+  cursor: default;
+  opacity: 0.6;
+}
+
+.pfb-toggle-locked:hover {
+  border-color: rgba(251, 191, 36, 0.35) !important;
+  color: rgba(251, 191, 36, 0.6) !important;
+  background: rgba(251, 191, 36, 0.06) !important;
+}
+
+/* The animated dot indicator */
+.pfb-toggle-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.2);
+  border: 1.5px solid rgba(255, 255, 255, 0.15);
+  flex-shrink: 0;
+  transition: all 0.2s ease;
+}
+
+.pfb-toggle-dot-on {
+  background: #38bdf8;
+  border-color: #38bdf8;
+  box-shadow: 0 0 8px rgba(56, 189, 248, 0.7);
+  animation: pfbDotPulse 1.8s ease-in-out infinite;
+}
+
+@keyframes pfbDotPulse {
+  0%, 100% { box-shadow: 0 0 6px rgba(56, 189, 248, 0.7); }
+  50%       { box-shadow: 0 0 14px rgba(56, 189, 248, 1); }
+}
+
+.pfb-toggle-lock {
+  font-size: 12px;
+  flex-shrink: 0;
+}
+
+.pfb-toggle-label {
+  line-height: 1;
+}
+
+/* "ON" badge */
+.pfb-toggle-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1px 6px;
+  border-radius: 4px;
+  font-size: 9px;
+  font-weight: 800;
+  letter-spacing: 0.8px;
+  background: rgba(56, 189, 248, 0.25);
+  color: #38bdf8;
+  border: 1px solid rgba(56, 189, 248, 0.4);
+}
+
+
+/* ════════════════════════════════════════════════════════════════════
+   MY PICKS DROPDOWN  (completed tab)
+   ════════════════════════════════════════════════════════════════════ */
+
+/* Active filter state — wraps the select */
+.pfb-mypicks-active {
+  border-radius: 11px;
+  outline: 2px solid rgba(79, 172, 254, 0.45);
+  outline-offset: -1px;
+}
+
+.pfb-mypicks-active .pfb-select {
+  border-color: rgba(79, 172, 254, 0.55) !important;
+  background: rgba(79, 172, 254, 0.1) !important;
+  color: #7dd3fc !important;
+}
+
+/* Active select itself */
+.pfb-mypicks-select-active {
+  font-weight: 700;
+}
+
+/* Locked (not logged in) */
+.pfb-mypicks-locked {
+  opacity: 0.55;
+  cursor: not-allowed;
+}
+
+.pfb-mypicks-locked .pfb-select {
+  cursor: not-allowed;
+}
+
+/* "ON" badge — positioned absolute inside the wrap */
+.pfb-select-wrap {
+  position: relative;
+}
+
+.pfb-mypicks-badge {
+  position: absolute;
+  top: -6px;
+  right: -4px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1px 5px;
+  border-radius: 4px;
+  font-size: 8px;
+  font-weight: 800;
+  letter-spacing: 0.8px;
+  background: rgba(56, 189, 248, 0.25);
+  color: #38bdf8;
+  border: 1px solid rgba(56, 189, 248, 0.4);
+  pointer-events: none;
+}
+
+/* Mobile overrides for My Picks */
+.pfb-mobile .pfb-mypicks-active {
+  outline: 2px solid rgba(56, 189, 248, 0.45);
+  border-radius: 13px;
+}
+
+/* ════════════════════════════════════════════════════════════════════
+   EMPTY STATE  (rendered by parent, but classed here for consistency)
+   ════════════════════════════════════════════════════════════════════ */
+
+.pfb-empty {
+  text-align: center;
+  padding: 64px 24px;
+  animation: pfbSlideIn 0.3s ease both;
+}
+
+.pfb-empty-icon {
+  font-size: 48px;
+  margin-bottom: 16px;
+  display: block;
+  opacity: 0.6;
+}
+
+.pfb-empty-title {
+  font-size: 17px;
+  font-weight: 700;
+  color: rgba(200, 230, 255, 0.7);
+  margin: 0 0 8px;
+}
+
+.pfb-empty-sub {
+  font-size: 13px;
+  color: rgba(160, 200, 255, 0.35);
+  margin: 0 0 20px;
+  line-height: 1.5;
+}
+
+.pfb-empty-clear {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 9px 20px;
+  border-radius: 50px;
+  border: 1px solid rgba(79, 172, 254, 0.3);
+  background: rgba(79, 172, 254, 0.08);
+  color: rgba(147, 197, 253, 0.8);
+  font-size: 13px;
+  font-weight: 600;
+  font-family: inherit;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.pfb-empty-clear:hover {
+  border-color: rgba(79, 172, 254, 0.55);
+  background: rgba(79, 172, 254, 0.14);
+  color: #7dd3fc;
+}
+
+/* Mobile empty state */
+.pfb-mobile-empty {
+  text-align: center;
+  padding: 56px 20px;
+}
+
+.pfb-mobile-empty .pfb-empty-icon { font-size: 44px; }
+.pfb-mobile-empty .pfb-empty-title { font-size: 16px; color: rgba(240, 249, 255, 0.55); }
+.pfb-mobile-empty .pfb-empty-sub   { font-size: 13px; color: rgba(240, 249, 255, 0.25); }
+
+.pfb-mobile-empty .pfb-empty-clear {
+  background: rgba(3, 105, 161, 0.3);
+  border-color: rgba(56, 189, 248, 0.35);
+  color: #38bdf8;
+}
+
+
+/* ════════════════════════════════════════════════════════════════════
+   RESPONSIVE TWEAKS
+   ════════════════════════════════════════════════════════════════════ */
+
+@media (max-width: 560px) {
+  /* Desktop version on small screens: stack everything */
+  .pfb-desktop {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  .pfb-desktop .pfb-search-wrap { flex: none; }
+  .pfb-desktop .pfb-select-wrap { width: 100%; }
+  .pfb-desktop .pfb-select       { max-width: none; width: 100%; }
+  .pfb-desktop .pfb-toggle       { width: 100%; justify-content: center; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .pfb-root, .pfb-toggle-dot-on, .pfb-empty { animation: none !important; }
+}

@@ -1,0 +1,36 @@
+/* react-app/src/pages/admin/UserManagement/UserManagement.css */
+
+
+/* User Management Specific Styles */
+
+.user-management-container {
+  padding: 24px;
+}
+
+/* Responsive table wrapper */
+@media (max-width: 1200px) {
+  .admin-table {
+    font-size: 13px;
+  }
+  
+  .admin-table th,
+  .admin-table td {
+    padding: 10px 8px;
+  }
+}
+
+@media (max-width: 768px) {
+  .admin-table {
+    font-size: 12px;
+  }
+  
+  .admin-badge {
+    font-size: 11px;
+    padding: 3px 8px;
+  }
+  
+  .admin-button {
+    padding: 6px 10px;
+    font-size: 11px;
+  }
+}

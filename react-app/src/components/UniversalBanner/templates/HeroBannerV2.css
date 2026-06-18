@@ -1,0 +1,832 @@
+/* react-app/src/components/UniversalBanner/templates/HeroBannerV2.css */
+
+
+
+/* ── Wrapper ── */
+.hb2-wrap {
+  position: relative;
+  width: 100%;
+  height: 420px;
+  margin: 20px 0;
+  border-radius: 20px;
+  overflow: hidden;
+  background: #04070d;
+  user-select: none;
+  touch-action: pan-y;
+  border: 1px solid rgba(255, 255, 255, 0.055);
+  box-shadow:
+    0 2px 0 rgba(255, 255, 255, 0.03) inset,
+    0 16px 60px rgba(0, 0, 0, 0.7),
+    0 40px 100px rgba(0, 0, 0, 0.5);
+  /* accent falls through to all children */
+  --accent: #00e5ff;
+}
+
+/* ══════════════════════════════════════
+   SLIDE BACKGROUNDS
+══════════════════════════════════════ */
+.hb2-slides {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+}
+
+.hb2-slide {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  --sa: var(--accent, #00e5ff);
+}
+
+.hb2-slide--hidden {
+  opacity: 0;
+  z-index: 0;
+}
+
+.hb2-slide--active {
+  opacity: 1;
+  z-index: 1;
+  transition: opacity 0.65s ease;
+}
+
+.hb2-slide--exit-next,
+.hb2-slide--exit-prev {
+  opacity: 0;
+  z-index: 1;
+  transform: scale(1.025);
+  transition: opacity 0.65s ease, transform 0.65s ease;
+}
+
+/* ── Background layers ── */
+.hb2-bg-fallback {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+}
+
+/* <img> tag — never inline backgroundImage */
+.hb2-bg-img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center top;
+  display: block;
+  z-index: 1;
+}
+
+/* ── Overlays ── */
+
+/* Left text-safe zone — only covers ~55%,
+   right side shows image at near-full brightness */
+.hb2-ov-left {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  background: linear-gradient(95deg,
+      rgba(3, 7, 18, 0.97) 0%,
+      rgba(3, 7, 18, 0.93) 25%,
+      rgba(3, 7, 18, 0.72) 42%,
+      rgba(3, 7, 18, 0.25) 58%,
+      transparent 70%);
+}
+
+/* Top + bottom edge darkening */
+.hb2-ov-edges {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  pointer-events: none;
+  background:
+    linear-gradient(to bottom,
+      rgba(3, 7, 18, 0.52) 0%,
+      transparent 16%,
+      transparent 74%,
+      rgba(3, 7, 18, 0.9) 100%);
+}
+
+/* Diagonal atmospheric beam — accent-tinted depth */
+.hb2-ov-beam {
+  position: absolute;
+  inset: 0;
+  z-index: 3;
+  pointer-events: none;
+  background: linear-gradient(112deg,
+      transparent 35%,
+      rgba(0, 229, 255, 0.018) 48%,
+      rgba(0, 229, 255, 0.038) 54%,
+      rgba(0, 229, 255, 0.018) 60%,
+      transparent 72%);
+}
+
+/* CRT scanlines */
+.hb2-scanlines {
+  position: absolute;
+  inset: 0;
+  z-index: 4;
+  pointer-events: none;
+  background-image: repeating-linear-gradient(0deg,
+      transparent,
+      transparent 3px,
+      rgba(0, 0, 0, 0.042) 3px,
+      rgba(0, 0, 0, 0.042) 6px);
+  opacity: 0.5;
+}
+
+/* Dot-grid texture — image side only, masked left */
+.hb2-dot-grid {
+  position: absolute;
+  inset: 0;
+  z-index: 4;
+  pointer-events: none;
+  background-image: radial-gradient(circle, rgba(255, 255, 255, 0.058) 1px, transparent 1px);
+  background-size: 28px 28px;
+  -webkit-mask-image: linear-gradient(to right, transparent 36%, rgba(0, 0, 0, 0.5) 56%, rgba(0, 0, 0, 0.5) 100%);
+  mask-image: linear-gradient(to right, transparent 36%, rgba(0, 0, 0, 0.5) 56%, rgba(0, 0, 0, 0.5) 100%);
+}
+
+/* ── HUD Corner Brackets ── */
+/* Inherit --sa from slide, --accent from wrapper fallback */
+.hb2-corner {
+  position: absolute;
+  width: 22px;
+  height: 22px;
+  z-index: 8;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.4s ease 0.2s;
+}
+
+.hb2-slide--active .hb2-corner {
+  opacity: 1;
+}
+
+.hb2-corner::before,
+.hb2-corner::after {
+  content: "";
+  position: absolute;
+  background: var(--sa, var(--accent, #00e5ff));
+  box-shadow: 0 0 6px var(--sa, var(--accent, #00e5ff));
+}
+
+/* top-left */
+.hb2-corner--tl {
+  top: 14px;
+  left: 14px;
+}
+
+.hb2-corner--tl::before {
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 2px;
+}
+
+.hb2-corner--tl::after {
+  top: 0;
+  left: 0;
+  width: 2px;
+  height: 100%;
+}
+
+/* top-right */
+.hb2-corner--tr {
+  top: 14px;
+  right: 14px;
+}
+
+.hb2-corner--tr::before {
+  top: 0;
+  right: 0;
+  left: unset;
+  width: 100%;
+  height: 2px;
+}
+
+.hb2-corner--tr::after {
+  top: 0;
+  right: 0;
+  left: unset;
+  width: 2px;
+  height: 100%;
+}
+
+/* bottom-right */
+.hb2-corner--br {
+  bottom: 58px;
+  right: 14px;
+}
+
+/* above bottom bar */
+.hb2-corner--br::before {
+  bottom: 0;
+  top: unset;
+  right: 0;
+  left: unset;
+  width: 100%;
+  height: 2px;
+}
+
+.hb2-corner--br::after {
+  bottom: 0;
+  top: unset;
+  right: 0;
+  left: unset;
+  width: 2px;
+  height: 100%;
+}
+
+/* ══════════════════════════════════════
+   CONTENT LAYER
+══════════════════════════════════════ */
+.hb2-content {
+  position: absolute;
+  inset: 0;
+  z-index: 5;
+  padding: 44px 52px 98px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 13px;
+  max-width: 640px;
+  pointer-events: none;
+}
+
+.hb2-content--in {
+  opacity: 1;
+  transform: translateY(0);
+  transition: opacity 0.5s ease 0.2s, transform 0.5s cubic-bezier(0.22, 1, 0.36, 1) 0.2s;
+}
+
+.hb2-content--out {
+  opacity: 0;
+  transform: translateY(-10px);
+  transition: opacity 0.22s ease, transform 0.22s ease;
+}
+
+/* ── HUD Slide counter ── */
+.hb2-counter {
+  position: absolute;
+  top: 22px;
+  right: 52px;
+  display: none !important;
+  align-items: baseline;
+  gap: 3px;
+  pointer-events: none;
+}
+
+.hb2-counter-cur {
+  font-family: "Barlow Condensed", sans-serif;
+  font-size: 44px;
+  font-weight: 900;
+  font-style: italic;
+  color: var(--accent, #00e5ff);
+  line-height: 1;
+  text-shadow: 0 0 24px var(--accent, #00e5ff);
+  opacity: 0.85;
+}
+
+.hb2-counter-sep {
+  font-family: "Rajdhani", sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.2);
+  margin: 0 2px;
+  align-self: center;
+}
+
+.hb2-counter-tot {
+  font-family: "Barlow Condensed", sans-serif;
+  font-size: 20px;
+  font-weight: 700;
+  color: rgba(255, 255, 255, 0.2);
+  line-height: 1;
+  align-self: flex-end;
+  margin-bottom: 7px;
+}
+
+/* ── Badge ── */
+.hb2-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  width: fit-content;
+  padding: 5px 13px 5px 9px;
+  background: rgba(0, 0, 0, 0.52);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-left: 2px solid var(--accent, #00e5ff);
+  backdrop-filter: blur(6px);
+  pointer-events: auto;
+}
+
+.hb2-badge-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--accent, #00e5ff);
+  box-shadow: 0 0 8px var(--accent, #00e5ff), 0 0 16px rgba(0, 229, 255, 0.3);
+  animation: hb2-dot-pulse 1.7s ease-in-out infinite;
+  flex-shrink: 0;
+}
+
+@keyframes hb2-dot-pulse {
+
+  0%,
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+
+  50% {
+    opacity: 0.4;
+    transform: scale(0.7);
+  }
+}
+
+.hb2-badge-text {
+  font-family: "Rajdhani", sans-serif;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 2.5px;
+  text-transform: uppercase;
+  color: var(--accent, #00e5ff);
+}
+
+/* ── Eyebrow ── */
+.hb2-eyebrow {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-family: "Rajdhani", sans-serif;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 2.5px;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.5);
+  margin: 0;
+}
+
+.hb2-eyebrow-rule {
+  display: block;
+  width: 24px;
+  height: 1.5px;
+  background: var(--accent, #00e5ff);
+  flex-shrink: 0;
+  opacity: 0.7;
+}
+
+/* ── MEGA TITLE ── */
+.hb2-title {
+  font-family: "Barlow Condensed", sans-serif;
+  font-size: 32px;
+  /* was clamp(26px, 4.5vw, 28px) — basically fixed at 28px */
+  font-weight: 900;
+  font-style: italic;
+  color: #ffffff;
+  margin: 0;
+  line-height: 0.93;
+  letter-spacing: -0.5px;
+  text-transform: uppercase;
+  text-shadow: 0 4px 32px rgba(0, 0, 0, 0.75), 0 2px 8px rgba(0, 0, 0, 0.6);
+  pointer-events: none;
+}
+
+/* Highlighted word — accent colour (from --accent CSS variable) */
+.hb2-title-hl {
+  font-style: italic;
+  /* Uses accent via filter glow + direct color */
+  color: var(--accent, #00e5ff);
+  /* Additional luminous glow matching accent */
+  filter: drop-shadow(0 0 18px var(--accent, #00e5ff)) drop-shadow(0 0 36px var(--accent, rgba(0, 229, 255, 0.4)));
+  /* For gold/warm accents the filter alone works great;
+     for cyan/blue accents it's extra vivid — both look premium */
+  -webkit-text-fill-color: var(--accent, #00e5ff);
+}
+
+/* ── Divider ── */
+.hb2-divider {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 1px 0;
+}
+
+.hb2-divider-dot {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: var(--accent, #00e5ff);
+  box-shadow: 0 0 8px var(--accent, #00e5ff);
+  flex-shrink: 0;
+}
+
+.hb2-divider-line {
+  display: block;
+  height: 1px;
+  width: 70px;
+  background: linear-gradient(to right, var(--accent, #00e5ff), transparent);
+  opacity: 0.6;
+}
+
+/* ── Subtitle ── */
+.hb2-subtitle {
+  font-family: "DM Sans", sans-serif;
+  font-size: 14px;
+  font-weight: 300;
+  color: rgba(255, 255, 255, 0.45);
+  margin: 0;
+  line-height: 1.65;
+  max-width: 400px;
+}
+
+/* ── Logo ── */
+.hb2-logo {
+  width: 48px;
+  height: auto;
+  object-fit: contain;
+  opacity: 0.75;
+  filter: brightness(1.7) contrast(1.1) drop-shadow(0 0 6px rgb(63, 99, 172));
+  pointer-events: none;
+  margin-top: 4px;
+}
+
+/* ══════════════════════════════════════
+   CTA — ACCENT-COLOURED CLIP-PATH SPLIT BUTTON
+   Shimmer runs on infinite 2.6s loop.
+   Uses --accent so each slide has its own CTA colour.
+══════════════════════════════════════ */
+.hb2-cta-wrap {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  width: fit-content;
+  pointer-events: auto;
+  margin-top: 6px;
+}
+
+/* Breathing outer glow — loop animation */
+.hb2-cta-glow {
+  position: absolute;
+  inset: -8px;
+  border-radius: 8px;
+  background: radial-gradient(ellipse at center, var(--accent, #00e5ff) 0%, transparent 65%);
+  opacity: 0;
+  animation: hb2-glow-breathe 2.6s ease-in-out infinite;
+  pointer-events: none;
+  z-index: 0;
+}
+
+@keyframes hb2-glow-breathe {
+
+  0%,
+  100% {
+    opacity: 0;
+    transform: scale(1);
+  }
+
+  50% {
+    opacity: 0.22;
+    transform: scale(1.05);
+  }
+}
+
+.hb2-cta {
+  position: relative;
+  z-index: 1;
+  display: inline-flex;
+  align-items: stretch;
+  padding: 0;
+  border: none;
+  cursor: pointer;
+  overflow: hidden;
+  border-radius: 0;
+  outline: none;
+  background: none;
+  transition: filter 0.2s ease;
+}
+
+.hb2-cta:hover {
+  filter: brightness(1.1);
+}
+
+.hb2-cta:active {
+  filter: brightness(0.9);
+}
+
+/* Continuous shimmer sweep */
+.hb2-cta-shimmer {
+  position: absolute;
+  top: 0;
+  left: -80%;
+  width: 55%;
+  height: 100%;
+  z-index: 3;
+  pointer-events: none;
+  background: linear-gradient(105deg,
+      transparent 0%,
+      rgba(255, 255, 255, 0.3) 50%,
+      transparent 100%);
+  animation: hb2-shimmer-sweep 2.6s ease-in-out infinite;
+}
+
+@keyframes hb2-shimmer-sweep {
+  0% {
+    left: -80%;
+    opacity: 0;
+  }
+
+  10% {
+    opacity: 1;
+  }
+
+  90% {
+    opacity: 1;
+  }
+
+  100% {
+    left: 130%;
+    opacity: 0;
+  }
+}
+
+/* Label compartment — parallelogram clip-path */
+.hb2-cta-label {
+  display: flex;
+  align-items: center;
+  padding: 14px 30px 14px 24px;
+  font-family: "Barlow Condensed", sans-serif;
+  font-size: 15px;
+  font-weight: 900;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  /* Dark text on accent bg — high contrast */
+  color: #030b15;
+  background: var(--accent, #00e5ff);
+  clip-path: polygon(0 0, calc(100% - 12px) 0, 100% 50%, calc(100% - 12px) 100%, 0 100%);
+  padding-right: 36px;
+  line-height: 1;
+  position: relative;
+  z-index: 2;
+}
+
+/* Arrow compartment */
+.hb2-cta-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 42px;
+  background: rgba(255, 255, 255, 0.14);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  border-left: none;
+  clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%, 12px 50%);
+  margin-left: -2px;
+  color: #fff;
+  position: relative;
+  z-index: 2;
+  transition: transform 0.2s ease;
+}
+
+.hb2-cta:hover .hb2-cta-icon {
+  transform: translateX(3px);
+}
+
+.hb2-cta-icon svg {
+  flex-shrink: 0;
+}
+
+/* ══════════════════════════════════════
+   BOTTOM BAR
+══════════════════════════════════════ */
+.hb2-bottom-bar {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 6;
+  background: rgb(200 200 200 / 5%);
+  backdrop-filter: blur(5px);
+  -webkit-backdrop-filter: blur(16px);
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+/* Progress line — accent coloured */
+.hb2-progress-track {
+  height: 2px;
+  width: 100%;
+  background: rgba(255, 255, 255, 0.05);
+  overflow: hidden;
+}
+
+.hb2-progress-fill {
+  height: 100%;
+  width: 0%;
+  background: var(--accent, #00e5ff);
+  border-radius: 0 2px 2px 0;
+  box-shadow: 0 0 8px var(--accent, #00e5ff);
+}
+
+.hb2-bar-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 9px 16px;
+  gap: 12px;
+}
+
+/* ── Thumbnail strip ── */
+.hb2-thumbs {
+  display: flex;
+  gap: 6px;
+  align-items: center;
+}
+
+.hb2-thumb {
+  position: relative;
+  width: 56px;
+  height: 36px;
+  border-radius: 4px;
+  overflow: hidden;
+  padding: 0;
+  border: 1.5px solid rgba(255, 255, 255, 0.07);
+  cursor: pointer;
+  flex-shrink: 0;
+  transition: border-color 0.22s ease, transform 0.22s ease, box-shadow 0.22s ease;
+  background: transparent;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.hb2-thumb:hover {
+  transform: translateY(-2px);
+  border-color: rgba(255, 255, 255, 0.2);
+}
+
+.hb2-thumb--on {
+  border-color: var(--accent, #00e5ff) !important;
+  box-shadow: 0 0 12px var(--accent, rgba(0, 229, 255, 0.3));
+}
+
+.hb2-thumb-img,
+.hb2-thumb-fallback {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.hb2-thumb-dim {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.44);
+  transition: background 0.22s ease;
+}
+
+.hb2-thumb--on .hb2-thumb-dim,
+.hb2-thumb:hover .hb2-thumb-dim {
+  background: rgba(0, 0, 0, 0.1);
+}
+
+/* Accent bottom bar on active thumbnail */
+.hb2-thumb-bar {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 2.5px;
+  background: var(--accent, #00e5ff);
+  box-shadow: 0 0 6px var(--accent, #00e5ff);
+}
+
+/* ── Arrows ── */
+.hb2-arrows {
+  display: flex;
+  gap: 5px;
+  flex-shrink: 0;
+}
+
+.hb2-arrow {
+  width: 32px;
+  height: 32px;
+  border-radius: 4px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.09);
+  color: rgba(255, 255, 255, 0.5);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.2s ease, border-color 0.2s ease, color 0.2s ease;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.hb2-arrow:hover {
+  background: rgba(var(--accent, 0, 229, 255), 0.1);
+  border-color: var(--accent, #00e5ff);
+  color: var(--accent, #00e5ff);
+}
+
+/* ══════════════════════════════════════
+   RESPONSIVE
+══════════════════════════════════════ */
+@media (max-width: 1100px) {
+  .hb2-title {
+    font-size: clamp(28px, 4.8vw, 62px);
+  }
+
+  .hb2-content {
+    padding: 38px 44px 98px;
+  }
+
+  .hb2-counter {
+    right: 44px;
+  }
+}
+
+@media (max-width: 860px) {
+  .hb2-wrap {
+    height: 370px;
+  }
+
+  .hb2-title {
+    font-size: clamp(24px, 5vw, 52px);
+  }
+
+  .hb2-content {
+    padding: 32px 36px 96px;
+    max-width: 76%;
+  }
+
+  .hb2-thumbs {
+    display: none;
+  }
+
+  .hb2-counter {
+    right: 36px;
+  }
+
+  .hb2-counter-cur {
+    font-size: 34px;
+  }
+}
+
+@media (max-width: 600px) {
+  .hb2-wrap {
+    height: auto;
+    min-height: 280px;
+    border-radius: 14px;
+    margin: 10px 0;
+  }
+
+  .hb2-title {
+    font-size: clamp(20px, 8vw, 42px);
+  }
+
+  .hb2-content {
+    padding: 20px 18px 90px;
+    max-width: 88%;
+    gap: 10px;
+  }
+
+  .hb2-subtitle {
+    display: none;
+  }
+
+  .hb2-logo {
+    width: 36px;
+  }
+
+  .hb2-cta-label {
+    font-size: 13px;
+    padding: 11px 30px 11px 18px;
+    letter-spacing: 1.5px;
+  }
+
+  .hb2-cta-icon {
+    width: 36px;
+  }
+
+  .hb2-counter {
+    right: 18px;
+  }
+
+  .hb2-counter-cur {
+    font-size: 28px;
+  }
+}
+
+@media (max-width: 420px) {
+  .hb2-wrap {
+    min-height: 250px;
+    border-radius: 10px;
+  }
+
+  .hb2-title {
+    font-size: clamp(16px, 9vw, 36px);
+  }
+
+  .hb2-content {
+    padding: 16px 14px 88px;
+  }
+}

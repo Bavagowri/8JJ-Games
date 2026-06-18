@@ -1,0 +1,521 @@
+/* react-app/src/components/mobile/MobileGameSectionScroll/MobileGameSectionScroll.css */
+.mobile-game-section-v4 {
+  padding: 24px 16px 28px;
+  background: linear-gradient(135deg, #030408 0%, #000000 100%);
+  position: relative;
+  overflow: hidden;
+}
+
+/* Animated background effect */
+.mobile-game-section-v4::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 120px;
+  background: radial-gradient(ellipse at center, rgba(79, 172, 254, 0.05), transparent);
+  pointer-events: none;
+}
+
+.mobile-game-section-v4::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 60%;
+  height: 80px;
+  background: radial-gradient(ellipse at center, rgba(25, 137, 171, 0.04), transparent);
+  pointer-events: none;
+}
+
+/* Header */
+.mobile-section-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+  padding-bottom: 12px;
+  /* border-bottom: 1px solid rgba(79, 172, 254, 0.1); */
+  position: relative;
+  z-index: 2;
+}
+
+/* .mobile-section-header::after {
+  content: '';
+  position: absolute;
+  bottom: -1px;
+  left: 0;
+  width: 60px;
+  height: 2px;
+  background: linear-gradient(90deg, #4facfe 0%, transparent 100%);
+  border-radius: 2px;
+} */
+
+/* Section Title */
+.mobile-section-scroll-title {
+  font-size: 26px;
+  font-weight: 900;
+  background: linear-gradient(135deg, #ffffff 0%, #a8d5e2 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  letter-spacing: -0.5px;
+  text-shadow: 0 2px 10px rgba(25, 137, 171, 0.2);
+  position: relative;
+}
+
+/* See All Button */
+.mobile-see-all-btn {
+  background: rgba(79, 172, 254, 0.1);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border: 1px solid rgba(79, 172, 254, 0.25);
+  color: #4facfe;
+  padding: 8px 18px;
+  border-radius: 20px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  letter-spacing: 0.01em;
+}
+
+.mobile-see-all-btn:active {
+  transform: scale(0.95);
+  background: rgba(79, 172, 254, 0.15);
+  border-color: rgba(79, 172, 254, 0.4);
+}
+
+/* Horizontal scroll container */
+.mobile-horizontal-scroll {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  scroll-snap-type: x mandatory;
+  scroll-behavior: smooth;
+  position: relative;
+  z-index: 1;
+}
+
+.mobile-horizontal-scroll::-webkit-scrollbar {
+  height: 4px;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 2px;
+}
+
+.mobile-horizontal-scroll::-webkit-scrollbar-thumb {
+  background: linear-gradient(90deg, #4facfe, #1989ab);
+  border-radius: 2px;
+}
+
+/* Track holding pages */
+.mobile-scroll-track {
+  display: flex;
+  gap: 16px;
+  padding-bottom: 8px;
+}
+
+/* Each page = 3×2 grid */
+.mobile-grid-page {
+  min-width: calc(100vw - 32px);
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(2, auto);
+  gap: 12px;
+  scroll-snap-align: start;
+  animation: fadeInScale 0.4s ease-out backwards;
+}
+
+@keyframes fadeInScale {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* Stagger page animations */
+.mobile-grid-page:nth-child(1) {
+  animation-delay: 0.05s;
+}
+
+.mobile-grid-page:nth-child(2) {
+  animation-delay: 0.1s;
+}
+
+.mobile-grid-page:nth-child(3) {
+  animation-delay: 0.15s;
+}
+
+.mobile-grid-page:nth-child(4) {
+  animation-delay: 0.2s;
+}
+
+/* Premium Card */
+.mobile-game-rect-card {
+  border-radius: 14px;
+  overflow: hidden;
+  background: linear-gradient(135deg, rgba(15, 23, 42, 0.6), rgba(30, 41, 59, 0.6));
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  box-shadow:
+    0 4px 12px rgba(0, 0, 0, 0.4),
+    0 2px 6px rgba(0, 0, 0, 0.3),
+    0 0 0 1px rgba(79, 172, 254, 0.1);
+}
+
+.mobile-game-rect-card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg,
+      rgba(79, 172, 254, 0.1),
+      transparent 50%,
+      rgba(25, 137, 171, 0.1));
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  z-index: 1;
+  pointer-events: none;
+}
+
+.mobile-game-rect-card:hover::before,
+.mobile-game-rect-card:active::before {
+  opacity: 1;
+}
+
+.mobile-game-rect-card:active {
+  transform: scale(0.97);
+  box-shadow:
+    0 2px 8px rgba(0, 0, 0, 0.4),
+    0 1px 4px rgba(0, 0, 0, 0.3);
+}
+
+/* Image Container with forced aspect ratio */
+.mobile-game-rect-card-image-wrapper {
+  width: 100%;
+  position: relative;
+  padding-bottom: 75%;
+  /* 4:3 aspect ratio */
+  overflow: hidden;
+  background: linear-gradient(135deg, rgba(15, 23, 42, 0.8), rgba(30, 41, 59, 0.8));
+}
+
+.mobile-game-rect-card img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.mobile-game-rect-card:active img {
+  transform: scale(1.05);
+}
+
+/* Play icon overlay */
+.mobile-game-rect-card-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(to top,
+      rgba(0, 0, 0, 0.5),
+      transparent);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  z-index: 2;
+}
+
+.mobile-game-rect-card:active .mobile-game-rect-card-overlay {
+  opacity: 1;
+}
+
+.mobile-game-rect-card-play-icon {
+  width: 36px;
+  height: 36px;
+  background: rgba(79, 172, 254, 0.9);
+  backdrop-filter: blur(10px);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  font-size: 14px;
+  box-shadow:
+    0 4px 12px rgba(79, 172, 254, 0.4),
+    0 2px 6px rgba(0, 0, 0, 0.3);
+  border: 2px solid rgba(255, 255, 255, 0.2);
+  transform: scale(0.8);
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.mobile-game-rect-card:active .mobile-game-rect-card-play-icon {
+  transform: scale(1);
+}
+
+/* Title */
+.mobile-game-rect-card p {
+  font-size: 12px;
+  line-height: 1.3;
+  font-weight: 700;
+  color: #ffffff;
+  text-align: center;
+  margin: 0;
+  padding: 8px 6px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  letter-spacing: 0.01em;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
+  background: linear-gradient(to bottom,
+      rgba(15, 23, 42, 0.8),
+      rgba(10, 13, 26, 0.9));
+}
+
+/* Page indicator dots */
+.mobile-scroll-dots {
+  display: flex;
+  justify-content: center;
+  gap: 6px;
+  margin-top: 12px;
+  padding: 0 16px;
+}
+
+.mobile-scroll-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.2);
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.mobile-scroll-dot.active {
+  background: linear-gradient(135deg, #4facfe, #1989ab);
+  width: 20px;
+  border-radius: 3px;
+  box-shadow: 0 2px 6px rgba(79, 172, 254, 0.4);
+}
+
+/* Scroll indicator arrows */
+.mobile-scroll-nav {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 32px;
+  height: 32px;
+  background: rgba(79, 172, 254, 0.2);
+  backdrop-filter: blur(10px);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #4facfe;
+  font-size: 16px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  z-index: 3;
+  border: 1px solid rgba(79, 172, 254, 0.3);
+  opacity: 0;
+}
+
+.mobile-game-section-v4:hover .mobile-scroll-nav {
+  opacity: 1;
+  display: none;
+}
+
+.mobile-scroll-nav.left {
+  left: 16px;
+}
+
+.mobile-scroll-nav.right {
+  right: 16px;
+}
+
+.mobile-scroll-nav:active {
+  transform: translateY(-50%) scale(0.9);
+  background: rgba(79, 172, 254, 0.3);
+}
+
+.mobile-scroll-nav.disabled {
+  opacity: 0.3;
+  pointer-events: none;
+}
+
+/* Loading skeleton */
+.mobile-grid-page-skeleton {
+  min-width: calc(100vw - 32px);
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(2, auto);
+  gap: 12px;
+}
+
+.mobile-game-rect-skeleton {
+  border-radius: 14px;
+  background: linear-gradient(90deg,
+      #1a234a 25%,
+      #2a3570 37%,
+      #1a234a 63%);
+  background-size: 400% 100%;
+  animation: shimmer 1.4s ease infinite;
+  aspect-ratio: 4 / 3;
+  box-shadow:
+    0 4px 12px rgba(0, 0, 0, 0.3),
+    0 0 0 1px rgba(255, 255, 255, 0.05);
+}
+
+.mobile-game-rect-skeleton-title {
+  height: 16px;
+  margin-top: 8px;
+  background: linear-gradient(90deg,
+      #1a234a 25%,
+      #2a3570 37%,
+      #1a234a 63%);
+  background-size: 400% 100%;
+  animation: shimmer 1.4s ease infinite;
+  border-radius: 4px;
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: 100% 0;
+  }
+
+  100% {
+    background-position: -100% 0;
+  }
+}
+
+/* Section entrance animation */
+.mobile-game-section-v4.loaded {
+  animation: fadeInUp 0.4s ease-out;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Responsive adjustments */
+@media (max-width: 380px) {
+  .mobile-game-section-v4 {
+    padding: 20px 12px 24px;
+  }
+
+  .mobile-section-scroll-title {
+    font-size: 22px;
+  }
+
+  .mobile-grid-page {
+    gap: 10px;
+  }
+
+  .mobile-game-rect-card p {
+    font-size: 11px;
+    padding: 7px 5px;
+  }
+
+  .mobile-game-rect-card-play-icon {
+    width: 32px;
+    height: 32px;
+    font-size: 12px;
+  }
+}
+
+@media (max-width: 480px) {
+  .mobile-grid-page {
+    min-width: calc(100vw - 24px);
+  }
+}
+
+@media (min-width: 480px) {
+  .mobile-section-scroll-title {
+    font-size: 26px;
+  }
+}
+
+/* Accessibility - Focus states */
+.mobile-game-rect-card:focus-visible {
+  outline: 2px solid #4facfe;
+  outline-offset: 3px;
+}
+
+.mobile-scroll-dot:focus-visible {
+  outline: 2px solid #4facfe;
+  outline-offset: 2px;
+}
+
+/* Performance optimization */
+.mobile-game-rect-card,
+.mobile-game-rect-card img,
+.mobile-game-rect-card-play-icon {
+  will-change: transform;
+}
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+
+  .mobile-game-rect-card,
+  .mobile-game-rect-card img,
+  .mobile-grid-page {
+    animation: none !important;
+    transition-duration: 0.01ms !important;
+  }
+
+  .mobile-horizontal-scroll {
+    scroll-behavior: auto;
+  }
+}
+
+
+
+.mobile-section-scroll-title::after {
+  content: '';
+  position: absolute;
+  bottom: -4px;
+  left: 0;
+  width: 150px;
+  height: 3px;
+  background: linear-gradient(90deg, #1989ab, transparent);
+  border-radius: 2px;
+}
+
+
+
+.mobile-scroll-dots {
+  display: none;
+}
+
+
+.mobile-horizontal-scroll::-webkit-scrollbar {
+  height: 0px !important;
+}
+
+
+
+
+.mobile-game-section-v4.action-section{
+    background: linear-gradient(180deg, #030408, #00000000);
+}

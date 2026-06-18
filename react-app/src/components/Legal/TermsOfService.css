@@ -1,0 +1,16 @@
+/* ============================================================
+   8JJGames – Terms of Service
+   Theme: Teal / Cyan
+   ============================================================ */
+@import './LegalBase.css';
+
+.tos-page .legal-hero-glow    { background: var(--brand-teal); }
+.tos-page .legal-badge         { background: rgba(20,184,166,0.12); border: 1px solid rgba(20,184,166,0.28); color: var(--brand-teal); }
+.tos-page .legal-hero h1 em    { background: var(--grad-teal); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+.tos-page .legal-intro         { border-left: 4px solid var(--brand-teal); }
+.tos-page .legal-section-num   { background: var(--grad-teal); box-shadow: 0 4px 14px rgba(14,165,233,0.28); }
+.tos-page .legal-subsection h3  { color: var(--brand-teal); }
+.tos-page .legal-info-list li:hover { border-color: rgba(20,184,166,0.35); }
+.tos-page .legal-simple-list li::before { background: var(--brand-teal); }
+.tos-page .legal-highlight      { background: rgba(20,184,166,0.08); border-color: rgba(20,184,166,0.28); color: #5eead4; }
+.tos-page .legal-contact a      { color: var(--brand-primary); }

@@ -1,6 +1,6 @@
-# 8JJ Games
+# Games site
 
-8JJ Games is a full-stack online gaming and rewards platform that provides users with access to HTML5 browser games, cricket match predictions, leaderboards, rewards, referrals, and user progression systems.
+It is a full-stack online gaming and rewards platform that provides users with access to HTML5 browser games, cricket match predictions, leaderboards, rewards, referrals, and user progression systems.
 
 ## Features
 
@@ -104,7 +104,7 @@
 ## Project Structure
 
 ```text
-8jj-games/
+games/
 │
 ├── react-app/          # Frontend (React + SSR)
 ├── server/             # Backend APIs
